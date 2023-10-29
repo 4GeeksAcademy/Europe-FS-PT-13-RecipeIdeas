@@ -16,13 +16,14 @@ export const Profile = () => {
     const handleCancel  = () => {
         setEditDetails(false)
     }
-
-    const handleSubmit = () => {
-        const forms = document.querySelectorAll('.needs-validation')
-
-        
-    }
     
+    const handleSubmit  = (event) => {
+        event.preventDefault()
+        event.stopPropagation()
+        console.log("Submmited")
+        setEditDetails(false)
+    }
+
     return (
         <div className="profile container-fluid border border-danger">
             <div className="user-data row d-flex justify-content-between border border-danger p-1">
@@ -40,7 +41,7 @@ export const Profile = () => {
                     <div className="wrapper mx-auto px-4 w-100">
                         <h1 className="display-5">{`${firstName} ${lastName}`}</h1>
 
-                        <form className="info-wrapper border border-3 py-4 px-4 d-flex flex-column needs-validation was-validated">
+                        <form className="info-wrapper border border-3 py-4 px-4 d-flex flex-column was-validated" onSubmit={handleSubmit}>
 
                             <div className="form-group row d-flex justify-content-between px-0">
                                 <div className="col-sm-12 col-md-12 col-lg-4 mb-2">
@@ -78,12 +79,12 @@ export const Profile = () => {
                                     {
                                         editDetails ?
                                         <div>
-                                            <div className="input-group">
+                                            <div className="input-group has-validation">
                                                 <span className="input-group-text">@</span>
                                                 <input id="username" type="text" required value={username} onChange={(event) => setUsername(event.target.value)} className="information-box form-control p-2"></input>
-                                            </div>
-                                            <div className="invalid-feedback">
+                                                <div className="invalid-feedback">
                                                     Provide a valid username.
+                                                </div>
                                             </div>
                                         </div>
                                         :
@@ -113,11 +114,11 @@ export const Profile = () => {
                             {   // Conditionl rendering for showing change info or save the updated info depending on the state.
                                 editDetails ?
                                 <div className="d-flex justify-content-end">
-                                    <div type="submit" className="save-info btn btn-danger p-2 mt-3 mx-2" onClick={handleEditInfo}>Save changes</div>
-                                    <div type="submit" className="cancel-info btn btn-danger p-2 mt-3" onClick={handleCancel}>Cancel</div>
+                                    <button type="submit" className="save-info btn btn-danger p-2 mt-3 mx-2">Save changes</button>
+                                    <button className="cancel-info btn btn-danger p-2 mt-3" onClick={handleCancel}>Cancel</button>
                                 </div>
                                 :
-                                <div className="edit-info btn btn-danger p-2 mt-3" onClick={handleEditInfo}>Edit details</div>
+                                <button className="edit-info btn btn-danger p-2 mt-3" onClick={handleEditInfo}>Edit details</button>
                             }
 
                         </form>
