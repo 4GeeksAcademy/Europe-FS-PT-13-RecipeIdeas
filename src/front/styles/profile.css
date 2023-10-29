@@ -9,7 +9,12 @@ img.avatar {
     border-radius: 1rem;
 }
 
-div.change-info {
+.save-info, .edit-info {
     display: inline-flex;
     align-self: end;
+}
+
+.information-box {
+    overflow-x: hidden;
+    min-height: 44px;
 }
