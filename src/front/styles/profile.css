@@ -9,7 +9,7 @@ img.avatar {
     border-radius: 1rem;
 }
 
-.save-info, .edit-info {
+.save-info, .edit-info, .cancel-info {
     display: inline-flex;
     align-self: end;
 }

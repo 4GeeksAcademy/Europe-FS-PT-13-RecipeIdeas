@@ -7,7 +7,7 @@ export const Profile = () => {
     const [firstName, setFirstName] = useState("Afonso")
     const [lastName, setLastName] = useState("Bernardes")
     const [username, setUsername] = useState("afonso_bernardes")
-    const [email, setEmail] = useState("")
+    const [email, setEmail] = useState("afonso.duarte.bernardes@gmail.com")
 
     const handleEditInfo  = () => {
         setEditDetails(!editDetails)
@@ -15,6 +15,12 @@ export const Profile = () => {
 
     const handleCancel  = () => {
         setEditDetails(false)
+    }
+
+    const handleSubmit = () => {
+        const forms = document.querySelectorAll('.needs-validation')
+
+        
     }
     
     return (
@@ -34,51 +40,57 @@ export const Profile = () => {
                     <div className="wrapper mx-auto px-4 w-100">
                         <h1 className="display-5">{`${firstName} ${lastName}`}</h1>
 
-                        <form className="info-wrapper border border-3 py-4 px-4 d-flex flex-column was-validated" novalidate>
+                        <form className="info-wrapper border border-3 py-4 px-4 d-flex flex-column needs-validation was-validated">
 
-                            <div className="form-group container-fluid d-flex justify-content-between w-100 px-0">
-                                <div className="w-50 me-2">
+                            <div className="form-group row d-flex justify-content-between px-0">
+                                <div className="col-sm-12 col-md-12 col-lg-4 mb-2">
                                     <label htmlFor="first-name" className="mb-1"> First Name</label>
                                     {
                                         editDetails ?
                                         <div>
-                                            <input id="first-name" type="text" required value={firstName} onChange={(event) => setFirstName(event.target.value)} className="information-box form-control p-2 w-100"></input>
-                                            <div class="invalid-feedback">
+                                            <input id="first-name" type="text" required value={firstName} onChange={(event) => setFirstName(event.target.value)} className="information-box form-control p-2"></input>
+                                            <div className="invalid-feedback">
                                                     Provide a valid first name.
                                             </div>
                                         </div>
                                         :
-                                        <div id="first-name" className="information-box border p-2 w-100">{firstName}</div>
+                                        <div id="first-name" className="information-box border border-3 p-2 w-100">{firstName}</div>
                                     }
                                 </div>
 
-                                <div className="w-50 mx-1">
+                                <div className="col-sm-12 col-md-12 col-lg-4 mb-2">
                                     <label htmlFor="last-name" className="form-label mb-1"> Last Name</label>
                                     {
                                         editDetails ?
                                         <div>
-                                            <input id="last-name" type="text" required value={lastName} onChange={(event) => setLastName(event.target.value)} className="information-box form-control p-2 w-100"></input>
-                                            <div class="invalid-feedback">
+                                            <input id="last-name" type="text" required value={lastName} onChange={(event) => setLastName(event.target.value)} className="information-box form-control p-2"></input>
+                                            <div className="invalid-feedback">
                                                 Provide a valid last name.
                                             </div>
                                         </div>
                                         :
-                                        <div id="last-name" className="information-box border p-2 w-100">{lastName}</div>
+                                        <div id="last-name" className="information-box border border-3 p-2 w-100">{lastName}</div>
                                     }
                                 </div>
 
-                                <div className="w-50 ms-2">
+                                <div className="col-sm-12 col-md-12 col-lg-4 mb-2">
                                     <label htmlFor="username" className="form-label mb-1">Username</label>
                                     {
                                         editDetails ?
                                         <div>
-                                            <input id="username" type="text" required value={username} onChange={(event) => setUsername(event.target.value)} className="information-box form-control p-2 w-100"></input>
-                                            <div class="invalid-feedback">
+                                            <div className="input-group">
+                                                <span className="input-group-text">@</span>
+                                                <input id="username" type="text" required value={username} onChange={(event) => setUsername(event.target.value)} className="information-box form-control p-2"></input>
+                                            </div>
+                                            <div className="invalid-feedback">
                                                     Provide a valid username.
                                             </div>
                                         </div>
                                         :
-                                        <div id="username" className="information-box border p-2 w-100">{username}</div>
+                                        <div className="d-flex">
+                                            <span className="input-group-text border border-3 border-end-0 rounded-0">@</span>
+                                            <div id="username" className="information-box border border-3 border-start-0 p-2 w-100">{username}</div>
+                                        </div>
                                     }
                                 </div>
                             </div>
@@ -88,13 +100,13 @@ export const Profile = () => {
                                 {
                                     editDetails ?
                                     <div>
-                                        <input id="email" type="email" required value={email} onChange={(event) => setEmail(event.target.value)} className="information-box form-control p-2 w-100"></input>
-                                        <div class="invalid-feedback" htmlFor="email">
+                                        <input id="email" type="email" required value={email} onChange={(event) => setEmail(event.target.value)} className="information-box form-control p-2"></input>
+                                        <div className="invalid-feedback" htmlFor="email">
                                             Provide a valid email.
                                         </div>
                                     </div>
                                     :
-                                    <div id="email" className="information-box border p-2">{email}</div>
+                                    <div id="email" className="information-box border border-3 p-2">{email}</div>
                                 }
                             </div>
 
@@ -102,7 +114,7 @@ export const Profile = () => {
                                 editDetails ?
                                 <div className="d-flex justify-content-end">
                                     <div type="submit" className="save-info btn btn-danger p-2 mt-3 mx-2" onClick={handleEditInfo}>Save changes</div>
-                                    <div type="submit" className="save-info btn btn-danger p-2 mt-3" onClick={handleCancel}>Cancel</div>
+                                    <div type="submit" className="cancel-info btn btn-danger p-2 mt-3" onClick={handleCancel}>Cancel</div>
                                 </div>
                                 :
                                 <div className="edit-info btn btn-danger p-2 mt-3" onClick={handleEditInfo}>Edit details</div>
