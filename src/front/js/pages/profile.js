@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../../styles/index.css"
 import "../../styles/profile.css";
 
 export const Profile = () => {
@@ -51,7 +52,7 @@ export const Profile = () => {
                                         <div>
                                             <input id="first-name" type="text" required value={firstName} onChange={(event) => setFirstName(event.target.value)} className="information-box form-control p-2"></input>
                                             <div className="invalid-feedback">
-                                                    Provide a valid first name.
+                                                Provide a valid first name.
                                             </div>
                                         </div>
                                         :
