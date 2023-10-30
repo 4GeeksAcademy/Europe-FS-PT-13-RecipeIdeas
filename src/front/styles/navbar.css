@@ -1,0 +1,75 @@
+.navbar {
+  background-color: #ffcab0;
+  height: 89px;
+  position: relative;
+  width: 2000px;
+}
+  
+  .navbar .text-wrapper {
+    color: #426b1f;
+    font-family: "Newsreader", Helvetica;
+    font-size: 32px;
+    font-weight: 500;
+    left: 96px;
+    letter-spacing: -0.32px;
+    line-height: 32px;
+    position: absolute;
+    top: 40px;
+    white-space: nowrap;
+  }
+  
+  .navbar .log-in-button {
+    background-color: #426b1f;
+    border-radius: 8px;
+    height: 48px;
+    left: 1123px;
+    overflow: hidden;
+    position: absolute;
+    top: 33px;
+    width: 126px;
+  }
+  
+  .navbar .div {
+    color: #ffffff;
+    font-family: "Inter", Helvetica;
+    font-size: 16px;
+    font-weight: 600;
+    height: 21px;
+    left: 40px;
+    letter-spacing: 0;
+    line-height: 20.8px;
+    position: absolute;
+    text-align: center;
+    top: 12px;
+    white-space: nowrap;
+  }
+  
+  .navbar .sign-up-button {
+    background-color: #426b1f;
+    border-radius: 8px;
+    height: 48px;
+    left: 1263px;
+    overflow: hidden;
+    position: absolute;
+    top: 33px;
+    width: 126px;
+  }
+  
+  .navbar .text-wrapper-2 {
+    color: #ffffff;
+    font-family: "Inter", Helvetica;
+    font-size: 16px;
+    font-weight: 600;
+    height: 24px;
+    left: 13px;
+    letter-spacing: 0;
+    line-height: 20.8px;
+    position: absolute;
+    text-align: center;
+    top: 10px;
+    white-space: nowrap;
+    width: 102px;
+  }
+  
+  
+  
