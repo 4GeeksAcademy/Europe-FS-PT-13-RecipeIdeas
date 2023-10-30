@@ -1,19 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import "../../styles/navbar.css"
+//import { Link } from "react-router-dom";
 
 export const Navbar = () => {
 	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-				</Link>
-				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
-					</Link>
-				</div>
-			</div>
-		</nav>
+	  <nav className="navbar">
+		<div className="text-wrapper">Main Course</div>
+		<div className="log-in-button">
+		  <div className="div">Log in</div>
+		</div>
+		<div className="sign-up-button">
+		  <div className="text-wrapper-2">Sign Up</div>
+		</div>
+		
+	  </nav>
 	);
-};
+  };
