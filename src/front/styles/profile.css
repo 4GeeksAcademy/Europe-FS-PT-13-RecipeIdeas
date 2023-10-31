@@ -13,8 +13,3 @@ img.avatar {
     display: inline-flex;
     align-self: end;
 }
-
-.information-box {
-    overflow-x: hidden;
-    min-height: 44px;
-}
