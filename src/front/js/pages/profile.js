@@ -24,7 +24,6 @@ export const Profile = () => {
     const handleSubmit  = (event) => {
         event.preventDefault()
         event.stopPropagation()
-        console.log("Submmited")
         setEditDetails(false)
     }
 
