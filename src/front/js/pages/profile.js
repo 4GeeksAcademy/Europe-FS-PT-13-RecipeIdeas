@@ -12,6 +12,8 @@ export const Profile = () => {
     const [lastName, setLastName] = useState("Bernardes")
     const [username, setUsername] = useState("afonso_bernardes")
     const [email, setEmail] = useState("afonso.duarte.bernardes@gmail.com")
+    const [linkedIn, setLinkedIn] = useState("https://www.linkedin.com/in/afonso-bernardes/")
+    const [github, setGithub] = useState("https://github.com/AfonsoBernardes")
 
     const handleEditInfo  = () => {
         setEditDetails(!editDetails)
@@ -107,24 +109,67 @@ export const Profile = () => {
                                 </div>
                             </div>
 
-                            <div className="col-12 mt-2">
-                                <label htmlFor="email" className="form-label mb-1"> Email </label>
-                                {
-                                    editDetails ?
-                                    <div className="input-group has-validation">
-                                        <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-envelope" size="2xl" /> </span>
-                                        <input id="email" type="email" required value={email} onChange={(event) => setEmail(event.target.value)} className="form-control p-2 border-4"></input>
-                                        <div className="invalid-feedback" htmlFor="email">
-                                            Provide a valid email.
+                            <div className="form-group row d-flex justify-content-center px-0">
+                                <div className="col-md-12 col-lg-8 mt-2">
+                                    <label htmlFor="email" className="form-label mb-1"> Email </label>
+                                    {
+                                        editDetails ?
+                                        <div className="input-group has-validation">
+                                            <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-envelope" size="2xl" /> </span>
+                                            <input id="email" type="email" required value={email} onChange={(event) => setEmail(event.target.value)} className="form-control p-2 border-4"></input>
+                                            <div className="invalid-feedback" htmlFor="email">
+                                                Provide a valid email.
+                                            </div>
                                         </div>
-                                    </div>
-                                    :
-                                    <div className="d-flex">
-                                        <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-envelope" size="2xl" /> </span>
-                                        <div id="email" className="form-input py-2 px-3 w-100">{email}</div>
-                                    </div>
-                                }
+                                        :
+                                        <div className="d-flex">
+                                            <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-envelope" size="2xl" /> </span>
+                                            <div id="email" className="form-input p-2 w-100">{email}</div>
+                                        </div>
+                                    }
+                                </div>
                             </div>
+
+                            <div className="form-group row d-flex justify-content-lg-center justify-content-xxl-between px-0">
+                                <div className="col-md-12 col-lg-8 col-xl-6 mt-2">
+                                    <label htmlFor="linkedin" className="mb-1"> LinkedIn</label>
+                                    {
+                                        editDetails ?
+                                        <div className="input-group has-validation">
+                                            <span className="form-input-icon"> <FontAwesomeIcon icon="fa-brands fa-linkedin" size="2xl" /> </span>
+                                            <input id="linkedin" type="text" value={linkedIn} onChange={(event) => setLinkedIn(event.target.value)} className="form-control p-2 border-4"></input>
+                                            <div className="invalid-feedback">
+                                                Provide a valid LinkedIn URL.
+                                            </div>
+                                        </div>
+                                        :
+                                        <div className="d-flex">
+                                            <span className="form-input-icon"> <FontAwesomeIcon icon="fa-brands fa-linkedin" size="2xl" /> </span>
+                                            <div id="linkedin" className="form-input p-2 w-100">{linkedIn}</div>
+                                        </div>
+                                    }
+                                </div>
+
+                                <div className="col-md-12 col-lg-8 col-xl-6 mt-2">
+                                    <label htmlFor="github" className="form-label mb-1"> Github </label>
+                                    {
+                                        editDetails ?
+                                        <div className="input-group has-validation">
+                                            <span className="form-input-icon"> <FontAwesomeIcon icon="fa-brands fa-github" size="2xl" /> </span>
+                                            <input id="github" type="text" value={github} onChange={(event) => setGithub(event.target.value)} className="form-control p-2 border-4"></input>
+                                            <div className="invalid-feedback">
+                                                Provide a valid Github URL.
+                                            </div>
+                                        </div>
+                                        :
+                                        <div className="d-flex">
+                                            <span className="form-input-icon"> <FontAwesomeIcon icon="fa-brands fa-github" size="2xl" /> </span>
+                                            <div id="github" className="form-input p-2 w-100">{github}</div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            
 
                             {   // Conditionl rendering for showing change info or save the updated info depending on the state.
                                 editDetails ?
