@@ -91,13 +91,11 @@ export const Profile = () => {
                                     <label htmlFor="username" className="form-label mb-1">Username</label>
                                     {
                                         editDetails ?
-                                        <div>
-                                            <div className="input-group has-validation">
-                                                <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-at" size="2xl" /> </span>
-                                                <input id="username" type="text" required value={username} onChange={(event) => setUsername(event.target.value)} className="form-control p-2 border-4"></input>
-                                                <div className="invalid-feedback">
-                                                    Provide a valid username.
-                                                </div>
+                                        <div className="input-group has-validation">
+                                            <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-at" size="2xl" /> </span>
+                                            <input id="username" type="text" required value={username} onChange={(event) => setUsername(event.target.value)} className="form-control p-2 border-4"></input>
+                                            <div className="invalid-feedback">
+                                                Provide a valid username.
                                             </div>
                                         </div>
                                         :
@@ -110,7 +108,7 @@ export const Profile = () => {
                             </div>
 
                             <div className="form-group row d-flex justify-content-center px-0">
-                                <div className="col-md-12 col-lg-8 mt-2">
+                                <div className="col-md-12 col-lg-10 col-xl-6 mt-3">
                                     <label htmlFor="email" className="form-label mb-1"> Email </label>
                                     {
                                         editDetails ?
@@ -131,7 +129,7 @@ export const Profile = () => {
                             </div>
 
                             <div className="form-group row d-flex justify-content-lg-center justify-content-xxl-between px-0">
-                                <div className="col-md-12 col-lg-8 col-xl-6 mt-2">
+                                <div className="col-md-12 col-lg-10 col-xl-6 mt-3">
                                     <label htmlFor="linkedin" className="mb-1"> LinkedIn</label>
                                     {
                                         editDetails ?
@@ -150,7 +148,7 @@ export const Profile = () => {
                                     }
                                 </div>
 
-                                <div className="col-md-12 col-lg-8 col-xl-6 mt-2">
+                                <div className="col-md-12 col-lg-10 col-xl-6 mt-3">
                                     <label htmlFor="github" className="form-label mb-1"> Github </label>
                                     {
                                         editDetails ?
