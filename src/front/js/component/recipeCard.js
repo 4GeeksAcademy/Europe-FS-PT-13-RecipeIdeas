@@ -16,7 +16,6 @@ export const RecipeCard = () => {
 
 
 	const getRecipe = () => {
-
 		fetch(url, {
 			method: 'GET',
 			headers: {
@@ -26,12 +25,14 @@ export const RecipeCard = () => {
 			},
 			body: JSON.stringify(),
 		})
-			.then((data) => {
-				return data.json();
+			.then(async (data) => {
+				const response = await data.json();
+				return response;
 			})
 			.then((data) => {
 				console.log(data);
-				setRecipe(data)
+				setRecipe(data);
+				totalRecipePrice(data);
 			})
 			.catch((error) => {
 				console.error('There was a problem with the fetch operation:', error);
@@ -39,10 +40,21 @@ export const RecipeCard = () => {
 	}
 
 	useEffect(() => {
-		getRecipe()
+		getRecipe();
 	}, []);
 
+	const totalRecipePrice = (recipeData) => {
+		if (!recipeData) {
+			return null; 
+		}
 
+		let price = recipeData.recipes[0]?.pricePerServing * recipeData.recipes[0]?.servings;
+		price = Math.round(price / 100); 
+		console.log(price);
+		return price;
+	}
+
+	// make a use state variable for total price
 
 
 	return (
@@ -59,7 +71,8 @@ export const RecipeCard = () => {
 			<div className="">
 				<p className="mt-1 ms-2">Serving: {recipe?.recipes[0]?.servings}</p>
 				<p className="mt-1 ms-2">Total Cook Time: {recipe?.recipes[0]?.readyInMinutes} minutes</p>
-				<p className="mt-1 ms-2">Diet: Vegan</p>
+				<p className="mt-1 ms-2">Price: {totalRecipePrice()}</p>
+				<p className="mt-1 ms-2">Diet: </p>
 				<button type="button" class="btn btn-primary w-100">Go to Recipe</button>
 			</div>
 		</div >
