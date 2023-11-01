@@ -1,0 +1,69 @@
+import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+
+
+export const RecipeCard = () => {
+
+	const [isFavorite, setIsFavorite] = useState(false);
+	const [recipe, setRecipe] = useState();
+
+	const toggleFavorite = () => {
+		setIsFavorite(!isFavorite);
+	};
+
+	const url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random"
+
+
+
+	const getRecipe = () => {
+
+		fetch(url, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-RapidAPI-Key': 'f4a6409e03msh2513ad740baf8b9p13e32fjsn5d20d8842c5f',
+				'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
+			},
+			body: JSON.stringify(),
+		})
+			.then((data) => {
+				return data.json();
+			})
+			.then((data) => {
+				console.log(data);
+				setRecipe(data)
+			})
+			.catch((error) => {
+				console.error('There was a problem with the fetch operation:', error);
+			});
+	}
+
+	useEffect(() => {
+		getRecipe()
+	}, []);
+
+
+
+
+	return (
+		<div className="border mt-4 rounded-top" style={{ width: "18rem" }}>
+			<div className="row">
+				<div className="col-9">
+					<h5 className="m-2">{recipe?.recipes[0]?.title}</h5>
+				</div>
+				<div className="col-3 d-flex align-items-center">
+					<i onClick={toggleFavorite} className={`fa${isFavorite ? 's' : 'r'} fa-heart fa-2x`}></i>
+				</div>
+			</div>
+			<img src={recipe?.recipes[0]?.image} className="card-img-top" alt="Recipe Image" />
+			<div className="">
+				<p className="mt-1 ms-2">Serving: {recipe?.recipes[0]?.servings}</p>
+				<p className="mt-1 ms-2">Total Cook Time: {recipe?.recipes[0]?.readyInMinutes} minutes</p>
+				<p className="mt-1 ms-2">Diet: Vegan</p>
+				<button type="button" class="btn btn-primary w-100">Go to Recipe</button>
+			</div>
+		</div >
+	);
+};
+
+export default RecipeCard;
