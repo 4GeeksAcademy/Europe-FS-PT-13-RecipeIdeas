@@ -2,14 +2,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
-			
-			firstName: "Afonso",
-    		lastName: "Bernardes",
-    		username: "afonso_bernardes",
+			userDetails: {
+				firstName: "Afonso",
+    			lastName: "Bernardes",
+				username: "afonso_bernardes",
 
-    		email: "afonso.duarte.bernardes@gmail.com",
-    		linkedIn: "https://www.linkedin.com/in/afonso-bernardes/",
-    		github: "https://github.com/AfonsoBernardes",
+				email: "afonso.duarte.bernardes@gmail.com",
+				linkedIn: "https://www.linkedin.com/in/afonso-bernardes/",
+				github: "https://github.com/AfonsoBernardes",
+			}
+			
 		},
 
 		actions: {
@@ -25,6 +27,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}catch(error){
 					console.log("Error loading message from backend", error)
 				}
+			},
+
+			setUserDetails: (userDetails) => {
+				// PUT request to user's database.
+				setStore({ userDetails: userDetails })
 			},
 		}
 	};

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../../js/store/appContext"
 import { Form } from "../../js/component/form.js"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import "../../styles/index.css"
 import "../../styles/profile.css";
@@ -8,16 +8,18 @@ import "../../styles/profile.css";
 
 export const Profile = () => {
 
+    const { store, actions } = useContext(Context)
+
     const [editDetails, setEditDetails] = useState(false) // Alternate between edit and save changes so that user can update his info when editDetails is true.
-    
-    const [firstName, setFirstName] = useState("Afonso")
-    const [lastName, setLastName] = useState("Bernardes")
-    const [username, setUsername] = useState("afonso_bernardes")
+    /*
+        const [firstName, setFirstName] = useState("Afonso")
+        const [lastName, setLastName] = useState("Bernardes")
+        const [username, setUsername] = useState("afonso_bernardes")
 
-    const [email, setEmail] = useState("afonso.duarte.bernardes@gmail.com")
-    const [linkedIn, setLinkedIn] = useState("https://www.linkedin.com/in/afonso-bernardes/")
-    const [github, setGithub] = useState("https://github.com/AfonsoBernardes")
-
+        const [email, setEmail] = useState("afonso.duarte.bernardes@gmail.com")
+        const [linkedIn, setLinkedIn] = useState("https://www.linkedin.com/in/afonso-bernardes/")
+        const [github, setGithub] = useState("https://github.com/AfonsoBernardes")
+    */
 
     const handleEditInfo  = () => {
         setEditDetails(!editDetails)
@@ -48,9 +50,9 @@ export const Profile = () => {
 
                 <div className="user-info col-sm-12 col-md-8 d-flex flex-column justify-content-center">
                     <div className="wrapper mx-auto px-4 w-100">
-                        <h1 className="display-5">{`${firstName} ${lastName}`}</h1>
+                        <h1 className="display-5">{`${store.userDetails.firstName} ${store.userDetails.lastName}`}</h1>
 
-                        <Form handle={ ...{handleSubmit, handleCancel, handleEditInfo} } />
+                        <Form handleSubmit={handleSubmit} handleCancel={handleCancel} handleEditInfo={handleEditInfo} editDetails={editDetails} />
                     </div>
                 </div>
             </div>
