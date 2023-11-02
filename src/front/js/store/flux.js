@@ -10,8 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				email: "afonso.duarte.bernardes@gmail.com",
 				linkedIn: "https://www.linkedin.com/in/afonso-bernardes/",
 				github: "https://github.com/AfonsoBernardes",
-			}
-			
+			},	
 		},
 
 		actions: {
@@ -32,6 +31,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			setUserDetails: (userDetails) => {
 				// PUT request to user's database.
 				setStore({ userDetails: userDetails })
+				console.log(userDetails.firstName)
 			},
 		}
 	};

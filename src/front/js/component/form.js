@@ -35,7 +35,7 @@ export const Form = (props) => {
                         props.editDetails ?
                         <div className="input-group has-validation">
                             <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-people-group" size="2xl" /> </span>
-                            <input id="last-name" type="text" required value={store.userDetails.lastName} onChange={(event) => actions.setUserDetails(event.target.value)} className="form-control p-2 border-4"></input>
+                            <input id="last-name" type="text" required value={store.userDetails.lastName} onChange={ (event) => actions.setUserDetails({ ...store['userDetails'], 'lastName': event.target.value }) } className="form-control p-2 border-4"></input>
                             <div className="invalid-feedback">
                                 Provide a valid last name.
                             </div>
@@ -54,7 +54,7 @@ export const Form = (props) => {
                         props.editDetails ?
                         <div className="input-group has-validation">
                             <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-at" size="2xl" /> </span>
-                            <input id="username" type="text" required value={store.userDetails.username} onChange={(event) => actions.setUserDetails(event.target.value)} className="form-control p-2 border-4"></input>
+                            <input id="username" type="text" required value={store.userDetails.username} onChange={ (event) => actions.setUserDetails({ ...store['userDetails'], 'username': event.target.value }) } className="form-control p-2 border-4"></input>
                             <div className="invalid-feedback">
                                 Provide a valid username.
                             </div>
@@ -76,7 +76,7 @@ export const Form = (props) => {
                         props.editDetails ?
                         <div className="input-group has-validation">
                             <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-envelope" size="2xl" /> </span>
-                            <input id="email" type="email" required value={store.userDetails.email} onChange={(event) => actions.setUserDetails(event.target.value)} className="form-control p-2 border-4"></input>
+                            <input id="email" type="email" required value={store.userDetails.email} onChange={ (event) => actions.setUserDetails({ ...store['userDetails'], 'email': event.target.value }) } className="form-control p-2 border-4"></input>
                             <div className="invalid-feedback" htmlFor="email">
                                 Provide a valid email.
                             </div>
@@ -92,43 +92,54 @@ export const Form = (props) => {
 
             <div className="form-group row d-flex justify-content-lg-center justify-content-xxl-between px-0">
                 <div className="col-md-12 col-lg-10 col-xl-6 mt-3">
-                    <label htmlFor="linkedin" className="mb-1"> LinkedIn</label>
+                    <label htmlFor="linkedin" className="mb-1"> {store.userDetails.linkedIn ? "LinkedIn" : <span></span>} </label>
                     {
                         props.editDetails ?
-                        <div className="input-group has-validation">
-                            <span className="form-input-icon"> <FontAwesomeIcon icon="fa-brands fa-linkedin" size="2xl" /> </span>
-                            <input id="linkedin" type="text" value={store.userDetails.linkedIn} onChange={(event) => actions.setUserDetails(event.target.value)} className="form-control p-2 border-4"></input>
-                            <div className="invalid-feedback">
-                                Provide a valid LinkedIn URL.
+                            <div className="input-group has-validation">
+                                <span className="form-input-icon"> <FontAwesomeIcon icon="fa-brands fa-linkedin" size="2xl" /> </span>
+                                <input id="linkedin" type="text" value={store.userDetails.linkedIn} onChange={ (event) => actions.setUserDetails({ ...store['userDetails'], 'linkedIn': event.target.value }) } className="form-control p-2 border-4"></input>
+                                <div className="invalid-feedback">
+                                    Provide a valid LinkedIn URL.
+                                </div>
                             </div>
-                        </div>
                         :
-                        <div className="d-flex">
-                            <span className="form-input-icon"> <FontAwesomeIcon icon="fa-brands fa-linkedin" size="2xl" /> </span>
-                            <div id="linkedin" className="form-input p-2 w-100">{store.userDetails.linkedIn}</div>
-                        </div>
+                            store.userDetails.linkedIn ?
+                            <div className="d-flex">
+                                <span className="form-input-icon"> <FontAwesomeIcon icon="fa-brands fa-linkedin" size="2xl" /> </span>
+                                <div id="linkedin" className="form-input p-2 w-100">
+                                    <a href={store.userDetails.linkedIn} target="_blank">{store.userDetails.linkedIn}</a>
+                                </div>
+                            </div>
+                            :
+                            <span></span>
+
                     }
                 </div>
 
                 <div className="col-md-12 col-lg-10 col-xl-6 mt-3">
-                    <label htmlFor="github" className="form-label mb-1"> Github </label>
+                    <label htmlFor="github" className="form-label mb-1"> {store.userDetails.github ? "Github" : <span></span>} </label>
                     {
                         props.editDetails ?
-                        <div className="input-group has-validation">
-                            <span className="form-input-icon"> <FontAwesomeIcon icon="fa-brands fa-github" size="2xl" /> </span>
-                            <input id="github" type="text" value={store.userDetails.github} onChange={(event) => setUserDetails(event.target.value)} className="form-control p-2 border-4"></input>
-                            <div className="invalid-feedback">
-                                Provide a valid Github URL.
+                            <div className="input-group has-validation">
+                                <span className="form-input-icon"> <FontAwesomeIcon icon="fa-brands fa-github" size="2xl" /> </span>
+                                <input id="github" type="text" value={store.userDetails.github} onChange={ (event) => actions.setUserDetails({ ...store['userDetails'], 'github': event.target.value }) } className="form-control p-2 border-4"></input>
+                                <div className="invalid-feedback">
+                                    Provide a valid Github URL.
+                                </div>
                             </div>
-                        </div>
                         :
-                        <div className="d-flex">
-                            <span className="form-input-icon"> <FontAwesomeIcon icon="fa-brands fa-github" size="2xl" /> </span>
-                            <div id="github" className="form-input p-2 w-100">{store.userDetails.github}</div>
-                        </div>
+                            store.userDetails.github ?
+                            <div className="d-flex">
+                                <span className="form-input-icon"> <FontAwesomeIcon icon="fa-brands fa-github" size="2xl" /> </span>
+                                <div id="github" className="form-input p-2 w-100">
+                                    <a href={store.userDetails.github} target="_blank">{store.userDetails.github}</a>
+                                </div>
+                            </div>
+                            :
+                            <span></span>
                     }
                 </div>
-            </div>    
+            </div>
 
                 {   // Conditionl rendering for showing change info or save the updated info depending on the state.
                     props.editDetails ?
