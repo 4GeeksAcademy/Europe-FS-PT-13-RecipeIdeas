@@ -6,6 +6,11 @@ export const RecipeCard = () => {
 
 	const [isFavorite, setIsFavorite] = useState(false);
 	const [recipe, setRecipe] = useState();
+	const [euros, setEuros] = useState("");
+	const [diets, setDiets] = useState("");
+
+
+
 
 	const toggleFavorite = () => {
 		setIsFavorite(!isFavorite);
@@ -45,16 +50,26 @@ export const RecipeCard = () => {
 
 	const totalRecipePrice = (recipeData) => {
 		if (!recipeData) {
-			return null; 
+			return null;
 		}
-
 		let price = recipeData.recipes[0]?.pricePerServing * recipeData.recipes[0]?.servings;
-		price = Math.round(price / 100); 
+		price = Math.round(price / 100);
 		console.log(price);
-		return price;
+
+		if (price <= 5) {
+			setEuros("€")
+		}
+		else if (price <= 10) {
+			setEuros("€€")
+	
+		}
+		else if (price <= 15) {
+			setEuros("€€€")
+		}
+		else { setEuros("€€€€")
+	}
 	}
 
-	// make a use state variable for total price
 
 
 	return (
@@ -71,8 +86,8 @@ export const RecipeCard = () => {
 			<div className="">
 				<p className="mt-1 ms-2">Serving: {recipe?.recipes[0]?.servings}</p>
 				<p className="mt-1 ms-2">Total Cook Time: {recipe?.recipes[0]?.readyInMinutes} minutes</p>
-				<p className="mt-1 ms-2">Price: {totalRecipePrice()}</p>
-				<p className="mt-1 ms-2">Diet: </p>
+				<p className="mt-1 ms-2">Price: {euros}</p>
+				<p className="mt-1 ms-2">Diet: {Array.isArray(recipe?.recipes[0]?.diets) ? recipe?.recipes[0]?.diets.join(", ")  : "Omnivore"}</p>
 				<button type="button" class="btn btn-primary w-100">Go to Recipe</button>
 			</div>
 		</div >
