@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
 
 
-export const RecipeCard = () => {
+export const RecipeCard = (props) => {
 
 	const [isFavorite, setIsFavorite] = useState(false);
 	const [recipe, setRecipe] = useState();
@@ -16,7 +16,7 @@ export const RecipeCard = () => {
 		setIsFavorite(!isFavorite);
 	};
 
-	const url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random"
+	const url = props.Url
 
 
 
@@ -53,7 +53,7 @@ export const RecipeCard = () => {
 		if (!recipeData) {
 			return null;
 		}
-		let price = recipeData.recipes[0]?.pricePerServing * recipeData.recipes[0]?.servings;
+		let price = recipeData.recipes[props.index]?.pricePerServing * recipeData.recipes[props.index]?.servings;
 		price = Math.round(price / 100);
 		console.log(price);
 
@@ -73,46 +73,48 @@ export const RecipeCard = () => {
 	}
 
 	const dietDisplay = (recipeData) => {
-		if (recipeData?.recipes[0]?.diets.length === 0) {
+		if (recipeData?.recipes[props.index]?.diets.length === 0) {
 			setDiets("Omnivore");
 		} else {
-			setDiets(recipeData?.recipes[0]?.diets.join(", "));
+			setDiets(recipeData?.recipes[props.index]?.diets.join(", "));
 		}
 	};
 
-{/* <div className="col-sm-12 col-md-12 col-lg-4 mb-2"></div> */}
+
 
 
 	return (
-		<div className="border mt-4 rounded-top">
-			<div className="row">
-				<div className="col-9">
-					<h5 className="m-2">{recipe?.recipes[0]?.title}</h5>
+		<li className="col-sm-3 col-md-3 col-lg-3 me-2">
+			<div className="border mt-4 rounded-top">
+				<div className="row">
+					<div className="col-sm-6 col-md-6 col-lg-9">
+						<h5 className="m-2">{recipe?.recipes[props.index]?.title}</h5>
+					</div>
+					<div className="col-sm-3 col-md-3 col-lg-3 d-flex align-items-center">
+						<i onClick={toggleFavorite} className={`fa${isFavorite ? 's' : 'r'} fa-heart fa-2x`}></i>
+					</div>
 				</div>
-				<div className="col-3 d-flex align-items-center">
-					<i onClick={toggleFavorite} className={`fa${isFavorite ? 's' : 'r'} fa-heart fa-2x`}></i>
+				<img src={recipe?.recipes[props.index]?.image} className="card-img-top" alt="Recipe Image" />
+				<div className="row">
+					<div className="col-sm-3 col-md-3 col-lg-4">
+						<p className="mt-1 ms-2"><i class="fas fa-utensils fa-lg"></i> {recipe?.recipes[props.index]?.servings} servings</p>
+					</div>
+					<div className="col-sm-3 col-md-3 col-lg-4">
+						<p className="mt-1 ms-2"><i class="far fa-clock fa-lg"></i> {recipe?.recipes[props.index]?.readyInMinutes} minutes</p>
+					</div>
+					<div className="col-sm-3 col-md-3 col-lg-4">
+						<p className="mt-1 ms-2"><i class="fas fa-coins fa-lg"></i> {euros}</p>
+					</div>
+					<div />
+					<div className="d-flex justify-content-center">
+						<p className="mt-1 ms-2"><i class="fas fa-apple-alt fa-lg"></i> {diets}</p>
+					</div>
+					<div className="d-flex justify-content-center">
+						<button type="button" class="btn btn-primary w-100">Go to Recipe</button>
+					</div>
 				</div>
-			</div>
-			<img src={recipe?.recipes[0]?.image} className="card-img-top" alt="Recipe Image" />
-			<div className="row">
-				<div className="col-4">
-					<p className="mt-1 ms-2"><i class="fas fa-utensils fa-lg"></i> {recipe?.recipes[0]?.servings} servings</p>
-				</div>
-				<div className="col-4">
-					<p className="mt-1 ms-2"><i class="far fa-clock fa-lg"></i> {recipe?.recipes[0]?.readyInMinutes} minutes</p>
-				</div>
-				<div className="col-4">
-					<p className="mt-1 ms-2"><i class="fas fa-coins fa-lg"></i> {euros}</p>
-				</div>
-				<div />
-				<div className="d-flex justify-content-center">
-					<p className="mt-1 ms-2"><i class="fas fa-apple-alt fa-lg"></i> {diets}</p>
-				</div>
-				<div className="d-flex justify-content-center">
-					<button type="button" class="btn btn-primary w-100">Go to Recipe</button>
-				</div>
-			</div>
-		</div >
+			</div >
+		</li>
 	);
 };
 
