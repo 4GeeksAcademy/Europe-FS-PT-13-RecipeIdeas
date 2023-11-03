@@ -29,6 +29,9 @@ export const RecipeCard = (props) => {
 				'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
 			},
 			body: JSON.stringify(),
+			params: {
+				Number: props.randomNumber
+			  },
 		})
 			.then(async (data) => {
 				const response = await data.json();
