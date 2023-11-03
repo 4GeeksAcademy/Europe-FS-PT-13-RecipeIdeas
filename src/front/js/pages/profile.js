@@ -11,29 +11,24 @@ export const Profile = () => {
     const { store, actions } = useContext(Context)
 
     const [editDetails, setEditDetails] = useState(false) // Alternate between edit and save changes so that user can update his info when editDetails is true.
-    /*
-        const [firstName, setFirstName] = useState("Afonso")
-        const [lastName, setLastName] = useState("Bernardes")
-        const [username, setUsername] = useState("afonso_bernardes")
 
-        const [email, setEmail] = useState("afonso.duarte.bernardes@gmail.com")
-        const [linkedIn, setLinkedIn] = useState("https://www.linkedin.com/in/afonso-bernardes/")
-        const [github, setGithub] = useState("https://github.com/AfonsoBernardes")
-    */
-
-    const handleEditInfo  = () => {
+    const handleEditInfo = () => {
         setEditDetails(!editDetails)
     }
 
-    const handleCancel  = () => {
+    const handleCancel = () => {
         setEditDetails(false)
     }
     
-    const handleSubmit  = (event) => {
+    const handleSubmit = (event) => {
         // flux.js -> setUserDetails()
         event.preventDefault()
         event.stopPropagation()
         setEditDetails(false)
+    }
+
+    const handleUploadAvatar = () => {
+        actions.setProfilePicture()
     }
 
     return (
@@ -46,7 +41,7 @@ export const Profile = () => {
                         src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flistimg.pinclipart.com%2Fpicdir%2Fs%2F351-3519728_png-file-svg-default-profile-picture-free-clipart.png&f=1&nofb=1&ipt=20c41a225bc465c20f51d2a0a087db917768fa1eca77d811c1f1832fdd60def0&ipo=images"
                         alt="Profile Picture"
                     />
-                    <button className="change-picture btn btn-danger my-2 mx-auto p-2">Change profile picture</button>
+                    <button className="change-picture btn btn-danger my-2 mx-auto p-2" onClick={handleUploadAvatar}>Change profile picture</button>
                 </div>
 
                 <div className="user-info col-sm-12 col-md-8 d-flex flex-column justify-content-center">
