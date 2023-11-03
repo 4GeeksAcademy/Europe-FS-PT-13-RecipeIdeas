@@ -24,6 +24,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getToken: () =>{
 				return sessionStorage.getItem("token");
+				
+			},
+
+			logout: () =>{
+				sessionStorage.removeItem("token");
+				console.log("Log out");
+				setStore({token : null});
+
 			},
 
 			login: async (email, password) => {
@@ -53,9 +61,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getMessage: () => {
-			
+				const store = getStore();
+				const opts = {
+					headers: {
+						"Authorization": "Bearer" + store.token
+					}
+				};
 					// fetching data from the backend
-					fetch(process.env.BACKEND_URL + "/api/hello")
+					fetch(process.env.BACKEND_URL + "/api/hello", opts)
 					.then(resp => resp.json())
 					.then(data => setStore({ message: data.message }))
 					// don't forget to return something, that is how the async resolves
@@ -63,6 +76,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 			},
 			changeColor: (index, color) => {
+
 				//get the store
 				const store = getStore();
 
