@@ -9,7 +9,7 @@ from api.utils import generate_sitemap, APIException
 
 import cloudinary
 import cloudinary.uploader
-import cloudinary.api as cld_api
+import cloudinary.api
 
 api = Blueprint('api', __name__)
 
@@ -37,10 +37,11 @@ def handle_hello():
     return jsonify(response_body), 200
 
 
-@api.route('/upload_avatar', methods=['POST'])
-def upload_avatar():
+@api.route('/upload_avatar/<image_url>', methods=['PUT'])
+def upload_avatar(image_url):
 
-    uploader = cloudinary.uploader.upload("https://picsum.photos/500/500", unique_filename = False, overwrite=True)
+    print(image_url)
+    uploader = cloudinary.uploader.upload(image_url, unique_filename = False, overwrite=True)
     image_info = cloudinary.api.resource(uploader["public_id"]) ## Get image via a randomly generated public_id.
     print("****3. Get and use details of the image****\nUpload response:\n", json.dumps(image_info,indent=4), "\n")
     
@@ -55,7 +56,7 @@ def upload_avatar():
     print("****4. Transform the image****\nTransfrmation URL: ", transformed_image_url, "\n")
 
     response_body = {
-        "message": image_info
+        "transformedImage": transformed_image_url
     }
 
     return jsonify(response_body), 200

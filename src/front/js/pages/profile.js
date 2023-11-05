@@ -27,8 +27,9 @@ export const Profile = () => {
         setEditDetails(false)
     }
 
-    const handleUploadAvatar = () => {
-        actions.setProfilePicture()
+    const handleUploadAvatar = (event) => {
+        event.preventDefault()
+        actions.setProfilePicture("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP._VFJnjezNAgyrCcdL-5KgAHaL0%26pid%3DApi&f=1&ipt=806bd563f45bc431c9c1591776d2d5ddd706ba2d31a9964473ba7d7f29da22ce&ipo=images")
     }
 
     return (
@@ -38,10 +39,10 @@ export const Profile = () => {
                 <div className="avatar col-sm-12 col-md-4 d-flex flex-column justify-content-center text-center">
                     <img
                         className="avatar img-fluid img-thumbnail rounded-circle mx-auto"
-                        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flistimg.pinclipart.com%2Fpicdir%2Fs%2F351-3519728_png-file-svg-default-profile-picture-free-clipart.png&f=1&nofb=1&ipt=20c41a225bc465c20f51d2a0a087db917768fa1eca77d811c1f1832fdd60def0&ipo=images"
+                        src={store.userDetails.avatar}
                         alt="Profile Picture"
                     />
-                    <button className="change-picture btn btn-danger my-2 mx-auto p-2" onClick={handleUploadAvatar}>Change profile picture</button>
+                    <button className="change-picture btn btn-danger my-2 mx-auto p-2" onClick={handleUploadAvatar}> Change profile picture </button>
                 </div>
 
                 <div className="user-info col-sm-12 col-md-8 d-flex flex-column justify-content-center">
