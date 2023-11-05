@@ -1,3 +1,5 @@
+import { number } from "prop-types";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -13,7 +15,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			randomRecipes: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -46,7 +49,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+
+			getRandomRecipe: (totalRecipePrice, dietDisplay, setRecipe) => {
+				const store = getStore();
+				fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=3", {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-RapidAPI-Key': 'f4a6409e03msh2513ad740baf8b9p13e32fjsn5d20d8842c5f',
+						'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
+					},
+					body: JSON.stringify()
+				})
+					.then(async (data) => {
+						const response = await data.json();
+						return response;
+					})
+					.then((data) => {
+						console.log(data);
+						setRecipe(data);
+						totalRecipePrice(data);
+						dietDisplay(data);
+						setStore({ randomRecipes: data["recipes"] });
+						console.log("here's the store for the randomRecipes")
+						console.log(getStore().randomRecipes)
+					})
+					.catch((error) => {
+						console.error('There was a problem with the fetch operation:', error);
+					});
 			}
+
 		}
 	};
 };
