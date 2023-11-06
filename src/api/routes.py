@@ -37,23 +37,25 @@ def handle_hello():
     return jsonify(response_body), 200
 
 
-@api.route('/upload_avatar/<image_url>', methods=['PUT'])
-def upload_avatar(image_url):
+@api.route('/upload_avatar/', methods=['PUT'])
+def upload_avatar():
 
-    print(image_url)
+
+    image_url = request.json.get('image_url', None)
+
     uploader = cloudinary.uploader.upload(image_url, unique_filename = False, overwrite=True)
     image_info = cloudinary.api.resource(uploader["public_id"]) ## Get image via a randomly generated public_id.
-    print("****3. Get and use details of the image****\nUpload response:\n", json.dumps(image_info,indent=4), "\n")
     
      # Create an image tag with transformations applied to the src URL.
-    transformed_image_url = cloudinary.CloudinaryImage(image_info["public_id"])\
+    transformed_image = cloudinary.CloudinaryImage(image_info["public_id"])\
                                     .image(transformation=[{'gravity': "face", 'height': 300, 'width': 300, 'crop': "fill"},
-                                                           {'fetch_format': "jpg,png"},
                                                            {'radius': "max"}]
                                             )
 
-      # Log the image tag to the console
-    print("****4. Transform the image****\nTransfrmation URL: ", transformed_image_url, "\n")
+    start_idx = transformed_image.index('"')
+    end_idx = transformed_image.rindex('"')
+    transformed_image_url = transformed_image[start_idx+1:end_idx]
+
 
     response_body = {
         "transformedImage": transformed_image_url

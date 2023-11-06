@@ -29,7 +29,7 @@ export const Profile = () => {
 
     const handleUploadAvatar = (event) => {
         event.preventDefault()
-        actions.setProfilePicture("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP._VFJnjezNAgyrCcdL-5KgAHaL0%26pid%3DApi&f=1&ipt=806bd563f45bc431c9c1591776d2d5ddd706ba2d31a9964473ba7d7f29da22ce&ipo=images")
+        actions.setProfilePicture("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.2389hs1Tuoxh-yRPP430oQHaEK%26pid%3DApi&f=1&ipt=8eb07f6e54740204beb04f9102538ae8348d2bde7b73aa2d9097c4d5a9c00b98&ipo=images")
     }
 
     return (
@@ -38,7 +38,7 @@ export const Profile = () => {
 
                 <div className="avatar col-sm-12 col-md-4 d-flex flex-column justify-content-center text-center">
                     <img
-                        className="avatar img-fluid img-thumbnail rounded-circle mx-auto"
+                        className="avatar img-fluid rounded-circle mx-auto"
                         src={store.userDetails.avatar}
                         alt="Profile Picture"
                     />

@@ -34,29 +34,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 			setUserDetails: (userDetails) => {
 				// PUT request to user's database.
 				setStore({ userDetails: userDetails })
-				console.log(userDetails.firstName)
 			},
 
 			setProfilePicture: async (url) => {
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}api/upload_avatar`,
 						{
-							method: 'PUT',
+							method: "PUT",
 							headers: {
 								"Content-Type": "application/json",
 							},
 
-							body: JSON.stringify( {image_url: url} ),
+							body: JSON.stringify({ image_url: url })
 						}
 					)
-					console.log(resp)
 					const data = await resp.json()
-					console.log(data)
+					const newAvatar = await data['transformedImage']
+					setStore( { userDetails: {...getStore()['userDetails'], "avatar": newAvatar} } )
 				}
 				catch(error) {
-					console.log("Error loading setting user's profile picture.", error)
+					console.log("Error setting user's profile picture.", error)
 				}
-			} 
+			},
 		}
 	};
 };
