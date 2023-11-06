@@ -30,3 +30,4 @@ class User(db.Model):
             "github": self.github,
             # do not serialize the password, its a security breach
         }
+

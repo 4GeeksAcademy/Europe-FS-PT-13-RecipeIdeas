@@ -9,6 +9,7 @@ from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
+import hashlib
 
 import cloudinary
 import cloudinary.uploader
@@ -37,8 +38,14 @@ cloudinary.config(
 def create_token():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    if email != "test@test.pt" or password != "test":
-        return jsonify({"msg": "Bad email or password"}), 401
+    m = hashlib.sha256()
+    m.update(bytes(password, 'utf-8'))
+    passwordhash = m.hexdigest()
+    user = User.query.filter_by(
+        email=email, password=passwordhash).first()
+    if user is None:
+        # the user was not found on the database
+        return jsonify({"msg": "Bad username or password"}), 401
 
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
@@ -112,10 +119,25 @@ def upload_avatar():
 @jwt_required()
 def get_hello():
 
-    email= get_jwt_identity()
+    email = get_jwt_identity()
 
     dictionary = {
         "message": "hello" + email
     }
 
     return jsonify(dictionary)
+
+
+@api.route("/signup", methods=["POST"])
+def create_signup():
+    name = request.json.get("name", None)
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    m = hashlib.sha256()
+    m.update(bytes(password, 'utf-8'))
+    passwordhash = m.hexdigest()
+    user = User(name=name, email=email, password=passwordhash)
+    db.session.add(user)
+    db.session.commit()
+
+    return jsonify(user.serialize())
