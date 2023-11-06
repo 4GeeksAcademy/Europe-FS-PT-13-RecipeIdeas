@@ -17,7 +17,7 @@ export const RecipeCard = (props) => {
 
 	useEffect(() => {
 		totalRecipePrice();
-		dietDisplay
+		dietDisplay();
 	  }, []);
 
 
@@ -54,8 +54,8 @@ export const RecipeCard = (props) => {
 
 
 	return (
-		<li className="col-sm-3 col-md-3 col-lg-3 me-2">
-			<div className="border mt-4 rounded-top">
+		<li className="col-sm-3 col-md-3 col-lg-3 me-4">
+			<div className="mt-4 rounded-top" style={{backgroundColor: "#ffcab0"}}>
 				<div className="row">
 					<div className="col-sm-6 col-md-6 col-lg-9">
 						<h5 className="m-2">{props.title}</h5>

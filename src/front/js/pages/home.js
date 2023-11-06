@@ -29,28 +29,26 @@ export const Home = () => {
 					</a>
 				</p>
 			</div>
-			<div className="container">
-				<div className="d-flex justify-contents-center">
-					<h1 className="">Random Recipes: </h1>
-				</div>
+			<div className="container p-5 rounded" style={{backgroundColor: "#ffebbb"}}>
+				<h1 className="text-center">Random Recipes:</h1>
 				<div className="row">
-					<ul className="container" style={{listStyleType: "none"}}>
-					{ store.randomRecipes.map((p, index) => {return(
-						<>
-						<RecipeCard key={index}
-						title={p.title}
-						image={p.image}
-						pricePerServing={p.pricePerServing}
-						servings={p.servings}
-						diets={p.diets}
-						readyInMinutes={p.readyInMinutes}
-						/>
-						</>
-					)})}
+					<ul className="d-flex justify-content-center" style={{ listStyleType: "none" }}>
+						{store.randomRecipes.map((p, index) => {
+							return (
+								<RecipeCard
+									key={index}
+									title={p.title}
+									image={p.image}
+									pricePerServing={p.pricePerServing}
+									servings={p.servings}
+									diets={p.diets}
+									readyInMinutes={p.readyInMinutes}
+								/>
+							);
+						})}
 					</ul>
-
 				</div>
 			</div>
 		</>
-	);	
+	);
 };
