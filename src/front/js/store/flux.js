@@ -51,7 +51,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			},
 
-			getRandomRecipe: (totalRecipePrice, dietDisplay, setRecipe) => {
+
+			// totalRecipePrice, dietDisplay, setRecipe, this were the arguments inside the func below
+			getRandomRecipe: () => {
 				const store = getStore();
 				fetch("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=3", {
 					method: 'GET',
@@ -67,12 +69,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response;
 					})
 					.then((data) => {
-						console.log(data);
-						setRecipe(data);
-						totalRecipePrice(data);
-						dietDisplay(data);
 						setStore({ randomRecipes: data["recipes"] });
-						console.log("here's the store for the randomRecipes")
+						console.log("store in the flux")
 						console.log(getStore().randomRecipes)
 					})
 					.catch((error) => {

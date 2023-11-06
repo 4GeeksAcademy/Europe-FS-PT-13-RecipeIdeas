@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
@@ -6,6 +6,11 @@ import { RecipeCard } from "../component/recipeCard";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+
+
+	useEffect(() => {
+		actions.getRandomRecipe()
+	}, []);
 
 	return (
 		<>
@@ -26,12 +31,24 @@ export const Home = () => {
 			</div>
 			<div className="container">
 				<div className="d-flex justify-contents-center">
-					<h1 className="">Random Recipes:</h1>
+					<h1 className="">Random Recipes: </h1>
 				</div>
 				<div className="row">
 					<ul className="container" style={{listStyleType: "none"}}>
-						<RecipeCard Url="https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random" index="0" />
+					{ store.randomRecipes.map((p, index) => {return(
+						<>
+						<RecipeCard key={index}
+						title={p.title}
+						image={p.image}
+						pricePerServing={p.pricePerServing}
+						servings={p.servings}
+						diets={p.diets}
+						readyInMinutes={p.readyInMinutes}
+						/>
+						</>
+					)})}
 					</ul>
+
 				</div>
 			</div>
 		</>

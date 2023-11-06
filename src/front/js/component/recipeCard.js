@@ -6,31 +6,24 @@ import { Context } from "../store/appContext";
 export const RecipeCard = (props) => {
 
 	const [isFavorite, setIsFavorite] = useState(false);
-	const [recipe, setRecipe] = useState();
 	const [euros, setEuros] = useState("");
 	const [diets, setDiets] = useState("Omnivore");
-
-	const { store, actions } = useContext(Context);
-    const { randomRecipes } = store;
-
-
-
 
 	const toggleFavorite = () => {
 		setIsFavorite(!isFavorite);
 	};
 
-	useEffect(() => {
-		actions.getRandomRecipe(totalRecipePrice, dietDisplay, setRecipe)
-		console.log("here's the random recipes array from the store in the actual component")
-		console.log(randomRecipes)
-	}, []);
 
-	const totalRecipePrice = (recipeData) => {
-		if (!recipeData) {
-			return null;
-		}
-		let price = recipeData.recipes[props.index]?.pricePerServing * recipeData.recipes[props.index]?.servings;
+
+	useEffect(() => {
+		totalRecipePrice();
+		dietDisplay
+	  }, []);
+
+
+
+	const totalRecipePrice = () => {
+		let price = props.pricePerServing * props.servings;
 		price = Math.round(price / 100);
 		console.log(price);
 
@@ -49,11 +42,11 @@ export const RecipeCard = (props) => {
 		}
 	}
 
-	const dietDisplay = (recipeData) => {
-		if (recipeData?.recipes[props.index]?.diets.length === 0) {
+	const dietDisplay = () => {
+		if (props.diets.length === 0) {
 			setDiets("Omnivore");
 		} else {
-			setDiets(recipeData?.recipes[props.index]?.diets.join(", "));
+			setDiets(props.diets.join(", "));
 		}
 	};
 
@@ -65,19 +58,19 @@ export const RecipeCard = (props) => {
 			<div className="border mt-4 rounded-top">
 				<div className="row">
 					<div className="col-sm-6 col-md-6 col-lg-9">
-						<h5 className="m-2">{recipe?.recipes[props.index]?.title}</h5>
+						<h5 className="m-2">{props.title}</h5>
 					</div>
 					<div className="col-sm-3 col-md-3 col-lg-3 d-flex align-items-center">
 						<i onClick={toggleFavorite} className={`fa${isFavorite ? 's' : 'r'} fa-heart fa-2x`}></i>
 					</div>
 				</div>
-				<img src={recipe?.recipes[props.index]?.image} className="card-img-top" alt="Recipe Image" />
+				<img src={props.image} className="card-img-top" alt="Recipe Image" />
 				<div className="row">
 					<div className="col-sm-3 col-md-3 col-lg-4">
-						<p className="mt-1 ms-2"><i class="fas fa-utensils fa-lg"></i> {recipe?.recipes[props.index]?.servings} servings</p>
+						<p className="mt-1 ms-2"><i class="fas fa-utensils fa-lg"></i> {props.servings} servings</p>
 					</div>
 					<div className="col-sm-3 col-md-3 col-lg-4">
-						<p className="mt-1 ms-2"><i class="far fa-clock fa-lg"></i> {recipe?.recipes[props.index]?.readyInMinutes} minutes</p>
+						<p className="mt-1 ms-2"><i class="far fa-clock fa-lg"></i> {props.readyInMinutes} minutes</p>
 					</div>
 					<div className="col-sm-3 col-md-3 col-lg-4">
 						<p className="mt-1 ms-2"><i class="fas fa-coins fa-lg"></i> {euros}</p>
