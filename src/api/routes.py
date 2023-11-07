@@ -40,8 +40,10 @@ def handle_hello():
 @api.route('/upload_avatar/', methods=['PUT'])
 def upload_avatar():
 
+    current_user = User.query.filter_by(email="test_user1@test.com").first()
+    print(current_user)
 
-    image_url = request.json.get('image_url', None)
+    image_url = request.json.get('image_url', None) # Get request body.
 
     uploader = cloudinary.uploader.upload(image_url, unique_filename = False, overwrite=True)
     image_info = cloudinary.api.resource(uploader["public_id"]) ## Get image via a randomly generated public_id.
@@ -52,13 +54,21 @@ def upload_avatar():
                                                            {'radius': "max"}]
                                             )
 
+    # Isolate URL string.
     start_idx = transformed_image.index('"')
     end_idx = transformed_image.rindex('"')
     transformed_image_url = transformed_image[start_idx+1:end_idx]
 
+    current_user.avatar = transformed_image_url
+
+    db.session.add(current_user)
+    db.session.commit()
 
     response_body = {
-        "transformedImage": transformed_image_url
+        "message": f"Users {current_user} avatar changed to {transformed_image_url}",
+        "avatar": transformed_image_url
     }
+
+
 
     return jsonify(response_body), 200

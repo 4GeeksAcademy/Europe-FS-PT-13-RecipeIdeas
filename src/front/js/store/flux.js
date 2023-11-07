@@ -48,8 +48,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 							body: JSON.stringify({ image_url: url })
 						}
 					)
-					const data = await resp.json()
-					const newAvatar = await data['transformedImage']
+					const resp_json = await resp.json()
+					console.log(resp_json.message)
+					const newAvatar = await resp_json['avatar']
 					setStore( { userDetails: {...getStore()['userDetails'], "avatar": newAvatar} } )
 				}
 				catch(error) {
