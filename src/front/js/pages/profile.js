@@ -37,19 +37,15 @@ export const Profile = () => {
         cropping: true}, 
         (error, result) => { 
             if (!error && result && result.event === "success") { 
-                console.log('Done! Here is the image info: ', result.info.url); 
+                console.log('Done! Here is the image info: ', result.info.url);
+                actions.setProfilePicture(result.info.url)
             }
         }
     )
 
-    const handleOpenWidget = (event) => {
-        event.preventDefault()
-        myWidget.open();
-    }
-
     const handleUploadAvatar = (event) => {
         event.preventDefault()
-        actions.setProfilePicture("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.2389hs1Tuoxh-yRPP430oQHaEK%26pid%3DApi&f=1&ipt=8eb07f6e54740204beb04f9102538ae8348d2bde7b73aa2d9097c4d5a9c00b98&ipo=images")
+        myWidget.open();
     }
 
     return (
@@ -62,7 +58,7 @@ export const Profile = () => {
                         src={store.userDetails.avatar}
                         alt="Profile Picture"
                     />
-                    <button className="change-picture btn btn-danger my-2 mx-auto p-2" onClick={handleOpenWidget}> Change profile picture </button>
+                    <button className="change-picture btn btn-danger my-2 mx-auto p-2" onClick={handleUploadAvatar}> Change profile picture </button>
 
                 </div>
 
