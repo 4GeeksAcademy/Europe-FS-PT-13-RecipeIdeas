@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../../js/store/appContext"
 import { Form } from "../../js/component/form.js"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import "../../styles/index.css"
 import "../../styles/profile.css";
+
 
 
 export const Profile = () => {
@@ -26,6 +28,24 @@ export const Profile = () => {
         event.stopPropagation()
         setEditDetails(false)
     }
+  
+
+    let myWidget = cloudinary.createUploadWidget({
+        cloudName: process.env.CLOUD_NAME, 
+        uploadPreset: "users_avatar",
+        sources: [ "local", "url"],
+        cropping: true}, 
+        (error, result) => { 
+            if (!error && result && result.event === "success") { 
+                console.log('Done! Here is the image info: ', result.info.url); 
+            }
+        }
+    )
+
+    const handleOpenWidget = (event) => {
+        event.preventDefault()
+        myWidget.open();
+    }
 
     const handleUploadAvatar = (event) => {
         event.preventDefault()
@@ -42,7 +62,8 @@ export const Profile = () => {
                         src={store.userDetails.avatar}
                         alt="Profile Picture"
                     />
-                    <button className="change-picture btn btn-danger my-2 mx-auto p-2" onClick={handleUploadAvatar}> Change profile picture </button>
+                    <button className="change-picture btn btn-danger my-2 mx-auto p-2" onClick={handleOpenWidget}> Change profile picture </button>
+
                 </div>
 
                 <div className="user-info col-sm-12 col-md-8 d-flex flex-column justify-content-center">
