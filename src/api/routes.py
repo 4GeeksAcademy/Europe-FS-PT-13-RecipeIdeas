@@ -40,10 +40,15 @@ def handle_hello():
 @api.route('/update_user/', methods=['PUT'])
 def update_user():
 
-    current_user = User.query.filter_by(id=1).first()
+    current_user = User.query.get(1)
 
     current_user.email = request.json.get('email')
     current_user.avatar = request.json.get('avatar')
+    current_user.firstName = request.json.get('firstName')
+    current_user.lastName = request.json.get('lastName')
+    current_user.username = request.json.get('username')
+    current_user.linkedIn = request.json.get('linkedIn')
+    current_user.github = request.json.get('github')
 
     db.session.add(current_user)
     db.session.commit()
@@ -52,7 +57,7 @@ def update_user():
         "message": f"Users' {current_user.email} details have been changed: {current_user}",
     }
 
-    return response_body
+    return jsonify(response_body), 200
 
 
 @api.route('/get_user/', methods=['GET'])

@@ -7,6 +7,11 @@ export const Form = (props) => {
     const { store, actions } = useContext(Context)
 
     const [userDetails, setUserDetails] = useState(store.userDetails)
+    console.log('STATE USER DETAILS', userDetails)
+
+    useEffect(() => {
+        setUserDetails(store.userDetails)
+    }, [store.userDetails])
 
     return(
         <form className="info-wrapper py-4 px-4 d-flex flex-column was-validated" onSubmit={props.handleSubmit}>
@@ -19,7 +24,7 @@ export const Form = (props) => {
                         <div className="input-group has-validation">
                             <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-person" size="2xl" /> </span>
 
-                            <input id="first-name" type="text" required value={userDetails.firstName} onChange={ (event) => setUserDetails({ ...userDetails, 'firstName': event.target.value }) }  className="form-control p-2 border-4"></input><div className="invalid-feedback">
+                            <input id="first-name" type="text" value={userDetails.firstName} onChange={ (event) => setUserDetails({ ...userDetails, 'firstName': event.target.value }) }  className="form-control p-2 border-4"></input><div className="invalid-feedback">
                                 Provide a valid first name.
                             </div>
                         </div>
@@ -37,7 +42,7 @@ export const Form = (props) => {
                         props.editDetails ?
                         <div className="input-group has-validation">
                             <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-people-group" size="2xl" /> </span>
-                            <input id="last-name" type="text" required value={userDetails.lastName} onChange={ (event) => setUserDetails({ ...userDetails, 'lastName': event.target.value }) } className="form-control p-2 border-4"></input>
+                            <input id="last-name" type="text" value={userDetails.lastName} onChange={ (event) => setUserDetails({ ...userDetails, 'lastName': event.target.value }) } className="form-control p-2 border-4"></input>
                             <div className="invalid-feedback">
                                 Provide a valid last name.
                             </div>
@@ -105,11 +110,11 @@ export const Form = (props) => {
                                 </div>
                             </div>
                         :
-                            store.userDetails.linkedIn ?
+                            userDetails.linkedIn ?
                             <div className="d-flex">
                                 <span className="form-input-icon"> <FontAwesomeIcon icon="fa-brands fa-linkedin" size="2xl" /> </span>
                                 <div id="linkedin" className="form-input p-2 w-100">
-                                    <a href={store.userDetails.linkedIn} target="_blank">{userDetails.linkedIn}</a>
+                                    <a href={userDetails.linkedIn} target="_blank">{userDetails.linkedIn}</a>
                                 </div>
                             </div>
                             :
@@ -130,11 +135,11 @@ export const Form = (props) => {
                                 </div>
                             </div>
                         :
-                            store.userDetails.github ?
+                            userDetails.github ?
                             <div className="d-flex">
                                 <span className="form-input-icon"> <FontAwesomeIcon icon="fa-brands fa-github" size="2xl" /> </span>
                                 <div id="github" className="form-input p-2 w-100">
-                                    <a href={store.userDetails.github} target="_blank">{userDetails.github}</a>
+                                    <a href={userDetails.github} target="_blank">{userDetails.github}</a>
                                 </div>
                             </div>
                             :
@@ -146,7 +151,7 @@ export const Form = (props) => {
                 {   // Conditionl rendering for showing change info or save the updated info depending on the state.
                     props.editDetails ?
                     <div className="d-flex justify-content-end">
-                        <button type="submit" className="save-info btn btn-danger p-2 mt-3 mx-2" onClick={event => props.handleSubmit(userDetails)}>Save changes</button>
+                        <button className="save-info btn btn-danger p-2 mt-3 mx-2" onClick={event => props.handleSubmit(userDetails)}>Save changes</button>
                         <button className="cancel-info btn btn-danger p-2 mt-3" onClick={props.handleCancel}>Cancel</button>
                     </div>
                     :

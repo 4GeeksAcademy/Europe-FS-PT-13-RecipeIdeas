@@ -38,9 +38,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const resp = await fetch(`${process.env.BACKEND_URL}api/get_user`)
 					const data = await resp.json()
 					const userData = await data.user
-					console.log('getUserDetails', userData)
-					setStore( { userDetails: {...getStore()['userDetails'], "email": userData['email'], "avatar": userData['avatar']} } )
-					console.log('FROM THE STORE', getStore()['userDetails'])
+					setStore( { userDetails: {...getStore()['userDetails'], "email": userData['email'], "avatar": userData['avatar'], "username": userData['username'],
+																			"firstName": userData['firstName'], "lastName": userData['lastName'],
+																			"linkedIn": userData['linkedIn'], "github": userData['github']} })
 				}
 				catch(error) {
 					console.log("Error fetching user data ('getUserDetails()' in flux.js). User might not exist.")
@@ -51,7 +51,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			setUserDetails: async (userDetails) => {
 				// PUT request to user's database.
 				try {
-					
 					const resp = await fetch(`${process.env.BACKEND_URL}api/update_user`,
 						{
 							method: "PUT",
@@ -59,12 +58,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 								"Content-Type": "application/json",
 							},
 							
-							body: JSON.stringify({ userDetails })
+							body: JSON.stringify(userDetails)
 						}
 					);
 					
 					const resp_json = await resp.json()
-					console.log(resp_json)
 					setStore({ userDetails: userDetails })
 				}
 				catch(error) {
