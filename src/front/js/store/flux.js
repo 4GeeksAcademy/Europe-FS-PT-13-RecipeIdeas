@@ -2,51 +2,94 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+
+			userDetails: {
+				firstName: "",
+    			lastName: "",
+				username: null,
+
+				email: null,
+				linkedIn: null,
+				github: null,
+
+				avatar: null,
+			},	
 		},
+
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
 
 			getMessage: async () => {
 				try{
 					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
+					const resp = await fetch(process.env.BACKEND_URL + "api/hello")
 					const data = await resp.json()
 					setStore({ message: data.message })
 					// don't forget to return something, that is how the async resolves
 					return data;
-				}catch(error){
+				}
+				catch(error){
 					console.log("Error loading message from backend", error)
 				}
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+			getuserDetails: async () => {
+				// Get logged user id and call API to get further info.
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}api/get_user`)
+					const data = await resp.json()
+					const userData = await data.user
+					setStore( { userDetails: {...getStore()['userDetails'], "email": userData['email'], "avatar": userData['avatar'], "username": userData['username'],
+																			"firstName": userData['firstName'], "lastName": userData['lastName'],
+																			"linkedIn": userData['linkedIn'], "github": userData['github']} })
+				}
+				catch(error) {
+					console.log("Error fetching user data ('getUserDetails()' in flux.js). User might not exist.")
+					console.log(error)
+				}
+			},
 
-				//reset the global store
-				setStore({ demo: demo });
-			}
+			setUserDetails: async (userDetails) => {
+				// PUT request to user's database.
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}api/update_user`,
+						{
+							method: "PUT",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							
+							body: JSON.stringify(userDetails)
+						}
+					);
+					
+					const resp_json = await resp.json()
+					setStore({ userDetails: userDetails })
+				}
+				catch(error) {
+					console.log("Error updating user's information.", error)
+				}
+			},
+
+			setProfilePicture: async (url) => {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}api/upload_avatar`,
+						{
+							method: "PUT",
+							headers: {
+								"Content-Type": "application/json",
+							},
+
+							body: JSON.stringify({ image_url: url })
+						}
+					)
+					const resp_json = await resp.json()
+					const newAvatar = await resp_json['avatar']
+					setStore( { userDetails: {...getStore()['userDetails'], "avatar": newAvatar} } )
+				}
+				catch(error) {
+					console.log("Error setting user's profile picture.", error)
+				}
+			},
 		}
 	};
 };

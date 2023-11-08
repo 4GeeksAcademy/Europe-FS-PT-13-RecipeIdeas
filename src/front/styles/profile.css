@@ -1,0 +1,15 @@
+img.avatar {
+    width: 300px;
+    height: 300px;
+    object-fit: cover; /*The image keeps the aspect ratio while filling the entire content box.*/
+    overflow: hidden;
+}
+
+.info-wrapper {
+    border-radius: 1rem;
+}
+
+.save-info, .edit-info, .cancel-info {
+    display: inline-flex;
+    align-self: end;
+}

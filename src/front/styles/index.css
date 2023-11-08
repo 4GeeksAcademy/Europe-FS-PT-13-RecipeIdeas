@@ -1,3 +1,44 @@
-/* 
-    General Styles used on every website (Don't Repeat Yourself)
-*/
+.main-color {
+    background: #ffebbb;
+}
+
+.form-input {
+    background-color: #ffebbb;
+
+    border: 0.3rem solid;
+    border-radius: 0 0.5rem 0.5rem 0;
+    border-color: #ffebbb;
+
+    overflow-x: hidden;
+    min-height: 44px;
+}
+
+.info-wrapper {
+    background: #fdffcd;
+}
+
+.form-input-icon {
+    background-color: #ffebbb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3rem 0.5rem;
+
+    border-top: 0.3rem solid;
+    border-bottom: 0.3rem solid;
+    border-left: 0.3rem solid;
+    border-right: 0;
+    border-radius: 0.5rem 0 0 0.5rem;
+    border-color: #ffebbb;
+
+    overflow-x: hidden;
+    min-height: 44px;
+}
+
+.positive-color {
+    background: #e0ffcd;
+}
+
+.negative-color {
+    background: #ffcab0;
+}
