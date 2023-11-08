@@ -37,16 +37,42 @@ def handle_hello():
     return jsonify(response_body), 200
 
 
+@api.route('/update_user/', methods=['PUT'])
+def update_user():
+
+    current_user = User.query.filter_by(id=1).first()
+
+    current_user.email = request.json.get('email')
+    current_user.avatar = request.json.get('avatar')
+
+    db.session.add(current_user)
+    db.session.commit()
+    
+    response_body = {
+        "message": f"Users' {current_user.email} details have been changed: {current_user}",
+    }
+
+    return response_body
+
+
+@api.route('/get_user/', methods=['GET'])
+def get_user():
+    current_user = User.query.filter_by(id=1).first()
+
+    response_body = {
+        "user": current_user.serialize()
+    }
+
+    return jsonify(response_body), 200
+
 @api.route('/upload_avatar/', methods=['PUT'])
 def upload_avatar():
 
-    current_user = User.query.filter_by(email="test_user1@test.com").first()
-    print(current_user)
-
+    current_user = User.query.filter_by(id="1").first()
     image_url = request.json.get('image_url', None) # Get request body.
 
     uploader = cloudinary.uploader.upload(image_url, unique_filename = False, overwrite=True)
-    image_info = cloudinary.api.resource(uploader["public_id"]) ## Get image via a randomly generated public_id.
+    image_info = cloudinary.api.resource(uploader["public_id"]) # Get image via a randomly generated public_id.
     
      # Create an image tag with transformations applied to the src URL.
     transformed_image = cloudinary.CloudinaryImage(image_info["public_id"])\
@@ -59,8 +85,8 @@ def upload_avatar():
     end_idx = transformed_image.rindex('"')
     transformed_image_url = transformed_image[start_idx+1:end_idx]
 
-    current_user.avatar = transformed_image_url
 
+    current_user.avatar = transformed_image_url
     db.session.add(current_user)
     db.session.commit()
 
@@ -68,7 +94,5 @@ def upload_avatar():
         "message": f"Users {current_user} avatar changed to {transformed_image_url}",
         "avatar": transformed_image_url
     }
-
-
 
     return jsonify(response_body), 200

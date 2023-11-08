@@ -2,16 +2,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
+
 			userDetails: {
-				firstName: "Afonso",
-    			lastName: "Bernardes",
-				username: "afonso_bernardes",
+				firstName: "",
+    			lastName: "",
+				username: null,
 
-				email: "afonso.duarte.bernardes@gmail.com",
-				linkedIn: "https://www.linkedin.com/in/afonso-bernardes/",
-				github: "https://github.com/AfonsoBernardes",
+				email: null,
+				linkedIn: null,
+				github: null,
 
-				avatar: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flistimg.pinclipart.com%2Fpicdir%2Fs%2F351-3519728_png-file-svg-default-profile-picture-free-clipart.png&f=1&nofb=1&ipt=20c41a225bc465c20f51d2a0a087db917768fa1eca77d811c1f1832fdd60def0&ipo=images"
+				avatar: null,
 			},	
 		},
 
@@ -31,9 +32,44 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			setUserDetails: (userDetails) => {
+			getuserDetails: async () => {
+				// Get logged user id and call API to get further info.
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}api/get_user`)
+					const data = await resp.json()
+					const userData = await data.user
+					console.log('getUserDetails', userData)
+					setStore( { userDetails: {...getStore()['userDetails'], "email": userData['email'], "avatar": userData['avatar']} } )
+					console.log('FROM THE STORE', getStore()['userDetails'])
+				}
+				catch(error) {
+					console.log("Error fetching user data ('getUserDetails()' in flux.js). User might not exist.")
+					console.log(error)
+				}
+			},
+
+			setUserDetails: async (userDetails) => {
 				// PUT request to user's database.
-				setStore({ userDetails: userDetails })
+				try {
+					
+					const resp = await fetch(`${process.env.BACKEND_URL}api/update_user`,
+						{
+							method: "PUT",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							
+							body: JSON.stringify({ userDetails })
+						}
+					);
+					
+					const resp_json = await resp.json()
+					console.log(resp_json)
+					setStore({ userDetails: userDetails })
+				}
+				catch(error) {
+					console.log("Error updating user's information.", error)
+				}
 			},
 
 			setProfilePicture: async (url) => {
@@ -49,7 +85,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					)
 					const resp_json = await resp.json()
-					console.log(resp_json.message)
 					const newAvatar = await resp_json['avatar']
 					setStore( { userDetails: {...getStore()['userDetails'], "avatar": newAvatar} } )
 				}

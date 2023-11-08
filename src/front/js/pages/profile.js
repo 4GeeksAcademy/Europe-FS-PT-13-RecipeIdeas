@@ -22,8 +22,8 @@ export const Profile = () => {
         setEditDetails(false)
     }
     
-    const handleSubmit = (event) => {
-        // flux.js -> setUserDetails()
+    const handleSubmit = (event, userDetails) => {
+        actions.setUserDetails(userDetails)
         event.preventDefault()
         event.stopPropagation()
         setEditDetails(false)
