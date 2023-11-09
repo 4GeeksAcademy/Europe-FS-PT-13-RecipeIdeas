@@ -17,7 +17,6 @@ import { ResultsPage } from "./pages/resultspage";
 import { Profile } from "./pages/profile";
 import { Recipe } from "./pages/recipePage";
 
-
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
