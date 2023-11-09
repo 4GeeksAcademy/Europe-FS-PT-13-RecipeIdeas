@@ -60,6 +60,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 			},
 
+			signup: async (name, email, password) => {
+				const opts ={
+					method: "GET",
+					headers:{ "Content-Type": "application/json"
+				  },
+					body:JSON.stringify(
+					{
+					  "name" : name,
+					  "email": email,
+					  "password": password
+					 })
+				  }
+			  
+				const resp = await fetch(process.env.BACKEND_URL + "/api/signup", opts)
+				.then(resp =>{
+				  if(resp.status === 200) return resp.json();
+				  else alert("There has been some error");
+				})
+				.then(data => {
+				  console.log("sign up successful", data)
+					
+				})
+				.catch(error =>{
+				  console.log("There was an error")
+				})
+			},
 			getMessage: () => {
 				const store = getStore();
 				const opts = {
@@ -75,6 +101,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log("Error loading message from backend", error));
 				
 			},
+
+
+
+
 			changeColor: (index, color) => {
 
 				//get the store
