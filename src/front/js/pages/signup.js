@@ -1,18 +1,22 @@
 import React from "react";
-import { useState } from "react";
-
+import { useState, useContext } from "react";
+import { Context } from "../store/appContext";
 
 
 export const Signup = () => {
-  const [formData, setFormData] = useState({ name: '', username: '', email: '', password: '' });
+  const {store, actions} = useContext(Context);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  const [signName, setSignName] = useState("");
+
+  const [signEmail, setSignEmail] = useState("");
+
+  const [signPassword, setSignPassword] = useState("");
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    actions.signup(signName, signEmail, signPassword)
   };
   
   return (
@@ -25,26 +29,18 @@ export const Signup = () => {
         <input
           type="text"
           name="name"
-          value={formData.name}
-          onChange={handleInputChange}
+          value={signName}
+          onChange={(e) => setSignName(e.target.value)}
         />
       </div>
-      <div>
-        <label>Username:</label>
-        <input
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleInputChange}
-        />
-      </div>
+      
       <div>
         <label>Email:</label>
         <input
           type="email"
           name="email"
-          value={formData.email}
-          onChange={handleInputChange}
+          value={signEmail}
+          onChange={(e) => setSignEmail(e.target.value)}
         />
       </div>
       <div>
@@ -52,8 +48,8 @@ export const Signup = () => {
         <input
           type="password"
           name="password"
-          value={formData.password}
-          onChange={handleInputChange}
+          value={signPassword}
+          onChange={(e) => setSignPassword(e.target.value)}
         />
       </div>
       <div>
