@@ -90,6 +90,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error setting user's profile picture.", error)
 				}
 			},
+
+			getRecipeSummary: async (recipe_id) => {
+				// Get recipe's Title and "About"
+				try {
+					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/summary`, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY,
+							'X-RapidAPI-Host': process.env.X_RAPIDAPI_HOST
+						},
+					})
+
+					const data =  await resp.json();
+					console.log(await data)
+					return await data
+				}
+				catch(error) {
+					console.error('There was a problem with the "getRecipeSummary": ', error);
+				};
+			}
 		}
 	};
 };

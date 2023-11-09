@@ -25,7 +25,7 @@ export const RecipeCard = (props) => {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
-				'X-RapidAPI-Key': 'f4a6409e03msh2513ad740baf8b9p13e32fjsn5d20d8842c5f',
+				'X-RapidAPI-Key': 'f4a6409e03msh2513ad740baf8b9p13e32fjsn5d20d8842c5',
 				'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
 			},
 			body: JSON.stringify(),
