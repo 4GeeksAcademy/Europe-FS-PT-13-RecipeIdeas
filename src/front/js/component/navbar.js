@@ -4,7 +4,7 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import mixingFood from "../../img/MixingFood.png";
 
-
+// Comment
 export const Navbar = () => {
 	const { store, actions} = useContext(Context);
 	return (
