@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useContext } from "react";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 
 export const Signup = () => {
@@ -12,11 +13,20 @@ export const Signup = () => {
 
   const [signPassword, setSignPassword] = useState("");
 
+  const navigate = useNavigate();
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    actions.signup(signName, signEmail, signPassword)
+    const signupResult = actions.signup(signName, signEmail, signPassword) 
+    signupResult.then(result => {
+      if (result === true){
+        navigate("/login") 
+       }
+    else alert("Please try again")
+
+    })
+    
   };
   
   return (

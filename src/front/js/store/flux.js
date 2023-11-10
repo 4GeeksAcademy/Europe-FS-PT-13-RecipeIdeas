@@ -60,9 +60,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 			},
 
-			signup: async (name, email, password) => {
+			signup: (name, email, password) => {
 				const opts ={
-					method: "GET",
+					method: "POST",
 					headers:{ "Content-Type": "application/json"
 				  },
 					body:JSON.stringify(
@@ -73,17 +73,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					 })
 				  }
 			  
-				const resp = await fetch(process.env.BACKEND_URL + "/api/signup", opts)
+				return fetch(process.env.BACKEND_URL + "/api/signup", opts)
 				.then(resp =>{
 				  if(resp.status === 200) return resp.json();
-				  else alert("There has been some error");
+				  else return false;
+
 				})
 				.then(data => {
 				  console.log("sign up successful", data)
+				  return true;
 					
 				})
 				.catch(error =>{
-				  console.log("There was an error")
+				  console.log("There was an error", error)
+				  return false;
 				})
 			},
 			getMessage: () => {
