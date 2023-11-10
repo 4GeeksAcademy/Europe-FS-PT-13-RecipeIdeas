@@ -73,32 +73,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 			},
 
-			signup: async (name, email, password) => {
-				const opts = {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: JSON.stringify(
-						{
-							"name": name,
-							"email": email,
-							"password": password
-						})
-				}
+			signup: (name, email, password) => {
+				const opts ={
+					method: "POST",
+					headers:{ "Content-Type": "application/json"
+				  },
+					body:JSON.stringify(
+					{
+					  "name" : name,
+					  "email": email,
+					  "password": password
+					 })
+				  }
+			  
+				return fetch(process.env.BACKEND_URL + "/api/signup", opts)
+				.then(resp =>{
+				  if(resp.status === 200) return resp.json();
+				  else return false;
 
-				const resp = await fetch(process.env.BACKEND_URL + "/api/signup", opts)
-					.then(resp => {
-						if (resp.status === 200) return resp.json();
-						else alert("There has been some error");
-					})
-					.then(data => {
-						console.log("sign up successful", data)
-
-					})
-					.catch(error => {
-						console.log("There was an error")
-					})
+				})
+				.then(data => {
+				  console.log("sign up successful", data)
+				  return true;
+					
+				})
+				.catch(error =>{
+				  console.log("There was an error", error)
+				  return false;
+				})
 			},
 			getMessage: () => {
 				const store = getStore();
