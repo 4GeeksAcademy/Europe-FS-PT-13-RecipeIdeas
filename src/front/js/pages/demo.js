@@ -34,7 +34,7 @@ export const Demo = () => {
 					);
 				})}
 			</ul>
-			<RecipeCard Url="https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random" index="0"/>
+			<RecipeCard index="0"/>
 			<br />
 			<Link to="/">
 				<button className="btn btn-primary">Back home</button>

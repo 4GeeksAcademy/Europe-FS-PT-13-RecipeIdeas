@@ -1,62 +1,29 @@
 import { Link } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext";
 
 
 export const RecipeCard = (props) => {
 
 	const [isFavorite, setIsFavorite] = useState(false);
-	const [recipe, setRecipe] = useState();
 	const [euros, setEuros] = useState("");
 	const [diets, setDiets] = useState("Omnivore");
-
-
-
 
 	const toggleFavorite = () => {
 		setIsFavorite(!isFavorite);
 	};
 
-	const url = props.Url
 
-
-
-	const getRecipe = () => {
-		fetch(url, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				'X-RapidAPI-Key': 'f4a6409e03msh2513ad740baf8b9p13e32fjsn5d20d8842c5f',
-				'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
-			},
-			body: JSON.stringify(),
-			params: {
-				Number: props.randomNumber
-			  },
-		})
-			.then(async (data) => {
-				const response = await data.json();
-				return response;
-			})
-			.then((data) => {
-				console.log(data);
-				setRecipe(data);
-				totalRecipePrice(data);
-				dietDisplay(data);
-			})
-			.catch((error) => {
-				console.error('There was a problem with the fetch operation:', error);
-			});
-	}
 
 	useEffect(() => {
-		getRecipe();
-	}, []);
+		totalRecipePrice();
+		dietDisplay();
+	  }, []);
 
-	const totalRecipePrice = (recipeData) => {
-		if (!recipeData) {
-			return null;
-		}
-		let price = recipeData.recipes[props.index]?.pricePerServing * recipeData.recipes[props.index]?.servings;
+
+
+	const totalRecipePrice = () => {
+		let price = props.pricePerServing * props.servings;
 		price = Math.round(price / 100);
 		console.log(price);
 
@@ -75,11 +42,11 @@ export const RecipeCard = (props) => {
 		}
 	}
 
-	const dietDisplay = (recipeData) => {
-		if (recipeData?.recipes[props.index]?.diets.length === 0) {
+	const dietDisplay = () => {
+		if (props.diets.length === 0) {
 			setDiets("Omnivore");
 		} else {
-			setDiets(recipeData?.recipes[props.index]?.diets.join(", "));
+			setDiets(props.diets.join(", "));
 		}
 	};
 
@@ -87,23 +54,23 @@ export const RecipeCard = (props) => {
 
 
 	return (
-		<li className="col-sm-3 col-md-3 col-lg-3 me-2">
-			<div className="border mt-4 rounded-top">
+		<li className="col-sm-3 col-md-3 col-lg-3 me-4">
+			<div className="mt-4 rounded-top" style={{backgroundColor: "#ffcab0"}}>
 				<div className="row">
 					<div className="col-sm-6 col-md-6 col-lg-9">
-						<h5 className="m-2">{recipe?.recipes[props.index]?.title}</h5>
+						<h5 className="m-2">{props.title}</h5>
 					</div>
 					<div className="col-sm-3 col-md-3 col-lg-3 d-flex align-items-center">
 						<i onClick={toggleFavorite} className={`fa${isFavorite ? 's' : 'r'} fa-heart fa-2x`}></i>
 					</div>
 				</div>
-				<img src={recipe?.recipes[props.index]?.image} className="card-img-top" alt="Recipe Image" />
+				<img src={props.image} className="card-img-top" alt="Recipe Image" />
 				<div className="row">
 					<div className="col-sm-3 col-md-3 col-lg-4">
-						<p className="mt-1 ms-2"><i class="fas fa-utensils fa-lg"></i> {recipe?.recipes[props.index]?.servings} servings</p>
+						<p className="mt-1 ms-2"><i class="fas fa-utensils fa-lg"></i> {props.servings} servings</p>
 					</div>
 					<div className="col-sm-3 col-md-3 col-lg-4">
-						<p className="mt-1 ms-2"><i class="far fa-clock fa-lg"></i> {recipe?.recipes[props.index]?.readyInMinutes} minutes</p>
+						<p className="mt-1 ms-2"><i class="far fa-clock fa-lg"></i> {props.readyInMinutes} minutes</p>
 					</div>
 					<div className="col-sm-3 col-md-3 col-lg-4">
 						<p className="mt-1 ms-2"><i class="fas fa-coins fa-lg"></i> {euros}</p>
