@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { RecipeCard } from "../component/recipeCard";
 import { Link } from "react-router-dom"
@@ -12,6 +11,10 @@ export const Home = () => {
 	useEffect(() => {
 		actions.getRandomRecipe()
 	}, []);
+
+	useEffect(() => {
+		if (store.token && store.token != "" && store.token != undefined) actions.getMessage();
+	}, [store.token]);
 
 	return (
 		<>

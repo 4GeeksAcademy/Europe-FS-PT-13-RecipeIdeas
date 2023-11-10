@@ -21,7 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			userDetails: {
 				firstName: "",
-    			lastName: "",
+				lastName: "",
 				username: null,
 
 				email: null,
@@ -29,27 +29,100 @@ const getState = ({ getStore, getActions, setStore }) => {
 				github: null,
 
 				avatar: null,
-			},	
+			},
 
 		},
 
 		actions: {
+			getToken: () => {
+				return sessionStorage.getItem("token");
 
-			getMessage: async () => {
-				try{
+			},
+
+			logout: () => {
+				sessionStorage.removeItem("token");
+				console.log("Log out");
+				setStore({ token: null });
+
+			},
+
+			login: async (email, password) => {
+				const opts = {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(
+						{
+							"email": email,
+							"password": password
+						})
+				}
+
+				const resp = await fetch(process.env.BACKEND_URL + "/api/token", opts)
+					.then(resp => {
+						if (resp.status === 200) return resp.json();
+						else alert("There has been some error");
+					})
+					.then(data => {
+						console.log("this came from the backend", data)
+						sessionStorage.setItem("token", data.access_token);
+					})
+					.catch(error => {
+						console.log("There was an error")
+					})
+			},
+
+			signup: (name, email, password) => {
+				const opts ={
+					method: "POST",
+					headers:{ "Content-Type": "application/json"
+				  },
+					body:JSON.stringify(
+					{
+					  "name" : name,
+					  "email": email,
+					  "password": password
+					 })
+				  }
+			  
+				return fetch(process.env.BACKEND_URL + "/api/signup", opts)
+				.then(resp =>{
+				  if(resp.status === 200) return resp.json();
+				  else return false;
+
+				})
+				.then(data => {
+				  console.log("sign up successful", data)
+				  return true;
+					
+				})
+				.catch(error =>{
+				  console.log("There was an error", error)
+				  return false;
+				})
+			},
+			getMessage: () => {
+				const store = getStore();
+				const opts = {
+					headers: {
+						"Authorization": "Bearer" + store.token
+					}
+				};
+				try {
 					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "api/hello")
-					const data = await resp.json()
-					setStore({ message: data.message })
+					fetch(process.env.BACKEND_URL + "/api/hello", opts)
+						.then(resp => resp.json())
+						.then(data => setStore({ message: data.message }))
+
 					// don't forget to return something, that is how the async resolves
 					return data;
-				}
-				catch(error){
+				} catch (error) {
 					console.log("Error loading message from backend", error)
 				}
 			},
-
 			changeColor: (index, color) => {
+
 				//get the store
 				const store = getStore();
 
@@ -85,7 +158,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ randomRecipes: data["recipes"] });
 						console.log("store in the flux")
 						console.log(getStore().randomRecipes)
-						
+
 					})
 					.catch((error) => {
 						console.error('There was a problem with the fetch operation:', error);
@@ -99,11 +172,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const resp = await fetch(`${process.env.BACKEND_URL}api/get_user`)
 					const data = await resp.json()
 					const userData = await data.user
-					setStore( { userDetails: {...getStore()['userDetails'], "email": userData['email'], "avatar": userData['avatar'], "username": userData['username'],
-																			"firstName": userData['firstName'], "lastName": userData['lastName'],
-																			"linkedIn": userData['linkedIn'], "github": userData['github']} })
+					setStore({
+						userDetails: {
+							...getStore()['userDetails'], "email": userData['email'], "avatar": userData['avatar'], "username": userData['username'],
+							"firstName": userData['firstName'], "lastName": userData['lastName'],
+							"linkedIn": userData['linkedIn'], "github": userData['github']
+						}
+					})
 				}
-				catch(error) {
+				catch (error) {
 					console.log("Error fetching user data ('getUserDetails()' in flux.js). User might not exist.")
 					console.log(error)
 				}
@@ -118,15 +195,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 							headers: {
 								"Content-Type": "application/json",
 							},
-							
+
 							body: JSON.stringify(userDetails)
 						}
 					);
-					
+
 					const resp_json = await resp.json()
 					setStore({ userDetails: userDetails })
 				}
-				catch(error) {
+				catch (error) {
 					console.log("Error updating user's information.", error)
 				}
 			},
@@ -145,9 +222,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					)
 					const resp_json = await resp.json()
 					const newAvatar = await resp_json['avatar']
-					setStore( { userDetails: {...getStore()['userDetails'], "avatar": newAvatar} } )
+					setStore({ userDetails: { ...getStore()['userDetails'], "avatar": newAvatar } })
 				}
-				catch(error) {
+				catch (error) {
 					console.log("Error setting user's profile picture.", error)
 				}
 			},
