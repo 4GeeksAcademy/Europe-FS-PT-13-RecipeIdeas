@@ -18,10 +18,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			randomRecipes: [],
+			complexSearchResults: [],
+			complexSearchIds: [],
+			filteredRecipes: [],
 
 			userDetails: {
 				firstName: "",
-    			lastName: "",
+				lastName: "",
 				username: null,
 
 				email: null,
@@ -29,14 +32,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				github: null,
 
 				avatar: null,
-			},	
+			},
 
 		},
 
 		actions: {
 
 			getMessage: async () => {
-				try{
+				try {
 					// fetching data from the backend
 					const resp = await fetch(process.env.BACKEND_URL + "api/hello")
 					const data = await resp.json()
@@ -44,7 +47,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					// don't forget to return something, that is how the async resolves
 					return data;
 				}
-				catch(error){
+				catch (error) {
 					console.log("Error loading message from backend", error)
 				}
 			},
@@ -85,7 +88,64 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ randomRecipes: data["recipes"] });
 						console.log("store in the flux")
 						console.log(getStore().randomRecipes)
-						
+
+					})
+					.catch((error) => {
+						console.error('There was a problem with the fetch operation:', error);
+					});
+			},
+
+			getComplexSearch: (cuisine) => {
+				const store = getStore();
+				console.log(cuisine)
+				fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?${cuisine}`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-RapidAPI-Key': 'f4a6409e03msh2513ad740baf8b9p13e32fjsn5d20d8842c5f',
+						'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
+					},
+					body: JSON.stringify()
+				})
+					.then(async (data) => {
+						const response = await data.json();
+						return response;
+					})
+					.then((data) => {
+						setStore({ complexSearchResults: data["results"] });
+						console.log("store for the complex search results");
+						console.log(store.complexSearchResults)
+
+					})
+					.then(() =>{
+						store.complexSearchIds = store.complexSearchResults.map(item => item.id)
+						console.log("complex search ids")
+						console.log(store.complexSearchIds)
+					})
+					.catch((error) => {
+						console.error('There was a problem with the fetch operation:', error);
+					});
+			},
+
+			getFilteredRecipes: () => {
+				const store = getStore();
+				fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk?ids=${store.complexSearchIds}`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-RapidAPI-Key': 'f4a6409e03msh2513ad740baf8b9p13e32fjsn5d20d8842c5f',
+						'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
+					},
+					body: JSON.stringify()
+				})
+					.then(async (data) => {
+						const response = await data.json();
+						return response;
+					})
+					.then((data) => {
+						setStore({ filteredRecipes: data["recipes"] })
+						console.log("filtered recipes")
+						console.log(store.filteredRecipes)
 					})
 					.catch((error) => {
 						console.error('There was a problem with the fetch operation:', error);
@@ -99,11 +159,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const resp = await fetch(`${process.env.BACKEND_URL}api/get_user`)
 					const data = await resp.json()
 					const userData = await data.user
-					setStore( { userDetails: {...getStore()['userDetails'], "email": userData['email'], "avatar": userData['avatar'], "username": userData['username'],
-																			"firstName": userData['firstName'], "lastName": userData['lastName'],
-																			"linkedIn": userData['linkedIn'], "github": userData['github']} })
+					setStore({
+						userDetails: {
+							...getStore()['userDetails'], "email": userData['email'], "avatar": userData['avatar'], "username": userData['username'],
+							"firstName": userData['firstName'], "lastName": userData['lastName'],
+							"linkedIn": userData['linkedIn'], "github": userData['github']
+						}
+					})
 				}
-				catch(error) {
+				catch (error) {
 					console.log("Error fetching user data ('getUserDetails()' in flux.js). User might not exist.")
 					console.log(error)
 				}
@@ -118,15 +182,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 							headers: {
 								"Content-Type": "application/json",
 							},
-							
+
 							body: JSON.stringify(userDetails)
 						}
 					);
-					
+
 					const resp_json = await resp.json()
 					setStore({ userDetails: userDetails })
 				}
-				catch(error) {
+				catch (error) {
 					console.log("Error updating user's information.", error)
 				}
 			},
@@ -145,9 +209,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					)
 					const resp_json = await resp.json()
 					const newAvatar = await resp_json['avatar']
-					setStore( { userDetails: {...getStore()['userDetails'], "avatar": newAvatar} } )
+					setStore({ userDetails: { ...getStore()['userDetails'], "avatar": newAvatar } })
 				}
-				catch(error) {
+				catch (error) {
 					console.log("Error setting user's profile picture.", error)
 				}
 			},

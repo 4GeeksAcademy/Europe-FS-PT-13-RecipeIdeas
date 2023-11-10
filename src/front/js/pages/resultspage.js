@@ -1,31 +1,25 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 import { RecipeCard } from "../component/recipeCard";
 
 
 export const ResultsPage = () => {
     const { store, actions } = useContext(Context);
-    const [example, setExample] = useState();
+    const [cuisine, setCuisine] = useState();
 
 
     useEffect(() => {
-        actions.getComplexSearch()
-        const storeSearchResults = store.complexSearchResults
-        setExample(storeSearchResults)
-
-        console.log("Store", store.searchParams)
-    }, []);
+        actions.getFilteredRecipes()
+    }, [store.complexSearchIds]);
 
 
-    	const handleCuisineSelect = (e) => {
-    		const selectedCuisine = e.target.value;
-    		setCuisineFilter(selectedCuisine);
-    		console.log(selectedCuisine);
-    	}
+    const handleCuisineSelect = (e) => {
+        const selectedCuisine = e.target.value;
+        setCuisine(selectedCuisine);
+        console.log(selectedCuisine);
+    }
 
-    // onClick={()=>actions.getComplexSearch(cuisineFilter)}
 
     return (
         <>
@@ -38,13 +32,11 @@ export const ResultsPage = () => {
                 </select>
             </div>
             <div>
-                
+                <button type="button" class="btn btn-primary" onClick={() => actions.getComplexSearch(cuisine)}>Search</button>
             </div>
             <div>
-                <p>{example}</p>
             </div>
         </>
     )
 }
-
 
