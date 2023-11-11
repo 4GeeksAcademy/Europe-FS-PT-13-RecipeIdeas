@@ -169,7 +169,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}api/get_user`)
 					const data = await resp.json()
-					console.log("DATA FROM getUserDetails()", resp)
 					const userData = await data.user
 					setStore({
 						userDetails: {
@@ -252,26 +251,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// Get recipe's Title and "About"
 				try {
 					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/information`, {
-						method: 'GET',
-						headers: {
-							'Content-Type': 'application/json',
-							'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY,
-							'X-RapidAPI-Host': process.env.X_RAPIDAPI_HOST
-						},
-					})
-
-					const data =  await resp.json();
-					return await data
-				}
-				catch(error) {
-					console.error('There was a problem with "getRecipeInformation": ', error);
-				};
-			},
-
-			getRecipeInstructions: async (recipe_id) => {
-				// Get recipe's step-by-step instructions.
-				try {
-					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/analyzedInstructions`, {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
