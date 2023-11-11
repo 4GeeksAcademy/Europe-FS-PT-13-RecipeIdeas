@@ -130,7 +130,7 @@ export const Recipe = props => {
 									recipeInstructions ?
 										recipeInstructions.map((part, index) => {
 											return part.steps.map( (step, idx) => {
-												return <p key={idx} className="mb-2"> {`${index+1}.${step.number}. ${step.step}`} </p>
+												return <p key={idx} className="mb-2"> {`${step.number}. ${step.step}`} </p>
 											})
 										})
 										
