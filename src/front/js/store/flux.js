@@ -87,7 +87,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					 })
 				  }
 			  
-				return fetch(process.env.BACKEND_URL + "/api/signup", opts)
+				return fetch(process.env.BACKEND_URL + "api/signup", opts)
 				.then(resp =>{
 				  if(resp.status === 200) return resp.json();
 				  else return false;
