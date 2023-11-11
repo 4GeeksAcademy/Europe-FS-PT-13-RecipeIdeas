@@ -17,7 +17,8 @@ export const Recipe = props => {
 	const [recipeSummary, setRecipeSummary] = useState("")
 	*/
 
-	const [recipeInformation, setRecipeInformation] = useState("")
+	const [recipeInformation, setRecipeInformation] = useState([])
+	const [recipeInstructions, setRecipeInstructions] = useState([])
 
 	useEffect(() => {
 		/*const fetchRecipeSummary = async () => {
@@ -26,14 +27,20 @@ export const Recipe = props => {
 			setRecipeSummary( await recipeSummary.summary )
 		}*/
 
-		const fetchRecipeInformation = async () => {
-			const recipeInformation = await actions.getRecipeInformation(params.id)
-			setRecipeInformation(await recipeInformation)
-			console.log(recipeInformation)
+		const getRecipeInformation = async () => {
+			const recipeInfo = await actions.getRecipeInformation(params.id)
+			setRecipeInformation( await recipeInfo)
+			console.log("HERE", recipeInformation.diets)
+		}
+
+		const getRecipeInstructions = async () => {
+			const recipeInst = await actions.getRecipeInstructions(params.id)
+			setRecipeInstructions(recipeInst)
 		}
 
 		//fetchRecipeSummary()
-		fetchRecipeInformation()
+		getRecipeInformation()
+		getRecipeInstructions()
 
 	}, [])
 
@@ -106,19 +113,30 @@ export const Recipe = props => {
 						<div className="row tab-pane fade d-flex justify-content-between px-0" id="pills-instructions" role="tabpanel" aria-labelledby="pills-instructions-tab" tabIndex="0">
 							
 							<div className="col-sm-12 col-md-6 d-flex flex-column text-center">
-								<div className="pb-3 fs-3">Ingredients</div>
+								<div className="pb-3 fs-3 pt-3">Ingredients</div>
 								{
 									recipeInformation.extendedIngredients ?
 										recipeInformation.extendedIngredients.map((ingredient, index) => {
 											return <p key={index} className="mb-2"> {`${ingredient.amount} ${ingredient.unit} of ${ingredient.name}`} </p>
 										})
 									:
-									""
+										""
 								}
 							</div>
 
 							<div className="col-sm-12 col-md-6 text-center">
-								<div className="pb-3 fs-3">Instructions</div>
+								<div className="pb-3 fs-3 pt-3">Instructions</div>
+								{
+									recipeInstructions ?
+										recipeInstructions.map((part, index) => {
+											return part.steps.map( (step, idx) => {
+												return <p key={idx} className="mb-2"> {`${index+1}.${step.number}. ${step.step}`} </p>
+											})
+										})
+										
+									:
+										""
+								}
 							</div>
 
 						</div>
