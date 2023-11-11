@@ -87,7 +87,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then((data) => {
 						setStore({ randomRecipes: data["recipes"] });
 						console.log("store in the flux")
-						console.log(getStore().randomRecipes)
+						console.log(store.randomRecipes)
 
 					})
 					.catch((error) => {
@@ -97,6 +97,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getComplexSearch: (cuisine) => {
 				const store = getStore();
+				const actions =getActions();
 				console.log(cuisine)
 				fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?${cuisine}`, {
 					method: 'GET',
@@ -117,11 +118,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(store.complexSearchResults)
 
 					})
-					.then(() =>{
+					.then(() => {
 						store.complexSearchIds = store.complexSearchResults.map(item => item.id)
 						console.log("complex search ids")
 						console.log(store.complexSearchIds)
 					})
+					.then(()=>{
+						actions.getFilteredRecipes()
+					}
+
+					)
+					//doing a informtaion bulk request get to get the information needed to appear on the cards
 					.catch((error) => {
 						console.error('There was a problem with the fetch operation:', error);
 					});
@@ -129,6 +136,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getFilteredRecipes: () => {
 				const store = getStore();
+				console.log("checking for ids in the store", store.complexSearchIds)
 				fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk?ids=${store.complexSearchIds}`, {
 					method: 'GET',
 					headers: {
@@ -143,9 +151,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response;
 					})
 					.then((data) => {
-						setStore({ filteredRecipes: data["recipes"] })
+						setStore({filteredRecipes: data});
+						console.log("logging the recipe search data", data)
 						console.log("filtered recipes")
 						console.log(store.filteredRecipes)
+
 					})
 					.catch((error) => {
 						console.error('There was a problem with the fetch operation:', error);

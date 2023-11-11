@@ -9,9 +9,6 @@ export const ResultsPage = () => {
     const [cuisine, setCuisine] = useState();
 
 
-    useEffect(() => {
-        actions.getFilteredRecipes()
-    }, [store.complexSearchIds]);
 
 
     const handleCuisineSelect = (e) => {
@@ -35,6 +32,19 @@ export const ResultsPage = () => {
                 <button type="button" class="btn btn-primary" onClick={() => actions.getComplexSearch(cuisine)}>Search</button>
             </div>
             <div>
+            {store.filteredRecipes.map((p, index) => {
+							return (
+								<RecipeCard
+									key={index}
+									title={p.title}
+									image={p.image}
+									pricePerServing={p.pricePerServing}
+									servings={p.servings}
+									diets={p.diets}
+									readyInMinutes={p.readyInMinutes}
+								/>
+							);
+						})}
             </div>
         </>
     )
