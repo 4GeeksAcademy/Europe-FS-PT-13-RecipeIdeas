@@ -20,6 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			randomRecipes: [],
 
 			userDetails: {
+				name: "",
 				firstName: "",
 				lastName: "",
 				username: null,
@@ -175,7 +176,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({
 						userDetails: {
 							...getStore()['userDetails'], "email": userData['email'], "avatar": userData['avatar'], "username": userData['username'],
-							"firstName": userData['firstName'], "lastName": userData['lastName'],
+							"name": userData['name'], "firstName": userData['firstName'], "lastName": userData['lastName'],
 							"linkedIn": userData['linkedIn'], "github": userData['github']
 						}
 					})

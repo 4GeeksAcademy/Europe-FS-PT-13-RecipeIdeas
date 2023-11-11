@@ -9,7 +9,7 @@ class User(db.Model):
     password = db.Column(db.String(80), unique=False, nullable=False)
     firstName = db.Column(db.String(80), unique=False, nullable=True)
     lastName = db.Column(db.String(80), unique=False, nullable=True)
-    userName = db.Column(db.String(80), unique=False, nullable=True)
+    username = db.Column(db.String(80), unique=False, nullable=True)
     linkedIn = db.Column(db.String(200), unique=False, nullable=True)
     github = db.Column(db.String(200), unique=False, nullable=True)
     avatar = db.Column(db.String(200), unique=False, nullable=True)

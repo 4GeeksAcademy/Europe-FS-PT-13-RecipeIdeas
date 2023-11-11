@@ -75,7 +75,8 @@ def update_user():
 
 @api.route('/get_user/', methods=['GET'])
 def get_user():
-    current_user = User.query.filter_by(id=1).first()
+    current_user = User.query.filter_by(id=2).first()
+    print(current_user)
 
     response_body = {
         "user": current_user.serialize()
@@ -86,7 +87,7 @@ def get_user():
 @api.route('/upload_avatar/', methods=['PUT'])
 def upload_avatar():
 
-    current_user = User.query.filter_by(id="1").first()
+    current_user = User.query.filter_by(id=2).first()
     image_url = request.json.get('image_url', None) # Get request body.
 
     uploader = cloudinary.uploader.upload(image_url, unique_filename = False, overwrite=True)
