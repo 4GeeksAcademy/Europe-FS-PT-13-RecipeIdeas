@@ -169,6 +169,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}api/get_user`)
 					const data = await resp.json()
+					console.log("DATA FROM getUserDetails()", resp)
 					const userData = await data.user
 					setStore({
 						userDetails: {
