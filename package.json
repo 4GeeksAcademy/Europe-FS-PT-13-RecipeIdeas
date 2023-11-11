@@ -85,6 +85,7 @@
 		"cloudinary-core": "^2.13.0",
 		"cloudinary-react": "^1.8.1",
 		"cors": "^2.8.5",
+		"dotenv": "^16.3.1",
 		"prop-types": "^15.6.1",
 		"react": "^16.8.4",
 		"react-dom": "^16.8.4",

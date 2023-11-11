@@ -70,7 +70,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						sessionStorage.setItem("token", data.access_token);
 					})
 					.catch(error => {
-						console.log("There was an error")
+						console.log("There was an error", error)
 					})
 			},
 
@@ -172,6 +172,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}api/get_user`)
 					const data = await resp.json()
+					console.log("DATA FROM getUserDetails()", resp)
 					const userData = await data.user
 					setStore({
 						userDetails: {

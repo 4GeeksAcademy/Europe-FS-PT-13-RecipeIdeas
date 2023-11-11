@@ -53,7 +53,7 @@ def create_token():
 @api.route('/update_user/', methods=['PUT'])
 def update_user():
 
-    current_user = User.query.get(1)
+    current_user = User.query.filter_by(email="test1@gmail.com").first()
 
     current_user.email = request.json.get('email')
     current_user.avatar = request.json.get('avatar')
@@ -75,7 +75,7 @@ def update_user():
 
 @api.route('/get_user/', methods=['GET'])
 def get_user():
-    current_user = User.query.filter_by(id=2).first()
+    current_user = User.query.filter_by(email="test1@gmail.com").first()
     print(current_user)
 
     response_body = {
@@ -87,7 +87,7 @@ def get_user():
 @api.route('/upload_avatar/', methods=['PUT'])
 def upload_avatar():
 
-    current_user = User.query.filter_by(id=2).first()
+    current_user = User.query.filter_by(email="test1@gmail.com").first()
     image_url = request.json.get('image_url', None) # Get request body.
 
     uploader = cloudinary.uploader.upload(image_url, unique_filename = False, overwrite=True)
