@@ -1,6 +1,12 @@
 //import react into the bundle
 import React from "react";
 import ReactDOM from "react-dom";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faAt, faEnvelope, faPerson, faPeopleGroup, faCamera } from '@fortawesome/free-solid-svg-icons'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+
+library.add(faAt, faEnvelope, faPerson, faPeopleGroup, faCamera, fab)
+
 
 //include your index.scss file into the bundle
 import "../styles/index.css";

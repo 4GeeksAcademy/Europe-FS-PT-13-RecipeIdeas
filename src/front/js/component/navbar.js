@@ -1,19 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
+import "../../styles/navbar.css"
+import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
+import logo from "../../img/Logo.png";
+import food from "../../img/food.png";
 
+
+// Comment
 export const Navbar = () => {
+	const { store, actions } = useContext(Context);
 	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-				</Link>
-				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
-					</Link>
-				</div>
+		<nav className="navbar">
+			<div className="text-wrapper"><img src={logo} style={{ width: "50px", height: "43px" }}></img><img src={food} style={{ width: "200px", height: "43px" }} />
 			</div>
+
+			{!store.token ?
+				<>
+					<div className="sign-up-button">
+						<Link className='nav-link' to="/signup">Sign Up</Link>
+					</div>
+
+					<div className="log-in-button">
+
+						<Link className='nav-link' to="/login">Log In</Link>
+
+					</div>
+				</>
+				:
+				<div className="log-in-button">
+					<button onClick={() => actions.logout()} className="btn">Log out</button>
+				</div>
+			}
+
 		</nav>
 	);
-};
+  };
