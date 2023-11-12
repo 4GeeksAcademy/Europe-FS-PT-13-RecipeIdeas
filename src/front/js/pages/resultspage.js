@@ -31,20 +31,23 @@ export const ResultsPage = () => {
             <div>
                 <button type="button" class="btn btn-primary" onClick={() => actions.getComplexSearch(cuisine)}>Search</button>
             </div>
-            <div>
-            {store.filteredRecipes.map((p, index) => {
-							return (
-								<RecipeCard
-									key={index}
-									title={p.title}
-									image={p.image}
-									pricePerServing={p.pricePerServing}
-									servings={p.servings}
-									diets={p.diets}
-									readyInMinutes={p.readyInMinutes}
-								/>
-							);
-						})}
+            <div className="container d-flex justify-content-center">
+                <ul className="container row" style={{ listStyleType: "none" }}>
+                    {store.filteredRecipes.map((p, index) => {
+                        return (
+                            <RecipeCard
+                                key={index}
+                                title={p.title}
+                                image={p.image}
+                                pricePerServing={p.pricePerServing}
+                                servings={p.servings}
+                                diets={p.diets}
+                                readyInMinutes={p.readyInMinutes}
+                                className="col-4"
+                            />
+                        );
+                    })}
+                </ul>
             </div>
         </>
     )
