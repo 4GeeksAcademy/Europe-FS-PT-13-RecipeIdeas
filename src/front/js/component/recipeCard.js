@@ -93,20 +93,20 @@ export const RecipeCard = (props) => {
 				<img src={props.image} className="card-img-top" alt="Recipe Image" />
 				<div className="row">
 					<div className="col-sm-3 col-md-3 col-lg-4">
-						<p className="mt-1 ms-2"><i class="fas fa-utensils fa-lg"></i> {props.servings} servings</p>
+						<p className="mt-1 ms-2"><i className="fas fa-utensils fa-lg"></i> {props.servings} servings</p>
 					</div>
 					<div className="col-sm-3 col-md-3 col-lg-4">
-						<p className="mt-1 ms-2"><i class="far fa-clock fa-lg"></i> {props.readyInMinutes} minutes</p>
+						<p className="mt-1 ms-2"><i className="far fa-clock fa-lg"></i> {props.readyInMinutes} minutes</p>
 					</div>
 					<div className="col-sm-3 col-md-3 col-lg-4">
-						<p className="mt-1 ms-2"><i class="fas fa-coins fa-lg"></i> {euros}</p>
+						<p className="mt-1 ms-2"><i className="fas fa-coins fa-lg"></i> {euros}</p>
 					</div>
 					<div />
 					<div className="d-flex justify-content-center">
-						<p className="mt-1 ms-2"><i class="fas fa-apple-alt fa-lg"></i> {diets}</p>
+						<p className="mt-1 ms-2"><i className="fas fa-apple-alt fa-lg"></i> {diets}</p>
 					</div>
 					<div className="d-flex justify-content-center">
-						<button type="button" class="btn btn-primary w-100">Go to Recipe</button>
+						<button type="button" className="btn btn-primary w-100">Go to Recipe</button>
 					</div>
 				</div>
 			</div >

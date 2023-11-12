@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import ReactHtmlParser from 'react-html-parser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { RecipeCard } from '../component/recipeCard'
 
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
@@ -19,6 +20,7 @@ export const Recipe = props => {
 
 	const [recipeInformation, setRecipeInformation] = useState([])
 	const [recipeInstructions, setRecipeInstructions] = useState([])
+	const [similarRecipes, setSimilarRecipes] = useState([])
 
 	useEffect(() => {
 		/*const fetchRecipeSummary = async () => {
@@ -26,21 +28,37 @@ export const Recipe = props => {
 			setRecipeTitle( await recipeSummary.title )
 			setRecipeSummary( await recipeSummary.summary )
 		}*/
+		let isMounted = true;
 
 		const getRecipeInformation = async () => {
 			const recipeInfo = await actions.getRecipeInformation(params.id)
-			setRecipeInformation( await recipeInfo)
-			console.log("HERE", recipeInformation.diets)
+			if (isMounted) {
+				setRecipeInformation( await recipeInfo)
+			}
 		}
 
 		const getRecipeInstructions = async () => {
 			const recipeInst = await actions.getRecipeInstructions(params.id)
-			setRecipeInstructions(recipeInst)
+			if (isMounted) {
+				setRecipeInstructions(recipeInst)
+			}
+		}
+
+		const getSimilarRecipes = async () => {
+			const similarRecipes = await actions.getRecipeInstructions(params.id)
+			if (isMounted) {
+				setSimilarRecipes(similarRecipes)
+			}
 		}
 
 		//fetchRecipeSummary()
 		getRecipeInformation()
 		getRecipeInstructions()
+		getSimilarRecipes()
+		
+		return () => {
+			isMounted = false;
+		}
 
 	}, [])
 
@@ -108,6 +126,11 @@ export const Recipe = props => {
 
 						<div className="tab-pane fade show active" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab" tabIndex="0">
 							{ReactHtmlParser(recipeInformation.summary)}
+
+							<div className="row">
+								
+							</div>
+
 						</div>
 
 						<div className="row tab-pane fade d-flex justify-content-between px-0" id="pills-instructions" role="tabpanel" aria-labelledby="pills-instructions-tab" tabIndex="0">
