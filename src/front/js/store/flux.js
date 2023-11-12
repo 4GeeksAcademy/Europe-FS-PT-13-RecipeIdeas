@@ -46,17 +46,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					 })
 				  }
 			  
-				const resp = await fetch(process.env.BACKEND_URL + "/api/token", opts)
+				 return fetch(process.env.BACKEND_URL + "/api/token", opts)
+			
 				.then(resp =>{
 				  if(resp.status === 200) return resp.json();
-				  else alert("There has been some error");
+				  else return false
 				})
 				.then(data => {
 				  console.log("this came from the backend", data)
 					sessionStorage.setItem("token", data.access_token);
+					return true
 				})
 				.catch(error =>{
-				  console.log("There was an error")
+				  console.log("There was an error", error)
+				  return false
 				})
 			},
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useContext } from "react";
 import { Context } from "../store/appContext";
-
+import { useNavigate } from "react-router-dom";
 
 
 export const Login = () => {
@@ -11,11 +11,18 @@ export const Login = () => {
 
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("entrei?")
-    actions.login(email, password)
+    const loginResult = actions.login(email, password)
+    loginResult.then( result => {
+      if (result === true){
+        navigate("/home")
+      }
+      else alert ("Have you register already?")
+    })
   };
   
   return (

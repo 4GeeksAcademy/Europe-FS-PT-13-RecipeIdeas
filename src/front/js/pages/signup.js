@@ -33,7 +33,10 @@ export const Signup = () => {
     
     <div>
     <h2>Sign Up</h2>
-    <form onSubmit={handleSubmit}>
+    <form className="info-wrapper py-4 px-4 d-flex flex-column was-validated" onSubmit={handleSubmit}>
+    <div className="form-group row d-flex justify-content-between px-0">
+                <div className="col-sm-12 col-md-12 col-lg-4 mb-2">
+    </div></div>
       <div>
         <label>Name:</label>
         <input

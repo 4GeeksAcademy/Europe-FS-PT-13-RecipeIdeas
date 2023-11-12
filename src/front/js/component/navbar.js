@@ -2,14 +2,16 @@ import React, { useContext } from "react";
 import "../../styles/navbar.css"
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import mixingFood from "../../img/MixingFood.png";
+import logo from "../../img/Logo.png";
+import food from "../../img/food.png";
 
 
 export const Navbar = () => {
 	const { store, actions} = useContext(Context);
 	return (
 	  <nav className="navbar">
-		<div className="text-wrapper"><img src={mixingFood} style={{width:"20px", height:"10px"}} /></div>
+		<div className="text-wrapper"><img src={logo} style={{width:"50px", height:"43px"}}></img><img src = {food}style={{width:"200px", height:"43px"}} />
+		</div>
 		
 	
 		<div className="sign-up-button">
