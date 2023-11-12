@@ -13,33 +13,7 @@ export const RecipeCard = (props) => {
 		setIsFavorite(!isFavorite);
 	};
 
-	const getRecipe = () => {
-		fetch(url, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				'X-RapidAPI-Key': 'f4a6409e03msh2513ad740baf8b9p13e32fjsn5d20d8842c5',
-				'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
-			},
-			body: JSON.stringify(),
-			params: {
-				Number: props.randomNumber
-			  },
-		})
-			.then(async (data) => {
-				const response = await data.json();
-				return response;
-			})
-			.then((data) => {
-				console.log(data);
-				setRecipe(data);
-				totalRecipePrice(data);
-				dietDisplay(data);
-			})
-			.catch((error) => {
-				console.error('There was a problem with the fetch operation:', error);
-			});
-	}
+
 
 	useEffect(() => {
 		totalRecipePrice();
@@ -93,20 +67,20 @@ export const RecipeCard = (props) => {
 				<img src={props.image} className="card-img-top" alt="Recipe Image" />
 				<div className="row">
 					<div className="col-sm-3 col-md-3 col-lg-4">
-						<p className="mt-1 ms-2"><i className="fas fa-utensils fa-lg"></i> {props.servings} servings</p>
+						<p className="mt-1 ms-2"><i class="fas fa-utensils fa-lg"></i> {props.servings} servings</p>
 					</div>
 					<div className="col-sm-3 col-md-3 col-lg-4">
-						<p className="mt-1 ms-2"><i className="far fa-clock fa-lg"></i> {props.readyInMinutes} minutes</p>
+						<p className="mt-1 ms-2"><i class="far fa-clock fa-lg"></i> {props.readyInMinutes} minutes</p>
 					</div>
 					<div className="col-sm-3 col-md-3 col-lg-4">
-						<p className="mt-1 ms-2"><i className="fas fa-coins fa-lg"></i> {euros}</p>
+						<p className="mt-1 ms-2"><i class="fas fa-coins fa-lg"></i> {euros}</p>
 					</div>
 					<div />
 					<div className="d-flex justify-content-center">
-						<p className="mt-1 ms-2"><i className="fas fa-apple-alt fa-lg"></i> {diets}</p>
+						<p className="mt-1 ms-2"><i class="fas fa-apple-alt fa-lg"></i> {diets}</p>
 					</div>
 					<div className="d-flex justify-content-center">
-						<button type="button" className="btn btn-primary w-100">Go to Recipe</button>
+						<button type="button" class="btn btn-primary w-100">Go to Recipe</button>
 					</div>
 				</div>
 			</div >
