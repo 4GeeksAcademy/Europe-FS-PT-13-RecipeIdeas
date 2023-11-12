@@ -73,7 +73,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						})
 				}
 
-				return fetch(process.env.BACKEND_URL + "/api/token", opts)
+				return fetch(process.env.BACKEND_URL + "api/token", opts)
 
 					.then(resp => {
 						if (resp.status === 200) return resp.json();
@@ -105,7 +105,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						})
 				}
 
-				return fetch(process.env.BACKEND_URL + "/api/signup", opts)
+				return fetch(process.env.BACKEND_URL + "api/signup", opts)
 					.then(resp => {
 						if (resp.status === 200) return resp.json();
 						else return false;
@@ -129,7 +129,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				};
 				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/hello", opts)
+				fetch(process.env.BACKEND_URL + "api/hello", opts)
 					.then(resp => resp.json())
 					.then(data => setStore({ message: data.message }))
 					// don't forget to return something, that is how the async resolves

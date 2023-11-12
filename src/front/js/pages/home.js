@@ -19,7 +19,7 @@ export const Home = () => {
 		<>
 			<div>
 				<Link to={"/resultpage"}>
-					<button type="button" class="btn btn-primary">Search for recipes</button>
+					<button type="button" className="btn btn-primary">Search for recipes</button>
 				</Link>
 			</div>
 			<div className="container p-5 rounded" style={{ backgroundColor: "#ffebbb" }}>
