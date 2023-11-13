@@ -11,7 +11,10 @@ export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 	return (
 		<nav className="navbar">
-			<div className="text-wrapper"><img src={logo} style={{ width: "50px", height: "43px" }}></img><img src={food} style={{ width: "200px", height: "43px" }} />
+			<div className="text-wrapper">
+			<Link to="/">
+				<img src={logo} style={{ width: "50px", height: "43px" }}></img><img src={food} style={{ width: "200px", height: "43px" }} />
+			</Link>
 			</div>
 
 			{!store.token ?
