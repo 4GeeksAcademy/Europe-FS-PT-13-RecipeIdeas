@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
-import * as mdb from 'mdb-ui-kit';
 import { RecipeCard } from "../component/recipeCard";
 
 
@@ -11,10 +10,10 @@ export const ResultsPage = () => {
     const [diet, setDiet] = useState();
     const [type, setType] = useState();
     const [minCalories, setMinCalories] = useState(0);
-    const [maxCalories, setMaxCalories] = useState(1000);
-
-
-
+    const [maxCalories, setMaxCalories] = useState(1300);
+    const [prepTime, setPrepTime] = useState();
+    const [includedIngredients, setIncludedIngredients  ] = useState([]);
+    
 
 
     const handleCuisineSelect = (e) => {
@@ -46,6 +45,21 @@ export const ResultsPage = () => {
         setMaxCalories(value);
     };
 
+
+    const handlePrepTimeChange = (e) => {
+        const value = e.target.value;
+        setPrepTime(value);
+    };
+
+    const handleIngredientChange = (e) => {
+        const ingredient = e.target.value;
+
+        if (e.target.checked) {
+            setIncludedIngredients((prevIngredients) => [...prevIngredients, ingredient]);
+        } else {
+            setIncludedIngredients((prevIngredients) => prevIngredients.filter((item) => item !== ingredient));
+        }
+    };
 
     return (
         <>
@@ -111,29 +125,51 @@ export const ResultsPage = () => {
                         </form>
                     </div>
                 </div>
-                <div>
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
+                        <label for="prepTimeRange" className="form-label">Preparation Time: {prepTime} minutes </label>
+                        <div className="d-flex justify-content-center align-items-center">
+                            <input type="range" className="form-range" min="5" max="50" step="5" value={prepTime} onChange={handlePrepTimeChange} id="prepTimeRange" />
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <button type="button" class="btn btn-primary" onClick={() => actions.getComplexSearch(cuisine, diet, type, ("minCalories=" + minCalories), ("maxCalories=" + maxCalories))}>Search</button>
+                <div className="container">
+                    <div className="row">
+                        <div className="form-check col-3">
+                            <input className="form-check-input" type="checkbox" value="" id="tomato" onChange={handleIngredientChange}/>
+                                <label className="form-check-label" for="tomato">
+                                    Tomato
+                                </label>
+                        </div>
+                        <div className="form-check col-3">
+                            <input className="form-check-input" type="checkbox" value="" id="cheese" onChange={handleIngredientChange}/>
+                                <label className="form-check-label" for="cheese">
+                                    Cheese
+                                </label>
+                        </div>
+                    </div>
                 </div>
-                <div className="container d-flex justify-content-center">
-                    <ul className="container row" style={{ listStyleType: "none" }}>
-                        {store.filteredRecipes.map((p, index) => {
-                            return (
-                                <RecipeCard
-                                    key={index}
-                                    title={p.title}
-                                    image={p.image}
-                                    pricePerServing={p.pricePerServing}
-                                    servings={p.servings}
-                                    diets={p.diets}
-                                    readyInMinutes={p.readyInMinutes}
-                                    className="col-4"
-                                />
-                            );
-                        })}
-                    </ul>
-                </div>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary" onClick={() => actions.getComplexSearch(cuisine,("includeIngredients=" + includedIngredients), diet, type, ("minCalories=" + minCalories), ("maxCalories=" + maxCalories), ("maxReadyTime=" + prepTime))}>Search</button>
+            </div>
+            <div className="container d-flex justify-content-center">
+                <ul className="container row" style={{ listStyleType: "none" }}>
+                    {store.filteredRecipes.map((p, index) => {
+                        return (
+                            <RecipeCard
+                                key={index}
+                                title={p.title}
+                                image={p.image}
+                                pricePerServing={p.pricePerServing}
+                                servings={p.servings}
+                                diets={p.diets}
+                                readyInMinutes={p.readyInMinutes}
+                                className="col-4"
+                            />
+                        );
+                    })}
+                </ul>
             </div>
         </>
     )
