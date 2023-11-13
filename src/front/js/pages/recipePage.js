@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import ReactHtmlParser from 'react-html-parser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { SimilarRecipes } from '../component/similarRecipes'
+import { SimilarRecipes } from '../component/similarRecipes.js'
 
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
@@ -15,43 +15,22 @@ export const Recipe = props => {
 
 	const [recipeInformation, setRecipeInformation] = useState([])
 	const [recipeInstructions, setRecipeInstructions] = useState([])
-	const [similarRecipes, setSimilarRecipes] = useState()
 
 	useEffect(() => {
 
-		let isMounted = true;
-
 		const getRecipeInformation = async () => {
 			const recipeInfo = await actions.getRecipeInformation(params.id)
-			if (isMounted) {
-				setRecipeInformation( await recipeInfo )
-			}
+			setRecipeInformation( recipeInfo )
 		};
 
 		const getRecipeInstructions = async () => {
 			const recipeInst = await actions.getRecipeInstructions(params.id)
-			if (isMounted) {
-				setRecipeInstructions( await recipeInst )
-			}
+			setRecipeInstructions( recipeInst )
 		};
 
-		const getSimilarRecipes = async () => {
-			const similarDishes = await actions.getSimilarRecipes(params.id)
-			const randomSimilarRecipes = await similarDishes.sort( () => Math.random()-0.5 ).slice(0,3) // Randomize array.
-
-			if (isMounted) {
-				setSimilarRecipes( await randomSimilarRecipes )
-			}
-		};
-
-		//fetchRecipeSummary()
 		getRecipeInformation()
 		getRecipeInstructions()
-		getSimilarRecipes()
-		
-		return () => {
-			isMounted = false;
-		}
+		actions.getSimilarRecipes(params.id)
 
 	}, [])
 
@@ -119,14 +98,9 @@ export const Recipe = props => {
 
 						<div className="tab-pane fade show active" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab" tabIndex="0">
 							{ReactHtmlParser(recipeInformation.summary)}
-							{
-								similarRecipes ?
-									<SimilarRecipes similarRecipesSimple={similarRecipes}/>
-								:
-									""
-							}
 							
-
+							<SimilarRecipes originRecipeId={params.id} />
+						
 						</div>
 
 						<div className="row tab-pane fade d-flex justify-content-between px-0" id="pills-instructions" role="tabpanel" aria-labelledby="pills-instructions-tab" tabIndex="0">

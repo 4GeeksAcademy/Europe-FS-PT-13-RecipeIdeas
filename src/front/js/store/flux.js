@@ -17,7 +17,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
+
 			randomRecipes: [],
+			similarRecipesInfo: [],
 
 			userDetails: {
 				name: "",
@@ -267,26 +269,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 			},
 
-			getSimilarRecipes: async (recipe_id) => {
-				// Get recipe's similars.
-				try {
-					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/similar`, {
-						method: 'GET',
-						headers: {
-							'Content-Type': 'application/json',
-							'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY,
-							'X-RapidAPI-Host': process.env.X_RAPIDAPI_HOST
-						},
-					})
-
-					const data =  await resp.json();
-					return await data
-				}
-				catch(error) {
-					console.error('There was a problem with "getSimilarRecipe": ', error);
-				};
-			},
-
 			getRecipeInstructions: async (recipe_id) => {
 				// Get recipe's step-by-step instructions.
 				try {
@@ -300,6 +282,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 
 					const data =  await resp.json();
+
 					return await data
 				}
 				catch(error) {
@@ -320,7 +303,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 
 					const data =  await resp.json();
-					return await data
+					const shuffledRecipes = data.sort( () => Math.random()-0.5 ).slice(0,3) // Randomize array.
+
+					const recipesInfo = await Promise.all(shuffledRecipes.map( async (recipe, index) => {
+						const dishInfo = await getActions().getRecipeInformation(recipe.id)
+						return dishInfo
+					}))
+					
+					setStore( { similarRecipesInfo: recipesInfo } )
+					return recipesInfo
 				}
 				catch(error) {
 					console.error('There was a problem with "getSimilarRecipe": ', error);
