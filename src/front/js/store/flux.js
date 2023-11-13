@@ -95,11 +95,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
-			getComplexSearch: (cuisine, diet, type) => {
+			getComplexSearch: (cuisine, diet, type, minCalories, maxCalories) => {
 				const store = getStore();
 				const actions =getActions();
 				console.log(cuisine)
-				fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?number=10&${cuisine}&${diet}&${type}`, {
+				fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?number=10&${cuisine}&${diet}&${type}&${minCalories}&${maxCalories}`, {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
