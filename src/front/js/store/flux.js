@@ -240,7 +240,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 
 					const data =  await resp.json();
-					return await data
+					return data
 				}
 				catch(error) {
 					console.error('There was a problem with "getRecipeSummary": ', error);
@@ -260,7 +260,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 
 					const data =  await resp.json();
-					return await data
+					return data
 				}
 				catch(error) {
 					console.error('There was a problem with "getRecipeInstructions": ', error);
@@ -268,7 +268,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getSimilarRecipes: async (recipe_id) => {
-				// Get recipe's step-by-step instructions.
+				// Get recipe's similars.
 				try {
 					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/similar`, {
 						method: 'GET',

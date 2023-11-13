@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import ReactHtmlParser from 'react-html-parser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { RecipeCard } from '../component/recipeCard'
+import { SimilarRecipes } from '../component/similarRecipes'
 
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
@@ -13,43 +13,36 @@ export const Recipe = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
 
-	/*
-	const [recipeTitle, setRecipeTitle] = useState("")
-	const [recipeSummary, setRecipeSummary] = useState("")
-	*/
-
 	const [recipeInformation, setRecipeInformation] = useState([])
 	const [recipeInstructions, setRecipeInstructions] = useState([])
-	const [similarRecipes, setSimilarRecipes] = useState([])
+	const [similarRecipes, setSimilarRecipes] = useState()
 
 	useEffect(() => {
-		/*const fetchRecipeSummary = async () => {
-			const recipeSummary = await actions.getRecipeSummary(params.id)
-			setRecipeTitle( await recipeSummary.title )
-			setRecipeSummary( await recipeSummary.summary )
-		}*/
+
 		let isMounted = true;
 
 		const getRecipeInformation = async () => {
 			const recipeInfo = await actions.getRecipeInformation(params.id)
 			if (isMounted) {
-				setRecipeInformation( await recipeInfo)
+				setRecipeInformation( await recipeInfo )
 			}
-		}
+		};
 
 		const getRecipeInstructions = async () => {
 			const recipeInst = await actions.getRecipeInstructions(params.id)
 			if (isMounted) {
-				setRecipeInstructions(recipeInst)
+				setRecipeInstructions( await recipeInst )
 			}
-		}
+		};
 
 		const getSimilarRecipes = async () => {
-			const similarRecipes = await actions.getRecipeInstructions(params.id)
+			const similarDishes = await actions.getSimilarRecipes(params.id)
+			const randomSimilarRecipes = await similarDishes.sort( () => Math.random()-0.5 ).slice(0,3) // Randomize array.
+
 			if (isMounted) {
-				setSimilarRecipes(similarRecipes)
+				setSimilarRecipes( await randomSimilarRecipes )
 			}
-		}
+		};
 
 		//fetchRecipeSummary()
 		getRecipeInformation()
@@ -126,10 +119,13 @@ export const Recipe = props => {
 
 						<div className="tab-pane fade show active" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab" tabIndex="0">
 							{ReactHtmlParser(recipeInformation.summary)}
-
-							<div className="row">
-								
-							</div>
+							{
+								similarRecipes ?
+									<SimilarRecipes similarRecipesSimple={similarRecipes}/>
+								:
+									""
+							}
+							
 
 						</div>
 
