@@ -12,20 +12,21 @@ export const Navbar = () => {
 	return (
 		<nav className="navbar">
 			<div className="text-wrapper">
-			<Link to="/">
-				<img src={logo} style={{ width: "50px", height: "43px" }}></img><img src={food} style={{ width: "200px", height: "43px" }} />
-			</Link>
+				<Link to="/">
+					<img src={logo} style={{ width: "50px", height: "43px" }}></img><img src={food} style={{ width: "200px", height: "43px" }} />
+				</Link>
 			</div>
 
 			{!store.token ?
 				<>
 					<div className="sign-up-button">
-						<Link className='nav-link' to="/signup">Sign Up</Link>
+						<Link className='link' to="/signup">Sign Up</Link>
 					</div>
+
 
 					<div className="log-in-button">
 
-						<Link className='nav-link' to="/login">Log In</Link>
+						<Link className='link' to="/login">Log In</Link>
 
 					</div>
 				</>
@@ -37,4 +38,4 @@ export const Navbar = () => {
 
 		</nav>
 	);
-  };
+};
