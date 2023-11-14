@@ -98,8 +98,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
-						'X-RapidAPI-Key': 'f4a6409e03msh2513ad740baf8b9p13e32fjsn5d20d8842c5f',
-						'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
+						'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY,
+							'X-RapidAPI-Host': process.env.X_RAPIDAPI_HOST
 					},
 					body: JSON.stringify()
 				})
