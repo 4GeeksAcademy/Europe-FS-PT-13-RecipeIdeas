@@ -20,7 +20,7 @@
   }
   
   .navbar .log-in-button {
-    background-color: #428b02;
+    background-color: #72aa40;
     border-radius: 8px;
     height: 48px;
     left: 1123px;
@@ -29,7 +29,7 @@
     top: 33px;
     width: 126px;
     text-align: center;
-    padding-top: 12px;
+    padding-top: 10px;
   }
   
   .navbar .div {
@@ -50,7 +50,7 @@
   
   .navbar .sign-up-button {
     color: #ffffff;
-    background-color: #428b02;
+    background-color: #72aa40;
     border-radius: 8px;
     height: 48px;
     left: 1263px;
@@ -59,7 +59,7 @@
     top: 33px;
     width: 126px;
     text-align: center;
-    padding-top: 12px;
+    padding-top: 10px;
   }
   
   .navbar .text-wrapper-2 {
@@ -81,5 +81,6 @@
   .link {
     color: white;
     text-decoration: none;
+    font-size: 20px;
    }
   
