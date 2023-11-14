@@ -25,7 +25,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			getToken: () => {
 				return sessionStorage.getItem("token");
-
 			},
 
 			logout: () => {
@@ -233,8 +232,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 
 					const data =  await resp.json();
-
-					return await data
+					return data
 				}
 				catch(error) {
 					console.error('There was a problem with "getRecipeInstructions": ', error);
