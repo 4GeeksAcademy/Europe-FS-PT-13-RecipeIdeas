@@ -2,11 +2,11 @@
   background-color: #ffcab0;
   height: 89px;
   position: relative;
-  width: 2000px;
+  display: flex;
+
 }
   
   .navbar .text-wrapper {
-    color: #428b02;
     font-family: "Newsreader", Helvetica;
     font-size: 32px;
     font-weight: 500;
@@ -14,7 +14,6 @@
     left: 96px;
     letter-spacing: -0.32px;
     line-height: 32px;
-    position: absolute;
     top: 40px;
     white-space: nowrap;
   }
@@ -25,11 +24,11 @@
     height: 48px;
     left: 1123px;
     overflow: hidden;
-    position: absolute;
     top: 33px;
     width: 126px;
     text-align: center;
     padding-top: 10px;
+    justify-content: space-between;
   }
   
   .navbar .div {
@@ -41,7 +40,6 @@
     left: 40px;
     letter-spacing: 0;
     line-height: 20.8px;
-    position: absolute;
     text-align: center;
     top: 12px;
     white-space: nowrap;
@@ -55,11 +53,11 @@
     height: 48px;
     left: 1263px;
     overflow: hidden;
-    position: absolute;
     top: 33px;
     width: 126px;
     text-align: center;
     padding-top: 10px;
+    justify-content: space-between;
   }
   
   .navbar .text-wrapper-2 {
@@ -71,7 +69,6 @@
     left: 13px;
     letter-spacing: 0;
     line-height: 20.8px;
-    position: absolute;
     text-align: center;
     top: 10px;
     white-space: nowrap;
@@ -82,6 +79,8 @@
     color: white;
     text-decoration: none;
     font-size: 20px;
+    display: flex;
+    justify-content: center;
    }
   
    .navbar .btn {

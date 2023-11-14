@@ -10,7 +10,7 @@ import food from "../../img/food.png";
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 	return (
-		<nav className="navbar">
+		<nav className="navbar container d-flex py-2">
 			<div className="text-wrapper">
 				<Link to="/">
 					<img src={logo} style={{ width: "50px", height: "43px" }}></img><img src={food} style={{ width: "200px", height: "43px" }} />
@@ -19,12 +19,12 @@ export const Navbar = () => {
 
 			{!store.token ?
 				<>
-					<div className="sign-up-button">
+					<div className="sign-up-button col-auto">
 						<Link className='link' to="/signup">Sign Up</Link>
 					</div>
 
 
-					<div className="log-in-button">
+					<div className="log-in-button col-auto">
 
 						<Link className='link' to="/login">Log In</Link>
 
