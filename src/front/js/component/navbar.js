@@ -9,6 +9,9 @@ import food from "../../img/food.png";
 // Comment
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
+
+	const [selectValue, setSelectValue] = useState("");
+
 	return (
 		<nav className="navbar container d-flex py-2">
 			<div className="text-wrapper">
@@ -32,7 +35,7 @@ export const Navbar = () => {
 				</>
 				:
 				<div className="log-in-button">
-					<button onClick={() => actions.logout()} className="btn">Log out</button>
+				<button onClick={() => actions.logout()} className="btn">Log out</button> 
 				</div>
 			}
 
