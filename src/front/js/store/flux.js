@@ -99,7 +99,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					headers: {
 						'Content-Type': 'application/json',
 						'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY,
-							'X-RapidAPI-Host': process.env.X_RAPIDAPI_HOST
+						'X-RapidAPI-Host': process.env.X_RAPIDAPI_HOST
 					},
 					body: JSON.stringify()
 				})
