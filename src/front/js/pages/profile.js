@@ -7,7 +7,6 @@ import "../../styles/index.css"
 import "../../styles/profile.css";
 
 
-
 export const Profile = () => {
 
     const { store, actions } = useContext(Context)
@@ -27,7 +26,7 @@ export const Profile = () => {
         setEditDetails(false)
     }
   
-
+    
     let myWidget = cloudinary.createUploadWidget({
         cloudName: process.env.CLOUD_NAME, 
         uploadPreset: "users_avatar",

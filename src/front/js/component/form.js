@@ -7,7 +7,6 @@ export const Form = (props) => {
     const { store, actions } = useContext(Context)
 
     const [userDetails, setUserDetails] = useState(store.userDetails)
-    console.log('STATE USER DETAILS', userDetails)
 
     useEffect(() => {
         setUserDetails(store.userDetails)

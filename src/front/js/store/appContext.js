@@ -31,7 +31,6 @@ const injectContext = PassedComponent => {
 			// <---- calling this function from the flux.js actions
 			state.actions.getToken();
 			state.actions.getuserDetails();
-			state.actions.getMessage();
 			state.actions.getRandomRecipe();
 		}, []);
 
