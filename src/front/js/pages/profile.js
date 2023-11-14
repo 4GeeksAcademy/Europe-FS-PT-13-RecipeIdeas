@@ -31,7 +31,6 @@ export const Profile = () => {
     let myWidget = cloudinary.createUploadWidget({
         cloudName: process.env.CLOUD_NAME, 
         uploadPreset: "users_avatar",
-        sources: [ "local", "url"],
         cropping: true}, 
         (error, result) => { 
             if (!error && result && result.event === "success") { 
