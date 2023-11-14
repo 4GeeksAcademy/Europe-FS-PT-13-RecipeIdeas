@@ -17,9 +17,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
+
 			randomRecipes: [],
+			similarRecipesInfo: [],
 
 			userDetails: {
+				name: "",
 				firstName: "",
 				lastName: "",
 				username: null,
@@ -69,7 +72,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						sessionStorage.setItem("token", data.access_token);
 					})
 					.catch(error => {
-						console.log("There was an error")
+						console.log("There was an error", error)
 					})
 			},
 
@@ -86,7 +89,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					 })
 				  }
 			  
-				return fetch(process.env.BACKEND_URL + "/api/signup", opts)
+				return fetch(process.env.BACKEND_URL + "api/signup", opts)
 				.then(resp =>{
 				  if(resp.status === 200) return resp.json();
 				  else return false;
@@ -156,9 +159,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then((data) => {
 						setStore({ randomRecipes: data["recipes"] });
-						console.log("store in the flux")
-						console.log(getStore().randomRecipes)
-
 					})
 					.catch((error) => {
 						console.error('There was a problem with the fetch operation:', error);
@@ -175,7 +175,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({
 						userDetails: {
 							...getStore()['userDetails'], "email": userData['email'], "avatar": userData['avatar'], "username": userData['username'],
-							"firstName": userData['firstName'], "lastName": userData['lastName'],
+							"name": userData['name'], "firstName": userData['firstName'], "lastName": userData['lastName'],
 							"linkedIn": userData['linkedIn'], "github": userData['github']
 						}
 					})
@@ -227,6 +227,95 @@ const getState = ({ getStore, getActions, setStore }) => {
 				catch (error) {
 					console.log("Error setting user's profile picture.", error)
 				}
+			},
+
+			getRecipeSummary: async (recipe_id) => {
+				// Get recipe's Title and "About"
+				try {
+					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/summary`, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY,
+							'X-RapidAPI-Host': process.env.X_RAPIDAPI_HOST
+						},
+					})
+
+					const data =  await resp.json();
+					return data
+				}
+				catch(error) {
+					console.error('There was a problem with "getRecipeSummary": ', error);
+				};
+			},
+
+			getRecipeInformation: async (recipe_id) => {
+				// Get recipe's Title and "About"
+				try {
+					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/information`, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY,
+							'X-RapidAPI-Host': process.env.X_RAPIDAPI_HOST
+						},
+					})
+
+					const data =  await resp.json();
+					return data
+				}
+				catch(error) {
+					console.error('There was a problem with "getRecipeInstructions": ', error);
+				};
+			},
+
+			getRecipeInstructions: async (recipe_id) => {
+				// Get recipe's step-by-step instructions.
+				try {
+					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/analyzedInstructions`, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY,
+							'X-RapidAPI-Host': process.env.X_RAPIDAPI_HOST
+						},
+					})
+
+					const data =  await resp.json();
+
+					return await data
+				}
+				catch(error) {
+					console.error('There was a problem with "getRecipeInstructions": ', error);
+				};
+			},
+
+			getSimilarRecipes: async (recipe_id) => {
+				// Get recipe's step-by-step instructions.
+				try {
+					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/similar`, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY,
+							'X-RapidAPI-Host': process.env.X_RAPIDAPI_HOST
+						},
+					})
+
+					const data =  await resp.json();
+					const shuffledRecipes = data.sort( () => Math.random()-0.5 ).slice(0,3) // Randomize array.
+
+					const recipesInfo = await Promise.all(shuffledRecipes.map( async (recipe, index) => {
+						const dishInfo = await getActions().getRecipeInformation(recipe.id)
+						return dishInfo
+					}))
+					
+					setStore( { similarRecipesInfo: recipesInfo } )
+					return recipesInfo
+				}
+				catch(error) {
+					console.error('There was a problem with "getSimilarRecipe": ', error);
+				};
 			},
 		}
 	};
