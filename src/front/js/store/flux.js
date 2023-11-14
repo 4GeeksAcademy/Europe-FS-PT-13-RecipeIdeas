@@ -3,20 +3,6 @@ import { number } from "prop-types";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			message: null,
-
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			],
 
 			randomRecipes: [],
 			similarRecipesInfo: [],
@@ -105,41 +91,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  return false;
 				})
 			},
-			getMessage: () => {
-				const store = getStore();
-				const opts = {
-					headers: {
-						"Authorization": "Bearer" + store.token
-					}
-				};
-				try {
-					// fetching data from the backend
-					fetch(process.env.BACKEND_URL + "/api/hello", opts)
-						.then(resp => resp.json())
-						.then(data => setStore({ message: data.message }))
-
-					// don't forget to return something, that is how the async resolves
-					return data;
-				} catch (error) {
-					console.log("Error loading message from backend", error)
-				}
-			},
-			changeColor: (index, color) => {
-
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			},
-
 
 			// totalRecipePrice, dietDisplay, setRecipe, this were the arguments inside the func below
 			getRandomRecipe: () => {
