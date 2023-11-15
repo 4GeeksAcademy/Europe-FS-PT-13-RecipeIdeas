@@ -8,7 +8,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
       
 			randomRecipes: [],
+
+			complexSearchResults: [],
+			complexSearchIds: [],
+			filteredRecipes: [],
+
 			similarRecipesInfo: [],
+
 
 			userDetails: {
 				name: "",
@@ -26,6 +32,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 
 		actions: {
+
 
 
 			refreshStore: () => {
@@ -142,6 +149,77 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then((data) => {
 						setStore({ randomRecipes: data["recipes"] });
+						console.log("store in the flux")
+						console.log(store.randomRecipes)
+
+					})
+					.catch((error) => {
+						console.error('There was a problem with the fetch operation:', error);
+					});
+			},
+
+			getComplexSearch: (cuisine, diet, type, minCalories, maxCalories, preptime, includedIngredients) => {
+				const store = getStore();
+				const actions =getActions();
+				console.log(cuisine)
+				fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?number=100&${cuisine}&${includedIngredients}&${diet}&${type}&${minCalories}&${maxCalories}&${preptime}`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-RapidAPI-Key': 'f4a6409e03msh2513ad740baf8b9p13e32fjsn5d20d8842c5f',
+						'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
+					},
+					body: JSON.stringify()
+				})
+					.then(async (data) => {
+						const response = await data.json();
+						return response;
+					})
+					.then((data) => {
+						setStore({ complexSearchResults: data["results"] });
+						console.log("store for the complex search results");
+						console.log(store.complexSearchResults)
+
+					})
+					.then(() => {
+						store.complexSearchIds = store.complexSearchResults.map(item => item.id)
+						console.log("complex search ids")
+						console.log(store.complexSearchIds)
+					})
+					.then(()=>{
+						actions.getFilteredRecipes()
+					}
+
+					)
+					//doing a informtaion bulk request get to get the information needed to appear on the cards
+					.catch((error) => {
+						console.error('There was a problem with the fetch operation:', error);
+					});
+			},
+
+			getFilteredRecipes: () => {
+				const store = getStore();
+				console.log("checking for ids in the store", store.complexSearchIds)
+				fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk?ids=${store.complexSearchIds}`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-RapidAPI-Key': 'f4a6409e03msh2513ad740baf8b9p13e32fjsn5d20d8842c5f',
+						'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
+					},
+					body: JSON.stringify()
+				})
+					.then(async (data) => {
+						const response = await data.json();
+						return response;
+					})
+					.then((data) => {
+						setStore({filteredRecipes: data});
+						console.log("logging the recipe search data", data)
+						console.log("filtered recipes")
+						console.log(store.filteredRecipes)
+
+
 					})
 					.catch((error) => {
 						console.error('There was a problem with the fetch operation:', error);
