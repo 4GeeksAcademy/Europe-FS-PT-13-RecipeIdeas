@@ -6,7 +6,7 @@ import logo from "../../img/Logo.png";
 import food from "../../img/food.png";
 
 
-// Comment
+
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 	return (
