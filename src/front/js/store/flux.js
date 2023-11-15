@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: null,
+			user: null,
 			message: null,
 
 			demo: [
@@ -41,13 +42,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
-			getToken: () => {
+			refreshStore: () => {
 				if (!getStore().token) {
 					const token = sessionStorage.getItem("token");
+					const user = sessionStorage.getItem("user");
 					if (token) {
 						setStore({ token: token });
+						setStore({ user: user });
 					}
-					return token
 				}
 
 
@@ -83,6 +85,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log("this came from the backend", data)
 						sessionStorage.setItem("token", data.access_token);
 						setStore({ token: data.access_token })
+						sessionStorage.setItem("user", data.user);
+						setStore({ user: data.user })
 						return true
 					})
 					.catch(error => {

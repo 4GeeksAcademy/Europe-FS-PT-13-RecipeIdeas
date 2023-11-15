@@ -48,7 +48,11 @@ def create_token():
         return jsonify({"msg": "Bad username or password"}), 401
 
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token)
+    response_body = {
+        "user": user.serialize(),
+        "access_token": access_token
+    }
+    return jsonify(response_body)
 
 @api.route('/update_user/', methods=['PUT'])
 def update_user():

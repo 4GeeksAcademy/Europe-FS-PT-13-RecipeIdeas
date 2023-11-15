@@ -31,14 +31,14 @@ export const Login = () => {
     <div>
       <h2>Login</h2>
 
-      {(actions.getToken() && actions.getToken() != "" && actions.getToken() != undefined) ? "You are logged in with this token" + actions.getToken() :
+      {(store.token && store.token != "" && store.token != undefined) ? "You are logged in with this token" + store.token :
 
         <form className="info-wrapper py-4 px-4 d-flex flex-column was-validated" onSubmit={handleSubmit}>
           <div className="form-group row d-flex justify-content-between px-0">
             <div className="col-sm-12 col-md-12 col-lg-4 mb-2">
             </div></div>
           <div>
-          <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-envelope" size="2xl" /> </span>
+            <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-envelope" size="2xl" /> </span>
             <label>Email:</label>
             <input
               type="text"
@@ -50,7 +50,7 @@ export const Login = () => {
             </div>
           </div>
           <div>
-          <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-key" size="2xl" /> </span>
+            <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-key" size="2xl" /> </span>
             <label>Password:</label>
             <input
               type="password"
