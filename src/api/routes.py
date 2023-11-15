@@ -48,13 +48,17 @@ def create_token():
         return jsonify({"msg": "Bad username or password"}), 401
 
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token)
+    response_body = {
+        "user": user.serialize(),
+        "access_token": access_token
+    }
+    return jsonify(response_body)
 
 @api.route('/update_user/', methods=['PUT'])
 def update_user():
 
-    current_user = User.query.filter_by(email="test1@gmail.com").first()
 
+    current_user = User.query.get(1)
     current_user.email = request.json.get('email')
     current_user.avatar = request.json.get('avatar')
     current_user.firstName = request.json.get('firstName')
@@ -88,6 +92,7 @@ def get_user():
 def upload_avatar():
 
     current_user = User.query.filter_by(email="test1@gmail.com").first()
+
     image_url = request.json.get('image_url', None) # Get request body.
 
     uploader = cloudinary.uploader.upload(image_url, unique_filename = False, overwrite=True)

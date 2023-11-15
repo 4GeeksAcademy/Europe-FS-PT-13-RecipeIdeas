@@ -3,7 +3,10 @@ import { number } from "prop-types";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-
+			token: null,
+			user: null,
+			message: null,
+      
 			randomRecipes: [],
 			similarRecipesInfo: [],
 
@@ -23,8 +26,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 
 		actions: {
-			getToken: () => {
-				return sessionStorage.getItem("token");
+
+
+			refreshStore: () => {
+				if (!getStore().token) {
+					const token = sessionStorage.getItem("token");
+					const user = sessionStorage.getItem("user");
+					if (token) {
+						setStore({ token: token });
+						setStore({ user: user });
+					}
+				}
 			},
 
 			logout: () => {
@@ -47,24 +59,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 						})
 				}
 
-				const resp = await fetch(process.env.BACKEND_URL + "/api/token", opts)
+				return fetch(process.env.BACKEND_URL + "api/token", opts)
+
 					.then(resp => {
 						if (resp.status === 200) return resp.json();
-						else alert("There has been some error");
+						else return false
 					})
 					.then(data => {
 						console.log("this came from the backend", data)
 						sessionStorage.setItem("token", data.access_token);
+						setStore({ token: data.access_token })
+						sessionStorage.setItem("user", data.user);
+						setStore({ user: data.user })
+						return true
 					})
 					.catch(error => {
 						console.log("There was an error", error)
+						return false
 					})
 			},
 
 			signup: (name, email, password) => {
-				const opts ={
+				const opts = {
 					method: "POST",
-					headers:{ "Content-Type": "application/json"
+					headers:{ 
+            "Content-Type": "application/json"
 				  },
 					body:JSON.stringify(
 					{
@@ -78,17 +97,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.then(resp =>{
 				  if(resp.status === 200) return resp.json();
 				  else return false;
+					})
+					.then(data => {
+						console.log("sign up successful", data)
+						return true;
+					})
+					.catch(error => {
+						console.log("There was an error", error)
+						return false;
+					})
+			},
+      
+			getMessage: () => {
+				const store = getStore();
+				const opts = {
+					headers: {
+						"Authorization": "Bearer" + store.token
+					}
+				};
+				// fetching data from the backend
+				fetch(process.env.BACKEND_URL + "api/hello", opts)
+					.then(resp => resp.json())
+					.then(data => setStore({ message: data.message }))
+					// don't forget to return something, that is how the async resolves
+					.catch(error => console.log("Error loading message from backend", error));
 
-				})
-				.then(data => {
-				  console.log("sign up successful", data)
-				  return true;
-					
-				})
-				.catch(error =>{
-				  console.log("There was an error", error)
-				  return false;
-				})
 			},
 
 			// totalRecipePrice, dietDisplay, setRecipe, this were the arguments inside the func below

@@ -19,18 +19,18 @@ export const ResultsPage = () => {
     }, []);
 
 
-    	const handleCuisineSelect = (e) => {
-    		const selectedCuisine = e.target.value;
-    		setCuisineFilter(selectedCuisine);
-    		console.log(selectedCuisine);
-    	}
+    const handleCuisineSelect = (e) => {
+        const selectedCuisine = e.target.value;
+        setCuisineFilter(selectedCuisine);
+        console.log(selectedCuisine);
+    }
 
     // onClick={()=>actions.getComplexSearch(cuisineFilter)}
 
     return (
         <>
             <div className="container p-5 rounded" style={{ backgroundColor: "#ffebbb" }}>
-                <select class="form-select" aria-label="Cuisine" onChange={handleCuisineSelect}>
+                <select className="form-select" aria-label="Cuisine" onChange={handleCuisineSelect}>
                     <option value="">Select Cuisine:</option>
                     <option value="cuisine=italian">Italian</option>
                     <option value="cuisine=french">French</option>
@@ -38,7 +38,7 @@ export const ResultsPage = () => {
                 </select>
             </div>
             <div>
-                
+
             </div>
             <div>
                 <p>{example}</p>
