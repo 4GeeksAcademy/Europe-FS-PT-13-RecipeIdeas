@@ -14,6 +14,7 @@ export const ResultsPage = () => {
     const [prepTime, setPrepTime] = useState(10);
     const [includedIngredients, setIncludedIngredients] = useState([]);
     const [resultsLoaded, setResultsLoaded] = useState(12);
+    const [showGreeting, setShowGreeting] = useState(true);
 
 
 
@@ -65,12 +66,18 @@ export const ResultsPage = () => {
     const handleSearch = () => {
         setResultsLoaded(12);
         actions.getComplexSearch(cuisine, diet, type, minCalories, maxCalories, includedIngredients, resultsLoaded);
+        setShowGreeting(false);
     };
 
     const handleLoadMore = () => {
         setResultsLoaded((prevResultsLoaded) => prevResultsLoaded + 12);
         actions.getComplexSearch(cuisine, diet, type, minCalories, maxCalories, includedIngredients, resultsLoaded);
     };
+
+
+    useEffect(() => {
+        setShowGreeting(true);
+    }, []);
 
     return (
         <>
@@ -225,23 +232,18 @@ export const ResultsPage = () => {
                     </div>
                 </div>
             </div>
-            <div>
-                <button type="button" class="btn btn-primary" onClick={handleSearch}>Search</button>
+            <div className="d-flex justify-content-center mt-3">
+                <button type="button" className="btn btn-primary " onClick={handleSearch}>Search</button>
             </div>
-            <div className="row mt-3 justify-content-center">
-                <div className="col-md-12">
-                    {store.isLoading && (
-                        <p>Feeling hungry for something specific? Try filtering through some of our options!</p>
+            <div className="container d-flex justify-content-center">
+                <div className="text-center">
+                    {showGreeting && (
+                        <h3>Feeling hungry for something specific? Try filtering through some of our options!</h3>
                     )}
 
-                    {!store.isLoading && store.filteredRecipes.length === 0 && (
-                        <p>Oops, looks like we don't have anything like that!</p>
-                    )}
-
-                    {!store.isLoading && store.filteredRecipes.length > 0 && (
+                    {store.filteredRecipes.length > 0 && (
                         <>
-                            {/* Display the loaded recipe cards */}
-                            <ul className="container row" style={{ listStyleType: "none" }}>
+                            <ul className="container row justify-content-center" style={{ listStyleType: "none" }}>
                                 {store.filteredRecipes.slice(0, resultsLoaded).map((p, index) => (
                                     <RecipeCard
                                         key={index}
@@ -257,7 +259,7 @@ export const ResultsPage = () => {
                             </ul>
                             {store.filteredRecipes.length > resultsLoaded && (
                                 <div className="row mt-3">
-                                    <div className="col-md-6">
+                                    <div className="col-md-6 mx-auto">
                                         <button type="button" className="btn btn-secondary" onClick={handleLoadMore}>
                                             Load More
                                         </button>
@@ -265,6 +267,10 @@ export const ResultsPage = () => {
                                 </div>
                             )}
                         </>
+                    )}
+
+                    {!store.isLoading && store.filteredRecipes.length === 0 && !showGreeting && (
+                        <h3 className="text-center">Oops, looks like we don't have anything like that!</h3>
                     )}
                 </div>
             </div>
