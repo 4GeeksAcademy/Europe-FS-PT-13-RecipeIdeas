@@ -57,8 +57,8 @@ def create_token():
 @api.route('/update_user/', methods=['PUT'])
 def update_user():
 
-    current_user = User.query.get(1)
 
+    current_user = User.query.get(1)
     current_user.email = request.json.get('email')
     current_user.avatar = request.json.get('avatar')
     current_user.firstName = request.json.get('firstName')
@@ -79,7 +79,8 @@ def update_user():
 
 @api.route('/get_user/', methods=['GET'])
 def get_user():
-    current_user = User.query.filter_by(email="test1@test.pt").first()
+    current_user = User.query.filter_by(email="test1@gmail.com").first()
+    print(current_user)
 
     response_body = {
         "user": current_user.serialize()
@@ -90,7 +91,8 @@ def get_user():
 @api.route('/upload_avatar/', methods=['PUT'])
 def upload_avatar():
 
-    current_user = User.query.filter_by(email="test1@test.pt").first()
+    current_user = User.query.filter_by(email="test1@gmail.com").first()
+
     image_url = request.json.get('image_url', None) # Get request body.
 
     uploader = cloudinary.uploader.upload(image_url, unique_filename = False, overwrite=True)
