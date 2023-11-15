@@ -71,6 +71,7 @@ export const ResultsPage = () => {
         setShowGreeting(false);
     };
 
+
     const handleLoadMore = () => {
         setResultsLoaded((prevResultsLoaded) => prevResultsLoaded + 12);
         actions.getComplexSearch(cuisine, diet, type, minCalories, maxCalories, includedIngredients, resultsLoaded);
@@ -169,6 +170,7 @@ export const ResultsPage = () => {
                 <div className="d-flex justify-content-center mt-3 pb-3">
                     <button type="button" className="btn btn-primary " onClick={handleSearch}>Search</button>
                 </div>
+
             </div>
 
 
