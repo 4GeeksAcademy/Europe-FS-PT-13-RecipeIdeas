@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { RecipeCard } from "../component/recipeCard";
+import { IngredientCheckBox } from "../component/ingredientCheckbox";
 
 
 export const ResultsPage = () => {
@@ -15,6 +16,7 @@ export const ResultsPage = () => {
     const [includedIngredients, setIncludedIngredients] = useState([]);
     const [resultsLoaded, setResultsLoaded] = useState(12);
     const [showGreeting, setShowGreeting] = useState(true);
+    const [ingredientList, setIngredientList] = useState(["tomato", "Cheese", "Avocado", "pasta", "Pork", "Chicken", "Beef", "Eggs", "Tuna", "Beans", "Rice", "Mushrooms"])
 
 
 
@@ -81,8 +83,9 @@ export const ResultsPage = () => {
 
     return (
         <>
-            <div>
-                <div className="row p-5" style={{ backgroundColor: "#ffebbb" }}>
+            <div className="container rounded-3 mt-4" style={{ backgroundColor: "#e0ffcd" }}>
+                <div className="row p-5">
+                    <h3 className="text-center mb-4">Filter Options:</h3>
                     <div className="col-sm-2 col-md-3 col-lg-4">
                         <select class="form-select " aria-label="Cuisine" onChange={handleCuisineSelect}>
                             <option value="">Select Cuisine:</option>
@@ -151,94 +154,28 @@ export const ResultsPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="container">
-                    <div className="row">
-                        <div className="form-check col-3">
-                            <input className="form-check-input" type="checkbox" value="includeIngredients=tomato" id="tomato" onChange={handleIngredientChange} />
-                            <label className="form-check-label" for="tomato">
-                                Tomato
-                            </label>
-                        </div>
-                        <div className="form-check col-3">
-                            <input className="form-check-input" type="checkbox" value="includeIngredients=cheese" id="cheese" onChange={handleIngredientChange} />
-                            <label className="form-check-label" for="cheese">
-                                Cheese
-                            </label>
-                        </div>
-                        <div className="form-check col-3">
-                            <input className="form-check-input" type="checkbox" value="includeIngredients=avocado" id="avocado" onChange={handleIngredientChange} />
-                            <label className="form-check-label" for="avocado">
-                                Avocado
-                            </label>
-                        </div>
-                        <div className="form-check col-3">
-                            <input className="form-check-input" type="checkbox" value="includeIngredients=pasta" id="pasta" onChange={handleIngredientChange} />
-                            <label className="form-check-label" for="pasta">
-                                Pasta
-                            </label>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="form-check col-3">
-                            <input className="form-check-input" type="checkbox" value="includeIngredients=pork" id="pork" onChange={handleIngredientChange} />
-                            <label className="form-check-label" for="pork">
-                                Pork
-                            </label>
-                        </div>
-                        <div className="form-check col-3">
-                            <input className="form-check-input" type="checkbox" value="includeIngredients=chicken" id="chicken" onChange={handleIngredientChange} />
-                            <label className="form-check-label" for="chicken">
-                                Chicken
-                            </label>
-                        </div>
-                        <div className="form-check col-3">
-                            <input className="form-check-input" type="checkbox" value="includeIngredients=beef" id="beef" onChange={handleIngredientChange} />
-                            <label className="form-check-label" for="beef">
-                                Beef
-                            </label>
-                        </div>
-                        <div className="form-check col-3">
-                            <input className="form-check-input" type="checkbox" value="includeIngredients=eggs" id="eggs" onChange={handleIngredientChange} />
-                            <label className="form-check-label" for="eggs">
-                                Eggs
-                            </label>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="form-check col-3">
-                            <input className="form-check-input" type="checkbox" value="includeIngredients=tuna" id="tuna" onChange={handleIngredientChange} />
-                            <label className="form-check-label" for="tuna">
-                                Tuna
-                            </label>
-                        </div>
-                        <div className="form-check col-3">
-                            <input className="form-check-input" type="checkbox" value="includeIngredients=beans" id="beans" onChange={handleIngredientChange} />
-                            <label className="form-check-label" for="beans">
-                                Beans
-                            </label>
-                        </div>
-                        <div className="form-check col-3">
-                            <input className="form-check-input" type="checkbox" value="includeIngredients=rice" id="rice" onChange={handleIngredientChange} />
-                            <label className="form-check-label" for="rice">
-                                Rice
-                            </label>
-                        </div>
-                        <div className="form-check col-3">
-                            <input className="form-check-input" type="checkbox" value="includeIngredients=mushrooms" id="mushrooms" onChange={handleIngredientChange} />
-                            <label className="form-check-label" for="mushrooms">
-                                Mushrooms
-                            </label>
-                        </div>
-                    </div>
+                <div className="container row">
+                    <h4 className="text-center mb-4">Included Ingredients:</h4>
+                    {ingredientList.map((p, index) => {
+                        return (
+                            <IngredientCheckBox
+                                ingredient={p}
+                                ingredientCapital={p.charAt(0).toUpperCase() + p.slice(1)}
+                                handFunction={handleIngredientChange}
+                            />
+                        )
+                    })}
+                </div>
+                <div className="d-flex justify-content-center mt-3 pb-3">
+                    <button type="button" className="btn btn-primary " onClick={handleSearch}>Search</button>
                 </div>
             </div>
-            <div className="d-flex justify-content-center mt-3">
-                <button type="button" className="btn btn-primary " onClick={handleSearch}>Search</button>
-            </div>
+
+
             <div className="container d-flex justify-content-center">
                 <div className="text-center">
                     {showGreeting && (
-                        <h3>Feeling hungry for something specific? Try filtering through some of our options!</h3>
+                        <h3 className="mt-3">Feeling hungry for something specific? Try filtering through some of our options!</h3>
                     )}
 
                     {store.filteredRecipes.length > 0 && (
@@ -270,7 +207,7 @@ export const ResultsPage = () => {
                     )}
 
                     {!store.isLoading && store.filteredRecipes.length === 0 && !showGreeting && (
-                        <h3 className="text-center">Oops, looks like we don't have anything like that!</h3>
+                        <h3 className="text-center mt-3">Oops, looks like we don't have anything like that!</h3>
                     )}
                 </div>
             </div>
