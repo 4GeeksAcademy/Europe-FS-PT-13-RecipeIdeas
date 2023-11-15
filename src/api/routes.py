@@ -36,13 +36,17 @@ cloudinary.config(
 
 @api.route("/token", methods=["POST"])
 def create_token():
+
     email = request.json.get("email", None)
     password = request.json.get("password", None)
+
     m = hashlib.sha256()
     m.update(bytes(password, 'utf-8'))
     passwordhash = m.hexdigest()
+
     user = User.query.filter_by(
         email=email, password=passwordhash).first()
+        
     if user is None:
         # the user was not found on the database
         return jsonify({"msg": "Bad username or password"}), 401
@@ -58,7 +62,8 @@ def create_token():
 def update_user():
 
 
-    current_user = User.query.get(1)
+    current_user = User.query.filter_by(email="test1@gmail.com").first()
+
     current_user.email = request.json.get('email')
     current_user.avatar = request.json.get('avatar')
     current_user.firstName = request.json.get('firstName')
@@ -138,11 +143,14 @@ def get_hello():
 def create_signup():
     name = request.json.get("name", None)
     email = request.json.get("email", None)
+
     password = request.json.get("password", None)
     m = hashlib.sha256()
     m.update(bytes(password, 'utf-8'))
     passwordhash = m.hexdigest()
+
     user = User(name=name, email=email, password=passwordhash)
+
     db.session.add(user)
     db.session.commit()
 

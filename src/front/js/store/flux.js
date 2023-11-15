@@ -83,15 +83,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const opts = {
 					method: "POST",
 					headers:{ 
-            "Content-Type": "application/json"
-				  },
+            			"Content-Type": "application/json"
+				  	},
+
 					body:JSON.stringify(
-					{
-					  "name" : name,
-					  "email": email,
-					  "password": password
-					 })
-				  }
+						{
+						"name" : name,
+						"email": email,
+						"password": password
+						}
+					)
+				}
 			  
 				return fetch(process.env.BACKEND_URL + "api/signup", opts)
 				.then(resp =>{
