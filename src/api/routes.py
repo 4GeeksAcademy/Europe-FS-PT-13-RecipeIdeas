@@ -10,7 +10,6 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 import hashlib
-
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -58,7 +57,7 @@ def create_token():
 def update_user():
 
 
-    current_user = User.query.get(1)
+    current_user = User.query.filter_by(email="test1@gmail.com").first()
     current_user.email = request.json.get('email')
     current_user.avatar = request.json.get('avatar')
     current_user.firstName = request.json.get('firstName')

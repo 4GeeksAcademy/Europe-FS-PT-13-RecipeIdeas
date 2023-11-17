@@ -43,11 +43,11 @@ export const Navbar = () => {
 				</>
 				:
 				<>
-					<div class="dropdown">
+					<div className="dropdown">
 
-						<img class="dropdown-toggle" data-bs-toggle="dropdown" src={logo} style={{ width: "50px", height: "43px" }}></img>
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">{store.user && store.user.name}</a></li>
+						<img className="dropdown-toggle" data-bs-toggle="dropdown" src={logo} style={{ width: "50px", height: "43px" }}></img>
+						<ul className="dropdown-menu">
+							<li><a className="dropdown-item" href="#">{store.user && store.user.name}</a></li>
 							<li><button onClick={() => actions.logout()} className="dropdown-item">Log out</button></li>
 
 						</ul>
