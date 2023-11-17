@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 
@@ -54,7 +54,7 @@ export const RecipeCard = (props) => {
 
 
 	return (
-		<li className="col-sm-3 col-md-3 col-lg-3 me-4">
+		<li className="col-sm-3 col-md-3 col-lg-3 me-4" style={{ listStyleType: "none" }}>
 			<div className="mt-4 rounded-top" style={{backgroundColor: "#ffcab0"}}>
 				<div className="row">
 					<div className="col-sm-6 col-md-6 col-lg-9">
@@ -80,7 +80,9 @@ export const RecipeCard = (props) => {
 						<p className="mt-1 ms-2"><i className="fas fa-apple-alt fa-lg"></i> {diets}</p>
 					</div>
 					<div className="d-flex justify-content-center">
-						<button type="button" className="btn btn-primary w-100">Go to Recipe</button>
+						<Link to={"/recipe/" + props.id} className="d-flex justify-content-center">
+							<button type="button" className="btn btn-primary w-100">Go to Recipe</button>
+						</Link>
 					</div>
 				</div>
 			</div >

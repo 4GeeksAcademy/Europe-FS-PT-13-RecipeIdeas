@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { RecipeCard } from "../component/recipeCard";
 import { IngredientCheckBox } from "../component/ingredientCheckbox";
+import { TailSpin } from "react-loader-spinner"
 
 
 export const ResultsPage = () => {
@@ -16,7 +17,8 @@ export const ResultsPage = () => {
     const [includedIngredients, setIncludedIngredients] = useState([]);
     const [resultsLoaded, setResultsLoaded] = useState(12);
     const [showGreeting, setShowGreeting] = useState(true);
-    const [ingredientList, setIngredientList] = useState(["tomato", "Cheese", "Avocado", "pasta", "Pork", "Chicken", "Beef", "Eggs", "Tuna", "Beans", "Rice", "Mushrooms"])
+    const [ingredientList, setIngredientList] = useState(["tomato", "Cheese", "Avocado", "pasta", "Pork", "Chicken", "Beef", "Eggs", "Tuna", "Beans", "Rice", "Mushrooms"]);
+    const [loading, setLoading] = useState(false);
 
 
 
@@ -182,7 +184,7 @@ export const ResultsPage = () => {
 
                     {store.filteredRecipes.length > 0 && (
                         <>
-                            <ul className="container row justify-content-center" style={{ listStyleType: "none" }}>
+                            <ul className="container row justify-content-center">
                                 {store.filteredRecipes.slice(0, resultsLoaded).map((p, index) => (
                                     <RecipeCard
                                         key={index}
@@ -192,6 +194,7 @@ export const ResultsPage = () => {
                                         servings={p.servings}
                                         diets={p.diets}
                                         readyInMinutes={p.readyInMinutes}
+                                        id={p.id}
                                         className="col-4"
                                     />
                                 ))}

@@ -8,8 +8,8 @@ export const SimilarRecipes = (props) => {
 
     const { store, actions } = useContext(Context);
 
-    useEffect( () => {
-        
+    useEffect(() => {
+
     }, [store.similarRecipesInfo])
 
     return (
@@ -18,7 +18,7 @@ export const SimilarRecipes = (props) => {
             {
                 store.similarRecipesInfo ?
                     store.similarRecipesInfo.map((recipe, index) => {
-                        return(
+                        return (
                             <RecipeCard
                                 key={index}
                                 title={recipe.title}
@@ -27,8 +27,10 @@ export const SimilarRecipes = (props) => {
                                 servings={recipe.servings}
                                 diets={recipe.diets}
                                 readyInMinutes={recipe.readyInMinutes}
+                                id={recipe.id}
+
                             />
-                        )   
+                        )
                     })
                     :
                     console.log("NOTHING")
