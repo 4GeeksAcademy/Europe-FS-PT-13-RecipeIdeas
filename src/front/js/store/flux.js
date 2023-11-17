@@ -1,3 +1,4 @@
+import { store } from "fontawesome";
 import { number } from "prop-types";
 
 const getState = ({ getStore, getActions, setStore }) => {
@@ -27,7 +28,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		actions: {
 
-
 			refreshStore: () => {
 				if (!getStore().token) {
 					const token = sessionStorage.getItem("token");
@@ -44,8 +44,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logout: () => {
 				sessionStorage.removeItem("token");
 				sessionStorage.removeItem("user");
-				console.log("Log out");
-				setStore({ token: null });
+				setStore(
+					{
+						token: null,
+						userDetails: {
+							name: "",
+							firstName: "",
+							lastName: "",
+							username: null,
+			
+							email: null,
+							linkedIn: null,
+							github: null,
+			
+							avatar: null,
+						},
+					}
+				);
 			},
 
 
@@ -77,7 +92,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return true
 					})
 					.catch(error => {
-						console.log("There was an error", error)
+						console.log("There was an error during login: ", error)
 						return false
 					})
 			},
@@ -141,9 +156,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			getuserDetails: async () => {
-				// Get logged user id and call API to get further info.TODO: PASS TOKEN TO API.
+				// Get logged user id and call API to get further info.
 				try {
-					const resp = await fetch(`${process.env.BACKEND_URL}api/get_user`)
+					const resp = await fetch(`${process.env.BACKEND_URL}api/get_user`,
+						{
+							method: "GET",
+							headers: {
+								"Content-Type": "application/json",
+								"Authorization": "Bearer " + getStore().token
+							}
+						}
+					)
 					const data = await resp.json()
 					const userData = await data.user
 					setStore({
@@ -160,7 +183,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			//TODO: PASS TOKEN TO API.
 			setUserDetails: async (userDetails) => {
 				// PUT request to user's database.
 				try {
@@ -169,6 +191,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							method: "PUT",
 							headers: {
 								"Content-Type": "application/json",
+								"Authorization": "Bearer " + getStore().token
 							},
 
 							body: JSON.stringify(userDetails)
@@ -183,7 +206,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			// TODO: PASS TOKEN TO API.
+
 			setProfilePicture: async (url) => {
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}api/upload_avatar`,
@@ -191,6 +214,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							method: "PUT",
 							headers: {
 								"Content-Type": "application/json",
+								"Authorization": "Bearer " + getStore().token
 							},
 
 							body: JSON.stringify({ image_url: url })

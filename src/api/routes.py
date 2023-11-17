@@ -60,9 +60,11 @@ def create_token():
 
 
 @api.route('/update_user/', methods=['PUT'])
+@jwt_required()
 def update_user():
 
-    current_user = User.query.filter_by(email="test1@gmail.com").first()
+    current_user_email = get_jwt_identity()
+    current_user = User.query.filter_by(email=current_user_email).first()
 
     current_user.email = request.json.get('email')
     current_user.avatar = request.json.get('avatar')
@@ -83,10 +85,11 @@ def update_user():
 
 
 @api.route('/get_user/', methods=['GET'])
-@jwt_required
+@jwt_required()
 def get_user():
-    current_user = User.query.filter_by(email="test1@gmail.com").first()
-    print(current_user)
+
+    current_user_email = get_jwt_identity()
+    current_user = User.query.filter_by(email=current_user_email).first()
 
     response_body = {
         "user": current_user.serialize()
@@ -95,10 +98,13 @@ def get_user():
     return jsonify(response_body), 200
 
 
+
 @api.route('/upload_avatar/', methods=['PUT'])
+@jwt_required()
 def upload_avatar():
 
-    current_user = User.query.filter_by(email="test1@gmail.com").first()
+    current_user_email = get_jwt_identity()
+    current_user = User.query.filter_by(email=current_user_email).first()
 
     image_url = request.json.get('image_url', None) # Get request body.
 
