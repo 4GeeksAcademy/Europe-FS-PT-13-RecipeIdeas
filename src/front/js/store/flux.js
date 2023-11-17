@@ -32,6 +32,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (!getStore().token) {
 					const token = sessionStorage.getItem("token");
 					const user = sessionStorage.getItem("user");
+
 					if (token) {
 						setStore({ token: token });
 						setStore({ user: user });
@@ -39,12 +40,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+
 			logout: () => {
 				sessionStorage.removeItem("token");
+				sessionStorage.removeItem("user");
 				console.log("Log out");
 				setStore({ token: null });
-
 			},
+
 
 			login: async (email, password) => {
 				const opts = {
@@ -79,7 +82,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 			},
 
-			signup: (name, email, password) => {
+
+			signup: async (name, email, password) => {
 				const opts = {
 					method: "POST",
 					headers:{ 
@@ -96,19 +100,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			  
 				return fetch(process.env.BACKEND_URL + "api/signup", opts)
-				.then(resp =>{
-				  if(resp.status === 200) return resp.json();
-				  else return false;
-					})
-					.then(data => {
-						console.log("sign up successful", data)
-						return true;
-					})
-					.catch(error => {
-						console.log("There was an error", error)
-						return false;
-					})
+				.then(resp => {
+					if(resp.status === 200) return resp.json();
+				  	else { return false; }
+				})
+				.then(data => {
+					console.log("sign up successful", data)
+					return true;
+				})
+				.catch(error => {
+					console.log("There was an error", error)
+					return false;
+				})
 			},
+
       
 			getMessage: () => {
 				const store = getStore();
@@ -123,8 +128,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ message: data.message }))
 					// don't forget to return something, that is how the async resolves
 					.catch(error => console.log("Error loading message from backend", error));
-
 			},
+
 
 			// totalRecipePrice, dietDisplay, setRecipe, this were the arguments inside the func below
 			getRandomRecipe: () => {
@@ -152,7 +157,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			getuserDetails: async () => {
-				// Get logged user id and call API to get further info.
+				// Get logged user id and call API to get further info.TODO: PASS TOKEN TO API.
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}api/get_user`)
 					const data = await resp.json()
@@ -171,6 +176,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			//TODO: PASS TOKEN TO API.
 			setUserDetails: async (userDetails) => {
 				// PUT request to user's database.
 				try {
@@ -193,6 +199,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			// TODO: PASS TOKEN TO API.
 			setProfilePicture: async (url) => {
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}api/upload_avatar`,
@@ -214,6 +221,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+
 			getRecipeSummary: async (recipe_id) => {
 				// Get recipe's Title and "About"
 				try {
@@ -233,6 +241,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error('There was a problem with "getRecipeSummary": ', error);
 				};
 			},
+
 
 			getRecipeInformation: async (recipe_id) => {
 				// Get recipe's Title and "About"
@@ -254,6 +263,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 			},
 
+
 			getRecipeInstructions: async (recipe_id) => {
 				// Get recipe's step-by-step instructions.
 				try {
@@ -273,6 +283,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error('There was a problem with "getRecipeInstructions": ', error);
 				};
 			},
+
 
 			getSimilarRecipes: async (recipe_id) => {
 				// Get recipe's step-by-step instructions.

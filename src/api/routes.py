@@ -58,9 +58,9 @@ def create_token():
     }
     return jsonify(response_body)
 
+
 @api.route('/update_user/', methods=['PUT'])
 def update_user():
-
 
     current_user = User.query.filter_by(email="test1@gmail.com").first()
 
@@ -92,6 +92,7 @@ def get_user():
     }
 
     return jsonify(response_body), 200
+
 
 @api.route('/upload_avatar/', methods=['PUT'])
 def upload_avatar():
@@ -125,18 +126,6 @@ def upload_avatar():
     }
 
     return jsonify(response_body), 200
-
-@api.route("/token", methods=["GET"])
-@jwt_required()
-def get_hello():
-
-    email = get_jwt_identity()
-
-    dictionary = {
-        "message": "hello" + email
-    }
-
-    return jsonify(dictionary)
 
 
 @api.route("/signup", methods=["POST"])
