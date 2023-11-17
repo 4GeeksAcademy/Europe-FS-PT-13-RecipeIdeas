@@ -83,6 +83,7 @@ def update_user():
 
 
 @api.route('/get_user/', methods=['GET'])
+@jwt_required
 def get_user():
     current_user = User.query.filter_by(email="test1@gmail.com").first()
     print(current_user)

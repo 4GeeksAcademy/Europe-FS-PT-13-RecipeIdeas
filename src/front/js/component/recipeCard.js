@@ -25,7 +25,6 @@ export const RecipeCard = (props) => {
 	const totalRecipePrice = () => {
 		let price = props.pricePerServing * props.servings;
 		price = Math.round(price / 100);
-		console.log(price);
 
 		if (price <= 5) {
 			setEuros("€")

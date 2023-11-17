@@ -114,22 +114,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 			},
 
-      
-			getMessage: () => {
-				const store = getStore();
-				const opts = {
-					headers: {
-						"Authorization": "Bearer" + store.token
-					}
-				};
-				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "api/hello", opts)
-					.then(resp => resp.json())
-					.then(data => setStore({ message: data.message }))
-					// don't forget to return something, that is how the async resolves
-					.catch(error => console.log("Error loading message from backend", error));
-			},
-
 
 			// totalRecipePrice, dietDisplay, setRecipe, this were the arguments inside the func below
 			getRandomRecipe: () => {
