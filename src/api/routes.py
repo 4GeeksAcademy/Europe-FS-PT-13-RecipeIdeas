@@ -164,9 +164,9 @@ def add_favourite():
 
     if not recipe:
 
-        recipe_title = request.json.get('recipe_title')
-        recipe_servings = request.json.get('recipe_servings')
-        recipe_prep_time = request.json.get('recipe_prep_time')
+        recipe_title = request.json.get('recipeTitle')
+        recipe_servings = request.json.get('recipeServings')
+        recipe_prep_time = request.json.get('recipePrepTime')
         recipe_cost = request.json.get('recipe_cost')
         recipe_diet = request.json.get('recipe_diet')
 
@@ -195,7 +195,7 @@ def delete_favourite():
 
     current_user_email = get_jwt_identity()
     current_user = User.query.filter_by(email=current_user_email).first()
-    recipe_id = request.json.get('recipe_id')
+    recipe_id = request.json.get('recipeId')
 
     favourite = FavouriteRecipes.query.filter_by(recipe_external_id=recipe_id).filter_by(user_id=current_user.id).first()
     if favourite:

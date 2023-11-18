@@ -230,10 +230,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
-			getRecipeSummary: async (recipe_id) => {
+			getRecipeSummary: async (recipeId) => {
 				// Get recipe's Title and "About"
 				try {
-					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/summary`, {
+					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeId}/summary`, {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
@@ -251,10 +251,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
-			getRecipeInformation: async (recipe_id) => {
+			getRecipeInformation: async (recipeId) => {
 				// Get recipe's Title and "About"
 				try {
-					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/information`, {
+					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeId}/information`, {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
@@ -272,10 +272,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
-			getRecipeInstructions: async (recipe_id) => {
+			getRecipeInstructions: async (recipeId) => {
 				// Get recipe's step-by-step instructions.
 				try {
-					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/analyzedInstructions`, {
+					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeId}/analyzedInstructions`, {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
@@ -293,10 +293,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
-			getSimilarRecipes: async (recipe_id) => {
+			getSimilarRecipes: async (recipeId) => {
 				// Get recipe's step-by-step instructions.
 				try {
-					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/similar`, {
+					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeId}/similar`, {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
@@ -341,7 +341,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			addFavourite: async (recipe_details) => {
+			addFavourite: async (recipeDetails) => {
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}api/add_favourite`, {
 						method: 'POST',
@@ -352,12 +352,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 						body: JSON.stringify(
 							{
-								recipe_id: recipe_details.id,
-								recipe_title: recipe_details.title,
-								recipe_servings: recipe_details.servings,
-								recipe_prep_time: recipe_details.prep_time,
-								recipe_cost: recipe_details.cost,
-								recipe_diet: recipe_details.diet,
+								recipeId: recipeDetails.id,
+								recipeTitle: recipeDetails.title,
+								recipeServings: recipeDetails.servings,
+
+								recipePrepTime: recipeDetails.prep_time,
+								recipeCost: recipeDetails.cost,
+								recipeCiet: recipeDetails.diet,
 							}
 						)
 					})
@@ -372,7 +373,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			removeFavourite: async (recipe_details) => {
+			removeFavourite: async (recipeDetails) => {
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}api/delete_favourite`, {
 						method: 'POST',
@@ -383,7 +384,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 						body: JSON.stringify(
 							{
-								recipe_id: recipe_details.id
+								recipeId: recipeDetails.id
 							}
 						)
 					})
