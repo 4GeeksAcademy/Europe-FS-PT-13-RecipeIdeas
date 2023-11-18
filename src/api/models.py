@@ -19,7 +19,7 @@ class User(db.Model):
     recipe = db.relationship('Recipe', lazy='subquery', secondary="favourite_recipes")
 
     def __repr__(self):
-        return f'<User email: {self.email} | User id: {self.id}>'
+        return f'<User id: {self.id} | User email: {self.email}>'
 
     def serialize(self):
         return {
@@ -68,11 +68,11 @@ class FavouriteRecipes(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     recipe_external_id = db.Column(db.Integer, db.ForeignKey('recipe.external_id'))
 
-    user = db.relationship('User', lazy='subquery', backref=db.backref("favourite_recipes", cascade="all, delete-orphan"))
-    recipe = db.relationship('Recipe', lazy='subquery', backref=db.backref("favourite_recipes", cascade="all, delete-orphan"))
+    user = db.relationship(User, lazy='subquery', backref=db.backref("favourite_recipes", cascade="all, delete-orphan"))
+    recipe = db.relationship(Recipe, lazy='subquery', backref=db.backref("favourite_recipes", cascade="all, delete-orphan"))
 
     def __repr__(self):
-        return f'<User id: {self.user} has Recipe id: {self.recipe_external_id} as a favourite.>'
+        return f"FavouriteRecipe(user_id={self.user_id}, recipe_external_id_id={self.recipe_external_id})"
 
     def serialize(self):
         return {

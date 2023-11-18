@@ -159,13 +159,10 @@ def add_favourite():
     current_user_email = get_jwt_identity()
     current_user = User.query.filter_by(email=current_user_email).first()
 
-    user_id = current_user.id
     recipe_id = request.json.get('recipe_id')
+    recipe = Recipe.query.filter_by(external_id=recipe_id).first()
 
-    recipe_in_db = FavouriteRecipes.query.filter_by(recipe_external_id=recipe_id).first()
-    print(recipe_in_db)
-
-    if not recipe_in_db:
+    if not recipe:
 
         recipe_title = request.json.get('recipe_title')
         recipe_servings = request.json.get('recipe_servings')
@@ -173,21 +170,37 @@ def add_favourite():
         recipe_cost = request.json.get('recipe_cost')
         recipe_diet = request.json.get('recipe_diet')
 
-        recipe_in_db = FavouriteRecipes(recipe_external_id=recipe_id, recipe_title=recipe_title, 
-                                     recipe_servings=recipe_servings, recipe_prep_time=recipe_prep_time,
-                                     recipe_cost=recipe_cost, recipe_diet=recipe_diet
+        recipe = Recipe(external_id=recipe_id, recipe_title=recipe_title, 
+                        recipe_servings=recipe_servings, recipe_prep_time=recipe_prep_time,
+                        recipe_cost=recipe_cost, recipe_diet=recipe_diet
         )
 
-        db.session.add(recipe_in_db)
+        db.session.add(recipe)
         db.session.commit()
     
-    print(current_user.favourite_recipes)
-    user_favs = current_user.favourite_recipes
-    print("USER FAVS", user_favs)
+    
+    user_favourites = FavouriteRecipes.query.filter_by(user_id=current_user.id, recipe_external_id=recipe.external_id).first()
+    if not user_favourites:
+        db.session.add(FavouriteRecipes(user_id=current_user.id, recipe_external_id=recipe.external_id))
+        db.session.commit()
+        return jsonify({ "message": f"'Recipe {recipe_id}' as been successfully added to '{current_user}'" }), 200
 
-    if not user_favs:
-        user_favs.append(recipe_in_db)
-        return jsonify({ "message": f"Recipe {recipe_id} as been successfully added to '{current_user}'" }), 200
+
+    return jsonify({ "message": f"'Recipe {recipe_id}' was already in '{current_user}' favourites" }), 200
 
 
-    return jsonify({ "message": f"Recipe {recipe_id} was already in '{current_user}' favourites" }), 200
+@api.route('/delete_favourite/', methods=['DELETE'])
+@jwt_required()
+def delete_favourite():
+
+    current_user_email = get_jwt_identity()
+    current_user = User.query.filter_by(email=current_user_email).first()
+    recipe_id = request.json.get('recipe_id')
+
+    favourite = FavouriteRecipes.query.filter_by(recipe_external_id=recipe_id).filter_by(user_id=current_user.id).first()
+    if favourite:
+        db.session.delete(favourite)
+        db.session.commit()
+        return jsonify({"message": f"'Recipe {favourite.recipe.external_id}' deleted from 'User '{favourite.user.id}' favourites."}), 200
+    
+    return jsonify({"message": f"Nothing to delete: 'Recipe {recipe_id}' is not in user 'User {current_user.id}' favourites."}), 200
