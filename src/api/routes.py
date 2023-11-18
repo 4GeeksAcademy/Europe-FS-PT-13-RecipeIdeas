@@ -204,3 +204,17 @@ def delete_favourite():
         return jsonify({"message": f"'Recipe {favourite.recipe.external_id}' deleted from 'User '{favourite.user.id}' favourites."}), 200
     
     return jsonify({"message": f"Nothing to delete: 'Recipe {recipe_id}' is not in user 'User {current_user.id}' favourites."}), 200
+
+
+@api.route('/get_favourites/', methods=['GET'])
+@jwt_required()
+def get_user_favourites():
+    
+    current_user_email = get_jwt_identity()
+    current_user = User.query.filter_by(email=current_user_email).first()
+
+    favourite_recipes = current_user.recipe
+    favourite_recipes = [fav_recipe.serialize() for fav_recipe in favourite_recipes]
+
+
+    return jsonify({ "favourite_recipes": favourite_recipes }), 200

@@ -105,7 +105,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             			"Content-Type": "application/json"
 				  	},
 
-					body:JSON.stringify(
+					body: JSON.stringify(
 						{
 						"name" : name,
 						"email": email,
@@ -319,6 +319,82 @@ const getState = ({ getStore, getActions, setStore }) => {
 				catch(error) {
 					console.error('There was a problem with "getSimilarRecipe": ', error);
 				};
+			},
+
+			getFavourites: async () => {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}api/get_favourites`, {
+						method: 'POST',
+						headers: {
+							"Content-Type": "application/json",
+							"Authorization": "Bearer " + getStore().token
+						},
+					})
+
+					const favourite_recipes = await resp.favourite_recipes
+					console.log(favourite_recipes)
+					return favourite_recipes
+
+				}
+				catch(error) {
+					console.error('There was a problem with adding a favourite recipe: ', error);
+				}
+			},
+
+			addFavourite: async (recipe_details) => {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}api/add_favourite`, {
+						method: 'POST',
+						headers: {
+							"Content-Type": "application/json",
+							"Authorization": "Bearer " + getStore().token
+						},
+
+						body: JSON.stringify(
+							{
+								recipe_id: recipe_details.id,
+								recipe_title: recipe_details.title,
+								recipe_servings: recipe_details.servings,
+								recipe_prep_time: recipe_details.prep_time,
+								recipe_cost: recipe_details.cost,
+								recipe_diet: recipe_details.diet,
+							}
+						)
+					})
+
+					const message = await resp.message
+					alert(message)
+					return message
+
+				}
+				catch(error) {
+					console.error('There was a problem with adding a favourite recipe: ', error);
+				}
+			},
+
+			removeFavourite: async (recipe_details) => {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}api/delete_favourite`, {
+						method: 'POST',
+						headers: {
+							"Content-Type": "application/json",
+							"Authorization": "Bearer " + getStore().token
+						},
+
+						body: JSON.stringify(
+							{
+								recipe_id: recipe_details.id
+							}
+						)
+					})
+
+					const message = await resp.message
+					alert(message)
+					return message
+				}
+				catch(error) {
+					console.error('There was a problem with removing a favourite recipe: ', error);
+				}
 			},
 		}
 	};
