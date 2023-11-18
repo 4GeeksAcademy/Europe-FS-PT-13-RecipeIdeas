@@ -19,7 +19,7 @@ export const Navbar = () => {
 	}
 
 	return (
-		<nav className="navbar navbar-expand-lg d-flex container-fluid d-flex justify-content-between py-2">
+		<nav className="navbar navbar-expand-sm d-flex container-fluid d-flex justify-content-between py-2">
 			<div className="justify-content-between">
 				<a className="navbar-brand" href="#">
 					<Link to="/">
