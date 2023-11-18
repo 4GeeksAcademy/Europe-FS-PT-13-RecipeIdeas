@@ -4,7 +4,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 import os
 import json
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Recipe, FavouriteRecipes
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -29,6 +29,23 @@ cloudinary.config(
     api_secret = API_SECRET,
     secure = True
 )
+
+@api.route("/signup", methods=["POST"])
+def create_signup():
+    name = request.json.get("name", None)
+    email = request.json.get("email", None)
+
+    password = request.json.get("password", None)
+    m = hashlib.sha256()
+    m.update(bytes(password, 'utf-8'))
+    passwordhash = m.hexdigest()
+
+    user = User(name=name, email=email, password=passwordhash)
+
+    db.session.add(user)
+    db.session.commit()
+
+    return jsonify(user.serialize())
 
 
 # Create a route to authenticate your users and return JWTs. The
@@ -59,6 +76,20 @@ def create_token():
     return jsonify(response_body)
 
 
+@api.route('/get_user/', methods=['GET'])
+@jwt_required()
+def get_user():
+
+    current_user_email = get_jwt_identity()
+    current_user = User.query.filter_by(email=current_user_email).first()
+
+    response_body = {
+        "user": current_user.serialize()
+    }
+
+    return jsonify(response_body), 200
+
+
 @api.route('/update_user/', methods=['PUT'])
 @jwt_required()
 def update_user():
@@ -79,20 +110,6 @@ def update_user():
     
     response_body = {
         "message": f"Users' {current_user.email} details have been changed: {current_user}",
-    }
-
-    return jsonify(response_body), 200
-
-
-@api.route('/get_user/', methods=['GET'])
-@jwt_required()
-def get_user():
-
-    current_user_email = get_jwt_identity()
-    current_user = User.query.filter_by(email=current_user_email).first()
-
-    response_body = {
-        "user": current_user.serialize()
     }
 
     return jsonify(response_body), 200
@@ -135,19 +152,42 @@ def upload_avatar():
     return jsonify(response_body), 200
 
 
-@api.route("/signup", methods=["POST"])
-def create_signup():
-    name = request.json.get("name", None)
-    email = request.json.get("email", None)
+@api.route('/add_favourite/', methods=['POST'])
+@jwt_required()
+def add_favourite():
 
-    password = request.json.get("password", None)
-    m = hashlib.sha256()
-    m.update(bytes(password, 'utf-8'))
-    passwordhash = m.hexdigest()
+    current_user_email = get_jwt_identity()
+    current_user = User.query.filter_by(email=current_user_email).first()
 
-    user = User(name=name, email=email, password=passwordhash)
+    user_id = current_user.id
+    recipe_id = request.json.get('recipe_id')
 
-    db.session.add(user)
-    db.session.commit()
+    recipe_in_db = FavouriteRecipes.query.filter_by(recipe_external_id=recipe_id).first()
+    print(recipe_in_db)
 
-    return jsonify(user.serialize())
+    if not recipe_in_db:
+
+        recipe_title = request.json.get('recipe_title')
+        recipe_servings = request.json.get('recipe_servings')
+        recipe_prep_time = request.json.get('recipe_prep_time')
+        recipe_cost = request.json.get('recipe_cost')
+        recipe_diet = request.json.get('recipe_diet')
+
+        recipe_in_db = FavouriteRecipes(recipe_external_id=recipe_id, recipe_title=recipe_title, 
+                                     recipe_servings=recipe_servings, recipe_prep_time=recipe_prep_time,
+                                     recipe_cost=recipe_cost, recipe_diet=recipe_diet
+        )
+
+        db.session.add(recipe_in_db)
+        db.session.commit()
+    
+    print(current_user.favourite_recipes)
+    user_favs = current_user.favourite_recipes
+    print("USER FAVS", user_favs)
+
+    if not user_favs:
+        user_favs.append(recipe_in_db)
+        return jsonify({ "message": f"Recipe {recipe_id} as been successfully added to '{current_user}'" }), 200
+
+
+    return jsonify({ "message": f"Recipe {recipe_id} was already in '{current_user}' favourites" }), 200
