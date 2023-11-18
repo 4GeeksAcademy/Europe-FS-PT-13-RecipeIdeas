@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: null,
 			user: null,
 			message: null,
-      
+
 			randomRecipes: [],
 			similarRecipesInfo: [],
 
@@ -29,24 +29,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			refreshStore: () => {
-				if (!getStore().token) {
+				const store = getStore()
+				if (!store.token) {
 					const token = sessionStorage.getItem("token");
 					const user = sessionStorage.getItem("user");
 					if (token) {
-						setStore({ token: token });
-						setStore({ user: user });
+						setStore({ ...store, user: user, token: token });
 					}
 				}
 			},
 
 			logout: () => {
+				const store = getStore()
 				sessionStorage.removeItem("token");
 				console.log("Log out");
-				setStore({ token: null });
+				setStore({...store, token: null });
 
 			},
 
 			login: async (email, password) => {
+				const store = getStore()
 				const opts = {
 					method: "POST",
 					headers: {
@@ -68,9 +70,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						console.log("this came from the backend", data)
 						sessionStorage.setItem("token", data.access_token);
-						setStore({ token: data.access_token })
-						sessionStorage.setItem("user", data.user);
-						setStore({ user: data.user })
+						sessionStorage.setItem("user", JSON.stringify(data.user));
+						setStore({ ...store, token: data.access_token, user: data.user })
 						return true
 					})
 					.catch(error => {
@@ -82,21 +83,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 			signup: (name, email, password) => {
 				const opts = {
 					method: "POST",
-					headers:{ 
-            "Content-Type": "application/json"
-				  },
-					body:JSON.stringify(
-					{
-					  "name" : name,
-					  "email": email,
-					  "password": password
-					 })
-				  }
-			  
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(
+						{
+							"name": name,
+							"email": email,
+							"password": password
+						})
+				}
+
 				return fetch(process.env.BACKEND_URL + "api/signup", opts)
-				.then(resp =>{
-				  if(resp.status === 200) return resp.json();
-				  else return false;
+					.then(resp => {
+						if (resp.status === 200) return resp.json();
+						else return false;
 					})
 					.then(data => {
 						console.log("sign up successful", data)
@@ -107,22 +108,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return false;
 					})
 			},
-      
-			getMessage: () => {
-				const store = getStore();
-				const opts = {
-					headers: {
-						"Authorization": "Bearer" + store.token
-					}
-				};
-				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "api/hello", opts)
-					.then(resp => resp.json())
-					.then(data => setStore({ message: data.message }))
-					// don't forget to return something, that is how the async resolves
-					.catch(error => console.log("Error loading message from backend", error));
 
-			},
+
 
 			// totalRecipePrice, dietDisplay, setRecipe, this were the arguments inside the func below
 			getRandomRecipe: () => {
@@ -141,7 +128,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response;
 					})
 					.then((data) => {
-						setStore({ randomRecipes: data["recipes"] });
+						setStore({ ...store, randomRecipes: data["recipes"] });
 					})
 					.catch((error) => {
 						console.error('There was a problem with the fetch operation:', error);
@@ -152,10 +139,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getuserDetails: async () => {
 				// Get logged user id and call API to get further info.
 				try {
-					const resp = await fetch(`${process.env.BACKEND_URL}api/get_user`)
+					const resp = await fetch(`${process.env.BACKEND_URL}api/get_user/${getStore().user.email}`)
 					const data = await resp.json()
 					const userData = await data.user
+					const store = getStore()
 					setStore({
+						...store,
 						userDetails: {
 							...getStore()['userDetails'], "email": userData['email'], "avatar": userData['avatar'], "username": userData['username'],
 							"name": userData['name'], "firstName": userData['firstName'], "lastName": userData['lastName'],
@@ -172,6 +161,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			setUserDetails: async (userDetails) => {
 				// PUT request to user's database.
 				try {
+					const store = getStore()
 					const resp = await fetch(`${process.env.BACKEND_URL}api/update_user`,
 						{
 							method: "PUT",
@@ -184,7 +174,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					);
 
 					const resp_json = await resp.json()
-					setStore({ userDetails: userDetails })
+					setStore({ ...store, userDetails: userDetails })
 				}
 				catch (error) {
 					console.log("Error updating user's information.", error)
@@ -205,7 +195,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					)
 					const resp_json = await resp.json()
 					const newAvatar = await resp_json['avatar']
-					setStore({ userDetails: { ...getStore()['userDetails'], "avatar": newAvatar } })
+					const store = getStore()
+					setStore({
+						...store,
+						userDetails: { ...getStore()['userDetails'], "avatar": newAvatar }
+					})
 				}
 				catch (error) {
 					console.log("Error setting user's profile picture.", error)
@@ -224,10 +218,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 					})
 
-					const data =  await resp.json();
+					const data = await resp.json();
 					return data
 				}
-				catch(error) {
+				catch (error) {
 					console.error('There was a problem with "getRecipeSummary": ', error);
 				};
 			},
@@ -244,10 +238,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 					})
 
-					const data =  await resp.json();
+					const data = await resp.json();
 					return data
 				}
-				catch(error) {
+				catch (error) {
 					console.error('There was a problem with "getRecipeInstructions": ', error);
 				};
 			},
@@ -264,10 +258,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 					})
 
-					const data =  await resp.json();
+					const data = await resp.json();
 					return data
 				}
-				catch(error) {
+				catch (error) {
 					console.error('There was a problem with "getRecipeInstructions": ', error);
 				};
 			},
@@ -284,18 +278,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 					})
 
-					const data =  await resp.json();
-					const shuffledRecipes = data.sort( () => Math.random()-0.5 ).slice(0,3) // Randomize array.
+					const data = await resp.json();
+					const shuffledRecipes = data.sort(() => Math.random() - 0.5).slice(0, 3) // Randomize array.
 
-					const recipesInfo = await Promise.all(shuffledRecipes.map( async (recipe, index) => {
+					const recipesInfo = await Promise.all(shuffledRecipes.map(async (recipe, index) => {
 						const dishInfo = await getActions().getRecipeInformation(recipe.id)
 						return dishInfo
 					}))
-					
-					setStore( { similarRecipesInfo: recipesInfo } )
+					const store = getStore()
+					setStore({
+						...store,
+						similarRecipesInfo: recipesInfo
+					})
 					return recipesInfo
 				}
-				catch(error) {
+				catch (error) {
 					console.error('There was a problem with "getSimilarRecipe": ', error);
 				};
 			},

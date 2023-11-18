@@ -53,11 +53,11 @@ def create_token():
     }
     return jsonify(response_body)
 
-@api.route('/update_user/', methods=['PUT'])
-def update_user():
+@api.route('/update_user/<email>', methods=['PUT'])
+def update_user(email):
 
 
-    current_user = User.query.filter_by(email="test1@gmail.com").first()
+    current_user = User.query.filter_by(email= email).first()
     current_user.email = request.json.get('email')
     current_user.avatar = request.json.get('avatar')
     current_user.firstName = request.json.get('firstName')
@@ -76,9 +76,9 @@ def update_user():
     return jsonify(response_body), 200
 
 
-@api.route('/get_user/', methods=['GET'])
-def get_user():
-    current_user = User.query.filter_by(email="test1@gmail.com").first()
+@api.route('/get_user/<email>', methods=['GET'])
+def get_user(email):
+    current_user = User.query.filter_by(email=email).first()
     print(current_user)
 
     response_body = {
@@ -87,10 +87,10 @@ def get_user():
 
     return jsonify(response_body), 200
 
-@api.route('/upload_avatar/', methods=['PUT'])
-def upload_avatar():
+@api.route('/upload_avatar/<email>', methods=['PUT'])
+def upload_avatar(email):
 
-    current_user = User.query.filter_by(email="test1@gmail.com").first()
+    current_user = User.query.filter_by(email = email).first()
 
     image_url = request.json.get('image_url', None) # Get request body.
 
@@ -120,17 +120,6 @@ def upload_avatar():
 
     return jsonify(response_body), 200
 
-@api.route("/token", methods=["GET"])
-@jwt_required()
-def get_hello():
-
-    email = get_jwt_identity()
-
-    dictionary = {
-        "message": "hello" + email
-    }
-
-    return jsonify(dictionary)
 
 
 @api.route("/signup", methods=["POST"])

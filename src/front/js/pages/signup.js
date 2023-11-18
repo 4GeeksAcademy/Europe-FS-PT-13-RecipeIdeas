@@ -3,6 +3,7 @@ import { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 export const Signup = () => {
   const { store, actions } = useContext(Context);
@@ -23,7 +24,7 @@ export const Signup = () => {
       if (result === true) {
         navigate("/login")
       }
-      else alert("Please try again")
+      else alert("Email already in use")
 
     })
 
@@ -79,7 +80,9 @@ export const Signup = () => {
         <div>
           <button type="submit"className="save-info btn btn-primary p-2 mt-3 mx-2">Sign Up</button>
         </div>
+        <p>Already have an account? Please <Link to="/login">Login</Link>!</p>
       </form>
+      
     </div>
   );
 };
