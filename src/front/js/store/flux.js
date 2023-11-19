@@ -10,6 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       
 			randomRecipes: [],
 			similarRecipesInfo: [],
+			favouriteRecipes: [],
 
 			userDetails: {
 				name: "",
@@ -331,10 +332,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 					})
 
-					const favourite_recipes = await resp.favourite_recipes
-					console.log(favourite_recipes)
+					const data = await resp.json()
+					setStore({ favouriteRecipes: data.favourite_recipes })
 					return favourite_recipes
-
 				}
 				catch(error) {
 					console.error('There was a problem with adding a favourite recipe: ', error);
@@ -355,15 +355,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 								recipeId: recipeDetails.id,
 								recipeTitle: recipeDetails.title,
 								recipeServings: recipeDetails.servings,
-
-								recipePrepTime: recipeDetails.prep_time,
+								recipePrepTime: recipeDetails.prepTime,
 								recipeCost: recipeDetails.cost,
 								recipeCiet: recipeDetails.diet,
 							}
 						)
 					})
 
-					const message = await resp.message
+					const message = await resp.json().message
 					alert(message)
 					return message
 
@@ -389,7 +388,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						)
 					})
 
-					const message = await resp.message
+					const message = await resp.json()
 					alert(message)
 					return message
 				}
