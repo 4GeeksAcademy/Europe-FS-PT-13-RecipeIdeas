@@ -63,7 +63,7 @@ export const Profile = () => {
 
                     <div className="user-info col-sm-12 col-md-8 d-flex flex-column justify-content-center">
                         <div className="wrapper mx-auto px-4 w-100">
-                            <h1 className="display-5">{`${store.userDetails.firstName} ${store.userDetails.lastName}`}</h1>
+                            <h1 className="display-5">{`${store.userDetails.firstName ? store.userDetails.firstName : ""} ${store.userDetails.lastName ? store.userDetails.lastName : ""}`}</h1>
                             <Form handleSubmit={handleSubmit} handleCancel={handleCancel} handleEditInfo={handleEditInfo} editDetails={editDetails} />
                         </div>
                     </div>
