@@ -159,7 +159,7 @@ def add_favourite():
     current_user_email = get_jwt_identity()
     current_user = User.query.filter_by(email=current_user_email).first()
 
-    recipe_id = request.json.get('recipe_id')
+    recipe_id = request.json.get('recipeId')
     recipe = Recipe.query.filter_by(external_id=recipe_id).first()
 
     if not recipe:
@@ -167,8 +167,8 @@ def add_favourite():
         recipe_title = request.json.get('recipeTitle')
         recipe_servings = request.json.get('recipeServings')
         recipe_prep_time = request.json.get('recipePrepTime')
-        recipe_cost = request.json.get('recipe_cost')
-        recipe_diet = request.json.get('recipe_diet')
+        recipe_cost = request.json.get('recipeCost')
+        recipe_diet = request.json.get('recipeDiet')
 
         recipe = Recipe(external_id=recipe_id, recipe_title=recipe_title, 
                         recipe_servings=recipe_servings, recipe_prep_time=recipe_prep_time,

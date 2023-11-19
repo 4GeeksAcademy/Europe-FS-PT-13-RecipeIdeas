@@ -357,15 +357,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 								recipeServings: recipeDetails.servings,
 								recipePrepTime: recipeDetails.prepTime,
 								recipeCost: recipeDetails.cost,
-								recipeCiet: recipeDetails.diet,
+								recipeDiet: recipeDetails.diet,
 							}
 						)
 					})
 
-					const message = await resp.json().message
-					alert(message)
-					return message
-
+					if (resp.ok) {
+						const data = await resp.json()
+						return data.message
+					}
+					
+					return resp.status
 				}
 				catch(error) {
 					console.error('There was a problem with adding a favourite recipe: ', error);
@@ -389,7 +391,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 
 					const message = await resp.json()
-					alert(message)
+					alert(message.message)
 					return message
 				}
 				catch(error) {
