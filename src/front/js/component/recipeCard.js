@@ -22,16 +22,12 @@ export const RecipeCard = (props) => {
 		}
 	};
 
-	const getFavRecipes = async () => {
-		if (store.token && store.token !== "") {
-			actions.getFavourites()
-		}
-	}
-
 
 	useEffect(() => {
+
 		setRecipeDetails({
 			id: props.id,
+			image: props.image,
 			title: props.title,
 			servings: props.servings,
 			prepTime: props.readyInMinutes,
@@ -39,7 +35,11 @@ export const RecipeCard = (props) => {
 			diet: dietDisplay(),
 		})
 
-	}, []);
+		setIsFavorite(store.favouriteRecipes.some(recipe => recipe.id === recipeDetails.id))
+		console.log(isFavorite)
+
+
+	}, [store.favouriteRecipes]);
 
 
 
@@ -86,7 +86,7 @@ export const RecipeCard = (props) => {
 
 				</div>
 
-				<img src={props.image} className="card-img-top" alt="Recipe Image" />
+				<img src={recipeDetails.image} className="card-img-top" alt="Recipe Image" />
 				<div className="row">
 					<div className="col-sm-3 col-md-3 col-lg-4">
 						<p className="mt-1 ms-2"><i className="fas fa-utensils fa-lg"></i> {recipeDetails.servings} servings</p>
@@ -127,7 +127,7 @@ export const RecipeCard = (props) => {
 										</Link>
 										
 										<Link to="/login">
-											<button type="button" className="btn btn-success">Login</button>
+											<button type="button" className="btn btn-success" data-bs-dismiss="modal">Login</button>
 										</Link>
 										
 									</div>

@@ -216,5 +216,4 @@ def get_user_favourites():
     favourite_recipes = current_user.recipe
     favourite_recipes = [fav_recipe.serialize() for fav_recipe in favourite_recipes]
 
-
     return jsonify({ "favourite_recipes": favourite_recipes }), 200

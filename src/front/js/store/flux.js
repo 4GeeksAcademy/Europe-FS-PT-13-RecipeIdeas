@@ -325,7 +325,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getFavourites: async () => {
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}api/get_favourites`, {
-						method: 'POST',
+						method: 'GET',
 						headers: {
 							"Content-Type": "application/json",
 							"Authorization": "Bearer " + getStore().token
@@ -333,11 +333,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 
 					const data = await resp.json()
-					setStore({ favouriteRecipes: data.favourite_recipes })
-					return favourite_recipes
+					setStore({ favouriteRecipes: await data.favourite_recipes })
+					return getStore().favouriteRecipes
 				}
 				catch(error) {
-					console.error('There was a problem with adding a favourite recipe: ', error);
+					console.error("There was a problem with getting the user's favourite recipe: ", error);
 				}
 			},
 
@@ -366,7 +366,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						const data = await resp.json()
 						return data.message
 					}
-					
+
 					return resp.status
 				}
 				catch(error) {
@@ -377,7 +377,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			removeFavourite: async (recipeDetails) => {
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}api/delete_favourite`, {
-						method: 'POST',
+						method: 'DELETE',
 						headers: {
 							"Content-Type": "application/json",
 							"Authorization": "Bearer " + getStore().token
@@ -390,9 +390,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						)
 					})
 
-					const message = await resp.json()
-					alert(message.message)
-					return message
+					if (resp.ok) {
+						const data = await resp.json()
+						return data.message
+					}
+
+					return resp.status
 				}
 				catch(error) {
 					console.error('There was a problem with removing a favourite recipe: ', error);
