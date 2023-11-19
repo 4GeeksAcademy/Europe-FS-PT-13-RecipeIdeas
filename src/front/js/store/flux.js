@@ -162,13 +162,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getComplexSearch: (cuisine, includedIngredients, diet, type, minCalories, maxCalories, preptime) => {
 				const store = getStore();
 				const actions = getActions();
-				console.log(cuisine)
-				console.log(includedIngredients)
-				console.log(diet)
-				console.log(type)
-				console.log(minCalories)
-				console.log(maxCalories)
-				console.log(preptime)
 				fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?number=100&${cuisine}&${includedIngredients}&${diet}&${type}&${minCalories}&${maxCalories}&${preptime}`, {
 					method: 'GET',
 					headers: {
@@ -230,8 +223,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error('There was a problem with the fetch operation:', error);
 				}
 				finally {
-					setStore({isLoading: false})
-			}},
+					setStore({isLoading: false})}
+			},
 
 
 			getuserDetails: async () => {
