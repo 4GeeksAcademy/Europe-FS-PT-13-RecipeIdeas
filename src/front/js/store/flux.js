@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: null,
 			user: null,
 			message: null,
-      
+
 			randomRecipes: [],
 
 			complexSearchResults: [],
@@ -14,6 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			filteredRecipes: [],
 
 			similarRecipesInfo: [],
+			isLoading: false,
 
 
 			userDetails: {
@@ -89,21 +90,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 			signup: (name, email, password) => {
 				const opts = {
 					method: "POST",
-					headers:{ 
-            "Content-Type": "application/json"
-				  },
-					body:JSON.stringify(
-					{
-					  "name" : name,
-					  "email": email,
-					  "password": password
-					 })
-				  }
-			  
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(
+						{
+							"name": name,
+							"email": email,
+							"password": password
+						})
+				}
+
 				return fetch(process.env.BACKEND_URL + "api/signup", opts)
-				.then(resp =>{
-				  if(resp.status === 200) return resp.json();
-				  else return false;
+					.then(resp => {
+						if (resp.status === 200) return resp.json();
+						else return false;
 					})
 					.then(data => {
 						console.log("sign up successful", data)
@@ -114,7 +115,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return false;
 					})
 			},
-      
+
 			getMessage: () => {
 				const store = getStore();
 				const opts = {
@@ -158,10 +159,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
-			getComplexSearch: (cuisine, diet, type, minCalories, maxCalories, preptime, includedIngredients) => {
+			getComplexSearch: (cuisine, includedIngredients, diet, type, minCalories, maxCalories, preptime) => {
 				const store = getStore();
-				const actions =getActions();
+				const actions = getActions();
 				console.log(cuisine)
+				console.log(includedIngredients)
+				console.log(diet)
+				console.log(type)
+				console.log(minCalories)
+				console.log(maxCalories)
+				console.log(preptime)
 				fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?number=100&${cuisine}&${includedIngredients}&${diet}&${type}&${minCalories}&${maxCalories}&${preptime}`, {
 					method: 'GET',
 					headers: {
@@ -186,7 +193,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log("complex search ids")
 						console.log(store.complexSearchIds)
 					})
-					.then(()=>{
+					.then(() => {
 						actions.getFilteredRecipes()
 					}
 
@@ -197,34 +204,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
-			getFilteredRecipes: () => {
+			getFilteredRecipes: async () => {
 				const store = getStore();
-				console.log("checking for ids in the store", store.complexSearchIds)
-				fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk?ids=${store.complexSearchIds}`, {
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-						'X-RapidAPI-Key': 'f4a6409e03msh2513ad740baf8b9p13e32fjsn5d20d8842c5f',
-						'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
-					},
-					body: JSON.stringify()
-				})
-					.then(async (data) => {
-						const response = await data.json();
-						return response;
-					})
-					.then((data) => {
-						setStore({filteredRecipes: data});
-						console.log("logging the recipe search data", data)
-						console.log("filtered recipes")
-						console.log(store.filteredRecipes)
+				try {
+					setStore({isLoading: true})
+					console.log("checking for ids in the store", store.complexSearchIds);
 
-
-					})
-					.catch((error) => {
-						console.error('There was a problem with the fetch operation:', error);
+					const response = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk?ids=${store.complexSearchIds}`, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							'X-RapidAPI-Key': 'f4a6409e03msh2513ad740baf8b9p13e32fjsn5d20d8842c5f',
+							'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
+						},
+						body: JSON.stringify()
 					});
-			},
+
+					const data = await response.json();
+
+					setStore({ filteredRecipes: data });
+					console.log("logging the recipe search data", data);
+					console.log("filtered recipes");
+					console.log(store.filteredRecipes);
+				} catch (error) {
+					console.error('There was a problem with the fetch operation:', error);
+				}
+				finally {
+					setStore({isLoading: false})
+			}},
 
 
 			getuserDetails: async () => {
@@ -302,10 +309,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 					})
 
-					const data =  await resp.json();
+					const data = await resp.json();
 					return data
 				}
-				catch(error) {
+				catch (error) {
 					console.error('There was a problem with "getRecipeSummary": ', error);
 				};
 			},
@@ -322,10 +329,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 					})
 
-					const data =  await resp.json();
+					const data = await resp.json();
 					return data
 				}
-				catch(error) {
+				catch (error) {
 					console.error('There was a problem with "getRecipeInstructions": ', error);
 				};
 			},
@@ -342,10 +349,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 					})
 
-					const data =  await resp.json();
+					const data = await resp.json();
 					return data
 				}
-				catch(error) {
+				catch (error) {
 					console.error('There was a problem with "getRecipeInstructions": ', error);
 				};
 			},
@@ -362,18 +369,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 					})
 
-					const data =  await resp.json();
-					const shuffledRecipes = data.sort( () => Math.random()-0.5 ).slice(0,3) // Randomize array.
+					const data = await resp.json();
+					const shuffledRecipes = data.sort(() => Math.random() - 0.5).slice(0, 3) // Randomize array.
 
-					const recipesInfo = await Promise.all(shuffledRecipes.map( async (recipe, index) => {
+					const recipesInfo = await Promise.all(shuffledRecipes.map(async (recipe, index) => {
 						const dishInfo = await getActions().getRecipeInformation(recipe.id)
 						return dishInfo
 					}))
-					
-					setStore( { similarRecipesInfo: recipesInfo } )
+
+					setStore({ similarRecipesInfo: recipesInfo })
 					return recipesInfo
 				}
-				catch(error) {
+				catch (error) {
 					console.error('There was a problem with "getSimilarRecipe": ', error);
 				};
 			},
