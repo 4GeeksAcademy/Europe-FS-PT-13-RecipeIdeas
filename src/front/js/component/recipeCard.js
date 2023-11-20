@@ -31,20 +31,18 @@ export const RecipeCard = (props) => {
 			title: props.title,
 			servings: props.servings,
 			prepTime: props.readyInMinutes,
-			cost: totalRecipePrice(),
-			diet: dietDisplay(),
+			cost: props.pricePerServing,
+			diet: props.diets,
 		})
+		console.log("RECIPE CARD", props.title, props.diets)
 
-		setIsFavorite(store.favouriteRecipes.some(recipe => recipe.id === recipeDetails.id))
-		console.log(isFavorite)
-
-
-	}, [store.favouriteRecipes]);
+		setIsFavorite( store.favouriteRecipes ? store.favouriteRecipes.some(recipe => recipe.recipe_external_id === recipeDetails.id) : false ) 
+	}, []);
 
 
 
-	const totalRecipePrice = () => {
-		let price = props.pricePerServing * props.servings;
+	const totalRecipePrice = (pricePerServing, servings) => {
+		let price = pricePerServing * servings;
 		price = Math.round(price / 100);
 
 		if (price <= 5) {
@@ -97,11 +95,11 @@ export const RecipeCard = (props) => {
 					</div>
 
 					<div className="col-sm-3 col-md-3 col-lg-4">
-						<p className="mt-1 ms-2"><i className="fas fa-coins fa-lg"></i> {recipeDetails.cost}</p>
+						<p className="mt-1 ms-2"><i className="fas fa-coins fa-lg"></i> {totalRecipePrice(recipeDetails.cost, recipeDetails.servings)}</p>
 					</div>
 
 					<div className="d-flex justify-content-center">
-						<p className="mt-1 ms-2"><i className="fas fa-apple-alt fa-lg"></i> {recipeDetails.diet}</p>
+						<p className="mt-1 ms-2"><i className="fas fa-apple-alt fa-lg"></i> {dietDisplay()}</p>
 					</div>
 
 					<div className="d-flex justify-content-center">

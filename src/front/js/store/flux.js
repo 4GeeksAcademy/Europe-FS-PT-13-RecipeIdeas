@@ -48,6 +48,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore(
 					{
 						token: null,
+						favouriteRecipes: [],
 						userDetails: {
 							name: "",
 							firstName: "",
@@ -354,6 +355,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							{
 								recipeId: recipeDetails.id,
 								recipeTitle: recipeDetails.title,
+								recipeImage: recipeDetails.image,
 								recipeServings: recipeDetails.servings,
 								recipePrepTime: recipeDetails.prepTime,
 								recipeCost: recipeDetails.cost,

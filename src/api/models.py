@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.dialects.postgresql import ARRAY
 
 db = SQLAlchemy()
 
@@ -43,10 +44,11 @@ class Recipe(db.Model):
     external_id = db.Column(db.Integer, unique=True, nullable=False)
 
     recipe_title = db.Column(db.String(120), unique=False, nullable=False)
-    recipe_servings = db.Column(db.Integer, nullable=False)
-    recipe_prep_time = db.Column(db.Integer, nullable=False)
+    recipe_image = db.Column(db.String(200), unique=False, nullable=False)
+    recipe_servings = db.Column(db.Integer, unique=False,nullable=False)
+    recipe_prep_time = db.Column(db.Integer, unique=False,nullable=False)
     recipe_cost = db.Column(db.String(10), unique=False, nullable=False)
-    recipe_diet = db.Column(db.String(80), unique=False, nullable=False)
+    recipe_diet = db.Column(db.ARRAY(db.String), unique=False, nullable=False)
 
     user = db.relationship('User', lazy='subquery', secondary="favourite_recipes")
 
@@ -56,12 +58,13 @@ class Recipe(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "recipe_external_id": self.external_id,
-            "recipe_title": self.recipe_title,
-            "recipe_servings": self.recipe_servings,
-            "recipe_prep_time": self.recipe_prep_time,
-            "recipe_cost": self.recipe_cost,
-            "recipe_diet": self.recipe_diet,
+            "recipeExternalId": self.external_id,
+            "recipeTitle": self.recipe_title,
+            "recipeImage": self.recipe_image,
+            "recipeServings": self.recipe_servings,
+            "recipePrepTime": self.recipe_prep_time,
+            "recipeCost": self.recipe_cost,
+            "recipeDiet": self.recipe_diet,
 
         }
 

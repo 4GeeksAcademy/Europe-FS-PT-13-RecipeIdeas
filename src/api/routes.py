@@ -165,12 +165,13 @@ def add_favourite():
     if not recipe:
 
         recipe_title = request.json.get('recipeTitle')
+        recipe_image = request.json.get('recipeImage')
         recipe_servings = request.json.get('recipeServings')
         recipe_prep_time = request.json.get('recipePrepTime')
         recipe_cost = request.json.get('recipeCost')
         recipe_diet = request.json.get('recipeDiet')
 
-        recipe = Recipe(external_id=recipe_id, recipe_title=recipe_title, 
+        recipe = Recipe(external_id=recipe_id, recipe_title=recipe_title, recipe_image=recipe_image,
                         recipe_servings=recipe_servings, recipe_prep_time=recipe_prep_time,
                         recipe_cost=recipe_cost, recipe_diet=recipe_diet
         )
