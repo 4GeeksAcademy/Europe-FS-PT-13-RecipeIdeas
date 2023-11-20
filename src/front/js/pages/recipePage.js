@@ -34,6 +34,7 @@ export const Recipe = props => {
 
 	}, [])
 
+
 	return (
 		<div className="container-fluid d-flex flex-column justify-content-center px-5">
 			<h1 className="display-4 text-center pt-5 pb-3">{recipeInformation.title}</h1>
@@ -99,7 +100,7 @@ export const Recipe = props => {
 						<div className="tab-pane fade show active" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab" tabIndex="0">
 							{ReactHtmlParser(recipeInformation.summary)}
 							
-							<SimilarRecipes originRecipeId={params.id} />
+							<SimilarRecipes/>
 						
 						</div>
 

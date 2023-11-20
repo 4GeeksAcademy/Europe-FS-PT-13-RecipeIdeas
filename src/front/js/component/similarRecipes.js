@@ -15,25 +15,21 @@ export const SimilarRecipes = (props) => {
     return (
         <div className="row mt-5 d-flex justify-content-between text-center">
             <span className="pb-3 fs-3 pt-3">Similar Recipes</span>
-            {
-                store.similarRecipesInfo ?
-                    store.similarRecipesInfo.map((recipe, index) => {
-                        return (
-                            <RecipeCard
-                                key={index}
-                                title={recipe.title}
-                                image={recipe.image}
-                                pricePerServing={recipe.pricePerServing}
-                                servings={recipe.servings}
-                                diets={recipe.diets}
-                                readyInMinutes={recipe.readyInMinutes}
-                                id={recipe.id}
+            {store.similarRecipesInfo.map((recipe, index) => {
+                return (
+                    <RecipeCard
+                        key={index}
+                        title={recipe.title}
+                        image={recipe.image}
+                        pricePerServing={recipe.pricePerServing}
+                        servings={recipe.servings}
+                        diets={recipe.diets}
+                        readyInMinutes={recipe.readyInMinutes}
+                        id={recipe.id}
 
-                            />
-                        )
-                    })
-                    :
-                    console.log("NOTHING")
+                    />
+                )
+            })
             }
         </div>
     )

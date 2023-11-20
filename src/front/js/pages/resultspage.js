@@ -17,8 +17,7 @@ export const ResultsPage = () => {
     const [includedIngredients, setIncludedIngredients] = useState([]);
     const [resultsLoaded, setResultsLoaded] = useState(12);
     const [showGreeting, setShowGreeting] = useState(true);
-    const [ingredientList, setIngredientList] = useState(["tomato", "Cheese", "Avocado", "pasta", "Pork", "Chicken", "Beef", "Eggs", "Tuna", "Beans", "Rice", "Mushrooms"]);
-
+    
 
 
     const handleCuisineSelect = (e) => {

@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 
@@ -8,6 +8,7 @@ export const RecipeCard = (props) => {
 	const [isFavorite, setIsFavorite] = useState(false);
 	const [euros, setEuros] = useState("");
 	const [diets, setDiets] = useState("Omnivore");
+	const navigate = useNavigate();
 
 	const toggleFavorite = () => {
 		setIsFavorite(!isFavorite);
@@ -48,6 +49,10 @@ export const RecipeCard = (props) => {
 		}
 	};
 
+	const handleGoToRecipe = () =>{
+		navigate("/recipe/" + props.id)
+	}
+
 
 
 
@@ -78,9 +83,7 @@ export const RecipeCard = (props) => {
 						<p className="mt-1 ms-2"><i className="fas fa-apple-alt fa-lg"></i> {diets}</p>
 					</div>
 					<div className="d-flex justify-content-center">
-						<Link to={"/recipe/" + props.id} className="d-flex justify-content-center">
-							<button type="button" className="btn btn-primary w-100">Go to Recipe</button>
-						</Link>
+							<button type="button" className="btn btn-primary w-100" onClick={handleGoToRecipe}>Go to Recipe</button>
 					</div>
 				</div>
 			</div >
