@@ -26,7 +26,7 @@ export const SimilarRecipes = (props) => {
                         diets={recipe.diets}
                         readyInMinutes={recipe.readyInMinutes}
                         id={recipe.id}
-
+                        className="col-4"
                     />
                 )
             })
