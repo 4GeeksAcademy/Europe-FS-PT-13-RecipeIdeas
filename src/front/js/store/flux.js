@@ -190,7 +190,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			setProfilePicture: async (url) => {
+			setProfilePicture: async (url, email) => {
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}api/upload_avatar`,
 						{
@@ -199,7 +199,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 								"Content-Type": "application/json",
 							},
 
-							body: JSON.stringify({ image_url: url })
+							body: JSON.stringify({ image_url: url, email: email})
 						}
 					)
 					const resp_json = await resp.json()

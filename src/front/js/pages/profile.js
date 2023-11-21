@@ -37,7 +37,7 @@ export const Profile = () => {
         (error, result) => {
             if (!error && result && result.event === "success") {
                 console.log('Done! Here is the image info: ', result.info.url);
-                actions.setProfilePicture(result.info.url)
+                actions.setProfilePicture(result.info.url, store.user.email)
             }
         }
     )

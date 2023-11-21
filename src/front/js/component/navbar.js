@@ -24,8 +24,8 @@ export const Navbar = () => {
 		actions.logout()
 		navigate("/")
 	}
-	
-	
+
+
 
 	return (
 		<nav className="navbar navbar-expand-sm d-flex container-fluid d-flex justify-content-between py-2">
@@ -54,13 +54,13 @@ export const Navbar = () => {
 						<a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><FontAwesomeIcon icon="fas fa-user-alt" />Profile</a>
 						<ul className="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
 							<div class="profile-highlight details">
-								<img className="dropdown-toggle avatar img-fluid rounded-circle mx-auto" data-bs-toggle="dropdown" style={{ width: "50px", height: "43px" }}>{store.user && store.user.avatar}</img>
+								<img className="dropdown-toggle avatar img-fluid rounded-circle mx-auto" data-bs-toggle="dropdown" style={{ width: "50px", height: "43px" }} src={store.user && store.user.avatar}></img>
 								<a id="profile-name">{store.user && store.user.name}</a>
 							</div>
 							<li><a className="dropdown-item" href="#"><Link className='link' to="/profile"><FontAwesomeIcon icon="fas fa-user-circle" />Account</Link></a></li>
 							<li className="dropdown-divider">
 							</li>
-							<li><button onClick={() => actions.logout()} className="dropdown-item"><FontAwesomeIcon icon="fas fa-sign-out-alt" />Log out</button></li>
+							<li><button onClick={handleLogout} className="dropdown-item"><FontAwesomeIcon icon="fas fa-sign-out-alt" />Log out</button></li>
 						</ul>
 					</div>
 				</>
