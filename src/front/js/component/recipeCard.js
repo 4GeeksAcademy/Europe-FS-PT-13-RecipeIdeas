@@ -8,8 +8,6 @@ export const RecipeCard = (props) => {
 	const { store, actions } = useContext(Context)
 	const [isFavorite, setIsFavorite] = useState(false);
 	const [recipeDetails, setRecipeDetails] = useState({})
-	// const [ euros, setEuros ] = useState("");
-	// const [ diets, setDiets ] = useState("Omnivore");
 
 	const toggleFavorite = () => {
 		if (store.token && store.token !== "") {
@@ -36,7 +34,6 @@ export const RecipeCard = (props) => {
 		})
 
 		if (store.favouriteRecipes) {
-			console.log(store.favouriteRecipes)
 			setIsFavorite(store.favouriteRecipes.some(recipe => recipe.recipeExternalId == props.id))
 		}
 
