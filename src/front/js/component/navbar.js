@@ -26,14 +26,18 @@ export const Navbar = () => {
 		navigate("/")
 	}
 
+	useEffect(() => {
+		actions.getUserDetails()
+	}, [])
+
 
 	return (
 		<nav className="navbar navbar-expand-sm d-flex container-fluid d-flex justify-content-between py-2">
 			<div className="justify-content-between">
-				<a className="navbar-brand" href="#">
-					<Link to="/">
-						<img src={logo} style={{ width: "50px", height: "43px" }}></img><img src={food} style={{ width: "200px", height: "43px" }} />
-					</Link></a>
+				<a className="navbar-brand" href="/">
+					<img src={logo} style={{ width: "50px", height: "43px" }}></img>
+					<img src={food} style={{ width: "200px", height: "43px" }} />
+				</a>
 			</div>
 
 			{!store.token ?
@@ -55,14 +59,21 @@ export const Navbar = () => {
 					<div className="nav-item dropdown rounded">
 						<a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><FontAwesomeIcon icon="fas fa-user-alt" />Profile</a>
 						<ul className="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
+
 							<div className="profile-highlight details">
-								<img className="dropdown-toggle avatar img-fluid rounded-circle mx-auto" data-bs-toggle="dropdown" style={{ width: "50px", height: "43px" }} src={store.user && store.user.avatar}></img>
-								<a id="profile-name">{store.user && store.user.name}</a>
+								<img className="dropdown-toggle avatar img-fluid rounded-circle mx-auto" data-bs-toggle="dropdown" style={{ width: "50px", height: "43px" }} src={store.user.avatar}></img>
+								<a id="profile-name">{store.user.name}</a>
 							</div>
-							<li><a className="dropdown-item" href="#"><Link className='link' to="/profile"><FontAwesomeIcon icon="fas fa-user-circle" />Account</Link></a></li>
-							<li className="dropdown-divider">
+
+							<li>
+								<a className="dropdown-item" href="/profile"><FontAwesomeIcon icon="fas fa-user-circle" />Account</a>
 							</li>
-							<li><button onClick={handleLogout} className="dropdown-item"><FontAwesomeIcon icon="fas fa-sign-out-alt" />Log out</button></li>
+							
+							<li className="dropdown-divider"></li>
+
+							<li>
+								<button onClick={handleLogout} className="dropdown-item"><FontAwesomeIcon icon="fas fa-sign-out-alt" />Log out</button>
+							</li>
 						</ul>
 					</div>
 				</>
