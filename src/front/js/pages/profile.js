@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../../js/store/appContext"
 import { Form } from "../../js/component/form.js"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -46,6 +46,10 @@ export const Profile = () => {
         event.preventDefault()
         myWidget.open();
     }
+
+    useEffect(() => {
+        setEditDetails(store.user.avatar)
+    }, [store.user])
 
     return (
         <div className="profile container-fluid border border-danger">

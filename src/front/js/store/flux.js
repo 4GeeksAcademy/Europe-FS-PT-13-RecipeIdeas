@@ -182,8 +182,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(store.user)
 					const resp_json = await resp.json()
 					setStore({ ...store, user: userDetails })
-					sessionStorage.removeItem("user");
 					sessionStorage.setItem("user", JSON.stringify(userDetails));
+					sessionStorage.removeItem("user");
 				}
 				catch (error) {
 					console.log("Error updating user's information.", error)
@@ -199,7 +199,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 								"Content-Type": "application/json",
 							},
 
-							body: JSON.stringify({ image_url: url, email: email})
+							body: JSON.stringify({ image_url: url, email: email })
 						}
 					)
 					const resp_json = await resp.json()
@@ -209,11 +209,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						...store,
 						userDetails: { ...getStore()['userDetails'], "avatar": newAvatar }
 					})
+					sessionStorage.removeItem("user");
+					sessionStorage.setItem("user", JSON.stringify(data.user));
 				}
 				catch (error) {
 					console.log("Error setting user's profile picture.", error)
 				}
 			},
+		
 
 			getRecipeSummary: async (recipe_id) => {
 				// Get recipe's Title and "About"
