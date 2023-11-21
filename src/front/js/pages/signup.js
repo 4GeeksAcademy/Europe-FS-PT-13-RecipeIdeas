@@ -6,29 +6,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
 export const Signup = () => {
-  const { store, actions } = useContext(Context);
+	const { store, actions } = useContext(Context);
 
-  const [signName, setSignName] = useState("");
+	const [signName, setSignName] = useState("");
+	const [signEmail, setSignEmail] = useState("");
+	const [signPassword, setSignPassword] = useState("");
 
-  const [signEmail, setSignEmail] = useState("");
-
-  const [signPassword, setSignPassword] = useState("");
-
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const signupResult = actions.signup(signName, signEmail, signPassword)
-    signupResult.then(result => {
-      if (result === true) {
-        navigate("/login")
-      }
-      else alert("Email already in use")
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		const signupResult = actions.signup(signName, signEmail, signPassword)
+		signupResult.then(result => {
+			if (result === true) {
+				navigate("/login")
+			}
+			else alert("The email you provided is already taken.")
+		})
+	};
 
-    })
-
-  };
 
   return (
 

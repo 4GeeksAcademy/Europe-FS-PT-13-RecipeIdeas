@@ -27,6 +27,7 @@ export const Home = () => {
 							return (
 								<RecipeCard
 									key={index}
+									id={p.id}
 									title={p.title}
 									image={p.image}
 									pricePerServing={p.pricePerServing}

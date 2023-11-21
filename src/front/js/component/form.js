@@ -61,7 +61,8 @@ export const Form = (props) => {
                         props.editDetails ?
                             <div className="input-group has-validation">
                                 <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-at" size="2xl" /> </span>
-                                <input id="username" type="text" required value={userDetails.username} onChange={(event) => setUserDetails({ ...userDetails, 'username': event.target.value })} className="form-control p-2 border-4"></input>
+
+                                <input id="username" type="text" value={userDetails.username} onChange={(event) => setUserDetails({ ...userDetails, 'username': event.target.value })} className="form-control p-2 border-4"></input>
                                 <div className="invalid-feedback">
                                     Provide a valid username.
                                 </div>
@@ -99,7 +100,7 @@ export const Form = (props) => {
 
             <div className="form-group row d-flex justify-content-lg-center justify-content-xxl-between px-0">
                 <div className="col-md-12 col-lg-10 col-xl-6 mt-3">
-                    <label htmlFor="linkedin" className="mb-1"> {userDetails.linkedIn ? "LinkedIn" : <span></span>} </label>
+                    <label htmlFor="linkedin" className="mb-1"> {userDetails.linkedIn ? "LinkedIn" : ""} </label>
                     {
                         props.editDetails ?
                             <div className="input-group has-validation">
@@ -117,14 +118,14 @@ export const Form = (props) => {
                                         <a href={userDetails.linkedIn} target="_blank">{userDetails.linkedIn}</a>
                                     </div>
                                 </div>
-                                :
-                                <span></span>
+                            :
+                                ""
 
                     }
                 </div>
 
                 <div className="col-md-12 col-lg-10 col-xl-6 mt-3">
-                    <label htmlFor="github" className="form-label mb-1"> {userDetails.github ? "Github" : <span></span>} </label>
+                    <label htmlFor="github" className="form-label mb-1"> {userDetails.github ? "Github" : ""} </label>
                     {
                         props.editDetails ?
                             <div className="input-group has-validation">
@@ -142,8 +143,8 @@ export const Form = (props) => {
                                         <a href={userDetails.github} target="_blank">{userDetails.github}</a>
                                     </div>
                                 </div>
-                                :
-                                <span></span>
+                            :
+                                ""
                     }
                 </div>
             </div>

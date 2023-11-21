@@ -1,3 +1,4 @@
+import { store } from "fontawesome";
 import { number } from "prop-types";
 
 const getState = ({ getStore, getActions, setStore }) => {
@@ -14,6 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			filteredRecipes: [],
 
 			similarRecipesInfo: [],
+			favouriteRecipes: [],
 
 
 			userDetails: {
@@ -33,12 +35,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		actions: {
 
-
-
 			refreshStore: () => {
 				const store = getStore()
 				if (!store.token) {
 					const token = sessionStorage.getItem("token");
+					const user = sessionStorage.getItem("user");
+
 					if (token) {
 						setStore({ ...store, token: token });
 					}
@@ -51,14 +53,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+
 			logout: () => {
 				const store = getStore()
 				sessionStorage.removeItem("token");
 				sessionStorage.removeItem("user");
-				console.log("Log out");
-				setStore({ ...store, token: null, user: null });
 
+				setStore(
+					{
+						token: null,
+            user: null,
+						favouriteRecipes: [],
+						userDetails: {
+							name: "",
+							firstName: "",
+							lastName: "",
+							username: null,
+			
+							email: null,
+							linkedIn: null,
+							github: null,
+			
+							avatar: null,
+						},
+					}
+				);
 			},
+
 
 			login: async (email, password) => {
 				const store = getStore()
@@ -88,40 +109,42 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return true
 					})
 					.catch(error => {
-						console.log("There was an error", error)
+						console.log("There was an error during login: ", error)
 						return false
 					})
 			},
 
-			signup: (name, email, password) => {
+
+			signup: async (name, email, password) => {
 				const opts = {
 					method: "POST",
-					headers: {
-						"Content-Type": "application/json"
-					},
+					headers:{ 
+            			"Content-Type": "application/json"
+				  	},
+
 					body: JSON.stringify(
 						{
-							"name": name,
-							"email": email,
-							"password": password
-						})
+						"name" : name,
+						"email": email,
+						"password": password
+						}
+					)
 				}
-
+			  
 				return fetch(process.env.BACKEND_URL + "api/signup", opts)
-					.then(resp => {
-						if (resp.status === 200) return resp.json();
-						else return false;
-					})
-					.then(data => {
-						console.log("sign up successful", data)
-						return true;
-					})
-					.catch(error => {
-						console.log("There was an error", error)
-						return false;
-					})
+				.then(resp => {
+					if(resp.status === 200) return resp.json();
+				  	else { return false; }
+				})
+				.then(data => {
+					console.log("sign up successful", data)
+					return true;
+				})
+				.catch(error => {
+					console.log("There was an error", error)
+					return false;
+				})
 			},
-
 
 
 			// totalRecipePrice, dietDisplay, setRecipe, this were the arguments inside the func below
@@ -225,7 +248,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getuserDetails: async () => {
 				// Get logged user id and call API to get further info.
 				try {
-					const resp = await fetch(`${process.env.BACKEND_URL}api/get_user/${getStore().user.email}`)
+					const resp = await fetch(`${process.env.BACKEND_URL}api/get_user`,
+						{
+							method: "GET",
+							headers: {
+								"Content-Type": "application/json",
+								"Authorization": "Bearer " + getStore().token
+							}
+						}
+					)
 					const data = await resp.json()
 					const userData = await data.user
 					const store = getStore()
@@ -253,6 +284,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							method: "PUT",
 							headers: {
 								"Content-Type": "application/json",
+								"Authorization": "Bearer " + getStore().token
 							},
 
 							body: JSON.stringify(userDetails)
@@ -270,13 +302,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			setProfilePicture: async (url, email) => {
+
+			setProfilePicture: async (url) => {
 				try {
 					const resp = await fetch(`${process.env.BACKEND_URL}api/upload_avatar`,
 						{
 							method: "PUT",
 							headers: {
 								"Content-Type": "application/json",
+								"Authorization": "Bearer " + getStore().token
 							},
 
 							body: JSON.stringify({ image_url: url, email: email })
@@ -298,10 +332,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 		
 
-			getRecipeSummary: async (recipe_id) => {
+
+			getRecipeSummary: async (recipeId) => {
 				// Get recipe's Title and "About"
 				try {
-					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/summary`, {
+					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeId}/summary`, {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
@@ -318,10 +353,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 			},
 
-			getRecipeInformation: async (recipe_id) => {
+
+			getRecipeInformation: async (recipeId) => {
 				// Get recipe's Title and "About"
 				try {
-					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/information`, {
+					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeId}/information`, {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
@@ -338,10 +374,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 			},
 
-			getRecipeInstructions: async (recipe_id) => {
+
+			getRecipeInstructions: async (recipeId) => {
 				// Get recipe's step-by-step instructions.
 				try {
-					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/analyzedInstructions`, {
+					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeId}/analyzedInstructions`, {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
@@ -358,10 +395,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 			},
 
-			getSimilarRecipes: async (recipe_id) => {
+
+			getSimilarRecipes: async (recipeId) => {
 				// Get recipe's step-by-step instructions.
 				try {
-					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe_id}/similar`, {
+					const resp = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeId}/similar`, {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
@@ -387,6 +425,87 @@ const getState = ({ getStore, getActions, setStore }) => {
 				catch (error) {
 					console.error('There was a problem with "getSimilarRecipe": ', error);
 				};
+			},
+
+			getFavourites: async () => {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}api/get_favourites`, {
+						method: 'GET',
+						headers: {
+							"Content-Type": "application/json",
+							"Authorization": "Bearer " + getStore().token
+						},
+					})
+
+					const data = await resp.json()
+					setStore({ favouriteRecipes: await data.favourite_recipes })
+					return getStore().favouriteRecipes
+				}
+				catch(error) {
+					console.error("There was a problem with getting the user's favourite recipe: ", error);
+				}
+			},
+
+			addFavourite: async (recipeDetails) => {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}api/add_favourite`, {
+						method: 'POST',
+						headers: {
+							"Content-Type": "application/json",
+							"Authorization": "Bearer " + getStore().token
+						},
+
+						body: JSON.stringify(
+							{
+								recipeId: recipeDetails.id,
+								recipeTitle: recipeDetails.title,
+								recipeImage: recipeDetails.image,
+								recipeServings: recipeDetails.servings,
+								recipePrepTime: recipeDetails.prepTime,
+								recipeCost: recipeDetails.cost,
+								recipeDiet: recipeDetails.diet,
+							}
+						)
+					})
+
+					if (resp.ok) {
+						const data = await resp.json()
+						return data.message
+					}
+
+					return resp.status
+				}
+				catch(error) {
+					console.error('There was a problem with adding a favourite recipe: ', error);
+				}
+			},
+
+			removeFavourite: async (recipeDetails) => {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}api/delete_favourite`, {
+						method: 'DELETE',
+						headers: {
+							"Content-Type": "application/json",
+							"Authorization": "Bearer " + getStore().token
+						},
+
+						body: JSON.stringify(
+							{
+								recipeId: recipeDetails.id
+							}
+						)
+					})
+
+					if (resp.ok) {
+						const data = await resp.json()
+						return data.message
+					}
+
+					return resp.status
+				}
+				catch(error) {
+					console.error('There was a problem with removing a favourite recipe: ', error);
+				}
 			},
 		}
 	};

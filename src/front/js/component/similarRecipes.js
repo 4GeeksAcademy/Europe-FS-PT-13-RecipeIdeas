@@ -21,6 +21,7 @@ export const SimilarRecipes = (props) => {
                         return(
                             <RecipeCard
                                 key={index}
+                                id={recipe.id}
                                 title={recipe.title}
                                 image={recipe.image}
                                 pricePerServing={recipe.pricePerServing}

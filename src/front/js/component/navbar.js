@@ -20,11 +20,11 @@ export const Navbar = () => {
 	const handleSelectChange = (event) => {
 		setSelectValue(event.target.value);
 	}
+
 	const handleLogout = (event) => {
 		actions.logout()
 		navigate("/")
 	}
-
 
 
 	return (
@@ -35,6 +35,7 @@ export const Navbar = () => {
 						<img src={logo} style={{ width: "50px", height: "43px" }}></img><img src={food} style={{ width: "200px", height: "43px" }} />
 					</Link></a>
 			</div>
+
 			{!store.token ?
 				<>
 					<div className="collapse navbar-collapse" id="navbarNav">
@@ -50,10 +51,11 @@ export const Navbar = () => {
 				</>
 				:
 				<>
+
 					<div className="nav-item dropdown rounded">
 						<a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><FontAwesomeIcon icon="fas fa-user-alt" />Profile</a>
 						<ul className="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
-							<div class="profile-highlight details">
+							<div className="profile-highlight details">
 								<img className="dropdown-toggle avatar img-fluid rounded-circle mx-auto" data-bs-toggle="dropdown" style={{ width: "50px", height: "43px" }} src={store.user && store.user.avatar}></img>
 								<a id="profile-name">{store.user && store.user.name}</a>
 							</div>
