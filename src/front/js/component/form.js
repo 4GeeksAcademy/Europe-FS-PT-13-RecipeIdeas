@@ -6,13 +6,14 @@ export const Form = (props) => {
 
     const { store, actions } = useContext(Context)
 
-    const [userDetails, setUserDetails] = useState(store.user)
+    const [userDetails, setUserDetails] = useState(null)
 
     useEffect(() => {
+        console.log(store.user)
         setUserDetails(store.user)
-    }, [])
+    }, [store.user])
 
-    return (
+    return userDetails ? (
         <form className="info-wrapper py-4 px-4 d-flex flex-column was-validated" onSubmit={props.handleSubmit}>
 
             <div className="form-group row d-flex justify-content-between px-0">
@@ -157,5 +158,6 @@ export const Form = (props) => {
                     <button className="edit-info btn btn-danger p-2 mt-3" onClick={props.handleEditInfo}>Edit details</button>
             }
         </form>
-    );
+
+    ) : <></>;
 };

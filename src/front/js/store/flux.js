@@ -32,9 +32,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore()
 				if (!store.token) {
 					const token = sessionStorage.getItem("token");
-					const user = sessionStorage.getItem("user");
 					if (token) {
-						setStore({ ...store, user: user, token: token });
+						setStore({ ...store, token: token });
+					}
+				}
+				if (!store.user) {
+					const user = JSON.parse(sessionStorage.getItem("user"));
+					if (user) {
+						setStore({ ...store, user: user });
 					}
 				}
 			},
@@ -42,8 +47,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logout: () => {
 				const store = getStore()
 				sessionStorage.removeItem("token");
+				sessionStorage.removeItem("user");
 				console.log("Log out");
-				setStore({...store, token: null });
+				setStore({ ...store, token: null, user: null });
 
 			},
 
@@ -172,9 +178,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 							body: JSON.stringify(userDetails)
 						}
 					);
-
+					console.log(userDetails)
+					console.log(store.user)
 					const resp_json = await resp.json()
-					setStore({ ...store, userDetails: userDetails })
+					setStore({ ...store, user: userDetails })
+					sessionStorage.removeItem("user");
+					sessionStorage.setItem("user", JSON.stringify(userDetails));
 				}
 				catch (error) {
 					console.log("Error updating user's information.", error)

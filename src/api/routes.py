@@ -53,12 +53,10 @@ def create_token():
     }
     return jsonify(response_body)
 
-@api.route('/update_user/<email>', methods=['PUT'])
-def update_user(email):
-
-
+@api.route('/update_user/', methods=['PUT'])
+def update_user():
+    email = request.json.get('email')
     current_user = User.query.filter_by(email= email).first()
-    current_user.email = request.json.get('email')
     current_user.avatar = request.json.get('avatar')
     current_user.firstName = request.json.get('firstName')
     current_user.lastName = request.json.get('lastName')
@@ -87,12 +85,14 @@ def get_user(email):
 
     return jsonify(response_body), 200
 
-@api.route('/upload_avatar/<email>', methods=['PUT'])
-def upload_avatar(email):
+@api.route('/upload_avatar/', methods=['PUT'])
+def upload_avatar():
 
-    current_user = User.query.filter_by(email = email).first()
+    email = request.json.get('email')
+    current_user = User.query.filter_by(email= email).first()
 
     image_url = request.json.get('image_url', None) # Get request body.
+    
 
     uploader = cloudinary.uploader.upload(image_url, unique_filename = False, overwrite=True)
     image_info = cloudinary.api.resource(uploader["public_id"]) # Get image via a randomly generated public_id.
@@ -135,3 +135,4 @@ def create_signup():
     db.session.commit()
 
     return jsonify(user.serialize())
+

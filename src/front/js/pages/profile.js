@@ -22,6 +22,8 @@ export const Profile = () => {
     }
 
     const handleSubmit = (userDetails) => {
+        console.log(userDetails)
+        console.log(store.user)
         actions.setUserDetails(userDetails)
         setEditDetails(false)
     }
