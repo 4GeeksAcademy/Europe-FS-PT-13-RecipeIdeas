@@ -377,6 +377,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error('There was a problem with "getSimilarRecipe": ', error);
 				};
 			},
+
+			clearResults: async () => {
+				setStore({filteredRecipes: []})
+			},
 		}
 	};
 };

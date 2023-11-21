@@ -57,7 +57,7 @@ export const RecipeCard = (props) => {
 
 	return (
 		<li className="col-sm-3 col-md-3 col-lg-3 me-4" style={{ listStyleType: "none" }}>
-			<div className="mt-4 rounded-top d-flex flex-column justify-content-between" style={{ backgroundColor: "#ffcab0", height: "425px" }}>
+			<div className="mt-4 rounded-top d-flex flex-column justify-content-between shadow" style={{ backgroundColor: "#ffcab0", height: "425px" }}>
 				<div className="row">
 					<div className="col-9">
 						<h5 className="m-2" style={{ fontSize: `${fontSizeTitle}px` }}>{props.title}</h5>
@@ -67,25 +67,27 @@ export const RecipeCard = (props) => {
 					</div>
 				</div>
 				<img src={props.image} className="card-img-top" alt="Recipe Image" style={{ objectFit: "cover", height: "150px" }} />
-				<div className="row">
-					<div className="col-4">
-						<p className="mt-1 ms-2"><i className="fas fa-utensils fa-lg"></i> {props.servings} servings</p>
+				<div className="m-2 rounded" style={{ backgroundColor: "#fdffcd" }}>
+					<div className="row">
+						<div className="col-4">
+							<p className="mt-1 ms-2"><i className="fas fa-utensils fa-lg"></i> {props.servings} servings</p>
+						</div>
+						<div className="col-4">
+							<p className="mt-1 ms-2"><i className="far fa-clock fa-lg"></i> {props.readyInMinutes} minutes</p>
+						</div>
+						<div className="col-4">
+							<p className="mt-1 ms-2"><i className="fas fa-coins fa-lg"></i> {euros}</p>
+						</div>
 					</div>
-					<div className="col-4">
-						<p className="mt-1 ms-2"><i className="far fa-clock fa-lg"></i> {props.readyInMinutes} minutes</p>
-					</div>
-					<div className="col-4">
-						<p className="mt-1 ms-2"><i className="fas fa-coins fa-lg"></i> {euros}</p>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-12 d-flex">
-						<p className="mt-1 ms-2"><i className="fas fa-apple-alt fa-lg"></i> {diets}</p>
+					<div className="row">
+						<div className="col-12 d-flex">
+							<p className="mt-1 ms-2"><i className="fas fa-apple-alt fa-lg"></i> {diets}</p>
+						</div>
 					</div>
 				</div>
 
 				<div className="d-flex flex-column align-items-end">
-					<button type="button" className="btn btn-primary w-100" onClick={handleGoToRecipe}>Go to Recipe</button>
+					<button type="button" className="btn w-100" style={{ backgroundColor: "#e0ffcd" }} onClick={handleGoToRecipe}>Go to Recipe</button>
 				</div>
 			</div>
 		</li>

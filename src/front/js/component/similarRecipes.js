@@ -13,7 +13,7 @@ export const SimilarRecipes = (props) => {
     }, [store.similarRecipesInfo])
 
     return (
-        <div className="row mt-5 d-flex justify-content-between text-center">
+        <div className="row mt-5 d-flex justify-content-between text-center container">
             <span className="pb-3 fs-3 pt-3">Similar Recipes</span>
             {store.similarRecipesInfo.map((recipe, index) => {
                 return (

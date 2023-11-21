@@ -82,6 +82,7 @@ export const ResultsPage = () => {
 
     useEffect(() => {
         setShowGreeting(true);
+        actions.clearResults()
     }, []);
 
     return (

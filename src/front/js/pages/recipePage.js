@@ -20,19 +20,19 @@ export const Recipe = props => {
 
 		const getRecipeInformation = async () => {
 			const recipeInfo = await actions.getRecipeInformation(params.id)
-			setRecipeInformation( recipeInfo )
+			setRecipeInformation(recipeInfo)
 		};
 
 		const getRecipeInstructions = async () => {
 			const recipeInst = await actions.getRecipeInstructions(params.id)
-			setRecipeInstructions( recipeInst )
+			setRecipeInstructions(recipeInst)
 		};
 
 		getRecipeInformation()
 		getRecipeInstructions()
 		actions.getSimilarRecipes(params.id)
 
-	}, [])
+	}, [params.id])
 
 
 	return (
@@ -99,13 +99,13 @@ export const Recipe = props => {
 
 						<div className="tab-pane fade show active" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab" tabIndex="0">
 							{ReactHtmlParser(recipeInformation.summary)}
-							
-							<SimilarRecipes/>
-						
+
+							<SimilarRecipes />
+
 						</div>
 
 						<div className="row tab-pane fade d-flex justify-content-between px-0" id="pills-instructions" role="tabpanel" aria-labelledby="pills-instructions-tab" tabIndex="0">
-							
+
 							<div className="col-sm-12 col-md-6 d-flex flex-column text-center">
 								<div className="pb-3 fs-3 pt-3">Ingredients</div>
 								{
@@ -113,7 +113,7 @@ export const Recipe = props => {
 										recipeInformation.extendedIngredients.map((ingredient, index) => {
 											return <p key={index} className="mb-2"> {`${ingredient.amount} ${ingredient.unit} of ${ingredient.name}`} </p>
 										})
-									:
+										:
 										""
 								}
 							</div>
@@ -123,18 +123,18 @@ export const Recipe = props => {
 								{
 									recipeInstructions ?
 										recipeInstructions.map((part, index) => {
-											return part.steps.map( (step, idx) => {
+											return part.steps.map((step, idx) => {
 												return <p key={idx} className="mb-2"> {`${step.number}. ${step.step}`} </p>
 											})
 										})
-										
-									:
+
+										:
 										""
 								}
 							</div>
 
 						</div>
-					
+
 					</div>
 				</div>
 
