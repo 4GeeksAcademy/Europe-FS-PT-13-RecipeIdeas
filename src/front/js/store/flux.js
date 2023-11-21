@@ -7,10 +7,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: null,
 			user: null,
 			message: null,
-      
+
 			randomRecipes: [],
+
+			complexSearchResults: [],
+			complexSearchIds: [],
+			filteredRecipes: [],
+
 			similarRecipesInfo: [],
 			favouriteRecipes: [],
+
 
 			userDetails: {
 				name: "",
@@ -30,24 +36,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 
 			refreshStore: () => {
-				if (!getStore().token) {
+				const store = getStore()
+				if (!store.token) {
 					const token = sessionStorage.getItem("token");
 					const user = sessionStorage.getItem("user");
 
 					if (token) {
-						setStore({ token: token });
-						setStore({ user: user });
+						setStore({ ...store, token: token });
+					}
+				}
+				if (!store.user) {
+					const user = JSON.parse(sessionStorage.getItem("user"));
+					if (user) {
+						setStore({ ...store, user: user });
 					}
 				}
 			},
 
 
 			logout: () => {
+				const store = getStore()
 				sessionStorage.removeItem("token");
 				sessionStorage.removeItem("user");
+
 				setStore(
 					{
 						token: null,
+            user: null,
 						favouriteRecipes: [],
 						userDetails: {
 							name: "",
@@ -67,6 +82,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			login: async (email, password) => {
+				const store = getStore()
 				const opts = {
 					method: "POST",
 					headers: {
@@ -88,9 +104,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						console.log("this came from the backend", data)
 						sessionStorage.setItem("token", data.access_token);
-						setStore({ token: data.access_token })
-						sessionStorage.setItem("user", data.user);
-						setStore({ user: data.user })
+						sessionStorage.setItem("user", JSON.stringify(data.user));
+						setStore({ ...store, token: data.access_token, user: data.user })
 						return true
 					})
 					.catch(error => {
@@ -149,7 +164,80 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response;
 					})
 					.then((data) => {
+						
 						setStore({ randomRecipes: data["recipes"] });
+						console.log("store in the flux")
+						console.log(store.randomRecipes)
+
+					})
+					.catch((error) => {
+						console.error('There was a problem with the fetch operation:', error);
+					});
+			},
+
+			getComplexSearch: (cuisine, diet, type, minCalories, maxCalories, preptime, includedIngredients) => {
+				const store = getStore();
+				const actions =getActions();
+				console.log(cuisine)
+				fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?number=100&${cuisine}&${includedIngredients}&${diet}&${type}&${minCalories}&${maxCalories}&${preptime}`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-RapidAPI-Key': 'f4a6409e03msh2513ad740baf8b9p13e32fjsn5d20d8842c5f',
+						'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
+					},
+					body: JSON.stringify()
+				})
+					.then(async (data) => {
+						const response = await data.json();
+						return response;
+					})
+					.then((data) => {
+						setStore({ complexSearchResults: data["results"] });
+						console.log("store for the complex search results");
+						console.log(store.complexSearchResults)
+
+					})
+					.then(() => {
+						store.complexSearchIds = store.complexSearchResults.map(item => item.id)
+						console.log("complex search ids")
+						console.log(store.complexSearchIds)
+					})
+					.then(()=>{
+						actions.getFilteredRecipes()
+					}
+
+					)
+					//doing a informtaion bulk request get to get the information needed to appear on the cards
+					.catch((error) => {
+						console.error('There was a problem with the fetch operation:', error);
+					});
+			},
+
+			getFilteredRecipes: () => {
+				const store = getStore();
+				console.log("checking for ids in the store", store.complexSearchIds)
+				fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk?ids=${store.complexSearchIds}`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-RapidAPI-Key': 'f4a6409e03msh2513ad740baf8b9p13e32fjsn5d20d8842c5f',
+						'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
+					},
+					body: JSON.stringify()
+				})
+					.then(async (data) => {
+						const response = await data.json();
+						return response;
+					})
+					.then((data) => {
+						setStore({filteredRecipes: data});
+						console.log("logging the recipe search data", data)
+						console.log("filtered recipes")
+						console.log(store.filteredRecipes)
+
+
+
 					})
 					.catch((error) => {
 						console.error('There was a problem with the fetch operation:', error);
@@ -171,7 +259,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					)
 					const data = await resp.json()
 					const userData = await data.user
+					const store = getStore()
 					setStore({
+						...store,
 						userDetails: {
 							...getStore()['userDetails'], "email": userData['email'], "avatar": userData['avatar'], "username": userData['username'],
 							"name": userData['name'], "firstName": userData['firstName'], "lastName": userData['lastName'],
@@ -188,6 +278,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			setUserDetails: async (userDetails) => {
 				// PUT request to user's database.
 				try {
+					const store = getStore()
 					const resp = await fetch(`${process.env.BACKEND_URL}api/update_user`,
 						{
 							method: "PUT",
@@ -199,9 +290,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 							body: JSON.stringify(userDetails)
 						}
 					);
-
+					console.log(userDetails)
+					console.log(store.user)
 					const resp_json = await resp.json()
-					setStore({ userDetails: userDetails })
+					setStore({ ...store, user: userDetails })
+					sessionStorage.setItem("user", JSON.stringify(userDetails));
+					sessionStorage.removeItem("user");
 				}
 				catch (error) {
 					console.log("Error updating user's information.", error)
@@ -219,17 +313,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 								"Authorization": "Bearer " + getStore().token
 							},
 
-							body: JSON.stringify({ image_url: url })
+							body: JSON.stringify({ image_url: url, email: email })
 						}
 					)
 					const resp_json = await resp.json()
 					const newAvatar = await resp_json['avatar']
-					setStore({ userDetails: { ...getStore()['userDetails'], "avatar": newAvatar } })
+					const store = getStore()
+					setStore({
+						...store,
+						userDetails: { ...getStore()['userDetails'], "avatar": newAvatar }
+					})
+					sessionStorage.removeItem("user");
+					sessionStorage.setItem("user", JSON.stringify(data.user));
 				}
 				catch (error) {
 					console.log("Error setting user's profile picture.", error)
 				}
 			},
+		
 
 
 			getRecipeSummary: async (recipeId) => {
@@ -244,10 +345,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 					})
 
-					const data =  await resp.json();
+					const data = await resp.json();
 					return data
 				}
-				catch(error) {
+				catch (error) {
 					console.error('There was a problem with "getRecipeSummary": ', error);
 				};
 			},
@@ -265,10 +366,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 					})
 
-					const data =  await resp.json();
+					const data = await resp.json();
 					return data
 				}
-				catch(error) {
+				catch (error) {
 					console.error('There was a problem with "getRecipeInstructions": ', error);
 				};
 			},
@@ -286,10 +387,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 					})
 
-					const data =  await resp.json();
+					const data = await resp.json();
 					return data
 				}
-				catch(error) {
+				catch (error) {
 					console.error('There was a problem with "getRecipeInstructions": ', error);
 				};
 			},
@@ -307,18 +408,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 					})
 
-					const data =  await resp.json();
-					const shuffledRecipes = data.sort( () => Math.random()-0.5 ).slice(0,3) // Randomize array.
+					const data = await resp.json();
+					const shuffledRecipes = data.sort(() => Math.random() - 0.5).slice(0, 3) // Randomize array.
 
-					const recipesInfo = await Promise.all(shuffledRecipes.map( async (recipe, index) => {
+					const recipesInfo = await Promise.all(shuffledRecipes.map(async (recipe, index) => {
 						const dishInfo = await getActions().getRecipeInformation(recipe.id)
 						return dishInfo
 					}))
-					
-					setStore( { similarRecipesInfo: recipesInfo } )
+					const store = getStore()
+					setStore({
+						...store,
+						similarRecipesInfo: recipesInfo
+					})
 					return recipesInfo
 				}
-				catch(error) {
+				catch (error) {
 					console.error('There was a problem with "getSimilarRecipe": ', error);
 				};
 			},

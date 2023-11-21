@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../../js/store/appContext"
 import { Form } from "../../js/component/form.js"
 import RecipeCard from "../component/recipeCard.js";
@@ -21,6 +21,8 @@ export const Profile = () => {
     }
 
     const handleSubmit = (userDetails) => {
+        console.log(userDetails)
+        console.log(store.user)
         actions.setUserDetails(userDetails)
         setEditDetails(false)
     }
@@ -34,7 +36,7 @@ export const Profile = () => {
         (error, result) => {
             if (!error && result && result.event === "success") {
                 console.log('Done! Here is the image info: ', result.info.url);
-                actions.setProfilePicture(result.info.url)
+                actions.setProfilePicture(result.info.url, store.user.email)
             }
         }
     )
@@ -57,7 +59,6 @@ export const Profile = () => {
                             alt="Profile Picture"
                         />
                         <button className="change-picture btn btn-danger my-2 mx-auto p-2" onClick={handleUploadAvatar}> Change profile picture </button>
-
                     </div>
 
                     <div className="user-info col-sm-12 col-md-8 d-flex flex-column justify-content-center">

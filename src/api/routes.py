@@ -10,7 +10,6 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 import hashlib
-
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -115,7 +114,6 @@ def update_user():
     return jsonify(response_body), 200
 
 
-
 @api.route('/upload_avatar/', methods=['PUT'])
 @jwt_required()
 def upload_avatar():
@@ -124,6 +122,7 @@ def upload_avatar():
     current_user = User.query.filter_by(email=current_user_email).first()
 
     image_url = request.json.get('image_url', None) # Get request body.
+    
 
     uploader = cloudinary.uploader.upload(image_url, unique_filename = False, overwrite=True)
     image_info = cloudinary.api.resource(uploader["public_id"]) # Get image via a randomly generated public_id.
@@ -163,7 +162,6 @@ def add_favourite():
     recipe = Recipe.query.filter_by(external_id=recipe_id).first()
 
     if not recipe:
-
         recipe_title = request.json.get('recipeTitle')
         recipe_image = request.json.get('recipeImage')
         recipe_servings = request.json.get('recipeServings')
@@ -173,8 +171,7 @@ def add_favourite():
 
         recipe = Recipe(external_id=recipe_id, recipe_title=recipe_title, recipe_image=recipe_image,
                         recipe_servings=recipe_servings, recipe_prep_time=recipe_prep_time,
-                        recipe_cost=recipe_cost, recipe_diet=recipe_diet
-        )
+                        recipe_cost=recipe_cost, recipe_diet=recipe_diet)
 
         db.session.add(recipe)
         db.session.commit()

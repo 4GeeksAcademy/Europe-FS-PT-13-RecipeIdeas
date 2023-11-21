@@ -6,13 +6,14 @@ export const Form = (props) => {
 
     const { store, actions } = useContext(Context)
 
-    const [userDetails, setUserDetails] = useState(store.userDetails)
+    const [userDetails, setUserDetails] = useState(null)
 
     useEffect(() => {
-        setUserDetails(store.userDetails)
-    }, [store.userDetails])
+        console.log(store.user)
+        setUserDetails(store.user)
+    }, [store.user])
 
-    return (
+    return userDetails ? (
         <form className="info-wrapper py-4 px-4 d-flex flex-column was-validated" onSubmit={props.handleSubmit}>
 
             <div className="form-group row d-flex justify-content-between px-0">
@@ -60,6 +61,7 @@ export const Form = (props) => {
                         props.editDetails ?
                             <div className="input-group has-validation">
                                 <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-at" size="2xl" /> </span>
+
                                 <input id="username" type="text" value={userDetails.username} onChange={(event) => setUserDetails({ ...userDetails, 'username': event.target.value })} className="form-control p-2 border-4"></input>
                                 <div className="invalid-feedback">
                                     Provide a valid username.
@@ -108,7 +110,7 @@ export const Form = (props) => {
                                     Provide a valid LinkedIn URL.
                                 </div>
                             </div>
-                        :
+                            :
                             userDetails.linkedIn ?
                                 <div className="d-flex">
                                     <span className="form-input-icon"> <FontAwesomeIcon icon="fa-brands fa-linkedin" size="2xl" /> </span>
@@ -133,7 +135,7 @@ export const Form = (props) => {
                                     Provide a valid Github URL.
                                 </div>
                             </div>
-                        :
+                            :
                             userDetails.github ?
                                 <div className="d-flex">
                                     <span className="form-input-icon"> <FontAwesomeIcon icon="fa-brands fa-github" size="2xl" /> </span>
@@ -157,5 +159,6 @@ export const Form = (props) => {
                     <button className="edit-info btn btn-danger p-2 mt-3" onClick={props.handleEditInfo}>Edit details</button>
             }
         </form>
-    );
+
+    ) : <></>;
 };
