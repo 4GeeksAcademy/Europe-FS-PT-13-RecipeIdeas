@@ -32,7 +32,8 @@ export const Recipe = props => {
 		getRecipeInstructions()
 		actions.getSimilarRecipes(params.id)
 
-	}, [])
+	}, [params.id])
+
 
 	return (
 		<div className="container-fluid d-flex flex-column justify-content-center px-5">
@@ -98,9 +99,7 @@ export const Recipe = props => {
 
 						<div className="tab-pane fade show active" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab" tabIndex="0">
 							{ReactHtmlParser(recipeInformation.summary)}
-
-							<SimilarRecipes originRecipeId={params.id} />
-
+							<SimilarRecipes />
 						</div>
 
 						<div className="row tab-pane fade d-flex justify-content-between px-0" id="pills-instructions" role="tabpanel" aria-labelledby="pills-instructions-tab" tabIndex="0">

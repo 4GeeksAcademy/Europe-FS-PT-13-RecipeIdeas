@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { RecipeCard } from "../component/recipeCard";
-import { IngredientCheckBox } from "../component/ingredientCheckbox";
+import { Spinner} from "../component/Spinner";
+
 
 
 export const ResultsPage = () => {
@@ -16,8 +17,7 @@ export const ResultsPage = () => {
     const [includedIngredients, setIncludedIngredients] = useState([]);
     const [resultsLoaded, setResultsLoaded] = useState(12);
     const [showGreeting, setShowGreeting] = useState(true);
-    const [ingredientList, setIngredientList] = useState(["tomato", "Cheese", "Avocado", "pasta", "Pork", "Chicken", "Beef", "Eggs", "Tuna", "Beans", "Rice", "Mushrooms"])
-
+    
 
 
     const handleCuisineSelect = (e) => {
@@ -60,6 +60,7 @@ export const ResultsPage = () => {
 
         if (e.target.checked) {
             setIncludedIngredients((prevIngredients) => [...prevIngredients, ingredient]);
+            console.log(ingredient);
         } else {
             setIncludedIngredients((prevIngredients) => prevIngredients.filter((item) => item !== ingredient));
         }
@@ -67,19 +68,21 @@ export const ResultsPage = () => {
 
     const handleSearch = () => {
         setResultsLoaded(12);
-        actions.getComplexSearch(cuisine, diet, type, minCalories, maxCalories, includedIngredients, resultsLoaded);
+        actions.getComplexSearch(cuisine, includedIngredients, diet, type, ("minCalories=" + minCalories), ("maxCalories=" + maxCalories), ("maxReadyTime=" + prepTime), resultsLoaded);
         setShowGreeting(false);
     };
 
 
     const handleLoadMore = () => {
         setResultsLoaded((prevResultsLoaded) => prevResultsLoaded + 12);
-        actions.getComplexSearch(cuisine, diet, type, minCalories, maxCalories, includedIngredients, resultsLoaded);
+        actions.getComplexSearch(cuisine, includedIngredients, diet, type, ("minCalories=" + minCalories), ("maxCalories=" + maxCalories), ("maxReadyTime=" + prepTime), resultsLoaded);
+
     };
 
 
     useEffect(() => {
         setShowGreeting(true);
+        actions.clearResults()
     }, []);
 
     return (
@@ -121,7 +124,7 @@ export const ResultsPage = () => {
                 <div className="row justify-content-center">
                     <div className="col-md-6">
                         <form className="multi-range-field">
-                            <label htmlFor="caloriesRange" className="mb-3">Calories Range: {minCalories} - {maxCalories} kcal</label>
+                            <label htmlFor="caloriesRange" className="mb-3">Calories Range {minCalories} - {maxCalories} kcal</label>
                             <div className="d-flex justify-content-center align-items-center">
                                 <input
                                     id="caloriesRange"
@@ -155,17 +158,86 @@ export const ResultsPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="container row">
-                    <h4 className="text-center mb-4">Included Ingredients:</h4>
-                    {ingredientList.map((p, index) => {
-                        return (
-                            <IngredientCheckBox
-                                ingredient={p}
-                                ingredientCapital={p.charAt(0).toUpperCase() + p.slice(1)}
-                                handFunction={handleIngredientChange}
-                            />
-                        )
-                    })}
+                <div className="container ms-2">
+                    <h4 className="mb-4 mt-4 text-center">Included Ingredients</h4>
+                    <div className="row justify-content-center">
+                        <div className="form-check col-3">
+                            <input className="form-check-input" type="checkbox" value="includeIngredients=cheese" id="cheese" onChange={handleIngredientChange} />
+                            <label className="form-check-label" htmlFor="cheese">
+                                Cheese
+                            </label>
+                        </div>
+                        <div className="form-check col-3">
+                            <input className="form-check-input" type="checkbox" value="includeIngredients=tomato" id="tomato" onChange={handleIngredientChange} />
+                            <label className="form-check-label" htmlFor="tomato">
+                                Tomato
+                            </label>
+                        </div>
+                        <div className="form-check col-3">
+                            <input className="form-check-input" type="checkbox" value="includeIngredients=avocado" id="avocado" onChange={handleIngredientChange} />
+                            <label className="form-check-label" htmlFor="avocado">
+                                Avocado
+                            </label>
+                        </div>
+                        <div className="form-check col-3">
+                            <input className="form-check-input" type="checkbox" value="includeIngredients=pasta" id="pasta" onChange={handleIngredientChange} />
+                            <label className="form-check-label" htmlFor="pasta">
+                                Pasta
+                            </label>
+                        </div>
+                    </div>
+                    <div className="row justify-content-center">
+                        <div className="form-check col-3">
+                            <input className="form-check-input" type="checkbox" value="includeIngredients=pork" id="pork" onChange={handleIngredientChange} />
+                            <label className="form-check-label" htmlFor="pork">
+                                Pork
+                            </label>
+                        </div>
+                        <div className="form-check col-3">
+                            <input className="form-check-input" type="checkbox" value="includeIngredients=chicken" id="chicken" onChange={handleIngredientChange} />
+                            <label className="form-check-label" htmlFor="chicken">
+                                Chicken
+                            </label>
+                        </div>
+                        <div className="form-check col-3">
+                            <input className="form-check-input" type="checkbox" value="includeIngredients=beef" id="beef" onChange={handleIngredientChange} />
+                            <label className="form-check-label" htmlFor="beef">
+                                Beef
+                            </label>
+                        </div>
+                        <div className="form-check col-3">
+                            <input className="form-check-input" type="checkbox" value="includeIngredients=eggs" id="eggs" onChange={handleIngredientChange} />
+                            <label className="form-check-label" htmlFor="eggs">
+                                Eggs
+                            </label>
+                        </div>
+                    </div>
+                    <div className="row justify-content-center">
+                        <div className="form-check col-3">
+                            <input className="form-check-input" type="checkbox" value="includeIngredients=tuna" id="tuna" onChange={handleIngredientChange} />
+                            <label className="form-check-label" htmlFor="tuna">
+                                Tuna
+                            </label>
+                        </div>
+                        <div className="form-check col-3">
+                            <input className="form-check-input" type="checkbox" value="includeIngredients=beans" id="beans" onChange={handleIngredientChange} />
+                            <label className="form-check-label" htmlFor="beans">
+                                Beans
+                            </label>
+                        </div>
+                        <div className="form-check col-3">
+                            <input className="form-check-input" type="checkbox" value="includeIngredients=rice" id="rice" onChange={handleIngredientChange} />
+                            <label className="form-check-label" htmlFor="rice">
+                                Rice
+                            </label>
+                        </div>
+                        <div className="form-check col-3">
+                            <input className="form-check-input" type="checkbox" value="includeIngredients=mushrooms" id="mushrooms" onChange={handleIngredientChange} />
+                            <label className="form-check-label" htmlFor="mushrooms">
+                                Mushrooms
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div className="d-flex justify-content-center mt-3 pb-3">
                     <button type="button" className="btn btn-primary " onClick={handleSearch}>Search</button>
@@ -179,36 +251,36 @@ export const ResultsPage = () => {
                     {showGreeting && (
                         <h3 className="mt-3">Feeling hungry for something specific? Try filtering through some of our options!</h3>
                     )}
-
-                    {store.filteredRecipes.length > 0 && (
-                        <>
-                            <ul className="container row justify-content-center" style={{ listStyleType: "none" }}>
-                                {store.filteredRecipes.slice(0, resultsLoaded).map((p, index) => (
-                                    <RecipeCard
-                                        key={index}
-                                        title={p.title}
-                                        image={p.image}
-                                        pricePerServing={p.pricePerServing}
-                                        servings={p.servings}
-                                        diets={p.diets}
-                                        readyInMinutes={p.readyInMinutes}
-                                        className="col-4"
-                                    />
-                                ))}
-                            </ul>
-                            {store.filteredRecipes.length > resultsLoaded && (
-                                <div className="row mt-3">
-                                    <div className="col-md-6 mx-auto">
-                                        <button type="button" className="btn btn-secondary" onClick={handleLoadMore}>
-                                            Load More
-                                        </button>
-                                    </div>
-                                </div>
-                            )}
-                        </>
+                    {store.isLoading && (
+                        <div className=" container d-flex justify-content-center">
+                            <Spinner />
+                        </div>
                     )}
-
-                    {!store.isLoading && store.filteredRecipes.length === 0 && !showGreeting && (
+                    <ul className="container row justify-content-center">
+                        {store.filteredRecipes.slice(0, resultsLoaded).map((p, index) => (
+                            <RecipeCard
+                                key={index}
+                                title={p.title}
+                                image={p.image}
+                                pricePerServing={p.pricePerServing}
+                                servings={p.servings}
+                                diets={p.diets}
+                                readyInMinutes={p.readyInMinutes}
+                                id={p.id}
+                                className="col-4"
+                            />
+                        ))}
+                    </ul>
+                    {store.filteredRecipes.length > resultsLoaded && (
+                        <div className="row mt-3">
+                            <div className="col-md-6 mx-auto">
+                                <button type="button" className="btn btn-secondary" onClick={handleLoadMore}>
+                                    Load More
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                    {store.filteredRecipes.length === 0 && !showGreeting && (
                         <h3 className="text-center mt-3">Oops, looks like we don't have anything like that!</h3>
                     )}
                 </div>
