@@ -1,9 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "../../styles/navbar.css"
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import logo from "../../img/Logo.png";
 import food from "../../img/food.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { user } from "fontawesome";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -12,49 +15,59 @@ export const Navbar = () => {
 
 	const [selectValue, setSelectValue] = useState("");
 
+	const navigate = useNavigate();
+
 	const handleSelectChange = (event) => {
 		setSelectValue(event.target.value);
 	}
 
+	const handleLogout = (event) => {
+		actions.logout()
+		navigate("/")
+	}
+
+
 	return (
-		<nav className="navbar container d-flex py-2">
-			<div className="text-wrapper">
-				<Link to="/">
-					<img src={logo} style={{ width: "50px", height: "43px" }}></img><img src={food} style={{ width: "200px", height: "43px" }} />
-				</Link>
+		<nav className="navbar navbar-expand-sm d-flex container-fluid d-flex justify-content-between py-2">
+			<div className="justify-content-between">
+				<a className="navbar-brand" href="#">
+					<Link to="/">
+						<img src={logo} style={{ width: "50px", height: "43px" }}></img><img src={food} style={{ width: "200px", height: "43px" }} />
+					</Link></a>
 			</div>
-
-
-
-
 
 			{!store.token ?
 				<>
-					<div className="sign-up-button col-auto">
-						<Link className='link' to="/signup">Sign Up</Link>
-					</div>
-
-
-					<div className="log-in-button col-auto">
-
-						<Link className='link' to="/login">Log In</Link>
-
+					<div className="collapse navbar-collapse" id="navbarNav">
+						<ul className="navbar-nav ms-md-auto gap-2 ">
+							<li className="nav-item rounded">
+								<a className="nav-link active" aria-current="page" href="#"><FontAwesomeIcon icon="fas fa-user-plus" size="1xl" /><Link className='link' to="/signup">Sign Up</Link></a>
+							</li>
+							<li className="nav-item rounded">
+								<a className="nav-link" href="#"><FontAwesomeIcon icon="fas fa-sign-in-alt" size="1xl" /><Link className='link' to="/login">Log In</Link></a>
+							</li>
+						</ul>
 					</div>
 				</>
 				:
 				<>
-					<div class="dropdown">
 
-						<img class="dropdown-toggle" data-bs-toggle="dropdown" src={logo} style={{ width: "50px", height: "43px" }}></img>
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">{store.user && store.user.name}</a></li>
-							<li><button onClick={() => actions.logout()} className="dropdown-item">Log out</button></li>
-
+					<div className="nav-item dropdown rounded">
+						<a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><FontAwesomeIcon icon="fas fa-user-alt" />Profile</a>
+						<ul className="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
+							<div className="profile-highlight details">
+								<img className="dropdown-toggle avatar img-fluid rounded-circle mx-auto" data-bs-toggle="dropdown" style={{ width: "50px", height: "43px" }} src={store.user && store.user.avatar}></img>
+								<a id="profile-name">{store.user && store.user.name}</a>
+							</div>
+							<li><a className="dropdown-item" href="#"><Link className='link' to="/profile"><FontAwesomeIcon icon="fas fa-user-circle" />Account</Link></a></li>
+							<li className="dropdown-divider">
+							</li>
+							<li><button onClick={handleLogout} className="dropdown-item"><FontAwesomeIcon icon="fas fa-sign-out-alt" />Log out</button></li>
 						</ul>
 					</div>
-
 				</>
 			}
+
 
 		</nav>
 	);

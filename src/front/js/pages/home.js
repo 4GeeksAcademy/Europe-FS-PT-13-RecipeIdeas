@@ -11,9 +11,6 @@ export const Home = () => {
 		actions.getRandomRecipe()
 	}, []);
 
-	useEffect(() => {
-		if (store.token && store.token != "" && store.token != undefined) actions.getMessage();
-	}, [store.token]);
 
 	return (
 		<>
@@ -37,6 +34,7 @@ export const Home = () => {
 							return (
 								<RecipeCard
 									key={index}
+									id={p.id}
 									title={p.title}
 									image={p.image}
 									pricePerServing={p.pricePerServing}

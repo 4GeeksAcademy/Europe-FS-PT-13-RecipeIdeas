@@ -37,41 +37,41 @@ export const Recipe = props => {
 
 	return (
 		<div className="container-fluid d-flex flex-column justify-content-center px-5">
-			<h1 className="display-4 text-center pt-5 pb-3">{recipeInformation.title}</h1>
+			<div className="row d-flex justify-content-center mt-5">
 
-			<img src={recipeInformation.image} className="recipe-image img-fluid pb-3" alt="Recipe Image" />
+				<img src={recipeInformation.image} className="col-lg-12 col-xl-6 recipe-image pb-3" alt="Recipe Image" />
 
+				<div className="col-lg-12 col-xl-6 d-flex flex-column justify-content-between text-center mb-4 px-5">
+					<h1 className="display-4 text-center pb-3">{recipeInformation.title}</h1>
 
-			<div className="container-fluid d-flex flex-column justify-content-center">
-				<div className="row d-flex justify-content-between text-center mb-4">
-					<div className="col-sm-3 col-md-3">
-						<FontAwesomeIcon icon="fa-solid fa-clock" size="2xl" className="pe-3 pt-3" />
-						{recipeInformation.readyInMinutes} Minutes
+					<div className="row d-flex justify-content-between">
+						<div className="col-4">
+							<FontAwesomeIcon icon="fa-solid fa-clock" size="2xl" className="pe-3 pt-3" />
+							{recipeInformation.readyInMinutes} Minutes
+						</div>
+						
+						<div className="col-4">
+							<FontAwesomeIcon icon="fa-solid fa-utensils" size="2xl" className="pe-3 pt-3" />
+							{recipeInformation.servings} Servings
+						</div>
+
+						<div className="col-4">
+							<FontAwesomeIcon icon="fa-solid fa-dollar-sign" size="2xl" className="pe-3 pt-3" />
+							{Math.round(recipeInformation.pricePerServing) / 100} Dollars per Serving
+						</div>
 					</div>
 
-					<div className="col-sm-3 col-md-3">
-						<FontAwesomeIcon icon="fa-solid fa-utensils" size="2xl" className="pe-3 pt-3" />
-						{recipeInformation.servings} Servings
-					</div>
-
-					<div className="col-sm-3 col-md-3">
-						<FontAwesomeIcon icon="fa-solid fa-dollar-sign" size="2xl" className="pe-3 pt-3" />
-						{Math.round(recipeInformation.pricePerServing) / 100} Dollars per Serving
-					</div>
-				</div>
-
-				<div className="row d-flex justify-content-between text-center mx-3">
-					<div className="col-sm-12 col-md-6">
+					<div className="col-12">
 						<FontAwesomeIcon icon="fa-solid fa-plate-wheat" size="2xl" className="pe-3 mt-3" />
 						{
-							recipeInformation.diets ?
+							recipeInformation.diets && (recipeInformation.diets != []) ?
 								recipeInformation.diets.join(", ")
 								:
 								"Omnivore"
 						}
 					</div>
-
-					<div className="col-sm-12 col-md-6">
+					
+					<div className="col-12">
 						<FontAwesomeIcon icon="fa-solid fa-bowl-food" size="2xl" className="pe-3 mt-3" />
 						{
 							recipeInformation.dishTypes ?
@@ -99,14 +99,12 @@ export const Recipe = props => {
 
 						<div className="tab-pane fade show active" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab" tabIndex="0">
 							{ReactHtmlParser(recipeInformation.summary)}
-
 							<SimilarRecipes />
-
 						</div>
 
 						<div className="row tab-pane fade d-flex justify-content-between px-0" id="pills-instructions" role="tabpanel" aria-labelledby="pills-instructions-tab" tabIndex="0">
 
-							<div className="col-sm-12 col-md-6 d-flex flex-column text-center">
+							<div className="col-sm-12 col-md-6 d-flex flex-column justify-content-between text-center">
 								<div className="pb-3 fs-3 pt-3">Ingredients</div>
 								{
 									recipeInformation.extendedIngredients ?
@@ -118,7 +116,7 @@ export const Recipe = props => {
 								}
 							</div>
 
-							<div className="col-sm-12 col-md-6 text-center">
+							<div className="col-sm-12 col-md-6 flex-column justify-content-between text-center">
 								<div className="pb-3 fs-3 pt-3">Instructions</div>
 								{
 									recipeInstructions ?
