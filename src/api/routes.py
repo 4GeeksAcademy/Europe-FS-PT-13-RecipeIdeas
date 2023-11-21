@@ -10,7 +10,6 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 import hashlib
-
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -56,10 +55,8 @@ def create_token():
 
 @api.route('/update_user/', methods=['PUT'])
 def update_user():
-
-
-    current_user = User.query.get(1)
-    current_user.email = request.json.get('email')
+    email = request.json.get('email')
+    current_user = User.query.filter_by(email= email).first()
     current_user.avatar = request.json.get('avatar')
     current_user.firstName = request.json.get('firstName')
     current_user.lastName = request.json.get('lastName')
@@ -77,9 +74,9 @@ def update_user():
     return jsonify(response_body), 200
 
 
-@api.route('/get_user/', methods=['GET'])
-def get_user():
-    current_user = User.query.filter_by(email="test1@gmail.com").first()
+@api.route('/get_user/<email>', methods=['GET'])
+def get_user(email):
+    current_user = User.query.filter_by(email=email).first()
     print(current_user)
 
     response_body = {
@@ -91,9 +88,11 @@ def get_user():
 @api.route('/upload_avatar/', methods=['PUT'])
 def upload_avatar():
 
-    current_user = User.query.filter_by(email="test1@gmail.com").first()
+    email = request.json.get('email')
+    current_user = User.query.filter_by(email= email).first()
 
     image_url = request.json.get('image_url', None) # Get request body.
+    
 
     uploader = cloudinary.uploader.upload(image_url, unique_filename = False, overwrite=True)
     image_info = cloudinary.api.resource(uploader["public_id"]) # Get image via a randomly generated public_id.
@@ -121,17 +120,6 @@ def upload_avatar():
 
     return jsonify(response_body), 200
 
-@api.route("/token", methods=["GET"])
-@jwt_required()
-def get_hello():
-
-    email = get_jwt_identity()
-
-    dictionary = {
-        "message": "hello" + email
-    }
-
-    return jsonify(dictionary)
 
 
 @api.route("/signup", methods=["POST"])
@@ -147,3 +135,4 @@ def create_signup():
     db.session.commit()
 
     return jsonify(user.serialize())
+

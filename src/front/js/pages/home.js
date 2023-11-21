@@ -11,9 +11,6 @@ export const Home = () => {
 		actions.getRandomRecipe()
 	}, []);
 
-	useEffect(() => {
-		if (store.token && store.token != "" && store.token != undefined) actions.getMessage();
-	}, [store.token]);
 
 	return (
 		<>

@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
@@ -64,8 +65,10 @@ export const Login = () => {
           <div>
             <input type="submit" className="save-info btn btn-primary p-2 mt-3 mx-2" value="Login" />
           </div>
+          <p>Have you register already? Please <Link to="/signup">Sign up</Link>!</p>
         </form>
       }
+      
     </div>
   );
 };

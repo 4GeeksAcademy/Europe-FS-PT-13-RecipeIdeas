@@ -30,7 +30,7 @@ const injectContext = PassedComponent => {
 			 **/
 			// <---- calling this function from the flux.js actions
 			state.actions.refreshStore();
-			state.actions.getuserDetails();
+			//state.actions.getuserDetails();
 			state.actions.getRandomRecipe();
 		}, []);
 

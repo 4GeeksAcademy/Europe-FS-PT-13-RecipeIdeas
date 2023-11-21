@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../../js/store/appContext"
 import { Form } from "../../js/component/form.js"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -20,21 +20,24 @@ export const Profile = () => {
     const handleCancel = () => {
         setEditDetails(false)
     }
-    
+
     const handleSubmit = (userDetails) => {
+        console.log(userDetails)
+        console.log(store.user)
         actions.setUserDetails(userDetails)
         setEditDetails(false)
     }
-  
-    
+
+
     let myWidget = cloudinary.createUploadWidget({
-        cloudName: process.env.CLOUD_NAME, 
+        cloudName: process.env.CLOUD_NAME,
         uploadPreset: "users_avatar",
-        cropping: true}, 
-        (error, result) => { 
-            if (!error && result && result.event === "success") { 
+        cropping: true
+    },
+        (error, result) => {
+            if (!error && result && result.event === "success") {
                 console.log('Done! Here is the image info: ', result.info.url);
-                actions.setProfilePicture(result.info.url)
+                actions.setProfilePicture(result.info.url, store.user.email)
             }
         }
     )
@@ -44,6 +47,10 @@ export const Profile = () => {
         myWidget.open();
     }
 
+    useEffect(() => {
+        setEditDetails(store.user.avatar)
+    }, [store.user])
+
     return (
         <div className="profile container-fluid border border-danger">
             <div className="user-data row d-flex justify-content-between p-1">
@@ -51,7 +58,7 @@ export const Profile = () => {
                 <div className="avatar col-sm-12 col-md-4 d-flex flex-column justify-content-center text-center">
                     <img
                         className="avatar img-fluid rounded-circle mx-auto"
-                        src={store.userDetails.avatar}
+                        src={store.user && store.user.avatar}
                         alt="Profile Picture"
                     />
                     <button className="change-picture btn btn-danger my-2 mx-auto p-2" onClick={handleUploadAvatar}> Change profile picture </button>
@@ -60,7 +67,7 @@ export const Profile = () => {
 
                 <div className="user-info col-sm-12 col-md-8 d-flex flex-column justify-content-center">
                     <div className="wrapper mx-auto px-4 w-100">
-                        <h1 className="display-5">{`${store.userDetails.firstName} ${store.userDetails.lastName}`}</h1>
+                        <h1 className="display-5">{`${store.user && store.user.firstName} ${store.user && store.user.lastName}`}</h1>
                         <Form handleSubmit={handleSubmit} handleCancel={handleCancel} handleEditInfo={handleEditInfo} editDetails={editDetails} />
                     </div>
                 </div>
