@@ -34,9 +34,12 @@ export const RecipeCard = (props) => {
 			cost: props.pricePerServing,
 			diet: props.diets,
 		})
-		console.log("RECIPE CARD", props.title, props.diets)
 
-		setIsFavorite( store.favouriteRecipes ? store.favouriteRecipes.some(recipe => recipe.recipe_external_id === recipeDetails.id) : false ) 
+		if (store.favouriteRecipes) {
+			console.log(store.favouriteRecipes)
+			setIsFavorite(store.favouriteRecipes.some(recipe => recipe.recipeExternalId == props.id))
+		}
+
 	}, []);
 
 

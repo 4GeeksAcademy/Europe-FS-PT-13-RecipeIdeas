@@ -16,6 +16,10 @@ export const Navbar = () => {
 		setSelectValue(event.target.value);
 	}
 
+	const handleLink = () => {
+		window.location.reload();
+	};
+
 	return (
 		<nav className="navbar container d-flex py-2">
 			<div className="text-wrapper">
@@ -23,9 +27,6 @@ export const Navbar = () => {
 					<img src={logo} style={{ width: "50px", height: "43px" }}></img><img src={food} style={{ width: "200px", height: "43px" }} />
 				</Link>
 			</div>
-
-
-
 
 
 			{!store.token ?
