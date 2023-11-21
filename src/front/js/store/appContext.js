@@ -34,7 +34,7 @@ const injectContext = PassedComponent => {
 			state.actions.getRandomRecipe();
 
 			if (state.store.token) { 
-				state.actions.getuserDetails();
+				state.actions.getUserDetails();
 				state.actions.getFavourites();	
 			}
 		}, []);
