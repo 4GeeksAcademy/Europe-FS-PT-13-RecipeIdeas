@@ -58,8 +58,8 @@ export const Navbar = () => {
 						<ul className="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
 
 							<div className="profile-highlight details">
-								<img className="dropdown-toggle avatar img-fluid rounded-circle mx-auto" data-bs-toggle="dropdown" style={{ width: "50px", height: "43px" }} src={store.userDetails.avatar}></img>
-								<a id="profile-name">{store.userDetails.name}</a>
+								<img className="dropdown-toggle avatar img-fluid rounded-circle ms-3 me-2" data-bs-toggle="dropdown" style={{ width: "50px", height: "43px" }} src={store.userDetails.avatar}></img>
+								<a id="profile-name ms-3">{store.userDetails.name}</a>
 							</div>
 
 							<li>
