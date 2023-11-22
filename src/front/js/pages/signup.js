@@ -6,25 +6,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
 export const Signup = () => {
-	const { store, actions } = useContext(Context);
+  const { store, actions } = useContext(Context);
 
-	const [signName, setSignName] = useState("");
-	const [signEmail, setSignEmail] = useState("");
-	const [signPassword, setSignPassword] = useState("");
+  const [signName, setSignName] = useState("");
+  const [signEmail, setSignEmail] = useState("");
+  const [signPassword, setSignPassword] = useState("");
 
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		const signupResult = actions.signup(signName, signEmail, signPassword)
-		signupResult.then(result => {
-			if (result === true) {
-				navigate("/login")
-			}
-			else alert("The email you provided is already taken.")
-		})
-	};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const signupResult = actions.signup(signName, signEmail, signPassword)
+    signupResult.then(result => {
+      if (result === true) {
+        navigate("/login")
+      }
+      else alert("The email you provided is already taken.")
+    })
+  };
 
 
   return (
@@ -37,7 +37,7 @@ export const Signup = () => {
           </div></div>
         <div>
           <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-person" size="2xl" /> </span>
-          <label>Name:</label>
+          <label> First Name:</label>
           <input
             type="text"
             name="name"
@@ -75,11 +75,11 @@ export const Signup = () => {
           </div>
         </div>
         <div>
-          <button type="submit"className="save-info btn btn-primary p-2 mt-3 mx-2">Sign Up</button>
+          <button type="submit" className="save-info btn btn-primary p-2 mt-3 mx-2">Sign Up</button>
         </div>
         <p>Already have an account? Please <Link to="/login">Login</Link>!</p>
       </form>
-      
+
     </div>
   );
 };

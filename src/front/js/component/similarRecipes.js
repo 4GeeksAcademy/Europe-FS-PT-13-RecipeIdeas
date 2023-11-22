@@ -9,11 +9,11 @@ export const SimilarRecipes = (props) => {
     const { store, actions } = useContext(Context);
 
     useEffect(() => {
-
+        
     }, [store.similarRecipesInfo])
 
     return (
-        <div className="row mt-5 d-flex justify-content-between text-center container">
+        <div className="row mt-5 d-flex justify-content-between text-center container-fluid">
             <span className="pb-3 fs-3 pt-3">Similar Recipes</span>
             {
                 store.similarRecipesInfo ?

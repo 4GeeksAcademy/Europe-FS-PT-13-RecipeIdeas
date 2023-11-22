@@ -25,13 +25,9 @@ export const Navbar = () => {
 		navigate("/")
 	}
 
-	useEffect(() => {
-		actions.getUserDetails()
-	}, [])
-
 
 	return (
-		<nav className="navbar navbar-expand-sm d-flex container-fluid d-flex justify-content-between py-2">
+		<nav className="navbar navbar-expand-sm d-flex container-fluid d-flex justify-content-between py-2 px-5">
 			<div className="justify-content-between">
 				<a className="navbar-brand" href="/">
 					<img src={logo} style={{ width: "50px", height: "43px" }}></img>
@@ -44,7 +40,7 @@ export const Navbar = () => {
 					<div className="collapse navbar-collapse" id="navbarNav">
 						<ul className="navbar-nav ms-md-auto gap-2 ">
 
-							<li className="nav-item rounded">
+							<li className="nav-item rounded pe-3">
 								<a className="nav-link active" aria-current="page" href="/signup"><FontAwesomeIcon icon="fas fa-user-plus" size="xl" />Sign Up</a>
 							</li>
 
@@ -62,8 +58,8 @@ export const Navbar = () => {
 						<ul className="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
 
 							<div className="profile-highlight details">
-								<img className="dropdown-toggle avatar img-fluid rounded-circle mx-auto" data-bs-toggle="dropdown" style={{ width: "50px", height: "43px" }} src={store.userDetails.avatar}></img>
-								<a id="profile-name">{store.user.name}</a>
+								<img className="dropdown-toggle avatar img-fluid rounded-circle ms-3 me-2" data-bs-toggle="dropdown" style={{ width: "50px", height: "43px" }} src={store.userDetails.avatar}></img>
+								<a id="profile-name ms-3">{store.userDetails.name}</a>
 							</div>
 
 							<li>
