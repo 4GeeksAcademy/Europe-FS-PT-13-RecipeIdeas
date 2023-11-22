@@ -85,7 +85,7 @@ export const RecipeCard = (props) => {
 					</div>
 
 					<div className="col-sm-3 col-md-3 col-lg-3 d-flex align-items-center">
-						<i onClick={toggleFavorite} className={`fa${isFavorite ? 's' : 'r'} fa-heart fa-2x`} data-bs-toggle="modal" data-bs-target="#favouritesModal"></i>
+						<i onClick={toggleFavorite} className={`fa${isFavorite ? 's' : 'r'} fa-heart fa-2x`} data-bs-toggle={!store.token || store.token === undefined ? "modal" : ""} data-bs-target={!store.token || store.token === undefined ? "#favouritesModal" : "#"}></i>
 					</div>
 
 				</div>
