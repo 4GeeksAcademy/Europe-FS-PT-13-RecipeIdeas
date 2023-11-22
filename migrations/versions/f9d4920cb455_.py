@@ -35,7 +35,6 @@ def upgrade():
     sa.Column('name', sa.String(length=120), nullable=False),
     sa.Column('email', sa.String(length=120), nullable=False),
     sa.Column('password', sa.String(length=80), nullable=False),
-    sa.Column('firstName', sa.String(length=80), nullable=True),
     sa.Column('lastName', sa.String(length=80), nullable=True),
     sa.Column('username', sa.String(length=80), nullable=True),
     sa.Column('linkedIn', sa.String(length=200), nullable=True),

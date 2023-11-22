@@ -64,7 +64,7 @@ export const Navbar = () => {
 
 							<div className="profile-highlight details">
 								<img className="dropdown-toggle avatar img-fluid rounded-circle mx-auto" data-bs-toggle="dropdown" style={{ width: "50px", height: "43px" }} src={store.userDetails.avatar}></img>
-								<a id="profile-name">{store.user.name}</a>
+								<a id="profile-name">{store.userDetails.name}</a>
 							</div>
 
 							<li>
