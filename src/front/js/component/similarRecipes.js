@@ -9,7 +9,7 @@ export const SimilarRecipes = (props) => {
     const { store, actions } = useContext(Context);
 
     useEffect(() => {
-
+        
     }, [store.similarRecipesInfo])
 
     return (

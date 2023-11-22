@@ -31,7 +31,6 @@ export const Recipe = props => {
 		getRecipeInformation()
 		getRecipeInstructions()
 		actions.getSimilarRecipes(params.id)
-
 	}, [params.id])
 
 
@@ -64,19 +63,26 @@ export const Recipe = props => {
 					<div className="col-12">
 						<FontAwesomeIcon icon="fa-solid fa-plate-wheat" size="2xl" className="pe-3 mt-3" />
 						{
-							recipeInformation.diets && (recipeInformation.diets != []) ?
-								recipeInformation.diets.join(", ")
+							recipeInformation.diets ?
+								recipeInformation.diets.length !== 0 ?
+									recipeInformation.diets.join(", ")
 								:
 								"Omnivore"
+							:
+							"Omnivore"
 						}
 					</div>
 					
 					<div className="col-12">
 						<FontAwesomeIcon icon="fa-solid fa-bowl-food" size="2xl" className="pe-3 mt-3" />
+						{console.log("HEEERRREEE", recipeInformation.dishTypes)}
 						{
 							recipeInformation.dishTypes ?
-								recipeInformation.dishTypes.join(", ")
-								:
+								recipeInformation.dishTypes.length !== 0 ?
+									recipeInformation.dishTypes.join(", ")
+									:
+									"Not defined."
+							:
 								"Not defined."
 						}
 					</div>
