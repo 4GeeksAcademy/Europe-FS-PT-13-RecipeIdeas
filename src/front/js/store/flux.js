@@ -190,7 +190,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					})
 					.then(() => {
-						store.complexSearchIds = store.complexSearchResults.map(item => item.id)
+						getStore().complexSearchIds = getStore().complexSearchResults.map(item => item.id)
 						console.log("complex search ids")
 						console.log(getStore().complexSearchIds)
 					})
@@ -210,7 +210,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({isLoading: true})
 					console.log("checking for ids in the store", getStore().complexSearchIds);
 
-					const response = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk?ids=${store.complexSearchIds}`, {
+					const response = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk?ids=${getStore().complexSearchIds}`, {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
@@ -220,6 +220,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify()
 					});
 					const data = await response.json();
+					console.log("DATA", data)
 					setStore({ filteredRecipes: data });
 				} catch (error) {
 					console.error('There was a problem with the fetch operation:', error);
