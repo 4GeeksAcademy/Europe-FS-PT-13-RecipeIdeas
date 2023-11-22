@@ -63,14 +63,14 @@ export const Navbar = () => {
 						<ul className="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
 
 							<div className="profile-highlight details">
-								<img className="dropdown-toggle avatar img-fluid rounded-circle mx-auto" data-bs-toggle="dropdown" style={{ width: "50px", height: "43px" }} src={store.user.avatar}></img>
+								<img className="dropdown-toggle avatar img-fluid rounded-circle mx-auto" data-bs-toggle="dropdown" style={{ width: "50px", height: "43px" }} src={store.userDetails.avatar}></img>
 								<a id="profile-name">{store.user.name}</a>
 							</div>
 
 							<li>
 								<a className="dropdown-item" href="/profile"><FontAwesomeIcon icon="fas fa-user-circle" />Account</a>
 							</li>
-							
+
 							<li className="dropdown-divider"></li>
 
 							<li>
