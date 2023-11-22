@@ -1,6 +1,6 @@
 img.avatar {
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     object-fit: cover; /*The image keeps the aspect ratio while filling the entire content box.*/
     overflow: hidden;
 }
