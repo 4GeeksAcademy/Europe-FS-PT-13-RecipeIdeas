@@ -41,7 +41,6 @@ export const Home = () => {
 									servings={p.servings}
 									diets={p.diets}
 									readyInMinutes={p.readyInMinutes}
-									id={p.id}
 								/>
 							);
 						})}
