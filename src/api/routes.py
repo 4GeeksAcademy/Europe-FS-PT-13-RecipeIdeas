@@ -96,8 +96,6 @@ def update_user():
     current_user_email = get_jwt_identity()
     current_user = User.query.filter_by(email=current_user_email).first()
 
-
-
     current_user.email = request.json.get('email')
     current_user.avatar = request.json.get('avatar')
     current_user.name = request.json.get('name')

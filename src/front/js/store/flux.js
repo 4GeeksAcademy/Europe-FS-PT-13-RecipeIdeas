@@ -21,7 +21,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			userDetails: {
 				name: "",
-				firstName: "",
 				lastName: "",
 				username: null,
 
@@ -105,6 +104,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							sessionStorage.setItem("token", data.access_token);
 							sessionStorage.setItem("user", JSON.stringify(data.user));
 							setStore({ token: data.access_token, user: data.user })
+							getActions().getUserDetails()
 							return true
 						}
 						return false
