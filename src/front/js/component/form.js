@@ -5,15 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export const Form = (props) => {
 
     const { store, actions } = useContext(Context)
-
-    const [userDetails, setUserDetails] = useState(null)
+    const [userDetails, setUserDetails] = useState(store.userDetails)
 
     useEffect(() => {
-        console.log(store.user)
-        setUserDetails(store.user)
-    }, [store.user])
+        setUserDetails(store.userDetails)
+    }, [store.userDetails])
 
-    return userDetails ? (
+    return (
         <form className="info-wrapper py-4 px-4 d-flex flex-column was-validated" onSubmit={props.handleSubmit}>
 
             <div className="form-group row d-flex justify-content-between px-0">
@@ -24,7 +22,8 @@ export const Form = (props) => {
                             <div className="input-group has-validation">
                                 <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-person" size="2xl" /> </span>
 
-                                <input id="first-name" type="text" value={userDetails.firstName} onChange={(event) => setUserDetails({ ...userDetails, 'firstName': event.target.value })} className="form-control p-2 border-4"></input><div className="invalid-feedback">
+                                <input id="first-name" type="text" value={userDetails.firstName} onChange={(event) => setUserDetails({ ...userDetails, 'firstName': event.target.value })} className="form-control p-2 border-4"></input>
+                                <div className="invalid-feedback">
                                     Provide a valid first name.
                                 </div>
                             </div>
@@ -159,6 +158,5 @@ export const Form = (props) => {
                     <button className="edit-info btn btn-danger p-2 mt-3" onClick={props.handleEditInfo}>Edit details</button>
             }
         </form>
-
-    ) : <></>;
+    );
 };

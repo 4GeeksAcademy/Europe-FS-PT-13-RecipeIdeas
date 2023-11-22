@@ -21,8 +21,6 @@ export const Profile = () => {
     }
 
     const handleSubmit = (userDetails) => {
-        console.log(userDetails)
-        console.log(store.user)
         actions.setUserDetails(userDetails)
         setEditDetails(false)
     }
@@ -36,7 +34,7 @@ export const Profile = () => {
         (error, result) => {
             if (!error && result && result.event === "success") {
                 console.log('Done! Here is the image info: ', result.info.url);
-                actions.setProfilePicture(result.info.url, store.user.email)
+                actions.setProfilePicture(result.info.url)
             }
         }
     )

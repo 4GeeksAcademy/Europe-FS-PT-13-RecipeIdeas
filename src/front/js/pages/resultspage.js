@@ -91,7 +91,7 @@ export const ResultsPage = () => {
                 <div className="row p-5">
                     <h3 className="text-center mb-4">Filter Options:</h3>
                     <div className="col-sm-2 col-md-3 col-lg-4">
-                        <select class="form-select " aria-label="Cuisine" onChange={handleCuisineSelect}>
+                        <select className="form-select " aria-label="Cuisine" onChange={handleCuisineSelect}>
                             <option value="">Select Cuisine:</option>
                             <option value="cuisine=italian">Italian</option>
                             <option value="cuisine=french">French</option>
@@ -101,7 +101,7 @@ export const ResultsPage = () => {
                         </select>
                     </div>
                     <div className="col-sm-2 col-md-3 col-lg-4">
-                        <select class="form-select " aria-label="Cuisine" onChange={handleDietSelect}>
+                        <select className="form-select " aria-label="Cuisine" onChange={handleDietSelect}>
                             <option value="">Select Diet:</option>
                             <option value="diet=vegetarian">Vegetarian</option>
                             <option value="diet=vegan">Vegan</option>
@@ -111,7 +111,7 @@ export const ResultsPage = () => {
                         </select>
                     </div>
                     <div className="col-sm-2 col-md-3 col-lg-4">
-                        <select class="form-select " aria-label="Cuisine" onChange={handleTypeSelect}>
+                        <select className="form-select " aria-label="Cuisine" onChange={handleTypeSelect}>
                             <option value="">Select Meal Type:</option>
                             <option value="type=main course">Main Course</option>
                             <option value="type=appetizer">Appetizer</option>
@@ -152,7 +152,7 @@ export const ResultsPage = () => {
                 </div>
                 <div className="row justify-content-center">
                     <div className="col-md-6">
-                        <label for="prepTimeRange" className="form-label">Preparation Time: {prepTime} minutes </label>
+                        <label htmlFor="prepTimeRange" className="form-label">Preparation Time: {prepTime} minutes </label>
                         <div className="d-flex justify-content-center align-items-center">
                             <input type="range" className="form-range" min="5" max="50" step="5" value={prepTime} onChange={handlePrepTimeChange} id="prepTimeRange" />
                         </div>
@@ -267,7 +267,6 @@ export const ResultsPage = () => {
                                 diets={p.diets}
                                 readyInMinutes={p.readyInMinutes}
                                 id={p.id}
-                                className="col-4"
                             />
                         ))}
                     </ul>
