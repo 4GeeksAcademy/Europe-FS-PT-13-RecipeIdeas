@@ -2,31 +2,33 @@
   background-color: #ffcab0;
   height: 89px;
   position: relative;
-  width: 2000px;
+  display: flex;
+  justify-content:;
+
 }
   
   .navbar .text-wrapper {
-    color: #426b1f;
     font-family: "Newsreader", Helvetica;
     font-size: 32px;
     font-weight: 500;
+    font-palette: white;
     left: 96px;
     letter-spacing: -0.32px;
     line-height: 32px;
-    position: absolute;
     top: 40px;
     white-space: nowrap;
   }
   
   .navbar .log-in-button {
-    background-color: #426b1f;
+    background-color: #72aa40;
     border-radius: 8px;
     height: 48px;
     left: 1123px;
     overflow: hidden;
-    position: absolute;
     top: 33px;
     width: 126px;
+    text-align: center;
+    padding-top: 10px;
   }
   
   .navbar .div {
@@ -38,21 +40,24 @@
     left: 40px;
     letter-spacing: 0;
     line-height: 20.8px;
-    position: absolute;
     text-align: center;
     top: 12px;
     white-space: nowrap;
+    
   }
   
   .navbar .sign-up-button {
-    background-color: #426b1f;
+    color: #ffffff;
+    background-color: #72aa40;
     border-radius: 8px;
     height: 48px;
     left: 1263px;
     overflow: hidden;
-    position: absolute;
     top: 33px;
     width: 126px;
+    text-align: center;
+    padding-top: 10px;
+
   }
   
   .navbar .text-wrapper-2 {
@@ -64,12 +69,70 @@
     left: 13px;
     letter-spacing: 0;
     line-height: 20.8px;
-    position: absolute;
     text-align: center;
     top: 10px;
     white-space: nowrap;
     width: 102px;
   }
   
+  .nav-link {
+    color: rgb(50 145 50);
+    text-decoration: none;
+    font-size: 22px;
+    display: flex;
+    justify-content:space-around;
+    text-align: center;
+    padding-right: 4px;
+   }
   
-  
+   .navbar .btn {
+    color: #fff;
+    padding-top: 2px;
+    font-size: 20px;
+   }
+
+   .svg-inline--fa {
+    display: var(--fa-display, inline-block);
+    height: 1em;
+    overflow: visible;
+    vertical-align: -0.125em;
+    justify-content: space-around;
+    padding-right: 10px;
+    padding-top: 4px;
+   }
+
+   a.link {
+    color: rgb(50 145 50);
+    text-decoration: none;
+}
+
+.dropdown-item {
+  display: flex;
+  width: 100%;
+  padding: 0.25rem 1rem;
+  padding-top: 0.7rem;
+  clear: both;
+  font-weight: 400;
+  color: green;
+  text-align: inherit;
+  text-decoration: underline;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+.dropdown-menu {
+  position: absolute;
+  z-index: 1000;
+  display: none;
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  margin: 0;
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color: #eaf5ec;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 0.25rem;
+}
