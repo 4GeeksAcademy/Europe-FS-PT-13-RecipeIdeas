@@ -20,6 +20,7 @@ export const Login = () => {
     e.preventDefault();
     const loginResult = actions.login(email, password)
     loginResult.then(result => {
+      console.log(result)
       if (result === true) {
         navigate("/")
       }
@@ -68,7 +69,7 @@ export const Login = () => {
           <p>Have you register already? Please <Link to="/signup">Sign up</Link>!</p>
         </form>
       }
-      
+
     </div>
   );
 };

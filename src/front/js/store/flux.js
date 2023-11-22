@@ -40,14 +40,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (!getStore().token && sessionStorage.getItem("token")) {
 					const token = sessionStorage.getItem("token");
 
-					if (token) {
+
+					if (token !== "undefined" && token !== null) {
 						setStore({ token: token });
 					}
 				}
 				if (!getStore().user && sessionStorage.getItem("user")) {
-					const user = JSON.parse(sessionStorage.getItem("user"));
-					if (user) {
-						setStore({ user: user });
+					const user = sessionStorage.getItem("user");
+					if (user !== "undefined" && user !== null) {
+						console.log(user)
+						setStore({ user: JSON.parse(user) });
 					}
 				}
 			},
@@ -60,18 +62,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore(
 					{
 						token: null,
-            			user: null,
+						user: null,
 						favouriteRecipes: [],
 						userDetails: {
 							name: "",
 							firstName: "",
 							lastName: "",
 							username: null,
-			
+
 							email: null,
 							linkedIn: null,
 							github: null,
-			
+
 							avatar: null,
 						},
 					}
@@ -99,11 +101,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						else return false
 					})
 					.then(data => {
-						console.log("this came from the backend", data)
-						sessionStorage.setItem("token", data.access_token);
-						sessionStorage.setItem("user", JSON.stringify(data.user));
-						setStore({ token: data.access_token, user: data.user })
-						return true
+						if (data){
+							console.log("this came from the backend", data)
+							sessionStorage.setItem("token", data.access_token);
+							sessionStorage.setItem("user", JSON.stringify(data.user));
+							setStore({ token: data.access_token, user: data.user })
+							return true
+						}
+						return false
 					})
 					.catch(error => {
 						console.log("There was an error during login: ", error)
@@ -116,32 +121,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const opts = {
 					method: "POST",
 
-					headers:{ 
-            			"Content-Type": "application/json"
-				  	},
+					headers: {
+						"Content-Type": "application/json"
+					},
 
 					body: JSON.stringify(
 						{
-						"name" : name,
-						"email": email,
-						"password": password
+							"name": name,
+							"email": email,
+							"password": password
 						}
 					)
 				}
-			  
+
 				return fetch(process.env.BACKEND_URL + "api/signup", opts)
-				.then(resp => {
-					if(resp.status === 200) return resp.json();
-				  	else { return false; }
-				})
-				.then(data => {
-					console.log("sign up successful", data)
-					return true;
-				})
-				.catch(error => {
-					console.log("There was an error during signup.", error)
-					return false;
-				})
+					.then(resp => {
+						if (resp.status === 200) return resp.json();
+						else { return false; }
+					})
+					.then(data => {
+						console.log("sign up successful", data)
+						return true;
+					})
+					.catch(error => {
+						console.log("There was an error during signup.", error)
+						return false;
+					})
 			},
 
 
@@ -161,7 +166,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return response;
 					})
 					.then((data) => {
-						
+
 						setStore({ randomRecipes: data["recipes"] });
 					})
 					.catch((error) => {
@@ -207,7 +212,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getFilteredRecipes: async () => {
 				try {
-					setStore({isLoading: true})
+					setStore({ isLoading: true })
 					console.log("checking for ids in the store", getStore().complexSearchIds);
 
 					const response = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk?ids=${getStore().complexSearchIds}`, {
@@ -226,7 +231,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error('There was a problem with the fetch operation:', error);
 				}
 				finally {
-					setStore({isLoading: false})}
+					setStore({ isLoading: false })
+				}
 			},
 
 
@@ -307,7 +313,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error setting user's profile picture.", error)
 				}
 			},
-		
+
 
 
 			getRecipeSummary: async (recipeId) => {
@@ -402,7 +408,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			clearResults: async () => {
-				setStore({filteredRecipes: []})
+				setStore({ filteredRecipes: [] })
 			},
 
 			getFavourites: async () => {
@@ -419,7 +425,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ favouriteRecipes: await data.favourite_recipes })
 					return getStore().favouriteRecipes
 				}
-				catch(error) {
+				catch (error) {
 					console.error("There was a problem with getting the user's favourite recipe: ", error);
 				}
 			},
@@ -453,7 +459,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					return resp.status
 				}
-				catch(error) {
+				catch (error) {
 					console.error('There was a problem with adding a favourite recipe: ', error);
 				}
 			},
@@ -481,7 +487,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					return resp.status
 				}
-				catch(error) {
+				catch (error) {
 					console.error('There was a problem with removing a favourite recipe: ', error);
 				}
 
