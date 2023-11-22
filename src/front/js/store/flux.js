@@ -37,14 +37,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 
 			refreshStore: () => {
-				if (!getStore().token) {
+				if (!getStore().token && sessionStorage.getItem("token")) {
 					const token = sessionStorage.getItem("token");
 
 					if (token) {
 						setStore({ token: token });
 					}
 				}
-				if (!getStore().user) {
+				if (!getStore().user && sessionStorage.getItem("user")) {
 					const user = JSON.parse(sessionStorage.getItem("user"));
 					if (user) {
 						setStore({ user: user });
@@ -301,7 +301,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({
 						userDetails: { ...getStore()['userDetails'], "avatar": newAvatar }
 					})
-
 				}
 				catch (error) {
 					console.log("Error setting user's profile picture.", error)

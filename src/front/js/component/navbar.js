@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import logo from "../../img/Logo.png";
 import food from "../../img/food.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { user } from "fontawesome";
+
 import { useNavigate } from "react-router-dom";
 
 
@@ -44,11 +44,13 @@ export const Navbar = () => {
 				<>
 					<div className="collapse navbar-collapse" id="navbarNav">
 						<ul className="navbar-nav ms-md-auto gap-2 ">
+
 							<li className="nav-item rounded">
-								<a className="nav-link active" aria-current="page" href="#"><FontAwesomeIcon icon="fas fa-user-plus" size="1xl" /><Link className='link' to="/signup">Sign Up</Link></a>
+								<a className="nav-link active" aria-current="page" href="/signup"><FontAwesomeIcon icon="fas fa-user-plus" size="xl" />Sign Up</a>
 							</li>
+
 							<li className="nav-item rounded">
-								<a className="nav-link" href="#"><FontAwesomeIcon icon="fas fa-sign-in-alt" size="1xl" /><Link className='link' to="/login">Log In</Link></a>
+								<a className="nav-link" href="/login"><FontAwesomeIcon icon="fas fa-sign-in-alt" size="xl" />Log In</a>
 							</li>
 						</ul>
 					</div>
