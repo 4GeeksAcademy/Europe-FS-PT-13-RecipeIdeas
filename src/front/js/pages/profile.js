@@ -29,7 +29,8 @@ export const Profile = () => {
     let myWidget = cloudinary.createUploadWidget({
         cloudName: process.env.CLOUD_NAME,
         uploadPreset: "users_avatar",
-        cropping: true
+        cropping: true,
+        croppingShowDimensions: true,
     },
         (error, result) => {
             if (!error && result && result.event === "success") {
@@ -50,18 +51,19 @@ export const Profile = () => {
             <div className="profile container-fluid my-5">
                 <div className="user-data row d-flex justify-content-between p-1">
 
-                    <div className="avatar col-sm-12 col-md-4 d-flex flex-column justify-content-center text-center">
+                    <div className="avatar col-sm-12 col-md-5 d-flex flex-column justify-content-center align-items-center">
                         <img
-                            className="avatar img-fluid rounded-circle mx-auto"
+                            className="avatar img-fluid rounded-circle"
                             src={store.userDetails.avatar}
                             alt="Profile Picture"
                         />
-                        <button className="change-picture btn btn-danger my-2 mx-auto p-2" onClick={handleUploadAvatar}> Change profile picture </button>
+                        <button className="change-picture btn btn-danger my-3 mx-auto p-2" onClick={handleUploadAvatar}> Change profile picture </button>
                     </div>
 
-                    <div className="user-info col-sm-12 col-md-8 d-flex flex-column justify-content-center">
-                        <div className="wrapper mx-auto px-4 w-100">
+                    <div className="user-info col-sm-12 col-md-7 d-flex flex-column justify-content-start">
+                        <div className="wrapper px-4 me-5">
                             <h1 className="display-5">{`${store.userDetails.name ? store.userDetails.name : ""} ${store.userDetails.lastName ? store.userDetails.lastName : ""}`}</h1>
+
                             <Form handleSubmit={handleSubmit} handleCancel={handleCancel} handleEditInfo={handleEditInfo} editDetails={editDetails} />
                         </div>
                     </div>

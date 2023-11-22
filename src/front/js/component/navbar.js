@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 
 
-
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 
