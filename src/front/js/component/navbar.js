@@ -25,13 +25,9 @@ export const Navbar = () => {
 		navigate("/")
 	}
 
-	useEffect(() => {
-		actions.getUserDetails()
-	}, [])
-
 
 	return (
-		<nav className="navbar navbar-expand-sm d-flex container-fluid d-flex justify-content-between py-2">
+		<nav className="navbar navbar-expand-sm d-flex container-fluid d-flex justify-content-between py-2 px-5">
 			<div className="justify-content-between">
 				<a className="navbar-brand" href="/">
 					<img src={logo} style={{ width: "50px", height: "43px" }}></img>
@@ -44,7 +40,7 @@ export const Navbar = () => {
 					<div className="collapse navbar-collapse" id="navbarNav">
 						<ul className="navbar-nav ms-md-auto gap-2 ">
 
-							<li className="nav-item rounded">
+							<li className="nav-item rounded pe-3">
 								<a className="nav-link active" aria-current="page" href="/signup"><FontAwesomeIcon icon="fas fa-user-plus" size="xl" />Sign Up</a>
 							</li>
 

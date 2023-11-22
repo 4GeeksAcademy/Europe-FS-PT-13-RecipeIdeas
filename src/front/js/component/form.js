@@ -30,7 +30,7 @@ export const Form = (props) => {
                             :
                             <div className="d-flex">
                                 <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-person" size="2xl" /> </span>
-                                <div id="first-name" className="form-input p-2 w-100">{userDetails.lastNameame}</div>
+                                <div id="first-name" className="form-input p-2 w-100">{userDetails.name}</div>
                             </div>
                     }
                 </div>

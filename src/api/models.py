@@ -28,7 +28,6 @@ class User(db.Model):
             "email": self.email,
             "avatar": self.avatar,
             "username": self.username,
-            "name": self.name,
             "lastName": self.lastName,
             "linkedIn": self.linkedIn,
             "github": self.github,
