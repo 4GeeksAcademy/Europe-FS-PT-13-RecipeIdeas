@@ -69,7 +69,7 @@ export const RecipeCard = (props) => {
 
 
 	const handleGoToRecipe = () => {
-		navigate("/recipe/" + props.id)
+		navigate("/recipe/" + recipeDetails.id)
 	}
 
 
