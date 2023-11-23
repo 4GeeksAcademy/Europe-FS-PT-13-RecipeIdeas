@@ -1,3 +1,7 @@
 img.recipe-image {
-    max-height: 500px;
+  max-height: 500px;
+}
+
+.nav-link:not(.active) {
+  color: #007BFF;
 }
