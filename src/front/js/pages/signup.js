@@ -22,7 +22,9 @@ export const Signup = () => {
       if (result === true) {
         navigate("/login")
       }
-      else alert("The email you provided is already taken.")
+      else {
+        alert("The email you provided is already taken.")
+      }
     })
   };
 
