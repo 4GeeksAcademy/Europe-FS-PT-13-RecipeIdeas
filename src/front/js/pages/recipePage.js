@@ -103,11 +103,10 @@ export const Recipe = props => {
 					</ul>
 
 					<div className="tab-content mt-4" id="pills-tabContent">
-
-						<div className="tab-pane fade show active" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab" tabIndex="0">
+						<div className="tab-pane fade show active container " id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab" tabIndex="0">
 							{ReactHtmlParser(recipeInformation.summary)}
 							<h1 className="pb-3 fs-3 pt-3 mt-5 text-center">Similar Recipes</h1>
-							<div className="container d-flex justify-content-center">
+							<div className="row d-flex justify-content-around">
 								{
 									store.similarRecipesInfo ?
 										store.similarRecipesInfo.map((recipe, index) => {
