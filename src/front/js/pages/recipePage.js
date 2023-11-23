@@ -13,8 +13,21 @@ export const Recipe = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
 
+	const [isFavorite, setIsFavorite] = useState(false);
+	const [recipeDetails, setRecipeDetails] = useState({})
 	const [recipeInformation, setRecipeInformation] = useState([])
 	const [recipeInstructions, setRecipeInstructions] = useState([])
+
+	const toggleFavorite = () => {
+		if (store.token && store.token !== "") {
+			isFavorite ?
+				actions.removeFavourite(recipeDetails)
+				:
+				actions.addFavourite(recipeDetails)
+
+			setIsFavorite(!isFavorite);
+		}
+	};
 
 	useEffect(() => {
 
@@ -32,6 +45,21 @@ export const Recipe = props => {
 		getRecipeInstructions()
 		actions.getSimilarRecipes(params.id)
 		window.scrollTo(0, 0)
+
+		setRecipeDetails({
+			id: params.id,
+			image: recipeInformation.image,
+			title: recipeInformation.title,
+			servings: recipeInformation.servings,
+			prepTime: recipeInformation.readyInMinutes,
+			cost: recipeInformation.pricePerServing,
+			diet: recipeInformation.diets,
+		})
+
+		if (store.favouriteRecipes) {
+			setIsFavorite(store.favouriteRecipes.some(recipe => recipe.recipeExternalId == params.id))
+		}
+
 	}, [params.id])
 
 
@@ -42,7 +70,14 @@ export const Recipe = props => {
 				<img src={recipeInformation.image} className="col-lg-12 col-xl-6 recipe-image pb-3" alt="Recipe Image" />
 
 				<div className="col-lg-12 col-xl-6 d-flex flex-column justify-content-between text-center mb-4 px-5">
-					<h1 className="display-4 text-center pb-3">{recipeInformation.title}</h1>
+
+					<div className="container-fluid d-flex justify-content-between">
+						<h1 className="col-sm-9 col-md-9 col-lg-9 display-4 text-center pb-3">{recipeInformation.title}</h1>
+						<div className="col-sm-3 col-md-3 col-lg-3 d-flex justify-content-end align-items-center">
+							<i onClick={toggleFavorite} className={`fa${isFavorite ? 's' : 'r'} fa-heart fa-3x`} data-bs-toggle={!store.token || store.token === undefined ? "modal" : ""} data-bs-target={!store.token || store.token === undefined ? "#favouritesModal" : "#"}></i>
+						</div>
+					</div>
+					
 
 					<div className="row d-flex justify-content-between">
 						<div className="col-4">
@@ -76,7 +111,6 @@ export const Recipe = props => {
 
 					<div className="col-12">
 						<FontAwesomeIcon icon="fa-solid fa-bowl-food" size="2xl" className="pe-3 mt-3" />
-						{console.log("HEEERRREEE", recipeInformation.dishTypes)}
 						{
 							recipeInformation.dishTypes ?
 								recipeInformation.dishTypes.length !== 0 ?
@@ -162,9 +196,36 @@ export const Recipe = props => {
 
 					</div>
 				</div>
-
 			</div>
+
+			
+			{/* MODAL TO BE DISPLAYED WHEN USER SELECTS FAVOURITE AND IS NOT LOGGED IN.*/}
+
+			<div className="modal fade" id="favouritesModal" tabIndex="-1" aria-labelledby="favouritesModalLabel" aria-hidden={true} >
+				<div className="modal-dialog modal-dialog-centered">
+					<div className="modal-content">
+						<div className="modal-header">
+							<h1 className="modal-title fs-5" id="exampleModalLabel">Login to add favourites</h1>
+							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div className="modal-body">
+							In order to add favourite recipes, you must be logged in. If you don't have an account yet, Sign Up.
+						</div>
+						<div className="modal-footer">
+							<Link to="/signup">
+								<button type="button" className="btn btn-success" data-bs-dismiss="modal">Sign Up</button>
+							</Link>
+
+							<Link to="/login">
+								<button type="button" className="btn btn-success" data-bs-dismiss="modal">Login</button>
+							</Link>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
+
 	);
 };
 
