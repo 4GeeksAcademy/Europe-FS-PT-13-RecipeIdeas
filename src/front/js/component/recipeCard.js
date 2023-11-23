@@ -76,7 +76,7 @@ export const RecipeCard = (props) => {
 	const fontSizeTitle = Math.max(12, 24 - props.title.length / 5);
 
 	return (
-		<li className="col-sm-3 col-md-3 col-lg-3 me-4" style={{ listStyleType: "none" }}>
+		<li className="col-sm-9 col-md-9 col-lg-3 me-4" style={{ listStyleType: "none" }}>
 			<div className="mt-4 rounded-top d-flex flex-column justify-content-between shadow" style={{ backgroundColor: "#ffcab0", height: "425px" }}>
 				<div className="row">
 
