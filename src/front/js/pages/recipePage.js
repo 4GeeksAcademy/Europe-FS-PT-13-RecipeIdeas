@@ -34,6 +34,16 @@ export const Recipe = props => {
 		const getRecipeInformation = async () => {
 			const recipeInfo = await actions.getRecipeInformation(params.id)
 			setRecipeInformation(recipeInfo)
+
+			setRecipeDetails({
+				id: params.id,
+				image: recipeInfo.image,
+				title: recipeInfo.title,
+				servings: recipeInfo.servings,
+				prepTime: recipeInfo.readyInMinutes,
+				cost: recipeInfo.pricePerServing,
+				diet: recipeInfo.diets,
+			})
 		};
 
 		const getRecipeInstructions = async () => {
@@ -46,21 +56,11 @@ export const Recipe = props => {
 		actions.getSimilarRecipes(params.id)
 		window.scrollTo(0, 0)
 
-		setRecipeDetails({
-			id: params.id,
-			image: recipeInformation.image,
-			title: recipeInformation.title,
-			servings: recipeInformation.servings,
-			prepTime: recipeInformation.readyInMinutes,
-			cost: recipeInformation.pricePerServing,
-			diet: recipeInformation.diets,
-		})
-
 		if (store.favouriteRecipes) {
 			setIsFavorite(store.favouriteRecipes.some(recipe => recipe.recipeExternalId == params.id))
 		}
 
-	}, [params.id])
+	}, [params.id, ])
 
 
 	return (
