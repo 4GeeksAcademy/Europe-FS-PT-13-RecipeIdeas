@@ -29,7 +29,7 @@ export const Home = () => {
 			<div className="container p-5 rounded" style={{ backgroundColor: "#ffebbb" }}>
 				<h1 className="text-center display-6">Suggested Recipes</h1>
 				<div className="row">
-					<ul className="d-flex justify-content-center">
+					<ul className="d-flex justify-content-around">
 						{store.randomRecipes.map((p, index) => {
 							return (
 								<RecipeCard
