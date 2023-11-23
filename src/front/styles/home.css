@@ -9,4 +9,5 @@
 .bg-image{
     background-image: url("https://www.aldi.pt/content/dam/aldi/portugal/receita/Conchas_recheadas_de_sabores_21x9_banner.jpg/jcr:content/renditions/original.transform/1817w/img.1535466721306.jpg");
     height: 400px;
+    min-width: 100%;
 }
