@@ -105,6 +105,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 							sessionStorage.setItem("user", JSON.stringify(data.user));
 							setStore({ token: data.access_token, user: data.user })
 							getActions().getUserDetails()
+
+							if (!data.user.avatar) {
+								getActions().setProfilePicture("https://static-media.hotmart.com/oJaok0Xh24PILrqMnrzNz5t3QTo=/300x300/smart/filters:format(webp):background_color(white)/hotmart/product_pictures/f9d9ba1d-7121-43ff-8dca-34bcd65c332d/Designsemnome.png?w=920")
+							}
 							return true
 						}
 						return false
@@ -135,7 +139,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				return fetch(process.env.BACKEND_URL + "api/signup", opts)
 					.then(resp => {
-						if (resp.status === 200) return resp.json();
+						if (resp.status === 200) {
+							return resp.json();
+						}
 						else { return false; }
 					})
 					.then(data => {

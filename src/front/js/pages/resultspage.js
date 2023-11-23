@@ -252,7 +252,7 @@ export const ResultsPage = () => {
                         <h3 className="mt-3">Feeling hungry for something specific? Try filtering through some of our options!</h3>
                     )}
                     {store.isLoading && (
-                        <div className=" container d-flex justify-content-center">
+                        <div className=" container d-flex justify-content-center mt-3">
                             <Spinner />
                         </div>
                     )}

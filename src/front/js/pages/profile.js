@@ -70,8 +70,8 @@ export const Profile = () => {
                 </div>
 
                 <div className="favourite-recipes container-fluid mt-5">
-                    <h1 className="text-center">Favourite Recipes:</h1>
-                    <div className="row container-fluid d-flex justify-content-around">
+                    <h1 className="text-center">Favourite Recipes</h1>
+                    <div className="row container d-flex justify-content-around mx-auto">
                             {
                                 store.favouriteRecipes ?
                                     store.favouriteRecipes.map((favRecipe, index) => {

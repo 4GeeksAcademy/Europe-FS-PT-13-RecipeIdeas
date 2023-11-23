@@ -76,11 +76,11 @@ export const RecipeCard = (props) => {
 	const fontSizeTitle = Math.max(12, 24 - props.title.length / 5);
 
 	return (
-		<li className="col-sm-3 col-md-3 col-lg-3 me-4" style={{ listStyleType: "none" }}>
+		<li className="col-sm-8 col-md-6 col-lg-3" style={{ listStyleType: "none" }}>
 			<div className="mt-4 rounded-top d-flex flex-column justify-content-between shadow" style={{ backgroundColor: "#ffcab0", height: "425px" }}>
-				<div className="row">
+				<div className="row d-felx justify-content-between">
 
-					<div className="col-sm-6 col-md-6 col-lg-9">
+					<div className="col-sm-8 col-md-8 col-lg-9">
 						<h5 className="m-2" style={{ fontSize: `${fontSizeTitle}px` }}>{recipeDetails.title}</h5>
 					</div>
 

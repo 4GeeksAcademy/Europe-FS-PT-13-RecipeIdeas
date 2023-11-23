@@ -25,10 +25,6 @@ export const Navbar = () => {
 		navigate("/")
 	}
 
-	const defaultImage = () => {
-		const source = store.userDetails.avatar || logo;
-		return source;
-	}
 
 	useEffect(() => {
 		actions.getUserDetails()
@@ -65,9 +61,8 @@ export const Navbar = () => {
 						<a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><FontAwesomeIcon icon="fas fa-user-alt" />Profile</a>
 						<ul className="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
 
-							<div className="profile-highlight details">
-
-								<img className="dropdown-toggle avatarmenu img-fluid rounded-circle mx-auto" data-bs-toggle="dropdown" src={defaultImage()}></img>
+							<div className="profile-highlight details mx-3">
+								<img className="dropdown-toggle avatarmenu img-fluid rounded-circle" data-bs-toggle="dropdown" src={store.userDetails.avatar}></img>
 								<a id="profile-name">{store.userDetails.name}</a>
 
 							</div>

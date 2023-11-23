@@ -26,25 +26,23 @@ export const Home = () => {
 					<button type="button" className="btn display-6 shadow-lg text-dark ps-5 pe-5 pt-3 pb-3 rounded-pill" style={{ backgroundColor: "#e0ffcd" }}>Search for recipes</button>
 				</Link>
 			</div>
-			<div className="container p-5 rounded" style={{ backgroundColor: "#ffebbb" }}>
+			<div className="container p-5 mt-3" style={{ backgroundColor: "#ffebbb" }}>
 				<h1 className="text-center display-6">Suggested Recipes</h1>
-				<div className="row">
-					<ul className="d-flex justify-content-center">
-						{store.randomRecipes.map((p, index) => {
-							return (
-								<RecipeCard
-									key={index}
-									id={p.id}
-									title={p.title}
-									image={p.image}
-									pricePerServing={p.pricePerServing}
-									servings={p.servings}
-									diets={p.diets}
-									readyInMinutes={p.readyInMinutes}
-								/>
-							);
-						})}
-					</ul>
+				<div className="row container-fluid d-flex justify-content-around mt-3">
+					{store.randomRecipes.map((p, index) => {
+						return (
+							<RecipeCard
+								key={index}
+								id={p.id}
+								title={p.title}
+								image={p.image}
+								pricePerServing={p.pricePerServing}
+								servings={p.servings}
+								diets={p.diets}
+								readyInMinutes={p.readyInMinutes}
+							/>
+						);
+					})}
 				</div>
 			</div>
 		</>
