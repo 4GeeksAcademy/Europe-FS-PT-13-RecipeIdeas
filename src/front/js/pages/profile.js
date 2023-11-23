@@ -16,10 +16,6 @@ export const Profile = () => {
         setEditDetails(!editDetails)
     }
 
-    const handleCancel = () => {
-        setEditDetails(false)
-    }
-
     const handleSubmit = (userDetails) => {
         actions.setUserDetails(userDetails)
         setEditDetails(false)
@@ -64,7 +60,7 @@ export const Profile = () => {
                         <div className="wrapper px-4 me-5">
                             <h1 className="display-5">{`${store.userDetails.name ? store.userDetails.name : ""} ${store.userDetails.lastName ? store.userDetails.lastName : ""}`}</h1>
 
-                            <Form handleSubmit={handleSubmit} handleCancel={handleCancel} handleEditInfo={handleEditInfo} editDetails={editDetails} />
+                            <Form handleSubmit={handleSubmit} handleEditInfo={handleEditInfo} editDetails={editDetails} />
                         </div>
                     </div>
                 </div>

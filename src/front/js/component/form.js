@@ -7,6 +7,11 @@ export const Form = (props) => {
     const { store, actions } = useContext(Context)
     const [userDetails, setUserDetails] = useState(store.userDetails)
 
+    const handleCancel = () => {
+        actions.getUserDetails()
+        setEditDetails(false)
+    }
+
     useEffect(() => {
         setUserDetails(store.userDetails)
     }, [store.userDetails])
@@ -15,7 +20,7 @@ export const Form = (props) => {
         <form className="info-wrapper py-4 px-4 d-flex flex-column was-validated" onSubmit={props.handleSubmit}>
 
             <div className="form-group row d-flex justify-content-between px-0">
-                <div className="col-sm-12 col-md-12 col-lg-4 mb-2">
+                <div className="col-sm-12 col-md-12 col-lg-6 mb-2">
                     <label htmlFor="first-name" className="mb-1"> First Name </label>
                     {
                         props.editDetails ?
@@ -35,7 +40,7 @@ export const Form = (props) => {
                     }
                 </div>
 
-                <div className="col-sm-12 col-md-12 col-lg-4 mb-2">
+                <div className="col-sm-12 col-md-12 col-lg-6 mb-2">
                     <label htmlFor="last-name" className="form-label mb-1"> Last Name </label>
                     {
                         props.editDetails ?
@@ -54,7 +59,7 @@ export const Form = (props) => {
                     }
                 </div>
 
-                <div className="col-sm-12 col-md-12 col-lg-4 mb-2">
+                {/*<div className="col-sm-12 col-md-12 col-lg-4 mb-2">
                     <label htmlFor="username" className="form-label mb-1">Username</label>
                     {
                         props.editDetails ?
@@ -72,7 +77,7 @@ export const Form = (props) => {
                                 <div id="username" className="form-input p-2 w-100">{userDetails.username}</div>
                             </div>
                     }
-                </div>
+                </div>*/}
             </div>
 
 
@@ -83,7 +88,7 @@ export const Form = (props) => {
                         props.editDetails ?
                             <div className="input-group has-validation">
                                 <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-envelope" size="2xl" /> </span>
-                                <input id="email" type="email" required value={userDetails.email} onChange={(event) => setUserDetails({ ...userDetails, 'email': event.target.value })} className="form-control p-2 border-4"></input>
+                                <input id="email" type="email" disabled value={userDetails.email} onChange={(event) => setUserDetails({ ...userDetails, 'email': event.target.value })} className="form-control p-2 border-4 border-success bg-white"></input>
                                 <div className="invalid-feedback" htmlFor="email">
                                     Provide a valid email.
                                 </div>
@@ -152,7 +157,7 @@ export const Form = (props) => {
                 props.editDetails ?
                     <div className="d-flex justify-content-end">
                         <button className="save-info btn btn-danger p-2 mt-3 mx-2" onClick={event => props.handleSubmit(userDetails)}>Save changes</button>
-                        <button className="cancel-info btn btn-danger p-2 mt-3" onClick={props.handleCancel}>Cancel</button>
+                        <button className="cancel-info btn btn-danger p-2 mt-3" onClick={handleCancel}>Cancel</button>
                     </div>
                     :
                     <button className="edit-info btn btn-danger p-2 mt-3" onClick={props.handleEditInfo}>Edit details</button>
