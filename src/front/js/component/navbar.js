@@ -25,10 +25,6 @@ export const Navbar = () => {
 		navigate("/")
 	}
 
-	const defaultImage = () => {
-		const source = store.userDetails.avatar || logo;
-		return source;
-	}
 
 	useEffect(() => {
 		actions.getUserDetails()
@@ -67,7 +63,7 @@ export const Navbar = () => {
 
 							<div className="profile-highlight details">
 
-								<img className="dropdown-toggle avatarmenu img-fluid rounded-circle mx-auto" data-bs-toggle="dropdown" src={defaultImage()}></img>
+								<img className="dropdown-toggle avatarmenu img-fluid rounded-circle mx-auto" data-bs-toggle="dropdown" src={store.userDetails.avatar}></img>
 								<a id="profile-name">{store.userDetails.name}</a>
 
 							</div>
