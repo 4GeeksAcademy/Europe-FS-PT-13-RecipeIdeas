@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import ReactHtmlParser from 'react-html-parser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { SimilarRecipes } from '../component/similarRecipes.js'
+import { RecipeCard } from "../component/recipeCard";
 
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
@@ -31,6 +31,7 @@ export const Recipe = props => {
 		getRecipeInformation()
 		getRecipeInstructions()
 		actions.getSimilarRecipes(params.id)
+		window.scrollTo(0, 0)
 	}, [params.id])
 
 
@@ -48,7 +49,7 @@ export const Recipe = props => {
 							<FontAwesomeIcon icon="fa-solid fa-clock" size="2xl" className="pe-3 pt-3" />
 							{recipeInformation.readyInMinutes} Minutes
 						</div>
-						
+
 						<div className="col-4">
 							<FontAwesomeIcon icon="fa-solid fa-utensils" size="2xl" className="pe-3 pt-3" />
 							{recipeInformation.servings} Servings
@@ -66,13 +67,13 @@ export const Recipe = props => {
 							recipeInformation.diets ?
 								recipeInformation.diets.length !== 0 ?
 									recipeInformation.diets.join(", ")
+									:
+									"Omnivore"
 								:
 								"Omnivore"
-							:
-							"Omnivore"
 						}
 					</div>
-					
+
 					<div className="col-12">
 						<FontAwesomeIcon icon="fa-solid fa-bowl-food" size="2xl" className="pe-3 mt-3" />
 						{console.log("HEEERRREEE", recipeInformation.dishTypes)}
@@ -82,7 +83,7 @@ export const Recipe = props => {
 									recipeInformation.dishTypes.join(", ")
 									:
 									"Not defined."
-							:
+								:
 								"Not defined."
 						}
 					</div>
@@ -105,7 +106,28 @@ export const Recipe = props => {
 
 						<div className="tab-pane fade show active" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab" tabIndex="0">
 							{ReactHtmlParser(recipeInformation.summary)}
-							<SimilarRecipes />
+							<h1 className="pb-3 fs-3 pt-3 mt-5 text-center">Similar Recipes</h1>
+							<div className="container d-flex justify-content-center">
+								{
+									store.similarRecipesInfo ?
+										store.similarRecipesInfo.map((recipe, index) => {
+											return (
+												<RecipeCard
+													key={index}
+													id={recipe.id}
+													title={recipe.title}
+													image={recipe.image}
+													pricePerServing={recipe.pricePerServing}
+													servings={recipe.servings}
+													diets={recipe.diets}
+													readyInMinutes={recipe.readyInMinutes}
+												/>
+											)
+										})
+										:
+										console.log("NOTHING")
+								}
+							</div>
 						</div>
 
 						<div className="row tab-pane fade d-flex justify-content-between px-0" id="pills-instructions" role="tabpanel" aria-labelledby="pills-instructions-tab" tabIndex="0">

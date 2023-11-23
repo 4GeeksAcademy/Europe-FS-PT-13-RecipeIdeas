@@ -87,9 +87,9 @@ export const ResultsPage = () => {
 
     return (
         <>
-            <div className="container rounded-3 mt-4" style={{ backgroundColor: "#e0ffcd" }}>
+            <div className="container rounded-3 mt-4" style={{ backgroundColor: "#ffcab0" }}>
                 <div className="row p-5">
-                    <h3 className="text-center mb-4">Filter Options:</h3>
+                    <h3 className="text-center mb-4 display-4">Filter Options</h3>
                     <div className="col-sm-2 col-md-3 col-lg-4">
                         <select className="form-select " aria-label="Cuisine" onChange={handleCuisineSelect}>
                             <option value="">Select Cuisine:</option>
@@ -158,8 +158,8 @@ export const ResultsPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="container ms-2">
-                    <h4 className="mb-4 mt-4 text-center">Included Ingredients</h4>
+                <div className="container ms-2 ps-5 pb-5 rounded-pill shadow" style={{ backgroundColor: "#fdffcd" }}>
+                    <h4 className="mb-4 mt-4 text-center display-6">Included Ingredients</h4>
                     <div className="row justify-content-center">
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=cheese" id="cheese" onChange={handleIngredientChange} />
@@ -240,7 +240,7 @@ export const ResultsPage = () => {
                     </div>
                 </div>
                 <div className="d-flex justify-content-center mt-3 pb-3">
-                    <button type="button" className="btn btn-primary " onClick={handleSearch}>Search</button>
+                    <button type="button" className="btn display-6 shadow-lg text-dark ps-5 pe-5 pt-3 pb-3 rounded-pill" style={{ backgroundColor: "#e0ffcd" }} onClick={handleSearch}>Search</button>
                 </div>
 
             </div>

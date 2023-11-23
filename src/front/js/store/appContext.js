@@ -48,7 +48,7 @@ const injectContext = PassedComponent => {
 			</Context.Provider>
 		);
 	};
-	return StoreWrapper;
+	return StoreWrapper
 };
 
 export default injectContext;
