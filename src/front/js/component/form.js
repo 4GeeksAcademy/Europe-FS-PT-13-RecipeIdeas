@@ -7,6 +7,11 @@ export const Form = (props) => {
     const { store, actions } = useContext(Context)
     const [userDetails, setUserDetails] = useState(store.userDetails)
 
+    const handleCancel = () => {
+        actions.getUserDetails()
+        setEditDetails(false)
+    }
+
     useEffect(() => {
         setUserDetails(store.userDetails)
     }, [store.userDetails])
@@ -152,7 +157,7 @@ export const Form = (props) => {
                 props.editDetails ?
                     <div className="d-flex justify-content-end">
                         <button className="save-info btn btn-danger p-2 mt-3 mx-2" onClick={event => props.handleSubmit(userDetails)}>Save changes</button>
-                        <button className="cancel-info btn btn-danger p-2 mt-3" onClick={props.handleCancel}>Cancel</button>
+                        <button className="cancel-info btn btn-danger p-2 mt-3" onClick={handleCancel}>Cancel</button>
                     </div>
                     :
                     <button className="edit-info btn btn-danger p-2 mt-3" onClick={props.handleEditInfo}>Edit details</button>
