@@ -1,6 +1,3 @@
-import { store } from "fontawesome";
-import { number } from "prop-types";
-
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {

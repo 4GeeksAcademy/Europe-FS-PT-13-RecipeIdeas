@@ -27,7 +27,9 @@ export const Navbar = () => {
 
 
 	useEffect(() => {
-		actions.getUserDetails()
+		if (store.token) {
+			actions.getUserDetails()
+		}
 	}, []);
 
 	return (
