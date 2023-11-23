@@ -10,7 +10,6 @@ class User(db.Model):
     name = db.Column(db.String(120), unique=False, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
-    firstName = db.Column(db.String(80), unique=False, nullable=True)
     lastName = db.Column(db.String(80), unique=False, nullable=True)
     username = db.Column(db.String(80), unique=False, nullable=True)
     linkedIn = db.Column(db.String(200), unique=False, nullable=True)
@@ -29,7 +28,6 @@ class User(db.Model):
             "email": self.email,
             "avatar": self.avatar,
             "username": self.username,
-            "firstName": self.firstName,
             "lastName": self.lastName,
             "linkedIn": self.linkedIn,
             "github": self.github,

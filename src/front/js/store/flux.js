@@ -21,7 +21,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			userDetails: {
 				name: "",
-				firstName: "",
 				lastName: "",
 				username: null,
 
@@ -66,7 +65,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						favouriteRecipes: [],
 						userDetails: {
 							name: "",
-							firstName: "",
 							lastName: "",
 							username: null,
 
@@ -106,6 +104,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							sessionStorage.setItem("token", data.access_token);
 							sessionStorage.setItem("user", JSON.stringify(data.user));
 							setStore({ token: data.access_token, user: data.user })
+							getActions().getUserDetails()
 							return true
 						}
 						return false
@@ -253,7 +252,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({
 						userDetails: {
 							...getStore()['userDetails'], "email": userData['email'], "avatar": userData['avatar'], "username": userData['username'],
-							"name": userData['name'], "firstName": userData['firstName'], "lastName": userData['lastName'],
+							"name": userData['name'],  "lastName": userData['lastName'],
 							"linkedIn": userData['linkedIn'], "github": userData['github']
 						}
 					})

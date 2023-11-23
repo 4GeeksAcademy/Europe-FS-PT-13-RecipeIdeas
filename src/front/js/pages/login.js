@@ -24,7 +24,7 @@ export const Login = () => {
       if (result === true) {
         navigate("/")
       }
-      else alert("Have you register already?")
+      else alert("Have you register already? If so check if your email and password are correct.")
     })
   };
 

@@ -22,7 +22,7 @@ export const Form = (props) => {
                             <div className="input-group has-validation">
                                 <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-person" size="2xl" /> </span>
 
-                                <input id="first-name" type="text" value={userDetails.firstName} onChange={(event) => setUserDetails({ ...userDetails, 'firstName': event.target.value })} className="form-control p-2 border-4"></input>
+                                <input id="first-name" type="text" required value={userDetails.name} onChange={(event) => setUserDetails({ ...userDetails, 'name': event.target.value })} className="form-control p-2 border-4"></input>
                                 <div className="invalid-feedback">
                                     Provide a valid first name.
                                 </div>
@@ -30,7 +30,7 @@ export const Form = (props) => {
                             :
                             <div className="d-flex">
                                 <span className="form-input-icon"> <FontAwesomeIcon icon="fa-solid fa-person" size="2xl" /> </span>
-                                <div id="first-name" className="form-input p-2 w-100">{userDetails.firstName}</div>
+                                <div id="first-name" className="form-input p-2 w-100">{userDetails.name}</div>
                             </div>
                     }
                 </div>
