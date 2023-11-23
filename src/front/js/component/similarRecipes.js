@@ -4,6 +4,7 @@ import { Context } from "../store/appContext";
 import { RecipeCard } from "../component/recipeCard"
 
 
+
 export const SimilarRecipes = (props) => {
 
     const { store, actions } = useContext(Context);
