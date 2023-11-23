@@ -32,7 +32,7 @@ export const Navbar = () => {
 
 	useEffect(() => {
 		actions.getUserDetails()
-	}, []
+	}, []);
 
 	return (
 		<nav className="navbar navbar-expand-sm d-flex container-fluid d-flex justify-content-between py-2 px-5">
