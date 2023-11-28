@@ -31,8 +31,9 @@ export const Signup = () => {
 
     return (
 
-        <form className="info-wrapper container py-4 mt-5 d-flex flex-column was-validated" onSubmit={handleSubmit}>
-            <div className="row d-flex justify-content-between mx-auto">
+        <form className="info-wrapper container w-50 mt-5 d-flex flex-column was-validated" onSubmit={handleSubmit}>
+            
+            <div className="row d-flex mt-5 justify-content-center">  
                 <div className="form-group col-md-12 col-lg-10">
                     <div className="input-group">
                         <span className="form-input-icon ps-3 py-0 my-0"> <FontAwesomeIcon icon="fa-solid fa-person" size="2xl" /> </span>
@@ -60,7 +61,7 @@ export const Signup = () => {
                     <div className="input-group mt-3">
                         <span className="form-input-icon ps-3"> <FontAwesomeIcon icon="fa-solid fa-key" size="xl" /> </span>
                         <input
-                            type="password" name="password" required value={signPassword} placeholder="Enter your first password."
+                            type="password" name="password" required value={signPassword} placeholder="Enter your password."
                             onChange={(e) => setSignPassword(e.target.value)} className="form-control p-2 border-4">
                         </input>
 
@@ -71,12 +72,12 @@ export const Signup = () => {
                 </div>
             </div>
 
-            <div className="row mt-5 d-flex justify-content-center">
+            <div className="row mx-auto mt-5 pb-4 d-flex justify-content-center text-center">
                 <div>
                     <button type="submit" className="save-info btn btn-primary">Sign Up</button>
                 </div>
 
-                <p className="mb-0">Already have an account? Please <Link to="/login">Login</Link>!</p>
+                <p className="pt-2 mb-0">Already have an account? <Link to="/login">Login</Link>!</p>
             </div>
         </form>
     );
