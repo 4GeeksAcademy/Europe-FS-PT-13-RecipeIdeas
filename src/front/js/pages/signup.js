@@ -33,55 +33,55 @@ export const Signup = () => {
 
     return (
 
-            <form className="info-wrapper container w-50 my-auto d-flex flex-column was-validated" onSubmit={handleSubmit}>
-                
-                <div className="row d-flex mt-5 justify-content-center">  
-                    <div className="form-group col-md-12 col-lg-12">
-                        <div className="input-group">
-                            <span className="form-input-icon ps-3 py-0 my-0"> <FontAwesomeIcon icon="fa-solid fa-person" size="2xl" /> </span>
-                            <input type="text" name="name" required value={signName} placeholder="Enter your first name."
-                                onChange={(e) => setSignName(e.target.value)} className="form-control p-2 border-4">
-                            </input>
+        <form className="info-wrapper container w-50 my-auto d-flex flex-column was-validated" onSubmit={handleSubmit}>
 
-                            {/*<div className="invalid-feedback">
+            <div className="row d-flex mt-5 justify-content-center">
+                <div className="form-group col-md-12 col-lg-12">
+                    <div className="input-group">
+                        <span className="form-input-icon ps-3 py-0 my-0"> <FontAwesomeIcon icon="fa-solid fa-person" size="2xl" /> </span>
+                        <input type="text" name="name" required value={signName} placeholder="Enter your first name."
+                            onChange={(e) => setSignName(e.target.value)} className="form-control p-2 border-4">
+                        </input>
+
+                        {/*<div className="invalid-feedback">
                                 Please provide a name.
                             </div>*/}
-                        </div>
+                    </div>
 
-                        <div className="input-group mt-3">
-                            <span className="form-input-icon ps-3"> <FontAwesomeIcon icon="fa-solid fa-envelope" size="xl" /> </span>
-                            <input
-                                type="email" name="email" required value={signEmail} placeholder="Enter your email."
-                                onChange={(e) => setSignEmail(e.target.value)} className="form-control p-2 border-4">
-                            </input>
+                    <div className="input-group mt-3">
+                        <span className="form-input-icon ps-3"> <FontAwesomeIcon icon="fa-solid fa-envelope" size="xl" /> </span>
+                        <input
+                            type="email" name="email" required value={signEmail} placeholder="Enter your email."
+                            onChange={(e) => setSignEmail(e.target.value)} className="form-control p-2 border-4">
+                        </input>
 
-                            {/*<div className="invalid-feedback">
+                        {/*<div className="invalid-feedback">
                                 Please provide a e-mail.
                             </div>*/}
-                        </div>
+                    </div>
 
-                        <div className="input-group mt-3">
-                            <span className="form-input-icon ps-3"> <FontAwesomeIcon icon="fa-solid fa-key" size="xl" /> </span>
-                            <input
-                                type="password" name="password" required value={signPassword} placeholder="Enter your password."
-                                onChange={(e) => setSignPassword(e.target.value)} className="form-control p-2 border-4">
-                            </input>
+                    <div className="input-group mt-3">
+                        <span className="form-input-icon ps-3"> <FontAwesomeIcon icon="fa-solid fa-key" size="xl" /> </span>
+                        <input
+                            type="password" name="password" required value={signPassword} placeholder="Enter your password."
+                            onChange={(e) => setSignPassword(e.target.value)} className="form-control p-2 border-4">
+                        </input>
 
-                            {/*<div className="invalid-feedback">
+                        {/*<div className="invalid-feedback">
                                 Please insert your secret password.
                             </div>*/}
-                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div className="row mx-auto mt-5 pb-4 d-flex justify-content-center text-center">
-                    <div>
-                        <button type="submit" className="save-info btn btn-primary">Sign Up</button>
-                    </div>
-
-                    <p className="pt-2 mb-0 text-white fs-5">Already have an account? <Link to="/login" className="text-primary">Login</Link></p>
+            <div className="row mx-auto mt-5 pb-4 d-flex justify-content-center text-center">
+                <div>
+                    <button type="submit" className="save-info btn btn-primary">Sign Up</button>
                 </div>
-            </form>
+
+                <p className="pt-2 mb-0 text-white fs-5">Already have an account? <Link to="/login" className="text-primary">Login</Link></p>
+            </div>
+        </form>
     );
 };
 
