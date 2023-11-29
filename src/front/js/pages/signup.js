@@ -33,10 +33,10 @@ export const Signup = () => {
 
     return (
 
-        <form className="info-wrapper container w-50 my-auto d-flex flex-column was-validated" onSubmit={handleSubmit}>
+        <form className="info-wrapper signup-wrapper container w-50 my-auto d-flex flex-column was-validated" onSubmit={handleSubmit}>
 
             <div className="row d-flex mt-5 justify-content-center">
-                <div className="form-group col-md-12 col-lg-12">
+                <div className="form-group col-12">
                     <div className="input-group">
                         <span className="form-input-icon ps-3 py-0 my-0"> <FontAwesomeIcon icon="fa-solid fa-person" size="2xl" /> </span>
                         <input type="text" name="name" required value={signName} placeholder="Enter your first name."
@@ -45,7 +45,7 @@ export const Signup = () => {
 
                         {/*<div className="invalid-feedback">
                                 Please provide a name.
-                            </div>*/}
+                        </div>*/}
                     </div>
 
                     <div className="input-group mt-3">
@@ -57,7 +57,7 @@ export const Signup = () => {
 
                         {/*<div className="invalid-feedback">
                                 Please provide a e-mail.
-                            </div>*/}
+                        </div>*/}
                     </div>
 
                     <div className="input-group mt-3">
@@ -69,7 +69,7 @@ export const Signup = () => {
 
                         {/*<div className="invalid-feedback">
                                 Please insert your secret password.
-                            </div>*/}
+                        </div>*/}
                     </div>
                 </div>
             </div>
