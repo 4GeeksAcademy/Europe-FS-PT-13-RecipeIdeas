@@ -1,3 +1,21 @@
-form {
-    background-color: black;
+html {
+    height: 100%;
+}
+
+.layout-wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-wrapper {
+    background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.fanpage.it%2Fwp-content%2Fuploads%2Fsites%2F22%2F2018%2F04%2Fistock-819671144.jpg&f=1&nofb=1&ipt=b1f59ca46c5fb9b528e12fc5791e35c11fbcd176eddf180d88e694ff38ecae0d&ipo=images");
+    background-position: 50% 40%;
+    background-size: cover;
+    padding: 0 10%;
+}
+
+footer {
+    padding-top: 0;
+    margin-bottom: 0;
 }

@@ -33,19 +33,19 @@ export const Signup = () => {
 
     return (
 
-            <form className="info-wrapper container w-50 mt-5 d-flex flex-column was-validated" onSubmit={handleSubmit}>
+            <form className="info-wrapper container w-50 my-auto d-flex flex-column was-validated" onSubmit={handleSubmit}>
                 
                 <div className="row d-flex mt-5 justify-content-center">  
-                    <div className="form-group col-md-12 col-lg-10">
+                    <div className="form-group col-md-12 col-lg-12">
                         <div className="input-group">
                             <span className="form-input-icon ps-3 py-0 my-0"> <FontAwesomeIcon icon="fa-solid fa-person" size="2xl" /> </span>
                             <input type="text" name="name" required value={signName} placeholder="Enter your first name."
                                 onChange={(e) => setSignName(e.target.value)} className="form-control p-2 border-4">
                             </input>
 
-                            <div className="invalid-feedback">
+                            {/*<div className="invalid-feedback">
                                 Please provide a name.
-                            </div>
+                            </div>*/}
                         </div>
 
                         <div className="input-group mt-3">
@@ -55,9 +55,9 @@ export const Signup = () => {
                                 onChange={(e) => setSignEmail(e.target.value)} className="form-control p-2 border-4">
                             </input>
 
-                            <div className="invalid-feedback">
+                            {/*<div className="invalid-feedback">
                                 Please provide a e-mail.
-                            </div>
+                            </div>*/}
                         </div>
 
                         <div className="input-group mt-3">
@@ -67,9 +67,9 @@ export const Signup = () => {
                                 onChange={(e) => setSignPassword(e.target.value)} className="form-control p-2 border-4">
                             </input>
 
-                            <div className="invalid-feedback">
+                            {/*<div className="invalid-feedback">
                                 Please insert your secret password.
-                            </div>
+                            </div>*/}
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@ export const Signup = () => {
                         <button type="submit" className="save-info btn btn-primary">Sign Up</button>
                     </div>
 
-                    <p className="pt-2 mb-0">Already have an account? <Link to="/login">Login</Link>!</p>
+                    <p className="pt-2 mb-0 text-white fs-5">Already have an account? <Link to="/login" className="text-primary">Login</Link></p>
                 </div>
             </form>
     );
