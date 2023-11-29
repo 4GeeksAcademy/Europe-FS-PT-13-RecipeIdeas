@@ -5,7 +5,6 @@ import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
-import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -26,7 +25,7 @@ const Layout = () => {
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
     return (
-        <div>
+        <div className="layout-wrapper">
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />
@@ -38,7 +37,6 @@ const Layout = () => {
                         <Route element={<Recipe />} path="/recipe/:id" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<ResultsPage />} path="/resultpage" />
-                        <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
