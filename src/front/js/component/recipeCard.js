@@ -73,18 +73,18 @@ export const RecipeCard = (props) => {
 	}
 
 
-	const fontSizeTitle = Math.max(12, 24 - props.title.length / 5);
+	/*const fontSizeTitle = Math.max(12, 24 - props.title.length / 5);*/
 
 	return (
 		<li className="col-sm-8 col-md-6 col-lg-4 mb-4" style={{ listStyleType: "none" }}>
-			<div className="border rounded rounded-3 d-flex flex-column justify-content-between shadow" style={{ backgroundColor: "#ffcab0", height: "425px" }}>
+			<div className="card border rounded-3 d-flex flex-column justify-content-between shadow" style={{ backgroundColor: "#ffcab0", height: "425px" }}>
 				
-				<div className="row d-felx justify-content-between px-2 align-items-middle">
-					<div className="col-sm-8 col-md-8 col-lg-9">
-						<h5 className="m-2" style={{ fontSize: `${fontSizeTitle}px` }}>{recipeDetails.title}</h5>
+				<div className="row d-felx justify-content-between px-2 my-auto align-items-middle">
+					<div className="col-sm-10 col-md-10 col-lg-10">
+						<h5 className="m-1" >{recipeDetails.title}</h5>
 					</div>
 
-					<div className="col-sm-3 col-md-3 col-lg-3 d-flex align-items-center">
+					<div className="col-sm-2 col-md-2 col-lg-2 d-flex align-items-center pe-4">
 						<i onClick={toggleFavorite} className={`fa${isFavorite ? 's' : 'r'} fa-heart fa-2x`} data-bs-toggle={!store.token || store.token === undefined ? "modal" : ""} data-bs-target={!store.token || store.token === undefined ? "#favouritesModal" : "#"}></i>
 					</div>
 
