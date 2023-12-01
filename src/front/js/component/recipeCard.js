@@ -76,10 +76,10 @@ export const RecipeCard = (props) => {
 	const fontSizeTitle = Math.max(12, 24 - props.title.length / 5);
 
 	return (
-		<li className="col-sm-8 col-md-6 col-lg-3" style={{ listStyleType: "none" }}>
-			<div className="mt-4 rounded-top d-flex flex-column justify-content-between shadow" style={{ backgroundColor: "#ffcab0", height: "425px" }}>
-				<div className="row d-felx justify-content-between">
-
+		<li className="col-sm-8 col-md-6 col-lg-4 mb-4" style={{ listStyleType: "none" }}>
+			<div className="border rounded rounded-3 d-flex flex-column justify-content-between shadow" style={{ backgroundColor: "#ffcab0", height: "425px" }}>
+				
+				<div className="row d-felx justify-content-between px-2 align-items-middle">
 					<div className="col-sm-8 col-md-8 col-lg-9">
 						<h5 className="m-2" style={{ fontSize: `${fontSizeTitle}px` }}>{recipeDetails.title}</h5>
 					</div>
@@ -92,28 +92,28 @@ export const RecipeCard = (props) => {
 
 				<img src={recipeDetails.image} className="card-img-top" alt="Recipe Image" style={{ objectFit: "cover", height: "150px" }} />
 				<div className="m-2 rounded" style={{ backgroundColor: "#fdffcd" }}>
-					<div className="row">
-						<div className="col-sm-3 col-md-3 col-lg-4">
-							<p className="mt-1 ms-2"><i className="fas fa-utensils fa-lg"></i> {recipeDetails.servings} servings</p>
+					<div className="row d-flex justify-content-center text-center my-2">
+						<div className="col-sm-12 col-md-5 col-lg-5">
+							<p className="mt-1"><i className="fas fa-utensils fa-lg me-1"></i> {recipeDetails.servings} servings</p>
 						</div>
 
-						<div className="col-sm-3 col-md-3 col-lg-4">
-							<p className="mt-1 ms-2"><i className="far fa-clock fa-lg"></i> {recipeDetails.prepTime} minutes</p>
+						<div className="col-sm-12 col-md-5 col-lg-5">
+							<p className="mt-1 ms-2"><i className="fas fa-coins fa-lg me-1"></i> {totalRecipePrice(recipeDetails.cost, recipeDetails.servings)}</p>
 						</div>
 
-						<div className="col-sm-3 col-md-3 col-lg-4">
-							<p className="mt-1 ms-2"><i className="fas fa-coins fa-lg"></i> {totalRecipePrice(recipeDetails.cost, recipeDetails.servings)}</p>
+						<div className="col-sm-12 col-md-5 col-lg-5">
+							<p className="mt-1"><i className="far fa-clock fa-lg me-1"></i> {recipeDetails.prepTime} minutes</p>
 						</div>
 					</div>
 
-					<div className="row">
-						<div className="col-12 d-flex">
-							<p className="mt-1 ms-2"><i className="fas fa-apple-alt fa-lg"></i> {dietDisplay()}</p>
+					<div className="row d-flex justify-content-center text-center">
+						<div className="col-sm-12 col-md-12">
+							<p className="mb-2"><i className="fas fa-apple-alt fa-lg me-1"></i> {dietDisplay()}</p>
 						</div>
 					</div>
 				</div>
 
-				<div className="d-flex flex-column align-items-end">
+				<div className="align-items-end">
 					<button type="button" className="btn w-100" style={{ backgroundColor: "#e0ffcd" }} onClick={handleGoToRecipe}>Go to Recipe</button>
 				</div>
 			</div>
