@@ -101,7 +101,7 @@ export const Recipe = props => {
 						{
 							recipeInformation.diets ?
 								recipeInformation.diets.length !== 0 ?
-									recipeInformation.diets.join(", ")
+									recipeInformation.diets.join(", ").replace(/\b\w/g, l => l.toUpperCase())
 									:
 									"Omnivore"
 								:
@@ -114,7 +114,7 @@ export const Recipe = props => {
 						{
 							recipeInformation.dishTypes ?
 								recipeInformation.dishTypes.length !== 0 ?
-									recipeInformation.dishTypes.join(", ")
+									recipeInformation.dishTypes.join(", ").replace(/\b\w/g, l => l.toUpperCase())
 									:
 									"Not defined."
 								:
