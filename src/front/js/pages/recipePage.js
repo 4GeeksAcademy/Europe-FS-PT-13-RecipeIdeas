@@ -72,26 +72,26 @@ export const Recipe = props => {
 				<div className="col-lg-12 col-xl-6 d-flex flex-column justify-content-between text-center mb-4 px-5">
 
 					<div className="container-fluid d-flex justify-content-between">
-						<h1 className="col-sm-9 col-md-9 col-lg-9 display-4 text-center pb-3">{recipeInformation.title}</h1>
+						<h1 className="col-sm-9 col-md-9 col-lg-9 fs-1 text-start pb-3">{recipeInformation.title}</h1>
 						<div className="col-sm-3 col-md-3 col-lg-3 d-flex justify-content-end align-items-center">
-							<i onClick={toggleFavorite} className={`fa${isFavorite ? 's' : 'r'} fa-heart fa-3x`} data-bs-toggle={!store.token || store.token === undefined ? "modal" : ""} data-bs-target={!store.token || store.token === undefined ? "#favouritesModal" : "#"}></i>
+							<i onClick={toggleFavorite} className={`fa${isFavorite ? 's' : 'r'} fa-star fa-3x`} data-bs-toggle={!store.token || store.token === undefined ? "modal" : ""} data-bs-target={!store.token || store.token === undefined ? "#favouritesModal" : "#"}></i>
 						</div>
 					</div>
 					
 
 					<div className="row d-flex justify-content-between">
 						<div className="col-4">
-							<FontAwesomeIcon icon="fa-solid fa-clock" size="2xl" className="pe-3 pt-3" />
+							<FontAwesomeIcon icon="fa-solid fa-clock" size="2xl" className="pe-2 pt-3" />
 							{recipeInformation.readyInMinutes} Minutes
 						</div>
 
 						<div className="col-4">
-							<FontAwesomeIcon icon="fa-solid fa-utensils" size="2xl" className="pe-3 pt-3" />
+							<FontAwesomeIcon icon="fa-solid fa-utensils" size="2xl" className="pe-2 pt-3" />
 							{recipeInformation.servings} Servings
 						</div>
 
 						<div className="col-4">
-							<FontAwesomeIcon icon="fa-solid fa-dollar-sign" size="2xl" className="pe-3 pt-3" />
+							<FontAwesomeIcon icon="fa-solid fa-dollar-sign" size="2xl" className="pe-2 pt-3" />
 							{Math.round(recipeInformation.pricePerServing) / 100} Dollars per Serving
 						</div>
 					</div>
@@ -101,7 +101,7 @@ export const Recipe = props => {
 						{
 							recipeInformation.diets ?
 								recipeInformation.diets.length !== 0 ?
-									recipeInformation.diets.join(", ")
+									recipeInformation.diets.join(", ").replace(/\b\w/g, l => l.toUpperCase())
 									:
 									"Omnivore"
 								:
@@ -114,7 +114,7 @@ export const Recipe = props => {
 						{
 							recipeInformation.dishTypes ?
 								recipeInformation.dishTypes.length !== 0 ?
-									recipeInformation.dishTypes.join(", ")
+									recipeInformation.dishTypes.join(", ").replace(/\b\w/g, l => l.toUpperCase())
 									:
 									"Not defined."
 								:
