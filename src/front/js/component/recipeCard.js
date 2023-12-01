@@ -64,7 +64,7 @@ export const RecipeCard = (props) => {
 		if (props.diets.length === 0) {
 			return "Omnivore";
 		}
-		return props.diets.join(", ");
+		return props.diets.join(", ").replace(/\b\w/g, l => l.toUpperCase());
 	};
 
 
@@ -77,15 +77,15 @@ export const RecipeCard = (props) => {
 
 	return (
 		<li className="col-sm-8 col-md-6 col-lg-4 mb-4" style={{ listStyleType: "none" }}>
-			<div className="card border rounded-3 d-flex flex-column justify-content-between shadow" style={{ backgroundColor: "#ffcab0", height: "425px" }}>
+			<div className="card d-flex flex-column justify-content-between shadow" style={{ backgroundColor: "#ffcab0", height: "425px" }}>
 				
-				<div className="row d-felx justify-content-between px-2 my-auto align-items-middle">
+				<div className="row d-flex justify-content-between px-2 my-auto">
 					<div className="col-sm-10 col-md-10 col-lg-10">
 						<h5 className="m-1" >{recipeDetails.title}</h5>
 					</div>
 
-					<div className="col-sm-2 col-md-2 col-lg-2 d-flex align-items-center pe-4">
-						<i onClick={toggleFavorite} className={`fa${isFavorite ? 's' : 'r'} fa-heart fa-2x`} data-bs-toggle={!store.token || store.token === undefined ? "modal" : ""} data-bs-target={!store.token || store.token === undefined ? "#favouritesModal" : "#"}></i>
+					<div className="col-sm-2 col-md-2 col-lg-2 d-flex align-items-center ps-0 pe-4">
+						<i onClick={toggleFavorite} className={`fa${isFavorite ? 's' : 'r'} fa-star fa-2x`} data-bs-toggle={!store.token || store.token === undefined ? "modal" : ""} data-bs-target={!store.token || store.token === undefined ? "#favouritesModal" : "#"}></i>
 					</div>
 
 				</div>
@@ -108,7 +108,7 @@ export const RecipeCard = (props) => {
 
 					<div className="row d-flex justify-content-center text-center">
 						<div className="col-sm-12 col-md-12">
-							<p className="mb-2"><i className="fas fa-apple-alt fa-lg me-1"></i> {dietDisplay()}</p>
+							<p className="mb-2 mx-2"><i className="fas fa-apple-alt fa-lg me-1"></i> {dietDisplay()}</p>
 						</div>
 					</div>
 				</div>
