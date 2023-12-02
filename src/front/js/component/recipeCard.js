@@ -76,7 +76,7 @@ export const RecipeCard = (props) => {
 	/*const fontSizeTitle = Math.max(12, 24 - props.title.length / 5);*/
 
 	return (
-		<li className="col-sm-8 col-md-6 col-lg-4 mb-4" style={{ listStyleType: "none" }}>
+		<li className="col-sm-8 col-md-6 col-lg-4 mb-5" style={{ listStyleType: "none" }}>
 			<div className="card d-flex flex-column justify-content-between shadow" style={{ backgroundColor: "#ffcab0", height: "425px" }}>
 				
 				<div className="row d-flex justify-content-between px-2 my-auto">

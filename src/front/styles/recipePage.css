@@ -2,6 +2,10 @@ img.recipe-image {
   max-height: 500px;
 }
 
-.nav-link:not(.active) {
-  color: #007BFF;
+.nav-item > .nav-link:not(.active) {
+  color: green;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background-color: green;
 }
