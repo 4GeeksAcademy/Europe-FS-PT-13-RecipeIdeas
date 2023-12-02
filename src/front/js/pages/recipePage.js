@@ -69,10 +69,10 @@ export const Recipe = props => {
 
 				<img src={recipeInformation.image} className="col-lg-12 col-xl-6 recipe-image pb-3" alt="Recipe Image" />
 
-				<div className="col-lg-12 col-xl-6 d-flex flex-column justify-content-between text-center mb-4 px-5">
+				<div className="col-lg-12 col-xl-6 d-flex flex-column justify-content-between text-center mt-3 mb-5 px-5">
 
-					<div className="container-fluid d-flex justify-content-between">
-						<h1 className="col-sm-9 col-md-9 col-lg-9 fs-1 text-start pb-3">{recipeInformation.title}</h1>
+					<div className="container-fluid d-flex justify-content-between align-items-middle">
+						<h1 className="col-sm-9 col-md-9 col-lg-9 fs-1 text-start mb-0">{recipeInformation.title}</h1>
 						<div className="col-sm-3 col-md-3 col-lg-3 d-flex justify-content-end align-items-center">
 							<i onClick={toggleFavorite} className={`fa${isFavorite ? 's' : 'r'} fa-star fa-3x`} data-bs-toggle={!store.token || store.token === undefined ? "modal" : ""} data-bs-target={!store.token || store.token === undefined ? "#favouritesModal" : "#"}></i>
 						</div>
@@ -127,11 +127,11 @@ export const Recipe = props => {
 					<ul className="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
 
 						<li className="nav-item mx-4" role="presentation">
-							<button className="nav-link border border-primary border-2 active" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#pills-about" type="button" role="tab" aria-controls="pills-about" aria-selected="true">About</button>
+							<button className="nav-link border border-success border-2 active" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#pills-about" type="button" role="tab" aria-controls="pills-about" aria-selected="true">About</button>
 						</li>
 
 						<li className="nav-item mx-4" role="presentation">
-							<button className="nav-link border border-primary border-2 " id="pills-instructions-tab" data-bs-toggle="pill" data-bs-target="#pills-instructions" type="button" role="tab" aria-controls="pills-instructions" aria-selected="false">Instructions</button>
+							<button className="nav-link border border-success border-2 " id="pills-instructions-tab" data-bs-toggle="pill" data-bs-target="#pills-instructions" type="button" role="tab" aria-controls="pills-instructions" aria-selected="false">Instructions</button>
 						</li>
 
 					</ul>
@@ -139,8 +139,8 @@ export const Recipe = props => {
 					<div className="tab-content mt-4" id="pills-tabContent">
 						<div className="tab-pane fade show active container " id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab" tabIndex="0">
 							{ReactHtmlParser(recipeInformation.summary)}
-							<h1 className="pb-3 fs-3 pt-3 mt-5 text-center">Similar Recipes</h1>
-							<div className="row d-flex justify-content-around">
+							<h1 className="pb-3 display-6 pt-3 mt-5 text-center">Similar Recipes</h1>
+							<div className="row container-fluid d-flex justify-content-around">
 								{
 									store.similarRecipesInfo ?
 										store.similarRecipesInfo.map((recipe, index) => {
@@ -163,7 +163,7 @@ export const Recipe = props => {
 							</div>
 						</div>
 
-						<div className="row tab-pane fade d-flex justify-content-between px-0" id="pills-instructions" role="tabpanel" aria-labelledby="pills-instructions-tab" tabIndex="0">
+						<div className="row tab-pane fade d-flex justify-content-between px-0 mb-5" id="pills-instructions" role="tabpanel" aria-labelledby="pills-instructions-tab" tabIndex="0">
 
 							<div className="col-sm-12 col-md-6 d-flex flex-column justify-content-between text-center">
 								<div className="pb-3 fs-3 pt-3">Ingredients</div>
@@ -177,7 +177,7 @@ export const Recipe = props => {
 								}
 							</div>
 
-							<div className="col-sm-12 col-md-6 flex-column justify-content-between text-center">
+							<div className="col-sm-12 col-md-6 d-flex flex-column justify-content-between text-center">
 								<div className="pb-3 fs-3 pt-3">Instructions</div>
 								{
 									recipeInstructions ?
