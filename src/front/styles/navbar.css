@@ -136,8 +136,8 @@ a.link {
 .avatarmenu {
     object-fit: cover;
     overflow: hidden;
-    width: 50px;
-    height: 43px;
+    width: auto;
+    height: 4rem;
     padding-right: 10px;
 }
 

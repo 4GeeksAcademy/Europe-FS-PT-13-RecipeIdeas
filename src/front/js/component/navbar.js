@@ -70,7 +70,7 @@ export const Navbar = () => {
 							</div>
 
 							<li>
-								<a className="dropdown-item pt-4" href="/profile"><FontAwesomeIcon icon="fas fa-user-circle" />Profile</a>
+								<a className="dropdown-item pt-3" href="/profile"><FontAwesomeIcon icon="fas fa-user-circle" />Profile</a>
 							</li>
 
 							<li className="dropdown-divider"></li>
