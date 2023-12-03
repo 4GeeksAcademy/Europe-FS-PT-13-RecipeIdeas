@@ -70,13 +70,13 @@ export const Navbar = () => {
 							</div>
 
 							<li>
-								<a className="dropdown-item" href="/profile"><FontAwesomeIcon icon="fas fa-user-circle" />Profile</a>
+								<a className="dropdown-item pt-4" href="/profile"><FontAwesomeIcon icon="fas fa-user-circle" />Profile</a>
 							</li>
 
 							<li className="dropdown-divider"></li>
 
 							<li>
-								<button onClick={handleLogout} className="dropdown-item"><FontAwesomeIcon icon="fas fa-sign-out-alt" />Log out</button>
+								<button onClick={handleLogout} className="dropdown-item py-0 text-danger"><FontAwesomeIcon icon="fas fa-sign-out-alt" />Log out</button>
 							</li>
 						</ul>
 					</div>
