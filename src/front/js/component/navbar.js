@@ -36,7 +36,7 @@ export const Navbar = () => {
 		<nav className="navbar navbar-expand-sm d-flex container-fluid d-flex justify-content-between py-2 px-5">
 			<div className="justify-content-between">
 				<a className="navbar-brand" href="/">
-					<img src={logo} style={{ width: "50px", height: "43px" }}></img>
+					<img src={logo} style={{ width: "80px", height: "60px" }}></img>
 					<img src={food} style={{ width: "200px", height: "43px" }} />
 				</a>
 			</div>
