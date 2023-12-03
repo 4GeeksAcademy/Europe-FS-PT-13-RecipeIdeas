@@ -91,7 +91,7 @@ export const Recipe = props => {
 						</div>
 
 						<div className="col-4">
-							<FontAwesomeIcon icon="fa-solid fa-dollar-sign" size="2xl" className="pe-2 pt-3" />
+							<FontAwesomeIcon icon="fa-solid fa-hand-holding-dollar" size="2xl" className="pe-2 pt-3" />
 							{Math.round(recipeInformation.pricePerServing) / 100} Dollars per Serving
 						</div>
 					</div>

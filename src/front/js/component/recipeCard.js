@@ -98,11 +98,11 @@ export const RecipeCard = (props) => {
 						</div>
 
 						<div className="col-sm-12 col-md-5 col-lg-5">
-							<p className="mt-1 ms-2"><i className="fas fa-coins fa-lg me-1"></i> {totalRecipePrice(recipeDetails.cost, recipeDetails.servings)}</p>
+							<p className="mt-1 ms-2"><i className="fa-solid fa-hand-holding-dollar fa-lg me-1"></i> {totalRecipePrice(recipeDetails.cost, recipeDetails.servings)}</p>
 						</div>
 
 						<div className="col-sm-12 col-md-5 col-lg-5">
-							<p className="mt-1"><i className="far fa-clock fa-lg me-1"></i> {recipeDetails.prepTime} minutes</p>
+							<p className="mt-1"><i className="fa-solid fa-clock fa-lg me-1"></i> {recipeDetails.prepTime} minutes</p>
 						</div>
 					</div>
 

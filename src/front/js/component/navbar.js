@@ -36,7 +36,7 @@ export const Navbar = () => {
 		<nav className="navbar navbar-expand-sm d-flex container-fluid d-flex justify-content-between py-2 px-5">
 			<div className="justify-content-between">
 				<a className="navbar-brand" href="/">
-					<img src={logo} style={{ width: "50px", height: "43px" }}></img>
+					<img src={logo} style={{ width: "80px", height: "60px" }}></img>
 					<img src={food} style={{ width: "200px", height: "43px" }} />
 				</a>
 			</div>
@@ -60,8 +60,8 @@ export const Navbar = () => {
 				<>
 
 					<div className="nav-item dropdown rounded">
-						<a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><FontAwesomeIcon icon="fas fa-user-alt" />Profile</a>
-						<ul className="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
+						<a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><FontAwesomeIcon icon="fas fa-user-alt" size="xl" className="pe-0"/></a>
+						<ul className="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
 
 							<div className="profile-highlight details mx-3">
 								<img className="dropdown-toggle avatarmenu img-fluid rounded-circle" data-bs-toggle="dropdown" src={store.userDetails.avatar}></img>
@@ -70,13 +70,13 @@ export const Navbar = () => {
 							</div>
 
 							<li>
-								<a className="dropdown-item" href="/profile"><FontAwesomeIcon icon="fas fa-user-circle" />Account</a>
+								<a className="dropdown-item pt-3" href="/profile"><FontAwesomeIcon icon="fas fa-user-circle" />Profile</a>
 							</li>
 
 							<li className="dropdown-divider"></li>
 
 							<li>
-								<button onClick={handleLogout} className="dropdown-item"><FontAwesomeIcon icon="fas fa-sign-out-alt" />Log out</button>
+								<button onClick={handleLogout} className="dropdown-item py-0 text-danger"><FontAwesomeIcon icon="fas fa-sign-out-alt" />Log out</button>
 							</li>
 						</ul>
 					</div>

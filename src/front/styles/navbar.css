@@ -1,11 +1,11 @@
 .navbar {
-  background-color: #ffcab0;
-  height: 89px;
-  position: relative;
-  display: flex;
+    background-color: #ffcab0;
+    height: 89px;
+    position: relative;
+    display: flex;
 }
-  
-  .navbar .text-wrapper {
+
+.navbar .text-wrapper {
     font-family: "Newsreader", Helvetica;
     font-size: 32px;
     font-weight: 500;
@@ -15,9 +15,9 @@
     line-height: 32px;
     top: 40px;
     white-space: nowrap;
-  }
-  
-  .navbar .log-in-button {
+}
+
+.navbar .log-in-button {
     background-color: #72aa40;
     border-radius: 8px;
     height: 48px;
@@ -27,9 +27,9 @@
     width: 126px;
     text-align: center;
     padding-top: 10px;
-  }
-  
-  .navbar .div {
+}
+
+.navbar .div {
     color: #ffffff;
     font-family: "Inter", Helvetica;
     font-size: 16px;
@@ -41,10 +41,9 @@
     text-align: center;
     top: 12px;
     white-space: nowrap;
-    
-  }
-  
-  .navbar .sign-up-button {
+}
+
+.navbar .sign-up-button {
     color: #ffffff;
     background-color: #72aa40;
     border-radius: 8px;
@@ -55,10 +54,9 @@
     width: 126px;
     text-align: center;
     padding-top: 10px;
+}
 
-  }
-  
-  .navbar .text-wrapper-2 {
+.navbar .text-wrapper-2 {
     color: #ffffff;
     font-family: "Inter", Helvetica;
     font-size: 16px;
@@ -71,25 +69,25 @@
     top: 10px;
     white-space: nowrap;
     width: 102px;
-  }
-  
-  .nav-link {
+    }
+
+.nav-link {
     color: rgb(50 145 50);
     text-decoration: none;
     font-size: 22px;
     display: flex;
-    justify-content:space-around;
+    justify-content: space-around;
     text-align: center;
     padding-right: 4px;
-   }
-  
-   .navbar .btn {
+}
+
+.navbar .btn {
     color: #fff;
     padding-top: 2px;
     font-size: 20px;
-   }
+}
 
-   .svg-inline--fa {
+.svg-inline--fa {
     display: var(--fa-display, inline-block);
     height: 1em;
     overflow: visible;
@@ -97,48 +95,53 @@
     justify-content: space-around;
     padding-right: 10px;
     padding-top: 4px;
-   }
+}
 
-   a.link {
+a.link {
     color: rgb(50 145 50);
     text-decoration: none;
 }
 
 .dropdown-item {
-  display: flex;
-  width: 100%;
-  padding: 0.25rem 1rem;
-  padding-top: 0.7rem;
-  clear: both;
-  font-weight: 400;
-  color: green;
-  text-align: inherit;
-  text-decoration: underline;
-  white-space: nowrap;
-  background-color: transparent;
-  border: 0;
+    display: flex;
+    width: 100%;
+    padding: 0.25rem 1rem;
+    padding-top: 0.7rem;
+    clear: both;
+    font-weight: 400;
+    color: green;
+    text-align: inherit;
+    text-decoration: underline;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
 }
 .dropdown-menu {
-  position: absolute;
-  z-index: 1000;
-  display: none;
-  min-width: 10rem;
-  padding: 0.5rem 0;
-  margin: 0;
-  font-size: 1rem;
-  color: #212529;
-  text-align: left;
-  list-style: none;
-  background-color: #eaf5ec;
-  background-clip: padding-box;
-  border: 1px solid rgba(0,0,0,.15);
-  border-radius: 0.25rem;
+    position: absolute;
+    z-index: 1000;
+    display: none;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #eaf5ec;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
 }
 
 .avatarmenu {
-  object-fit: cover;
-  overflow: hidden;
-  width: 50px;
-  height: 43px;
-  padding-right: 10px;
+    object-fit: cover;
+    overflow: hidden;
+    width: auto;
+    height: 4rem;
+    padding-right: 10px;
+}
+
+.dropdown-toggle::after {
+    font-size: 25px;
+    margin-top: 20px;
 }
