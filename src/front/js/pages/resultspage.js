@@ -154,6 +154,7 @@ export const ResultsPage = () => {
                         </form>
                     </div>
                 </div>
+
                 <div className="row justify-content-center">
                     <div className="col-md-6 text-center mb-5">
                         <label htmlFor="prepTimeRange" className="form-label mb-2">Preparation Time: {prepTime} minutes </label>
@@ -172,18 +173,21 @@ export const ResultsPage = () => {
                                 Cheese
                             </label>
                         </div>
+
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=tomato" id="tomato" onChange={handleIngredientChange} />
                             <label className="form-check-label" htmlFor="tomato">
                                 Tomato
                             </label>
                         </div>
+
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=avocado" id="avocado" onChange={handleIngredientChange} />
                             <label className="form-check-label" htmlFor="avocado">
                                 Avocado
                             </label>
                         </div>
+
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=pasta" id="pasta" onChange={handleIngredientChange} />
                             <label className="form-check-label" htmlFor="pasta">
@@ -191,6 +195,7 @@ export const ResultsPage = () => {
                             </label>
                         </div>
                     </div>
+
                     <div className="row justify-content-center">
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=pork" id="pork" onChange={handleIngredientChange} />
@@ -198,18 +203,21 @@ export const ResultsPage = () => {
                                 Pork
                             </label>
                         </div>
+
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=chicken" id="chicken" onChange={handleIngredientChange} />
                             <label className="form-check-label" htmlFor="chicken">
                                 Chicken
                             </label>
                         </div>
+
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=beef" id="beef" onChange={handleIngredientChange} />
                             <label className="form-check-label" htmlFor="beef">
                                 Beef
                             </label>
                         </div>
+
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=eggs" id="eggs" onChange={handleIngredientChange} />
                             <label className="form-check-label" htmlFor="eggs">
@@ -217,6 +225,7 @@ export const ResultsPage = () => {
                             </label>
                         </div>
                     </div>
+
                     <div className="row justify-content-center">
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=tuna" id="tuna" onChange={handleIngredientChange} />
@@ -224,18 +233,21 @@ export const ResultsPage = () => {
                                 Tuna
                             </label>
                         </div>
+
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=beans" id="beans" onChange={handleIngredientChange} />
                             <label className="form-check-label" htmlFor="beans">
                                 Beans
                             </label>
                         </div>
+
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=rice" id="rice" onChange={handleIngredientChange} />
                             <label className="form-check-label" htmlFor="rice">
                                 Rice
                             </label>
                         </div>
+
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=mushrooms" id="mushrooms" onChange={handleIngredientChange} />
                             <label className="form-check-label" htmlFor="mushrooms">
@@ -244,6 +256,7 @@ export const ResultsPage = () => {
                         </div>
                     </div>
                 </div>
+
                 <div className="d-flex justify-content-center mt-3 pb-3">
                     <button type="button" className="btn display-6 shadow-lg text-dark ps-5 pe-5 pt-3 pb-3 rounded-pill" style={{ backgroundColor: "#e0ffcd" }} onClick={handleSearch}>Search</button>
                 </div>
@@ -256,12 +269,14 @@ export const ResultsPage = () => {
                     {showGreeting && (
                         <h3 className="mt-3">Feeling hungry for something specific? Try filtering through some of our options!</h3>
                     )}
+
                     {store.isLoading && (
                         <div className=" container d-flex justify-content-center mt-3">
                             <Spinner />
                         </div>
                     )}
-                    <ul className="container row justify-content-center text-start">
+
+                    <ul className="container row justify-content-center text-start mb-0">
                         {store.filteredRecipes.slice(0, resultsLoaded).map((p, index) => (
                             <RecipeCard
                                 key={index}
@@ -275,8 +290,9 @@ export const ResultsPage = () => {
                             />
                         ))}
                     </ul>
+
                     {store.filteredRecipes.length > resultsLoaded && (
-                        <div className="row mt-3">
+                        <div className="row mt-0 mb-3">
                             <div className="col-md-6 mx-auto">
                                 <button type="button" className="btn btn-secondary" onClick={handleLoadMore}>
                                     Load More
@@ -284,6 +300,7 @@ export const ResultsPage = () => {
                             </div>
                         </div>
                     )}
+
                     {store.filteredRecipes.length === 0 && !showGreeting && (
                         <h3 className="text-center mt-3">Oops, looks like we don't have anything like that!</h3>
                     )}
