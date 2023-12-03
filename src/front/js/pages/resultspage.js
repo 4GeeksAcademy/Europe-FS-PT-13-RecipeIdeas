@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { RecipeCard } from "../component/recipeCard";
-import { Spinner} from "../component/Spinner";
+import { Spinner } from "../component/Spinner";
 
 
 
@@ -17,7 +17,7 @@ export const ResultsPage = () => {
     const [includedIngredients, setIncludedIngredients] = useState([]);
     const [resultsLoaded, setResultsLoaded] = useState(12);
     const [showGreeting, setShowGreeting] = useState(true);
-    
+
 
 
     const handleCuisineSelect = (e) => {
@@ -90,7 +90,7 @@ export const ResultsPage = () => {
             <div className="container rounded-3 mt-4">
                 <h3 className="text-center my-2 display-4">Filter Options</h3>
 
-                <div className="row p-4 d-flex justify-content-around">    
+                <div className="row p-4 d-flex justify-content-around">
                     <div className="col-sm-6 col-md-4 mb-3">
                         <select className="form-select " aria-label="Cuisine" onChange={handleCuisineSelect}>
                             <option value="">Select Cuisine:</option>
