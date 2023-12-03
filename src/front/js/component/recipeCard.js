@@ -94,7 +94,7 @@ export const RecipeCard = (props) => {
 				<div className="m-2 rounded" style={{ backgroundColor: "#fdffcd" }}>
 					<div className="row d-flex justify-content-center text-center my-2">
 						<div className="col-sm-12 col-md-5 col-lg-5">
-							<p className="mt-1"><i className="fas fa-utensils fa-lg me-1"></i> {recipeDetails.servings} servings</p>
+							<p className="mt-1"><i className="fas fa-utensils fa-lg me-1"></i> {recipeDetails.servings} Serving(s)</p>
 						</div>
 
 						<div className="col-sm-12 col-md-5 col-lg-5">
@@ -102,7 +102,7 @@ export const RecipeCard = (props) => {
 						</div>
 
 						<div className="col-sm-12 col-md-5 col-lg-5">
-							<p className="mt-1"><i className="fa-solid fa-clock fa-lg me-1"></i> {recipeDetails.prepTime} minutes</p>
+							<p className="mt-1"><i className="fa-solid fa-clock fa-lg me-1"></i> {recipeDetails.prepTime} Minutes</p>
 						</div>
 					</div>
 
