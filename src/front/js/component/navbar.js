@@ -60,8 +60,8 @@ export const Navbar = () => {
 				<>
 
 					<div className="nav-item dropdown rounded">
-						<a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><FontAwesomeIcon icon="fas fa-user-alt" />Profile</a>
-						<ul className="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
+						<a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><FontAwesomeIcon icon="fas fa-user-alt" size="xl" className="pe-0"/></a>
+						<ul className="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
 
 							<div className="profile-highlight details mx-3">
 								<img className="dropdown-toggle avatarmenu img-fluid rounded-circle" data-bs-toggle="dropdown" src={store.userDetails.avatar}></img>
@@ -70,7 +70,7 @@ export const Navbar = () => {
 							</div>
 
 							<li>
-								<a className="dropdown-item" href="/profile"><FontAwesomeIcon icon="fas fa-user-circle" />Account</a>
+								<a className="dropdown-item" href="/profile"><FontAwesomeIcon icon="fas fa-user-circle" />Profile</a>
 							</li>
 
 							<li className="dropdown-divider"></li>
