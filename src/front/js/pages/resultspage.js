@@ -87,10 +87,11 @@ export const ResultsPage = () => {
 
     return (
         <>
-            <div className="container rounded-3 mt-4" style={{ backgroundColor: "#ffcab0" }}>
-                <div className="row p-5">
-                    <h3 className="text-center mb-4 display-4">Filter Options</h3>
-                    <div className="col-sm-2 col-md-3 col-lg-4">
+            <div className="container rounded-3 mt-4">
+                <h3 className="text-center my-2 display-4">Filter Options</h3>
+
+                <div className="row p-4 d-flex justify-content-around">    
+                    <div className="col-sm-6 col-md-4 mb-3">
                         <select className="form-select " aria-label="Cuisine" onChange={handleCuisineSelect}>
                             <option value="">Select Cuisine:</option>
                             <option value="cuisine=italian">Italian</option>
@@ -100,7 +101,8 @@ export const ResultsPage = () => {
                             <option value="cuisine=mexican">Mexican</option>
                         </select>
                     </div>
-                    <div className="col-sm-2 col-md-3 col-lg-4">
+
+                    <div className="col-sm-6 col-md-4 mb-3">
                         <select className="form-select " aria-label="Cuisine" onChange={handleDietSelect}>
                             <option value="">Select Diet:</option>
                             <option value="diet=vegetarian">Vegetarian</option>
@@ -110,7 +112,8 @@ export const ResultsPage = () => {
                             <option value="diet=primal">Primal</option>
                         </select>
                     </div>
-                    <div className="col-sm-2 col-md-3 col-lg-4">
+
+                    <div className="col-sm-6 col-md-4 mb-3">
                         <select className="form-select " aria-label="Cuisine" onChange={handleTypeSelect}>
                             <option value="">Select Meal Type:</option>
                             <option value="type=main course">Main Course</option>
@@ -121,10 +124,11 @@ export const ResultsPage = () => {
                         </select>
                     </div>
                 </div>
+
                 <div className="row justify-content-center">
-                    <div className="col-md-6">
+                    <div className="col-md-6 text-center mb-5">
                         <form className="multi-range-field">
-                            <label htmlFor="caloriesRange" className="mb-3">Calories Range {minCalories} - {maxCalories} kcal</label>
+                            <label htmlFor="caloriesRange" className="mb-2">Calories Range {minCalories} - {maxCalories} kcal</label>
                             <div className="d-flex justify-content-center align-items-center">
                                 <input
                                     id="caloriesRange"
@@ -151,13 +155,14 @@ export const ResultsPage = () => {
                     </div>
                 </div>
                 <div className="row justify-content-center">
-                    <div className="col-md-6">
-                        <label htmlFor="prepTimeRange" className="form-label">Preparation Time: {prepTime} minutes </label>
+                    <div className="col-md-6 text-center mb-5">
+                        <label htmlFor="prepTimeRange" className="form-label mb-2">Preparation Time: {prepTime} minutes </label>
                         <div className="d-flex justify-content-center align-items-center">
                             <input type="range" className="form-range" min="5" max="50" step="5" value={prepTime} onChange={handlePrepTimeChange} id="prepTimeRange" />
                         </div>
                     </div>
                 </div>
+
                 <div className="container ms-2 ps-5 pb-5 rounded-pill shadow" style={{ backgroundColor: "#fdffcd" }}>
                     <h4 className="mb-4 mt-4 text-center display-6">Included Ingredients</h4>
                     <div className="row justify-content-center">
