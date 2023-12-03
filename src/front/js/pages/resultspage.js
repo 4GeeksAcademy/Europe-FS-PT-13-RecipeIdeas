@@ -261,7 +261,7 @@ export const ResultsPage = () => {
                             <Spinner />
                         </div>
                     )}
-                    <ul className="container row justify-content-center">
+                    <ul className="container row justify-content-center text-start">
                         {store.filteredRecipes.slice(0, resultsLoaded).map((p, index) => (
                             <RecipeCard
                                 key={index}
