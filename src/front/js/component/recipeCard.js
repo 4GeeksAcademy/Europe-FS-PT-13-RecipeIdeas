@@ -74,7 +74,7 @@ export const RecipeCard = (props) => {
 
 	return (
 		<li className="col-sm-8 col-md-6 col-lg-4 mb-5" style={{ listStyleType: "none" }}>
-			<div className="card d-flex flex-column justify-content-between shadow" style={{ backgroundColor: "#ffcab0", height: "425px" }}>
+			<div className="card d-flex flex-column justify-content-between shadow" style={{ backgroundColor: "#ffcab0", minHeight: "425px" }}>
 				
 				<div className="row d-flex justify-content-between px-2 my-auto">
 					<div className="col-sm-10 col-md-10 col-lg-10">
