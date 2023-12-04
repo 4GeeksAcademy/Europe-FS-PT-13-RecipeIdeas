@@ -13,7 +13,7 @@ export const ResultsPage = () => {
     const [type, setType] = useState();
     const [minCalories, setMinCalories] = useState(0);
     const [maxCalories, setMaxCalories] = useState(1300);
-    const [prepTime, setPrepTime] = useState(10);
+    const [prepTime, setPrepTime] = useState(50);
     const [includedIngredients, setIncludedIngredients] = useState([]);
     const [resultsLoaded, setResultsLoaded] = useState(12);
     const [showGreeting, setShowGreeting] = useState(true);
@@ -159,7 +159,7 @@ export const ResultsPage = () => {
                     <div className="col-md-6 text-center mb-5">
                         <label htmlFor="prepTimeRange" className="form-label mb-2">Preparation Time: {prepTime} minutes </label>
                         <div className="d-flex justify-content-center align-items-center">
-                            <input type="range" className="form-range" min="5" max="50" step="5" value={prepTime} onChange={handlePrepTimeChange} id="prepTimeRange" />
+                            <input type="range" className="form-range" min="5" max="50" step="5" onChange={handlePrepTimeChange} id="prepTimeRange" />
                         </div>
                     </div>
                 </div>
