@@ -12,7 +12,7 @@ export const ResultsPage = () => {
     const [diet, setDiet] = useState();
     const [type, setType] = useState();
     const [minCalories, setMinCalories] = useState(0);
-    const [maxCalories, setMaxCalories] = useState(1300);
+    const [maxCalories, setMaxCalories] = useState(2600);
     const [prepTime, setPrepTime] = useState(50);
     const [includedIngredients, setIncludedIngredients] = useState([]);
     const [resultsLoaded, setResultsLoaded] = useState(12);
@@ -48,7 +48,6 @@ export const ResultsPage = () => {
         const value = e.target.value;
         setMaxCalories(value);
     };
-
 
     const handlePrepTimeChange = (e) => {
         const value = e.target.value;

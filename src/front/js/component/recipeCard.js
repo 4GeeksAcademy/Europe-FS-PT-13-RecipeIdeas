@@ -72,9 +72,6 @@ export const RecipeCard = (props) => {
 		navigate("/recipe/" + recipeDetails.id)
 	}
 
-
-	/*const fontSizeTitle = Math.max(12, 24 - props.title.length / 5);*/
-
 	return (
 		<li className="col-sm-8 col-md-6 col-lg-4 mb-5" style={{ listStyleType: "none" }}>
 			<div className="card d-flex flex-column justify-content-between shadow" style={{ backgroundColor: "#ffcab0", height: "425px" }}>
@@ -91,7 +88,7 @@ export const RecipeCard = (props) => {
 				</div>
 
 				<img src={recipeDetails.image} className="card-img-top" alt="Recipe Image" style={{ objectFit: "cover", height: "150px" }} />
-				<div className="m-2 rounded" style={{ backgroundColor: "#fdffcd" }}>
+				<div className="m-2 rounded" style={{ backgroundColor: "#ffebbb" }}>
 					<div className="row d-flex justify-content-center text-center my-2">
 						<div className="col-sm-12 col-md-5 col-lg-5">
 							<p className="mt-1"><i className="fas fa-utensils fa-lg me-1"></i> {recipeDetails.servings} Serving(s)</p>

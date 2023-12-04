@@ -60,7 +60,7 @@ export const Recipe = props => {
 			setIsFavorite(store.favouriteRecipes.some(recipe => recipe.recipeExternalId == params.id))
 		}
 
-	}, [params.id, ])
+	}, [params.id])
 
 
 	return (
