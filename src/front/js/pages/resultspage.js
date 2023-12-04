@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { RecipeCard } from "../component/recipeCard";
-import { Spinner} from "../component/Spinner";
+import { Spinner } from "../component/Spinner";
 
 
 
@@ -12,12 +12,12 @@ export const ResultsPage = () => {
     const [diet, setDiet] = useState();
     const [type, setType] = useState();
     const [minCalories, setMinCalories] = useState(0);
-    const [maxCalories, setMaxCalories] = useState(1300);
-    const [prepTime, setPrepTime] = useState(10);
+    const [maxCalories, setMaxCalories] = useState(2600);
+    const [prepTime, setPrepTime] = useState(50);
     const [includedIngredients, setIncludedIngredients] = useState([]);
     const [resultsLoaded, setResultsLoaded] = useState(12);
     const [showGreeting, setShowGreeting] = useState(true);
-    
+
 
 
     const handleCuisineSelect = (e) => {
@@ -48,7 +48,6 @@ export const ResultsPage = () => {
         const value = e.target.value;
         setMaxCalories(value);
     };
-
 
     const handlePrepTimeChange = (e) => {
         const value = e.target.value;
@@ -87,10 +86,11 @@ export const ResultsPage = () => {
 
     return (
         <>
-            <div className="container rounded-3 mt-4" style={{ backgroundColor: "#ffcab0" }}>
-                <div className="row p-5">
-                    <h3 className="text-center mb-4 display-4">Filter Options</h3>
-                    <div className="col-sm-2 col-md-3 col-lg-4">
+            <div className="container rounded-3 mt-4">
+                <h3 className="text-center my-2 display-4">Filter Options</h3>
+
+                <div className="row p-4 d-flex justify-content-around">
+                    <div className="col-sm-6 col-md-4 mb-3">
                         <select className="form-select " aria-label="Cuisine" onChange={handleCuisineSelect}>
                             <option value="">Select Cuisine:</option>
                             <option value="cuisine=italian">Italian</option>
@@ -100,7 +100,8 @@ export const ResultsPage = () => {
                             <option value="cuisine=mexican">Mexican</option>
                         </select>
                     </div>
-                    <div className="col-sm-2 col-md-3 col-lg-4">
+
+                    <div className="col-sm-6 col-md-4 mb-3">
                         <select className="form-select " aria-label="Cuisine" onChange={handleDietSelect}>
                             <option value="">Select Diet:</option>
                             <option value="diet=vegetarian">Vegetarian</option>
@@ -110,7 +111,8 @@ export const ResultsPage = () => {
                             <option value="diet=primal">Primal</option>
                         </select>
                     </div>
-                    <div className="col-sm-2 col-md-3 col-lg-4">
+
+                    <div className="col-sm-6 col-md-4 mb-3">
                         <select className="form-select " aria-label="Cuisine" onChange={handleTypeSelect}>
                             <option value="">Select Meal Type:</option>
                             <option value="type=main course">Main Course</option>
@@ -121,10 +123,11 @@ export const ResultsPage = () => {
                         </select>
                     </div>
                 </div>
+
                 <div className="row justify-content-center">
-                    <div className="col-md-6">
+                    <div className="col-md-6 text-center mb-5">
                         <form className="multi-range-field">
-                            <label htmlFor="caloriesRange" className="mb-3">Calories Range {minCalories} - {maxCalories} kcal</label>
+                            <label htmlFor="caloriesRange" className="mb-2">Calories Range {minCalories} - {maxCalories} kcal</label>
                             <div className="d-flex justify-content-center align-items-center">
                                 <input
                                     id="caloriesRange"
@@ -150,14 +153,16 @@ export const ResultsPage = () => {
                         </form>
                     </div>
                 </div>
+
                 <div className="row justify-content-center">
-                    <div className="col-md-6">
-                        <label htmlFor="prepTimeRange" className="form-label">Preparation Time: {prepTime} minutes </label>
+                    <div className="col-md-6 text-center mb-5">
+                        <label htmlFor="prepTimeRange" className="form-label mb-2">Preparation Time: {prepTime} minutes </label>
                         <div className="d-flex justify-content-center align-items-center">
-                            <input type="range" className="form-range" min="5" max="50" step="5" value={prepTime} onChange={handlePrepTimeChange} id="prepTimeRange" />
+                            <input type="range" className="form-range" min="5" max="50" step="5" onChange={handlePrepTimeChange} id="prepTimeRange" />
                         </div>
                     </div>
                 </div>
+
                 <div className="container ms-2 ps-5 pb-5 rounded-pill shadow" style={{ backgroundColor: "#fdffcd" }}>
                     <h4 className="mb-4 mt-4 text-center display-6">Included Ingredients</h4>
                     <div className="row justify-content-center">
@@ -167,18 +172,21 @@ export const ResultsPage = () => {
                                 Cheese
                             </label>
                         </div>
+
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=tomato" id="tomato" onChange={handleIngredientChange} />
                             <label className="form-check-label" htmlFor="tomato">
                                 Tomato
                             </label>
                         </div>
+
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=avocado" id="avocado" onChange={handleIngredientChange} />
                             <label className="form-check-label" htmlFor="avocado">
                                 Avocado
                             </label>
                         </div>
+
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=pasta" id="pasta" onChange={handleIngredientChange} />
                             <label className="form-check-label" htmlFor="pasta">
@@ -186,6 +194,7 @@ export const ResultsPage = () => {
                             </label>
                         </div>
                     </div>
+
                     <div className="row justify-content-center">
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=pork" id="pork" onChange={handleIngredientChange} />
@@ -193,18 +202,21 @@ export const ResultsPage = () => {
                                 Pork
                             </label>
                         </div>
+
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=chicken" id="chicken" onChange={handleIngredientChange} />
                             <label className="form-check-label" htmlFor="chicken">
                                 Chicken
                             </label>
                         </div>
+
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=beef" id="beef" onChange={handleIngredientChange} />
                             <label className="form-check-label" htmlFor="beef">
                                 Beef
                             </label>
                         </div>
+
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=eggs" id="eggs" onChange={handleIngredientChange} />
                             <label className="form-check-label" htmlFor="eggs">
@@ -212,6 +224,7 @@ export const ResultsPage = () => {
                             </label>
                         </div>
                     </div>
+
                     <div className="row justify-content-center">
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=tuna" id="tuna" onChange={handleIngredientChange} />
@@ -219,18 +232,21 @@ export const ResultsPage = () => {
                                 Tuna
                             </label>
                         </div>
+
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=beans" id="beans" onChange={handleIngredientChange} />
                             <label className="form-check-label" htmlFor="beans">
                                 Beans
                             </label>
                         </div>
+
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=rice" id="rice" onChange={handleIngredientChange} />
                             <label className="form-check-label" htmlFor="rice">
                                 Rice
                             </label>
                         </div>
+
                         <div className="form-check col-3">
                             <input className="form-check-input" type="checkbox" value="includeIngredients=mushrooms" id="mushrooms" onChange={handleIngredientChange} />
                             <label className="form-check-label" htmlFor="mushrooms">
@@ -239,6 +255,7 @@ export const ResultsPage = () => {
                         </div>
                     </div>
                 </div>
+
                 <div className="d-flex justify-content-center mt-3 pb-3">
                     <button type="button" className="btn display-6 shadow-lg text-dark ps-5 pe-5 pt-3 pb-3 rounded-pill" style={{ backgroundColor: "#e0ffcd" }} onClick={handleSearch}>Search</button>
                 </div>
@@ -251,12 +268,14 @@ export const ResultsPage = () => {
                     {showGreeting && (
                         <h3 className="mt-3">Feeling hungry for something specific? Try filtering through some of our options!</h3>
                     )}
+
                     {store.isLoading && (
                         <div className=" container d-flex justify-content-center mt-3">
                             <Spinner />
                         </div>
                     )}
-                    <ul className="container row justify-content-center">
+
+                    <ul className="container row justify-content-center text-start mb-0">
                         {store.filteredRecipes.slice(0, resultsLoaded).map((p, index) => (
                             <RecipeCard
                                 key={index}
@@ -270,8 +289,9 @@ export const ResultsPage = () => {
                             />
                         ))}
                     </ul>
+
                     {store.filteredRecipes.length > resultsLoaded && (
-                        <div className="row mt-3">
+                        <div className="row mt-0 mb-3">
                             <div className="col-md-6 mx-auto">
                                 <button type="button" className="btn btn-secondary" onClick={handleLoadMore}>
                                     Load More
@@ -279,6 +299,7 @@ export const ResultsPage = () => {
                             </div>
                         </div>
                     )}
+
                     {store.filteredRecipes.length === 0 && !showGreeting && (
                         <h3 className="text-center mt-3">Oops, looks like we don't have anything like that!</h3>
                     )}
