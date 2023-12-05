@@ -156,11 +156,11 @@ export const Form = (props) => {
             {   // Conditionl rendering for showing change info or save the updated info depending on the state.
                 props.editDetails ?
                     <div className="d-flex justify-content-end">
-                        <button className="profile-form-save btn p-2 mt-3 mx-2 text-white" onClick={event => props.handleSubmit(userDetails)}>Save changes</button>
-                        <button className="profile-form-cancel btn btn-danger p-2 mt-3" onClick={handleCancel}>Cancel</button>
+                        <button className="profile-form-save btn p-2 mt-3 mx-2" onClick={event => props.handleSubmit(userDetails)}> <span className="text-white">Save changes</span></button>
+                        <button className="profile-form-cancel btn p-2 mt-3" onClick={handleCancel}> <span className="text-white">Cancel</span> </button>
                     </div>
                     :
-                    <button className="profile-form-edit btn p-2 mt-3 text-white" onClick={props.handleEditInfo}>Edit details</button>
+                    <button className="profile-form-edit btn p-2 mt-3" onClick={props.handleEditInfo}> <span className="text-white">Edit details</span> </button>
             }
         </form>
     );
