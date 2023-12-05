@@ -5,6 +5,7 @@
     display: flex;
 }
 
+
 .navbar .div {
     color: #ffffff;
     font-family: "Inter", Helvetica;
@@ -18,6 +19,7 @@
     top: 12px;
     white-space: nowrap;
 }
+
 
 .nav-link {
     color: rgba(25,135,84, 0.80);
@@ -44,7 +46,7 @@
 }
 
 a.link {
-    color: rgb(50 145 50);
+    color: rgba(25,135,84);
     text-decoration: none;
 }
 
@@ -64,20 +66,21 @@ a.link {
 }
 
 .dropdown-menu {
-    position: absolute;
+    position: flex;
     z-index: 1000;
     display: none;
     min-width: 10rem;
     padding: 0.5rem 0;
     margin: 0;
-    font-size: 1rem;
+    font-size: 1.3rem;
     color: #212529;
-    text-align: left;
+    text-align: center;
+    justify-content: center;
     list-style: none;
     background-color: #eaf5ec;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 0.25rem;
+    border-radius: 0.2rem;
 }
 
 .avatarmenu {

@@ -30,7 +30,10 @@ export const Login = () => {
     };
 
     return (
-            <form className="info-wrapper login-wrapper container w-50 my-auto d-flex flex-column was-validated" onSubmit={handleSubmit}>
+        <div>
+            
+            <form className="info-wrapper  login-wrapper container w-50  d-flex flex-column was-validated" onSubmit={handleSubmit}>
+            <h2>Login</h2>
                 {
                     (store.token && store.token != "" && store.token != undefined) ? 
                     
@@ -66,13 +69,15 @@ export const Login = () => {
                         </div>
 
                         <div className="row mx-auto mt-5 pb-4 d-flex justify-content-center text-center">
-                            <div>
-                                <button type="submit" className="save-info btn btn-primary"> Login </button>
-                            </div>
+                            <span>
+                                <button type="submit" className="save-info btn-lg btn-success"> Login </button>
+                            </span>
+                            <p></p>
                             <p className="pt-2 mb-0 text-white fs-5"> Have you registered already? <Link to="/signup" className="text-primary">Sign up</Link></p>
                         </div>
                     </div>
                 }
             </form>
+            </div>
     );
 };
