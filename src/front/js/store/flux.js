@@ -96,7 +96,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						else return false
 					})
 					.then(data => {
-						if (data){
+						if (data) {
 							console.log("this came from the backend", data)
 							sessionStorage.setItem("token", data.access_token);
 							sessionStorage.setItem("user", JSON.stringify(data.user));
@@ -181,8 +181,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
-						'X-RapidAPI-Key': 'f4a6409e03msh2513ad740baf8b9p13e32fjsn5d20d8842c5f',
-						'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
+						'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY,
+						'X-RapidAPI-Host': process.env.X_RAPIDAPI_HOST
 					},
 					body: JSON.stringify()
 				})
@@ -221,8 +221,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
-							'X-RapidAPI-Key': 'f4a6409e03msh2513ad740baf8b9p13e32fjsn5d20d8842c5f',
-							'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
+							'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY,
+							'X-RapidAPI-Host': process.env.X_RAPIDAPI_HOST
 						},
 						body: JSON.stringify()
 					});
@@ -255,7 +255,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({
 						userDetails: {
 							...getStore()['userDetails'], "email": userData['email'], "avatar": userData['avatar'], "username": userData['username'],
-							"name": userData['name'],  "lastName": userData['lastName'],
+							"name": userData['name'], "lastName": userData['lastName'],
 							"linkedIn": userData['linkedIn'], "github": userData['github']
 						}
 					})

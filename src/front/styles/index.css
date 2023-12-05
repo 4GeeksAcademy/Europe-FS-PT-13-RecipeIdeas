@@ -1,24 +1,24 @@
 .main-color {
-    background: #ffebbb;
+    background: #EDD892;
 }
 
 .form-input {
-    background-color: #ffebbb;
+    background-color: #EDD892;
 
     border: 0.3rem solid;
     border-radius: 0 0.5rem 0.5rem 0;
-    border-color: #ffebbb;
+    border-color: #EDD892;
 
     overflow-x: hidden;
     min-height: 44px;
 }
 
 .info-wrapper {
-    background: #fdffcd;
+    background: rgba(198,184,158, 0.3);
 }
 
 .form-input-icon {
-    background-color: #ffebbb;
+    background-color: #EDD892;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,16 +29,12 @@
     border-left: 0.3rem solid;
     border-right: 0;
     border-radius: 0.5rem 0 0 0.5rem;
-    border-color: #ffebbb;
+    border-color: #EDD892;
 
     overflow-x: hidden;
     min-height: 44px;
 }
 
 .positive-color {
-    background: #e0ffcd;
-}
-
-.negative-color {
-    background: #ffcab0;
+    background: #AABA9E;
 }

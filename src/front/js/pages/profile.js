@@ -44,7 +44,7 @@ export const Profile = () => {
 
     if (store.token && store.token != "" && store.token != undefined) {
         return (
-            <div className="profile container-fluid my-5">
+            <div className="profile container my-5">
                 <div className="user-data row d-flex justify-content-between p-1">
 
                     <div className="avatar col-sm-12 col-md-5 d-flex flex-column justify-content-center align-items-center">
@@ -53,20 +53,18 @@ export const Profile = () => {
                             src={store.userDetails.avatar}
                             alt="Profile Picture"
                         />
-                        <button className="change-picture btn btn-danger my-3 mx-auto p-2" onClick={handleUploadAvatar}> Change profile picture </button>
+                        <button className="profile-change-picture btn my-3 mx-auto p-2 text-white" onClick={handleUploadAvatar}> Change profile picture </button>
                     </div>
 
                     <div className="user-info col-sm-12 col-md-7 d-flex flex-column justify-content-start">
                         <div className="wrapper px-4 me-5">
-                            <h1 className="display-5">{`${store.userDetails.name ? store.userDetails.name : ""} ${store.userDetails.lastName ? store.userDetails.lastName : ""}`}</h1>
-
                             <Form handleSubmit={handleSubmit} handleEditInfo={handleEditInfo} editDetails={editDetails} />
                         </div>
                     </div>
                 </div>
 
                 <div className="favourite-recipes container-fluid mt-5">
-                    <h1 className="text-center display-6">Favourite Recipes</h1>
+                    <h1 className="text-center display-6 mt-5 mb-4">Favourite Recipes</h1>
                     <div className="row container d-flex justify-content-around mx-auto">
                             {
                                 store.favouriteRecipes ?

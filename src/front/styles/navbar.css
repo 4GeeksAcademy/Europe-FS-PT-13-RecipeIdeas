@@ -1,33 +1,10 @@
 .navbar {
-    background-color: #ffcab0;
+    background-color: rgba(252,185,125,0.85);
     height: 89px;
     position: relative;
     display: flex;
 }
 
-.navbar .text-wrapper {
-    font-family: "Newsreader", Helvetica;
-    font-size: 32px;
-    font-weight: 500;
-    font-palette: white;
-    left: 96px;
-    letter-spacing: -0.32px;
-    line-height: 32px;
-    top: 40px;
-    white-space: nowrap;
-}
-
-.navbar .log-in-button {
-    background-color: rgba(25,135,84);
-    border-radius: 8px;
-    height: 48px;
-    left: 1123px;
-    overflow: hidden;
-    top: 33px;
-    width: 126px;
-    text-align: center;
-    padding-top: 10px;
-}
 
 .navbar .div {
     color: #ffffff;
@@ -43,36 +20,9 @@
     white-space: nowrap;
 }
 
-.navbar .sign-up-button {
-    color: #ffffff;
-    background-color: rgba(25,135,84);
-    border-radius: 8px;
-    height: 48px;
-    left: 1263px;
-    overflow: hidden;
-    top: 33px;
-    width: 126px;
-    text-align: center;
-    padding-top: 10px;
-}
-
-.navbar .text-wrapper-2 {
-    color: #ffffff;
-    font-family: "Inter", Helvetica;
-    font-size: 16px;
-    font-weight: 600;
-    height: 24px;
-    left: 13px;
-    letter-spacing: 0;
-    line-height: 20.8px;
-    text-align: center;
-    top: 10px;
-    white-space: nowrap;
-    width: 102px;
-    }
 
 .nav-link {
-    color: rgba(25,135,84);
+    color: rgba(25,135,84, 0.80);
     text-decoration: none;
     font-size: 22px;
     display: flex;
@@ -81,10 +31,8 @@
     padding-right: 4px;
 }
 
-.navbar .btn {
-    color: #fff;
-    padding-top: 2px;
-    font-size: 20px;
+.nav-link:hover {
+    color: rgba(255, 255, 255, 0.75)
 }
 
 .svg-inline--fa {
@@ -116,6 +64,7 @@ a.link {
     background-color: transparent;
     border: 0;
 }
+
 .dropdown-menu {
     position: flex;
     z-index: 1000;
