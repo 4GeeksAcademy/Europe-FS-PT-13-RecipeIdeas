@@ -216,7 +216,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					setStore({ isLoading: true })
 					console.log("checking for ids in the store", getStore().complexSearchIds);
-
+					// getActions().clearResults()
 					const response = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/informationBulk?ids=${getStore().complexSearchIds}`, {
 						method: 'GET',
 						headers: {
