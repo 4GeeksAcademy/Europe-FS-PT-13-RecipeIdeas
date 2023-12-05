@@ -20,7 +20,7 @@ export const Form = (props) => {
 
     return (
         <form className="info-wrapper profile-wrapper py-4 px-4 d-flex flex-column was-validated" onSubmit={props.handleSubmit}>
-            <h1 className="display-5 text-center mb-3"> <span className="profile-form-text text-white fw-bolder">{`${store.userDetails.name ? store.userDetails.name : ""} ${store.userDetails.lastName ? store.userDetails.lastName : ""}`}</span> </h1>
+            <h1 className="display-5 text-center mb-3"> <span className="profile-form-text text-white">{`${store.userDetails.name ? store.userDetails.name : ""} ${store.userDetails.lastName ? store.userDetails.lastName : ""}`}</span> </h1>
             <div className="form-group row d-flex justify-content-center px-0">
                 <div className="col-sm-12 col-md-12 col-lg-7 mb-3">
                     <label htmlFor="first-name" className="mb-1"> <span className="text-white">First Name</span> </label>

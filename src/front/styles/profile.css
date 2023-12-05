@@ -23,3 +23,6 @@ img.avatar {
     background-color: rgba(220, 53, 69, 0.9);
 }
 
+.profile-form-text {
+    text-shadow: 1px 1px white, -1px 1px white, 1px -1px white, -1px -1px white;
+}

@@ -64,7 +64,7 @@ export const Profile = () => {
                 </div>
 
                 <div className="favourite-recipes container-fluid mt-5">
-                    <h1 className="text-center display-6">Favourite Recipes</h1>
+                    <h1 className="text-center display-6 mt-5 mb-4">Favourite Recipes</h1>
                     <div className="row container d-flex justify-content-around mx-auto">
                             {
                                 store.favouriteRecipes ?
