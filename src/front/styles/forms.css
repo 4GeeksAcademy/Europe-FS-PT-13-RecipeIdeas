@@ -22,6 +22,12 @@ html {
     padding: 3% 10%;
 }
 
+.profile-wrapper {
+    background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.eatthis.com%2Fwp-content%2Fuploads%2Fsites%2F4%2F2021%2F05%2Fhealthy-foods.jpg%3Fquality%3D82%26strip%3D1&f=1&nofb=1&ipt=d5d70b80911fb0d57a064f4ec573bbd3085ceb15d5d1617fc8fef0b7f3d2c25c&ipo=images");
+    background-size: cover;
+    padding: 3% 10%;
+}
+
 footer {
     padding-top: 0;
     margin-bottom: 0;
