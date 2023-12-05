@@ -90,7 +90,7 @@ export const RecipeCard = (props) => {
 				</div>
 
 				<img src={recipeDetails.image} className="card-img-top" alt="Recipe Image" />
-				<div className="card-body my-3 py-0">
+				<div className="card-body d-flex flex-column justify-content-around my-3 py-0">
 					<div className="row d-flex justify-content-center text-center">
 						<div className="col-sm-12 col-md-5 col-lg-5">
 							<p className="mt-1 mb-0"><i className="fas fa-utensils fa-lg me-1"></i> {recipeDetails.servings} Serving(s)</p>
