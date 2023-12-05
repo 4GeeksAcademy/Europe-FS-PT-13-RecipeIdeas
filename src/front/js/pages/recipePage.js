@@ -65,9 +65,9 @@ export const Recipe = props => {
 
 	return (
 		<div className="container d-flex flex-column justify-content-center">
-			<div className="row d-flex justify-content-between mt-5 pe-2">
+			<div className="row d-flex justify-content-between mt-5">
 
-				<div className="col-sm-12 col-md-5">
+				<div className="col-sm-12 col-md-5 ps-0 pe-4">
 					<div className="container-fluid d-flex justify-content-between align-items-middle mb-4 mx-0 px-2">
 						<h1 className="col-sm-9 col-md-9 col-lg-9 fs-3 text-start mb-0">{recipeInformation.title}</h1>
 						<div className="col-sm-3 col-md-3 col-lg-3 d-flex justify-content-end align-items-center">
@@ -123,8 +123,8 @@ export const Recipe = props => {
 					</div>
 				</div>
 
-				<div className="col-sm-12 col-md-7 d-flex flex-column ps-2">
-					<ul className="nav nav-pills nav-fill mb-5 px-5" id="pills-tab" role="tablist">
+				<div className="col-sm-12 col-md-7 d-flex flex-column ps-4 pe-0">
+					<ul className="nav nav-pills nav-fill mb-5 px-5 text-center" id="pills-tab" role="tablist">
 
 						<li className="nav-item mx-5" role="presentation">
 							<button className="nav-link active" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#pills-about" type="button" role="tab" aria-controls="pills-about" aria-selected="true">About</button>

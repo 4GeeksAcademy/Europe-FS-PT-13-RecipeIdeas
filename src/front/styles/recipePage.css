@@ -5,9 +5,16 @@ img.recipe-image {
 .nav-pills > .nav-item > .nav-link:not(.active) {
   color: rgba(25,135,84, 0.75);
   border: 0.2rem solid rgba(25,135,84, 0.80);
+  padding: 4px 16px;
+}
+
+.tab-content > .tab-pane:not(.active) {
+  visibility: collapse;
+  max-height: 0;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
   background-color: rgba(25,135,84, 0.75);
   border: 0.2rem solid rgba(25,135,84, 0.80);
+  padding: 4px 16px;
 }
