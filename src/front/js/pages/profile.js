@@ -44,7 +44,7 @@ export const Profile = () => {
 
     if (store.token && store.token != "" && store.token != undefined) {
         return (
-            <div className="profile container-fluid my-5">
+            <div className="profile container my-5">
                 <div className="user-data row d-flex justify-content-between p-1">
 
                     <div className="avatar col-sm-12 col-md-5 d-flex flex-column justify-content-center align-items-center">
@@ -53,7 +53,7 @@ export const Profile = () => {
                             src={store.userDetails.avatar}
                             alt="Profile Picture"
                         />
-                        <button className="change-picture btn btn-danger my-3 mx-auto p-2" onClick={handleUploadAvatar}> Change profile picture </button>
+                        <button className="profile-change-picture btn my-3 mx-auto p-2 text-white" onClick={handleUploadAvatar}> Change profile picture </button>
                     </div>
 
                     <div className="user-info col-sm-12 col-md-7 d-flex flex-column justify-content-start">
