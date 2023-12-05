@@ -1,0 +1,28 @@
+.card {
+    height: 100%;
+    max-width: 500px;
+    background-color: rgba(252,185,125,0.85);
+}
+
+.card-title {
+    height: 20%;
+}
+
+.card-title-text {
+    font-size: clamp(1.1rem, 2,5vw, 1.4rem);
+}
+
+.card-img-top {
+    height: 40%;
+}
+
+.card-body {
+    height: 30%;
+}
+
+.card-footer{
+    height: 10%;
+    color: white;
+    border: 0.1rem solid rgba(25,135,84, 0.6);
+    background-color: rgba(25,135,84, 0.5);
+}
