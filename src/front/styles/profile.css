@@ -12,15 +12,15 @@ img.avatar {
 .profile-form-save, .profile-form-edit {
     display: inline-flex;
     align-self: end;
-    background-color: #AABA9E;
+    background-color: rgba(25,135,84, 0.80);
 }
 
 .profile-change-picture {
-    background-color: #AABA9E;
+    background-color: rgba(25,135,84, 0.80);
 }
 
 .profile-form-cancel {
-    background-color: rgba(220, 53, 69, 0.9);
+    background-color: rgba(220, 53, 69, 0.85);
 }
 
 .profile-form-text {
