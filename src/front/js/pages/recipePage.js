@@ -154,7 +154,7 @@ export const Recipe = props => {
 								}
 							</div>
 
-							<div className="col-sm-12 col-md-6 d-flex flex-column justify-content-between text-center">
+							<div className="col-sm-12 col-md-6 d-flex flex-column text-center">
 								<div className="pb-3 fs-3 pt-3">Instructions</div>
 								{
 									recipeInstructions ?
