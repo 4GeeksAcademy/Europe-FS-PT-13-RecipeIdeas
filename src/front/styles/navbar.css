@@ -20,7 +20,7 @@
 }
 
 .nav-link {
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(25,135,84, 0.80);
     text-decoration: none;
     font-size: 22px;
     display: flex;
@@ -30,7 +30,7 @@
 }
 
 .nav-link:hover {
-    color: rgba(25,135,84, 0.80);
+    color: rgba(255, 255, 255, 0.75)
 }
 
 .svg-inline--fa {
