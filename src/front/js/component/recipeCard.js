@@ -2,6 +2,8 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 
+import "../../styles/recipeCard.css"
+
 
 export const RecipeCard = (props) => {
 	const navigate = useNavigate();
@@ -73,12 +75,12 @@ export const RecipeCard = (props) => {
 	}
 
 	return (
-		<li className="col-sm-8 col-md-6 col-lg-4 mb-5" style={{ listStyleType: "none" }}>
-			<div className="card d-flex flex-column justify-content-between shadow" style={{ backgroundColor: "#ffcab0", minHeight: "425px" }}>
+		<li className="col-sm-8 col-md-6 col-lg-4 mb-4" style={{ listStyleType: "none" }}>
+			<div className="card d-flex flex-column justify-content-between shadow">
 				
-				<div className="row d-flex justify-content-between px-2 my-auto">
-					<div className="col-sm-10 col-md-10 col-lg-10">
-						<h5 className="m-1" >{recipeDetails.title}</h5>
+				<div className="row card-title d-flex justify-content-between px-3 py-3">
+					<div className="col-sm-10 col-md-10 col-lg-10 my-auto">
+						<h5 className="card-title-text mb-0">{recipeDetails.title}</h5>
 					</div>
 
 					<div className="col-sm-2 col-md-2 col-lg-2 d-flex align-items-center ps-0 pe-4">
@@ -87,31 +89,33 @@ export const RecipeCard = (props) => {
 
 				</div>
 
-				<img src={recipeDetails.image} className="card-img-top" alt="Recipe Image" style={{ objectFit: "cover", height: "150px" }} />
-				<div className="m-2 rounded" style={{ backgroundColor: "#ffebbb" }}>
-					<div className="row d-flex justify-content-center text-center my-2">
+				<img src={recipeDetails.image} className="card-img-top" alt="Recipe Image" />
+				<div className="card-body my-3 py-0">
+					<div className="row d-flex justify-content-center text-center">
 						<div className="col-sm-12 col-md-5 col-lg-5">
-							<p className="mt-1"><i className="fas fa-utensils fa-lg me-1"></i> {recipeDetails.servings} Serving(s)</p>
+							<p className="mt-1 mb-0"><i className="fas fa-utensils fa-lg me-1"></i> {recipeDetails.servings} Serving(s)</p>
 						</div>
 
-						<div className="col-sm-12 col-md-5 col-lg-5">
-							<p className="mt-1 ms-2"><i className="fa-solid fa-hand-holding-dollar fa-lg me-1"></i> {totalRecipePrice(recipeDetails.cost, recipeDetails.servings)}</p>
+						<div className="col-sm-12 col-md-5 col-lg-5 mb-2">
+							<p className="mt-1 mb-0 ms-2"><i className="fa-solid fa-hand-holding-dollar fa-lg me-1"></i> {totalRecipePrice(recipeDetails.cost, recipeDetails.servings)}</p>
 						</div>
+					</div>
 
+					<div className="row d-flex justify-content-center text-center mb-2">
 						<div className="col-sm-12 col-md-5 col-lg-5">
-							<p className="mt-1"><i className="fa-solid fa-clock fa-lg me-1"></i> {recipeDetails.prepTime} Minutes</p>
+							<p className="mt-1 mb-0"><i className="fa-solid fa-clock fa-lg me-1"></i> {recipeDetails.prepTime} Minutes</p>
 						</div>
 					</div>
 
 					<div className="row d-flex justify-content-center text-center">
-						<div className="col-sm-12 col-md-12">
-							<p className="mb-2 mx-2"><i className="fas fa-apple-alt fa-lg me-1"></i> {dietDisplay()}</p>
+						<div className="col-sm-12 col-md-12 mb-0">
+							<p className="mb-0 mx-2"><i className="fas fa-apple-alt fa-lg me-1"></i> {dietDisplay()}</p>
 						</div>
 					</div>
 				</div>
 
-				<div className="align-items-end">
-					<button type="button" className="btn w-100" style={{ backgroundColor: "#e0ffcd" }} onClick={handleGoToRecipe}>Go to Recipe</button>
+				<div className="card-footer align-items-end">
+					<button type="button" className="btn w-100 text-white fs-5" onClick={handleGoToRecipe}>Go to Recipe</button>
 				</div>
 			</div>
 
