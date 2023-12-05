@@ -16,13 +16,13 @@ export const Home = () => {
 		<>
 			<div className="mt-5 mb-5 align-items-center d-flex justify-content-center bg-image-home">
 				<div className="mt-4 p-5 text-white rounded container">
-					<h1 className="text-start text-light display-3 fw-semibold">Mixing Food</h1>
-					<p className=" my-3 fs-5 text-start">Welcome to Mixing food! Your culinary haven for diverse and delicious recipes! We're a humble provider of mouthwatering dishes that you can find with just a few clicks. Explore a world of flavors, discover new cooking techniques, and embark on a culinary journey that celebrates the art of mixing and blending ingredients. Click below to start searching for the perfect recipe. Happy Cooking!</p>
+					<h1 className="text-start text-light display-3 fw-semibold text-center">Mixing Food</h1>
+					<p className=" my-3 fs-5 text-start">Welcome to Mixing food! We're a humble provider of mouthwatering dishes that you can find with just a few clicks. Embark on a culinary journey that celebrates the art of mixing and blending ingredients. Click below to start searching for the perfect recipe. Happy Cooking!</p>
 				</div>
 			</div>
-			<div className="d-flex justify-content-center">
+			<div className="d-flex justify-content-center mb-3">
 				<Link to={"/resultpage"}>
-					<button type="button" className="btn shadow-md text-dark px-5 py-3 rounded" style={{ backgroundColor: " #AABA9E" }}><p className="display-6">Search for recipes</p></button>
+					<button type="button" className="btn shadow-md text-dark px-5 py-3 rounded button-class"><p className="text-light display-6">Search for recipes</p></button>
 				</Link>
 			</div>
 			<div className="container p-5 mt-3" style={{ backgroundColor: "#FCB97D" }}>

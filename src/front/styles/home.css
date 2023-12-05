@@ -13,3 +13,7 @@
     height: 400px;
     min-width: 100%;
 }
+
+.button-class{
+    background: rgba(25,135,84, 0.75);
+}
