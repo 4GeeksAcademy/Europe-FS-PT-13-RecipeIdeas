@@ -6,6 +6,8 @@ html {
     min-height: 100%;
     display: flex;
     flex-direction: column;
+    
+
 }
 
 .signup-wrapper {
@@ -13,6 +15,7 @@ html {
     background-position: 50% 40%;
     background-size: cover;
     padding: 0 10%;
+
 }
 
 .login-wrapper {
@@ -20,7 +23,11 @@ html {
     background-position: 55% 40%;
     background-size: cover;
     padding: 3% 10%;
+    margin-top: 2.5rem;
+
 }
+
+
 
 footer {
     padding-top: 0;

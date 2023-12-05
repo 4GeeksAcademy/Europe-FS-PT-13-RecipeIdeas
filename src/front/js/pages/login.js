@@ -32,7 +32,7 @@ export const Login = () => {
     return (
         <div>
             
-            <form className="info-wrapper login-wrapper container w-50 my-auto d-flex flex-column was-validated" onSubmit={handleSubmit}>
+            <form className="info-wrapper  login-wrapper container w-50  d-flex flex-column was-validated" onSubmit={handleSubmit}>
             <h2>Login</h2>
                 {
                     (store.token && store.token != "" && store.token != undefined) ? 
