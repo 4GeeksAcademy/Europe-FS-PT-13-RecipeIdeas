@@ -34,7 +34,7 @@ export const Signup = () => {
     return (
 
         <form className="info-wrapper signup-wrapper container w-50 my-auto d-flex flex-column was-validated" onSubmit={handleSubmit}>
-
+           <h2>Signup</h2>
             <div className="row d-flex mt-5 justify-content-center">
                 <div className="form-group col-12">
                     <div className="input-group">
@@ -75,10 +75,10 @@ export const Signup = () => {
             </div>
 
             <div className="row mx-auto mt-5 pb-4 d-flex justify-content-center text-center">
-                <div>
-                    <button type="submit" className="save-info btn btn-primary">Sign Up</button>
-                </div>
-
+                <span>
+                    <button type="submit" className="save-info btn-lg btn-success">Sign Up</button>
+                </span>
+                        <p></p>
                 <p className="pt-2 mb-0 text-white fs-5">Already have an account? <Link to="/login" className="text-primary">Login</Link></p>
             </div>
         </form>
