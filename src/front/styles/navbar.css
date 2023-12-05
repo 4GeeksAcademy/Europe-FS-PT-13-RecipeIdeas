@@ -1,5 +1,5 @@
 .navbar {
-    background-color: #FCB97D;
+    background-color: rgba(252,185,125,0.9);
     height: 89px;
     position: relative;
     display: flex;
@@ -20,13 +20,17 @@
 }
 
 .nav-link {
-    color: rgb(50 145 50);
+    color: rgba(255, 255, 255, 0.75);
     text-decoration: none;
     font-size: 22px;
     display: flex;
     justify-content: space-around;
     text-align: center;
     padding-right: 4px;
+}
+
+.nav-link:hover {
+    color: rgba(25,135,84, 0.80);
 }
 
 .svg-inline--fa {
