@@ -33,8 +33,8 @@ export const Signup = () => {
 
     return (
 
-        <form className="info-wrapper signup-wrapper container w-50 my-auto d-flex flex-column was-validated" onSubmit={handleSubmit}>
-           <h2>Signup</h2>
+        <form className="info-wrapper signup-wrapper container w-50 my-auto py-5 d-flex flex-column was-validated" onSubmit={handleSubmit}>
+           <h2 className="text-white">Signup</h2>
             <div className="row d-flex mt-5 justify-content-center">
                 <div className="form-group col-12">
                     <div className="input-group">

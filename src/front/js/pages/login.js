@@ -30,13 +30,12 @@ export const Login = () => {
     };
 
     return (
-        <div>
-            
-            <form className="info-wrapper  login-wrapper container w-50  d-flex flex-column was-validated" onSubmit={handleSubmit}>
-            <h2>Login</h2>
-                {
-                    (store.token && store.token != "" && store.token != undefined) ? 
-                    
+
+        <form className="info-wrapper  login-wrapper container w-50 my-auto d-flex flex-column was-validated" onSubmit={handleSubmit}>
+            <h2 className="text-white">Login</h2>
+            {
+                (store.token && store.token != "" && store.token != undefined) ?
+
                     <p className="pt-2 my-4 text-white text-center fs-2"> Have are already logged in </p>
                     :
                     <div>
@@ -72,11 +71,10 @@ export const Login = () => {
                             <div>
                                 <button type="submit" className="login-btn btn px-4 py-2 text-white"> Login </button>
                             </div>
-                            <p className="login-redirect mb-0 mt-3 py-1 text-white fs-5">Have you registered already?<Link to="/signup" className="text-primary">Sign up</Link></p>
+                            <p className="login-redirect mb-0 mt-3 py-1 text-white fs-5">Have you registered already? <Link to="/signup" className="text-primary">Sign up</Link></p>
                         </div>
                     </div>
-                }
-            </form>
-            </div>
+            }
+        </form>
     );
 };
