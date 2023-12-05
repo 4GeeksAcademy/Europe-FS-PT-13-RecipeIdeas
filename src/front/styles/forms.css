@@ -38,3 +38,9 @@ h2 {
     color:#FFFFFF;
     padding: 0.3rem 0.7rem;
 }
+
+.btn-success {
+    color: #fff;
+    background-color: rgba(25,135,84);
+    
+}

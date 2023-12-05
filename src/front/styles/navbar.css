@@ -18,7 +18,7 @@
 }
 
 .navbar .log-in-button {
-    background-color: #72aa40;
+    background-color: rgba(25,135,84);
     border-radius: 8px;
     height: 48px;
     left: 1123px;
@@ -45,7 +45,7 @@
 
 .navbar .sign-up-button {
     color: #ffffff;
-    background-color: #72aa40;
+    background-color: rgba(25,135,84);
     border-radius: 8px;
     height: 48px;
     left: 1263px;
@@ -72,7 +72,7 @@
     }
 
 .nav-link {
-    color: rgb(50 145 50);
+    color: rgba(25,135,84);
     text-decoration: none;
     font-size: 22px;
     display: flex;
@@ -98,7 +98,7 @@
 }
 
 a.link {
-    color: rgb(50 145 50);
+    color: rgba(25,135,84);
     text-decoration: none;
 }
 
@@ -117,20 +117,21 @@ a.link {
     border: 0;
 }
 .dropdown-menu {
-    position: absolute;
+    position: flex;
     z-index: 1000;
     display: none;
     min-width: 10rem;
     padding: 0.5rem 0;
     margin: 0;
-    font-size: 1rem;
+    font-size: 1.3rem;
     color: #212529;
-    text-align: left;
+    text-align: center;
+    justify-content: center;
     list-style: none;
     background-color: #eaf5ec;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 0.25rem;
+    border-radius: 0.2rem;
 }
 
 .avatarmenu {

@@ -31,52 +31,53 @@ export const Login = () => {
 
     return (
         <div>
-
+            
             <form className="info-wrapper login-wrapper container w-50 my-auto d-flex flex-column was-validated" onSubmit={handleSubmit}>
-                <h2>Login</h2>
+            <h2>Login</h2>
                 {
-                    (store.token && store.token != "" && store.token != undefined) ?
+                    (store.token && store.token != "" && store.token != undefined) ? 
+                    
+                    <p className="pt-2 my-4 text-white text-center fs-2"> Have are already logged in </p>
+                    :
+                    <div>
+                        <div className="row d-flex mt-5 justify-content-center">
+                            <div className="form-group col-12">
 
-                        <p className="pt-2 my-4 text-white text-center fs-2"> Have are already logged in </p>
-                        :
-                        <div>
-                            <div className="row d-flex mt-5 justify-content-center">
-                                <div className="form-group col-12">
+                                <div className="input-group">
+                                    <span className="form-input-icon ps-3 py-0 my-0"> <FontAwesomeIcon icon="fa-solid fa-envelope" size="2xl" /> </span>
+                                    <input type="email" placeholder="Enter your email." required value={email}
+                                        onChange={(e) => setEmail(e.target.value)} className="form-control p-2 border-4">
+                                    </input>
 
-                                    <div className="input-group">
-                                        <span className="form-input-icon ps-3 py-0 my-0"> <FontAwesomeIcon icon="fa-solid fa-envelope" size="2xl" /> </span>
-                                        <input type="email" placeholder="Enter your email." required value={email}
-                                            onChange={(e) => setEmail(e.target.value)} className="form-control p-2 border-4">
-                                        </input>
-
-                                        {/*<div className="invalid-feedback">
+                                    {/*<div className="invalid-feedback">
                                             Mandatory field.
                                     </div>*/}
-                                    </div>
+                                </div>
 
-                                    <div className="input-group mt-3">
-                                        <span className="form-input-icon ps-3"> <FontAwesomeIcon icon="fa-solid fa-key" size="2xl" /> </span>
-                                        <input
-                                            type="password" placeholder="Enter your password." required value={password}
-                                            onChange={(e) => setPassword(e.target.value)} className="form-control p-2 border-4">
-                                        </input>
+                                <div className="input-group mt-3">
+                                    <span className="form-input-icon ps-3"> <FontAwesomeIcon icon="fa-solid fa-key" size="2xl" /> </span>
+                                    <input
+                                        type="password" placeholder="Enter your password." required value={password}
+                                        onChange={(e) => setPassword(e.target.value)} className="form-control p-2 border-4">
+                                    </input>
 
-                                        {/*<div className="invalid-feedback">
+                                    {/*<div className="invalid-feedback">
                                             Mandatory value.
                                     </div>*/}
-                                    </div>
                                 </div>
-                            </div>
-
-                            <div className="row mx-auto mt-5 pb-4 d-flex justify-content-center text-center">
-                                <div>
-                                    <button type="submit" className="save-info btn-lg btn-success"> Login </button>
-                                </div>
-                                <p className="pt-2 mb-0 text-white fs-5"> Have you registered already? <Link to="/signup" className="text-primary">Sign up</Link></p>
                             </div>
                         </div>
+
+                        <div className="row mx-auto mt-5 pb-4 d-flex justify-content-center text-center">
+                            <span>
+                                <button type="submit" className="save-info btn-lg btn-success"> Login </button>
+                            </span>
+                            <p></p>
+                            <p className="pt-2 mb-0 text-white fs-5"> Have you registered already? <Link to="/signup" className="text-primary">Sign up</Link></p>
+                        </div>
+                    </div>
                 }
             </form>
-        </div>
+            </div>
     );
 };

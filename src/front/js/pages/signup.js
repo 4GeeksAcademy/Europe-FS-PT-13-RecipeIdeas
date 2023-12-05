@@ -75,10 +75,10 @@ export const Signup = () => {
             </div>
 
             <div className="row mx-auto mt-5 pb-4 d-flex justify-content-center text-center">
-                <div>
+                <span>
                     <button type="submit" className="save-info btn-lg btn-success">Sign Up</button>
-                </div>
-
+                </span>
+                        <p></p>
                 <p className="pt-2 mb-0 text-white fs-5">Already have an account? <Link to="/login" className="text-primary">Login</Link></p>
             </div>
         </form>
