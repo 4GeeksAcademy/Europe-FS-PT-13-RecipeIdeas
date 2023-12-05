@@ -25,7 +25,7 @@ export const Home = () => {
 					<button type="button" className="btn shadow-md text-dark px-5 py-3 rounded button-class"><p className="text-light display-6">Search for recipes</p></button>
 				</Link>
 			</div>
-			<div className="container p-5 mt-3" style={{ backgroundColor: "#FCB97D" }}>
+			<div className="container p-5 mt-3">
 				<h1 className="text-center display-6">Suggested Recipes</h1>
 				<div className="row container-fluid d-flex justify-content-around mt-4 mx-2">
 					{store.randomRecipes.map((p, index) => {
