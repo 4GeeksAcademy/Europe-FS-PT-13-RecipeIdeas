@@ -69,11 +69,10 @@ export const Login = () => {
                         </div>
 
                         <div className="row mx-auto mt-5 pb-4 d-flex justify-content-center text-center">
-                            <span>
-                                <button type="submit" className="save-info btn-lg btn-success"> Login </button>
-                            </span>
-                            <p></p>
-                            <p className="pt-2 mb-0 text-white fs-5"> Have you registered already? <Link to="/signup" className="text-primary">Sign up</Link></p>
+                            <div>
+                                <button type="submit" className="login-btn btn px-4 py-2 text-white"> Login </button>
+                            </div>
+                            <p className="login-redirect mb-0 mt-3 py-1 text-white fs-5">Have you registered already?<Link to="/signup" className="text-primary">Sign up</Link></p>
                         </div>
                     </div>
                 }

@@ -38,6 +38,8 @@ footer {
     padding-top: 0;
     margin-bottom: 0;
 }
+
+
 h2 {
     margin: 0;
     color: #FFFFFF;
@@ -45,14 +47,12 @@ h2 {
   
 }
 
-.text-white {
-    background: rgba(0,0,0,0.6);
-    color:#FFFFFF;
-    padding: 0.3rem 0.7rem;
+.login-redirect,
+.signup-redirect {
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
-.btn-success {
-    color: #fff;
-    background-color: rgba(25,135,84);
-    
+.login-btn,
+.signup-btn {
+    background-color: rgba(25,135,84, 0.9); 
 }

@@ -26,3 +26,7 @@
     border: 0.1rem solid rgba(25,135,84, 0.6);
     background-color: rgba(25,135,84, 0.5);
 }
+
+.card-footer .btn{
+    background-color: rgba(25,135,84, 0.5);
+}
