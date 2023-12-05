@@ -1,6 +1,6 @@
 img.avatar {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
     object-fit: cover; /*The image keeps the aspect ratio while filling the entire content box.*/
     overflow: hidden;
 }
@@ -9,7 +9,20 @@ img.avatar {
     border-radius: 1rem;
 }
 
-.save-info, .edit-info, .cancel-info {
+.profile-form-save, .profile-form-edit {
     display: inline-flex;
     align-self: end;
+    background-color: rgba(25,135,84, 0.80);
+}
+
+.profile-change-picture {
+    background-color: rgba(25,135,84, 0.80);
+}
+
+.profile-form-cancel {
+    background-color: rgba(220, 53, 69, 0.85);
+}
+
+.profile-form-text {
+    text-shadow: 1px 1px white, -1px 1px white, 1px -1px white, -1px -1px white;
 }

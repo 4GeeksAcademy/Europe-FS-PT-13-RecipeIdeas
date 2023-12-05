@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../../js/store/appContext.js"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import "../../styles/forms.css";
+
 export const Form = (props) => {
 
     const { store, actions } = useContext(Context)
@@ -17,11 +19,11 @@ export const Form = (props) => {
     }, [store.userDetails])
 
     return (
-        <form className="info-wrapper py-4 px-4 d-flex flex-column was-validated" onSubmit={props.handleSubmit}>
-
-            <div className="form-group row d-flex justify-content-between px-0">
-                <div className="col-sm-12 col-md-12 col-lg-6 mb-2">
-                    <label htmlFor="first-name" className="mb-1"> First Name </label>
+        <form className="info-wrapper profile-wrapper py-4 px-4 d-flex flex-column was-validated" onSubmit={props.handleSubmit}>
+            <h1 className="display-5 text-center mb-3"> <span className="profile-form-text text-white">{`${store.userDetails.name ? store.userDetails.name : ""} ${store.userDetails.lastName ? store.userDetails.lastName : ""}`}</span> </h1>
+            <div className="form-group row d-flex justify-content-center px-0">
+                <div className="col-sm-12 col-md-12 col-lg-7 mb-3">
+                    <label htmlFor="first-name" className="mb-1"> <span className="text-white">First Name</span> </label>
                     {
                         props.editDetails ?
                             <div className="input-group has-validation">
@@ -40,8 +42,8 @@ export const Form = (props) => {
                     }
                 </div>
 
-                <div className="col-sm-12 col-md-12 col-lg-6 mb-2">
-                    <label htmlFor="last-name" className="form-label mb-1"> Last Name </label>
+                <div className="col-sm-12 col-md-12 col-lg-7 mb-3">
+                    <label htmlFor="last-name" className="form-label mb-1"> <span className="text-white">Last Name</span> </label>
                     {
                         props.editDetails ?
                             <div className="input-group has-validation">
@@ -82,8 +84,8 @@ export const Form = (props) => {
 
 
             <div className="form-group row d-flex justify-content-center px-0">
-                <div className="col-md-12 col-lg-10 col-xl-6 mt-3">
-                    <label htmlFor="email" className="form-label mb-1"> Email </label>
+                <div className="col-md-12 col-lg-10 col-xl-7">
+                    <label htmlFor="email" className="form-label"> <span className="text-white">Email</span> </label>
                     {
                         props.editDetails ?
                             <div className="input-group has-validation">
@@ -104,7 +106,7 @@ export const Form = (props) => {
 
             <div className="form-group row d-flex justify-content-lg-center justify-content-xxl-between px-0">
                 <div className="col-md-12 col-lg-10 col-xl-6 mt-3">
-                    <label htmlFor="linkedin" className="mb-1"> {userDetails.linkedIn ? "LinkedIn" : ""} </label>
+                    <label htmlFor="linkedin" className="mb-1"> <span className="text-white">{userDetails.linkedIn ? "LinkedIn" : ""}</span> </label>
                     {
                         props.editDetails ?
                             <div className="input-group has-validation">
@@ -129,7 +131,7 @@ export const Form = (props) => {
                 </div>
 
                 <div className="col-md-12 col-lg-10 col-xl-6 mt-3">
-                    <label htmlFor="github" className="form-label mb-1"> {userDetails.github ? "Github" : ""} </label>
+                    <label htmlFor="github" className="form-label mb-1"> <span className="text-white">{userDetails.github ? "Github" : ""}</span> </label>
                     {
                         props.editDetails ?
                             <div className="input-group has-validation">
@@ -156,11 +158,11 @@ export const Form = (props) => {
             {   // Conditionl rendering for showing change info or save the updated info depending on the state.
                 props.editDetails ?
                     <div className="d-flex justify-content-end">
-                        <button className="save-info btn btn-success p-2 mt-3 mx-2" onClick={event => props.handleSubmit(userDetails)}>Save changes</button>
-                        <button className="cancel-info btn btn-danger p-2 mt-3" onClick={handleCancel}>Cancel</button>
+                        <button className="profile-form-save btn p-2 mt-3 mx-2" onClick={event => props.handleSubmit(userDetails)}> <span className="text-white">Save changes</span></button>
+                        <button className="profile-form-cancel btn p-2 mt-3" onClick={handleCancel}> <span className="text-white">Cancel</span> </button>
                     </div>
                     :
-                    <button className="edit-info btn btn-danger p-2 mt-3" onClick={props.handleEditInfo}>Edit details</button>
+                    <button className="profile-form-edit btn p-2 mt-3" onClick={props.handleEditInfo}> <span className="text-white">Edit details</span> </button>
             }
         </form>
     );

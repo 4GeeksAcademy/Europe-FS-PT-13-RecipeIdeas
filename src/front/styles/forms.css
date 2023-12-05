@@ -6,6 +6,8 @@ html {
     min-height: 100%;
     display: flex;
     flex-direction: column;
+    
+
 }
 
 .signup-wrapper {
@@ -13,6 +15,7 @@ html {
     background-position: 50% 40%;
     background-size: cover;
     padding: 0 10%;
+
 }
 
 .login-wrapper {
@@ -20,9 +23,36 @@ html {
     background-position: 55% 40%;
     background-size: cover;
     padding: 3% 10%;
+    margin-top: 2.5rem;
+
 }
+
+.profile-wrapper {
+    background-image: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.eatthis.com%2Fwp-content%2Fuploads%2Fsites%2F4%2F2021%2F05%2Fhealthy-foods.jpg%3Fquality%3D82%26strip%3D1&f=1&nofb=1&ipt=d5d70b80911fb0d57a064f4ec573bbd3085ceb15d5d1617fc8fef0b7f3d2c25c&ipo=images");
+    background-size: cover;
+    padding: 3% 10%;
+}
+
 
 footer {
     padding-top: 0;
     margin-bottom: 0;
+}
+h2 {
+    margin: 0;
+    color: #FFFFFF;
+    margin-top: 20px;
+  
+}
+
+.text-white {
+    background: rgba(0,0,0,0.6);
+    color:#FFFFFF;
+    padding: 0.3rem 0.7rem;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: rgba(25,135,84);
+    
 }
