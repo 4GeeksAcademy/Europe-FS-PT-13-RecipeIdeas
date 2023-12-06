@@ -6,8 +6,6 @@ html {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    
-
 }
 
 .signup-wrapper {
@@ -23,7 +21,6 @@ html {
     background-position: 55% 40%;
     background-size: cover;
     padding: 3% 10%;
-    margin-top: 2.5rem;
 
 }
 
@@ -38,21 +35,13 @@ footer {
     padding-top: 0;
     margin-bottom: 0;
 }
-h2 {
-    margin: 0;
-    color: #FFFFFF;
-    margin-top: 20px;
-  
+
+.login-redirect,
+.signup-redirect {
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
-.text-white {
-    background: rgba(0,0,0,0.6);
-    color:#FFFFFF;
-    padding: 0.3rem 0.7rem;
-}
-
-.btn-success {
-    color: #fff;
-    background-color: rgba(25,135,84);
-    
+.login-btn,
+.signup-btn {
+    background-color: rgba(25,135,84, 0.9); 
 }
