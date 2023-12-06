@@ -14,19 +14,18 @@ export const Home = () => {
 
 	return (
 		<>
-			<div className="mt-5 mb-5 align-items-center d-flex justify-content-center bg-image shadow">
-				<h1 className="text-center text-light display-3 fw-semibold">Mixing Food</h1>
+			<div className="mt-5 mb-5 align-items-center d-flex justify-content-center bg-image-home">
+				<div className="mt-4 p-5 text-white rounded container">
+					<h1 className="text-start text-light display-3 fw-semibold text-center">Mixing Food</h1>
+					<p className=" my-3 fs-4 text-start">Welcome to Mixing food! We're a humble provider of mouthwatering dishes that you can find with just a few clicks. Embark on a culinary journey that celebrates the art of mixing and blending ingredients. Click below to start searching for the perfect recipe. Happy Cooking!</p>
+				</div>
 			</div>
-			<div className="container col-sm-12 col-md-10 col-lg-8 mt-5 mb-5 align-items-center d-flex justify-content-center rounded-pill p-4 shadow" style={{ backgroundColor: "#ffcab0" }}>
-				<p className="mx-5 my-3">Welcome to Mixing food! Your culinary haven for diverse and delicious recipes! We're a humble provider of mouthwatering dishes that you can find with just a few clicks. Whether you're a seasoned chef or a kitchen novice, our extensive collection of recipes spans various cuisines, dietary preferences, and skill levels. Explore a world of flavors, discover new cooking techniques, and embark on a culinary journey that celebrates the art of mixing and blending ingredients. Click below to start searching for the perfect recipe. Happy Cooking!</p>
-			</div>
-
-			<div className="d-flex justify-content-center">
+			<div className="d-flex justify-content-center mb-3">
 				<Link to={"/resultpage"}>
-					<button type="button" className="btn display-6 shadow-md text-dark ps-5 pe-5 pt-3 pb-3 rounded-pill" style={{ backgroundColor: "#e0ffcd" }}>Search for recipes</button>
+					<button type="button" className="btn shadow-md text-dark px-5 py-3 rounded button-class"><p className="text-light display-6">Search for recipes</p></button>
 				</Link>
 			</div>
-			<div className="container p-5 mt-3" style={{ backgroundColor: "#ffebbb" }}>
+			<div className="container p-5 mt-3">
 				<h1 className="text-center display-6">Suggested Recipes</h1>
 				<div className="row container-fluid d-flex justify-content-around mt-4 mx-2">
 					{store.randomRecipes.map((p, index) => {
