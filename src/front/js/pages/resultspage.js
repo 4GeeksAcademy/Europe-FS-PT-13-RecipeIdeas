@@ -74,7 +74,7 @@ export const ResultsPage = () => {
 
     const handleLoadMore = () => {
         setResultsLoaded((prevResultsLoaded) => prevResultsLoaded + 12);
-        actions.getComplexSearch(cuisine, includedIngredients, diet, type, ("minCalories=" + minCalories), ("maxCalories=" + maxCalories), ("maxReadyTime=" + prepTime), resultsLoaded);
+        actions.getComplexSearchLoadMore(cuisine, includedIngredients, diet, type, ("minCalories=" + minCalories), ("maxCalories=" + maxCalories), ("maxReadyTime=" + prepTime), resultsLoaded);
 
     };
 
@@ -88,8 +88,8 @@ export const ResultsPage = () => {
 
     return (
         <>
-            <div className="mt-5 mb-5 bg-image-results">
-                <div className="p-5 h-100 text-white rounded container">
+            <div className="mt-5 mb-5 bg-image-results py-5">
+                <div className="pt-5 pe-5 ps-5 h-100 text-white rounded container">
                     <h3 className="text-center my-2 display-4">Filter Options</h3>
 
                     <div className="row p-4 d-flex justify-content-around">
@@ -261,8 +261,8 @@ export const ResultsPage = () => {
                     </div>
 
 
-                    <div className="d-flex justify-content-center mt-3 pb-3">
-                        <button type="button" className="btn display-6 shadow-lg text-dark ps-5 pe-5 pt-3 pb-3 rounded-pill" style={{ backgroundColor: "#e0ffcd" }} onClick={handleSearch}>Search</button>
+                    <div className="d-flex justify-content-center mt-4">
+                    <button type="button" className="btn shadow-md px-5 py-3 rounded button-class" onClick={handleSearch}><p className="text-light display-6">Search for recipes</p></button>
                     </div>
                 </div>
             </div>
@@ -275,7 +275,7 @@ export const ResultsPage = () => {
                     )}
 
                     {store.isLoading && (
-                        <div className=" container d-flex justify-content-center mt-3">
+                        <div className=" container d-flex justify-content-center mt-4 mb-4">
                             <Spinner />
                         </div>
                     )}
@@ -298,9 +298,7 @@ export const ResultsPage = () => {
                     {store.filteredRecipes.length > resultsLoaded && (
                         <div className="row mt-0 mb-3">
                             <div className="col-md-6 mx-auto">
-                                <button type="button" className="btn btn-secondary" onClick={handleLoadMore}>
-                                    Load More
-                                </button>
+                            <button type="button" className="btn shadow-md pt-2 pb-1 px-4 rounded button-class align-items-center" onClick={handleLoadMore}><p className="text-light fs-3">Load More</p></button>
                             </div>
                         </div>
                     )}
