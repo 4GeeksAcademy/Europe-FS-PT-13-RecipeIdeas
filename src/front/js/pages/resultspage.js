@@ -89,7 +89,7 @@ export const ResultsPage = () => {
     return (
         <>
             <div className="mt-5 mb-5 bg-image-results py-5">
-                <div className="pt-5 pe-5 ps-5 h-100 text-white rounded container">
+                <div className="search-filters-text py-5 pe-5 ps-5 h-100 text-white rounded container">
                     <h3 className="text-center my-2 display-4">Filter Options</h3>
 
                     <div className="row p-4 d-flex justify-content-around">

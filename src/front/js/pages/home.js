@@ -15,7 +15,7 @@ export const Home = () => {
 	return (
 		<>
 			<div className="mt-5 mb-5 align-items-center d-flex justify-content-center bg-image-home">
-				<div className="mt-4 p-5 text-white rounded container">
+				<div className="home-title-text mt-4 p-5 text-white rounded container">
 					<h1 className="text-start text-light display-3 fw-semibold text-center">Mixing Food</h1>
 					<p className=" my-3 fs-4 text-start">Welcome to Mixing food! We're a humble provider of mouthwatering dishes that you can find with just a few clicks. Embark on a culinary journey that celebrates the art of mixing and blending ingredients. Click below to start searching for the perfect recipe. Happy Cooking!</p>
 				</div>
